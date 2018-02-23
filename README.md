@@ -9,7 +9,7 @@ To see the coverage reports, go to <module name>/target/site/jacoco/index.html.
 | ---------- | ----------------------- | ----------------------- | ---------------| ----- |
 | 84758      | Rafael Ribeiro          | rafaelmmribeiro@gmail.com | RafaelRibeiro97 |   17 |
 |            |                         |                         |                |   2   |
-|            |                         |                         |                |   3   |
+| 83405           | João Neves         | jmcpneves@gmail.com     | JoaoMiguelNeves|   17  |
 |            |                         |                         |                |   4   |
 |            |                         |                         |                |   5   |
 |            |                         |                         |                |   6   |
