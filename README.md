@@ -11,5 +11,5 @@ To see the coverage reports, go to <module name>/target/site/jacoco/index.html.
 | 85069      | Francisco Barros        | francisco.teixeira.de.barros@outlook.com | FranciscoKloganB  |  17  | 
 | 83405           | João Neves         | jmcpneves@gmail.com     | JoaoMiguelNeves|   17  |
 | 84710      | Diogo Vilela            | diogofsvilela@gmail.com | DiogoFSVilela  |   17  |
-|            |                         |                         |                |   5   |
-|            |                         |                         |                |   6   |
+| 84711 | Diogo Redin | diogo.redin@tecnico.ulisboa.pt | 17 |
+| | | | | |
