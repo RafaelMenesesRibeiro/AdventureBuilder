@@ -13,3 +13,4 @@ To see the coverage reports, go to <module name>/target/site/jacoco/index.html.
 | 84710      | Diogo Vilela            | diogofsvilela@gmail.com | DiogoFSVilela  |   17  |
 | 84711 | Diogo Redin | diogo.redin@tecnico.ulisboa.pt | diogoredin | 17 |
 | 77921 | Mafalda Gaspar | mariamafaldag@gmail.com | mafsgasp | 17 |
+| 83391 | Andreia Valente  | andreia.valente@tecnico.ulisboa.pt | AndreiaValente | 17
