@@ -1,4 +1,4 @@
-package pt.ulisboa.tecnico.softeng.broker.car;
+package pt.ulisboa.tecnico.softeng.car.exception;
 
 public class CarException extends RuntimeException {
   public BrokerException() {
