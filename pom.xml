@@ -154,6 +154,6 @@
 		<module>hotel</module>
 		<module>activity</module>
 		<module>broker</module>
+		<module>car</module>
 	</modules>
 </project>
-
