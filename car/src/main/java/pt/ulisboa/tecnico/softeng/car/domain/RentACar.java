@@ -108,17 +108,14 @@ public class RentACar {
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.name;
 	}
 
 	public int getCode() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.code;
 	}
 
 	public Set<Vehicle> getVehicleList() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.vehicleList;
 	}
 }
