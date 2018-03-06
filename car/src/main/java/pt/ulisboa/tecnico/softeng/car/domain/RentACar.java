@@ -111,7 +111,7 @@ public class RentACar {
 		return this.name;
 	}
 
-	public int getCode() {
+	public String getCode() {
 		return this.code;
 	}
 
