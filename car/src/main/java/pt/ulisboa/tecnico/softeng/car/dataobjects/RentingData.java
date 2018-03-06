@@ -20,8 +20,59 @@ public class RentingData {
 	public RentingData() {}
 
 	public RentingData(String reference, String plate, String drivingLicense, String rentACarCode, LocalDate begin, LocalDate end) {
-		// TODO
+		this.reference = reference;
+		this.plate = plate;
+		this.drivingLicense = drivingLicense;
+		this.rentACarCode = rentACarCode;
+		this.begin = begin;
+		this.end = end;
 	}
 
-	// TODO
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+	public void setPlate(String plate) {
+		this.plate = plate;
+	}
+
+	public void setDrivingLicense(String drivingLicense) {
+		this.drivingLicense = drivingLicense;
+	}
+
+	public void setRentACarCode(String rentACarCode) {
+		this.rentACarCode = rentACarCode;
+	}
+
+	public void setBegin(LocalDate begin) {
+		this.begin = begin;
+	}
+
+	public void setEnd(LocalDate end) {
+		this.end = end;
+	}
+
+	public String getReference() {
+		return this.reference;
+	}
+
+	public String getPlate() {
+		return this.plate;
+	}
+
+	public String getDrivingLicense() {
+		return this.drivingLicense;
+	}
+
+	public String getRentACarCode() {
+		return this.rentACarCode;
+	}
+
+	public LocalDate getBeginDate() {
+		return this.begin;
+	}
+
+	public LocalDate getEndDate() {
+		return this.end;
+	}
 }
