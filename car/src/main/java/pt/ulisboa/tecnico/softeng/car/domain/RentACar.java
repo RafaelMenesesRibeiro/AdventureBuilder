@@ -115,7 +115,7 @@ public class RentACar {
 		return this.code;
 	}
 
-	public Set<Vehicle> getVehicleList() {
+	public List<Vehicle> getVehicleList() {
 		return this.vehicleList;
 	}
 }
