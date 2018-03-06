@@ -4,10 +4,12 @@ import java.util.Set;
 import java.util.List;
 import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.car.domain.Car;
+import pt.ulisboa.tecnico.softeng.car.domain.Vehicle;
 import pt.ulisboa.tecnico.softeng.car.domain.Renting;
 import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
 import pt.ulisboa.tecnico.softeng.car.domain.Motorcycle;
@@ -24,18 +26,25 @@ import pt.ulisboa.tecnico.softeng.car.dataobjects.RentingData;
 public class RentACar {
 	public static Set<RentACar> rentingCompanies = new HashSet<>();
 	public static final int CODE_SIZE = 4;
+	public static synchronized AtomicInteger uniqueCode = new AtomicInteger(0);
 	private final String code;
 	private final String name;
+	private List<Vehicle> vehicleList;
 
 	public rentACar(String name) {
-		checkArguments(name);
+		String code = uniqueCode.incrementAndGet().toString();
+		checkArguments(code, name);
+		this.code = code;
 		this.name = name;
+		this.vehicleList = new ArrayList<Vehicle>;
+		RentACar.rentingCompanies.add(this);
 	}
 
 	public RentACar(String code, String name) {
 		checkArguments(code, name);
 		this.code = code;
 		this.name = name;
+		this.vehicleList = new ArrayList<Vehicle>;
 		RentACar.rentingCompanies.add(this);
 	}
 
@@ -44,8 +53,8 @@ public class RentACar {
 	}
 
 	private void checkArguments(String code, String name) {
-		checkArguments(name);
 		checkCode(code);
+		checkArguments(name);
 	}
 
 	private void checkCode(String code) {
@@ -68,16 +77,34 @@ public class RentACar {
 		}
 	}
 
+	public void addVehicle(Vehicle vehicle) {
+		this.vehicleList.add(vehicle);
+	}
+
 	public Renting getRenting(String reference) {
 		// TODO
 	}
 
+	// TODO
   public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
-		// TODO
+		List<Car> temp = new ArrayList<Car>;
+		for(Vehicle vehicle : vehicleList) {
+			if (vehicle instanceof Car) {
+				temp.add(vehicle);
+			}
+		}
+		return temp;
 	}
 
+	// TODO
 	public List<Motorcycle> getAllAvailableMotorcycles(LocalDate begin, LocalDate end) {
-		// TODO
+		List<Motorcycle> temp = new ArrayList<Motorcycle>;
+		for(Vehicle vehicle : vehicleList) {
+			if (vehicle instanceof Motorcycle) {
+				temp.add(vehicle);
+			}
+		}
+		return temp;
 	}
 
 	public RentingData getRentingData(String reference) {
