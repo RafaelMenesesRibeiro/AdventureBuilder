@@ -20,7 +20,7 @@ import pt.ulisboa.tecnico.softeng.car.dataobjects.RentingData;
 public class RentACar {
 	public static Set<RentACar> rentingCompanies = new HashSet<>();
 	public static final int CODE_SIZE = 4;
-	public static AtomicInteger uniqueCode = new AtomicInteger(0);
+	public static AtomicInteger uniqueCode = new AtomicInteger(1000);
 	private final String code;
 	private final String name;
 	private List<Vehicle> vehicleList;
