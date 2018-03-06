@@ -31,8 +31,13 @@ public class RentACarConstructorMethodTest {
     }
     
     @Test(expected = CarException.class)
-    public void notEmptyNameArgument() {
+    public void notNullNameArgument() {
     	new RentACar(null);
+    }
+    
+    @Test(expected = CarException.class)
+    public void notEmptyNameArgument() {
+    	new RentACar(new String());
     }
     
     @After
