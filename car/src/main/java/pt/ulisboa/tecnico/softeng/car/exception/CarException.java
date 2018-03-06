@@ -1,9 +1,11 @@
 package pt.ulisboa.tecnico.softeng.car.exception;
 
 public class CarException extends RuntimeException{
+	public CarException() {
+    super();
+  }
 
-	public CarException(String string) {
-		// TODO Auto-generated constructor stub
-	}
-
+  public CarException(String message) {
+    super(message);
+  }
 }
