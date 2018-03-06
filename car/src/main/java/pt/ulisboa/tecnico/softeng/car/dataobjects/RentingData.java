@@ -2,13 +2,6 @@ package pt.ulisboa.tecnico.softeng.car.dataobjects;
 
 import org.joda.time.LocalDate;
 
-import pt.ulisboa.tecnico.softeng.car.domain.Car;
-import pt.ulisboa.tecnico.softeng.car.domain.Vehicle;
-import pt.ulisboa.tecnico.softeng.car.domain.Renting;
-import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
-import pt.ulisboa.tecnico.softeng.car.domain.Motorcycle;
-
-
 public class RentingData {
 	private String reference;
 	private String plate;
