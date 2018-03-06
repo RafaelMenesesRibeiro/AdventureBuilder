@@ -14,3 +14,18 @@ To see the coverage reports, go to <module name>/target/site/jacoco/index.html.
 | 84711      | Diogo Redin             | diogo.redin@tecnico.ulisboa.pt           | diogoredin      |   17  |
 | 77921      | Mafalda Gaspar          | mariamafaldag@gmail.com                  | mafsgasp        |   17  |
 | 83391      | Andreia Valente         | andreia.valente@tecnico.ulisboa.pt       | AndreiaValente  |   17  |
+
+
+## Tasks - First Delivery  
+
+|   Number   |          Name           |   Name GitHUb   | Module |   Task   |
+| ---------- | ----------------------- | ----------------| ------ | -------- |
+| 84758      | Rafael Ribeiro          | RafaelRibeiro97 |   Tax  |   Code   |
+| 83391      | Andreia Valente         | AndreiaValente  |   Tax  |  Tester  |
+| 85069      | Francisco Barros        | FranciscoKloganB|   Car  |   Code   |
+| 84710      | Diogo Vilela            | DiogoFSVilela   |   Car  |  Tester  |
+| 83405      | João Neves              | JoaoMiguelNeves | Broker |  Tester  |
+| 84711      | Diogo Redin             | diogoredin      |Activity|  Tester  |
+| 84711      | Diogo Redin             | diogoredin      |  Hotel |  Tester  |
+| 77921      | Mafalda Gaspar          | mafsgasp        |  Bank  |  Tester  |
+
