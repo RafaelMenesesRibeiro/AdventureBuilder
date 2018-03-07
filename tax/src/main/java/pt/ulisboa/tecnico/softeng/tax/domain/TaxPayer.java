@@ -4,6 +4,8 @@ import pt.ulisboa.tecnico.softeng.tax.domain.IRS;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class TaxPayer {
+	
+
 	private final String _NIF;
 	private String _name;
 	private String _address;
@@ -25,11 +27,23 @@ public class TaxPayer {
 	}
 
 	private void checkArgumetns(String nif, String name, String address)  throws TaxException {
-		if (nif.length() != TaxException.NIF_SIZE) {
+		if (nif == null || nif.length() != TaxException.NIF_SIZE) {
 			throw new TaxException();
 		}
 		if (name == null || name.trim().equals("") || address == null || address.trim().equals("")) {
 			throw new TaxException();	
 		}
+	}
+
+	public String getNif() {
+		return this._NIF;
+	}
+
+	public String getName() {
+		return this._name;
+	}
+
+	public String getAddress() {
+		return this._address;
 	}
 }
