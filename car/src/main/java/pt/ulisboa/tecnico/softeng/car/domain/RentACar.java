@@ -75,11 +75,28 @@ public class RentACar {
 		this.vehicleList.add(vehicle);
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public String getCode() {
+		return this.code;
+	}
+
+	public List<Vehicle> getVehicleList() {
+		return this.vehicleList;
+	}
+
 	public Renting getRenting(String reference) {
 		return null;
 		// TODO
 	}
 
+	public RentingData getRentingData(String reference) {
+		return null;
+		// TODO
+	}
+	
 	// TODO
   public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
 		List<Car> temp = new ArrayList<Car>();
@@ -102,20 +119,4 @@ public class RentACar {
 		return temp;
 	}
 
-	public RentingData getRentingData(String reference) {
-		return null;
-		// TODO
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public String getCode() {
-		return this.code;
-	}
-
-	public List<Vehicle> getVehicleList() {
-		return this.vehicleList;
-	}
 }
