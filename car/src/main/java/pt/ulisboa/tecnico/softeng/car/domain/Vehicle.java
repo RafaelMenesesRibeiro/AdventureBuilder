@@ -19,8 +19,8 @@ public class Vehicle {
 		this.kilometers = 0;
 	}
 
-	public Vehicle(String plate, RentACar dealer, int kilometers) {
-		checkArguments(plate, dealer, kilometers);
+	public Vehicle(String plate, int kilometers, RentACar dealer) {
+		checkArguments(plate, kilometers, dealer);
 		this.plate = plate;
 		this.dealer = dealer;
 		this.kilometers = kilometers;
@@ -31,7 +31,7 @@ public class Vehicle {
 		checkDealer(dealer);
 	}
 
-	private void checkArguments(String plate, RentACar dealer, int kilometers) {
+	private void checkArguments(String plate, int kilometers, RentACar dealer) {
 		checkArguments(plate, dealer);
 		checkKilometers(kilometers);
 	}

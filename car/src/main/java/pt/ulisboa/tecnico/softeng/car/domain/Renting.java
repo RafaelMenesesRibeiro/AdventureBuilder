@@ -1,7 +1,9 @@
 package pt.ulisboa.tecnico.softeng.car.domain;
 
-import java.time.LocalDateTime;
+import org.joda.time.LocalDate;
+
 import pt.ulisboa.tecnico.softeng.car.exception.CarException;
+import pt.ulisboa.tecnico.softeng.car.domain.Vehicle;
 
 public class Renting {
 	private String reference;
@@ -9,6 +11,7 @@ public class Renting {
 	private LocalDate begin;
 	private LocalDate end;
 	private int kilometers;
+	private Vehicle vehicle = null;
 
 	public String getReference() {
 		return this.reference;
@@ -28,6 +31,10 @@ public class Renting {
 
 	public int getKilometers() {
 		return this.kilometers;
+	}
+
+	public Vehicle getVehicle() {
+		return this.vehicle;
 	}
 
 	public void setReference(String reference) {
@@ -54,11 +61,23 @@ public class Renting {
 		}
 	}
 
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
+	}
+
 	public void increaseKilometers(int km) {
 		if (km < 0) {
 			throw new CarException("Car kilometers may only be raised.");
 		} else {
 			this.kilometers += km;
 		}
+	}
+
+	public boolean conflict(LocalDate begin, LocalDate end) {
+		return false;
+	}
+
+	public void checkout(int kilometers) {
+	
 	}
 }
