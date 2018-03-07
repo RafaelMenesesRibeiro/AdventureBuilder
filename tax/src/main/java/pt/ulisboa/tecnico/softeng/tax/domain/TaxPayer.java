@@ -4,7 +4,7 @@ import pt.ulisboa.tecnico.softeng.tax.domain.IRS;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class TaxPayer {
-	
+	public static final int NIF_SIZE = 9;
 
 	private final String _NIF;
 	private String _name;
