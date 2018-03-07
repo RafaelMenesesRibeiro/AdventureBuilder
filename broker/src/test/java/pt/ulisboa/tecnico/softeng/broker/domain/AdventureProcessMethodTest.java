@@ -3,6 +3,7 @@ package pt.ulisboa.tecnico.softeng.broker.domain;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+
 import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
@@ -54,8 +55,7 @@ public class AdventureProcessMethodTest {
 		assertEquals(Adventure.State.CONFIRMED, adventure.getState());
 		assertNotNull(adventure.getPaymentConfirmation());
 		assertNotNull(adventure.getRoomConfirmation());
-		assertNotNull(adventure.getActivityConfirmation());
-	}
+		assertNotNull(adventure.getActivityConfirmation());	}
 
 	@Test
 	public void successNoHotelBooking() {
@@ -67,6 +67,13 @@ public class AdventureProcessMethodTest {
 		assertEquals(Adventure.State.CONFIRMED, adventure.getState());
 		assertNotNull(adventure.getPaymentConfirmation());
 		assertNotNull(adventure.getActivityConfirmation());
+	}
+
+	@Test
+	public void successAdventureCancellation() {
+		Adventure adventure = new Adventure(this.broker, this.begin, this.begin, 20, this.IBAN, 300);
+
+		
 	}
 
 	@After
