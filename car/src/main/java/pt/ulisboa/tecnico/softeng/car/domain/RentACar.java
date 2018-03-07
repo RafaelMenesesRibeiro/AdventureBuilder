@@ -16,6 +16,9 @@ import pt.ulisboa.tecnico.softeng.car.dataobjects.RentingData;
 * Each rental company knows may rent two types of vehicles. Cars or Motorcycles.
 * It's identified by a unique code and it has some name.
 * All Companies know about the existence of other companies through a static HashSet of RentingCompanies.
+* @member: vehicleList is a list of Vehicle objects belonging to this rental enterprise.
+* Do not confuse vehicleList with vehicles in {@link package.Vehicle#vehicles} which is
+* a list of all existing vehicles
 */
 public class RentACar {
 	public static Set<RentACar> rentingCompanies = new HashSet<>();
@@ -96,7 +99,7 @@ public class RentACar {
 		return null;
 		// TODO
 	}
-	
+
 	// TODO
   public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
 		List<Car> temp = new ArrayList<Car>();

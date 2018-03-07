@@ -1,29 +1,36 @@
 package pt.ulisboa.tecnico.softeng.car.domain;
 
 import java.util.Set;
+import java.util.List;
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.time.LocalDateTime;
+
 import pt.ulisboa.tecnico.softeng.car.exception.CarException;
+import pt.ulisboa.tecnico.softeng.car.domain.Renting;
 
 public class Vehicle {
 	public static Set<Vehicle> vehicles = new HashSet<>();
 	public static final int CODE_SIZE = 8;
 	private final String plate;
+	private List rentingsList;
 	private int kilometers;
 	private RentACar dealer;
 
 	public Vehicle(String plate, RentACar dealer) {
 		checkArguments(plate, dealer);
 		this.plate = plate;
-		this.dealer = dealer;
+		this.rentingsList = new ArrayList<Renting>;
 		this.kilometers = 0;
+		this.dealer = dealer;
 	}
 
 	public Vehicle(String plate, int kilometers, RentACar dealer) {
 		checkArguments(plate, kilometers, dealer);
 		this.plate = plate;
-		this.dealer = dealer;
+		this.rentingsList = new ArrayList<Renting>;
 		this.kilometers = kilometers;
+		this.dealer = dealer;
 	}
 
 	private void checkArguments(String plate, RentACar dealer) {
@@ -109,11 +116,26 @@ public class Vehicle {
 		return this.dealer;
 	}
 
-	public void isFree(LocalDateTime begin, LocalDateTime end) {
-		// TODO
+	public boolean isFree(LocalDateTime begin, LocalDateTime end) {
+		for (Renting renting : this.rentingsList) {
+			if (renting.conflict(begin, end)) {
+				return false;
+			}
+		} else {
+			return true;
+		}
 	}
 
-	public void rent(String drivingLicense, LocalDateTime begin, LocalDateTime end) {
-		// TODO
+	public Renting rent(String drivingLicense, LocalDateTime begin, LocalDateTime end) {
+		if (drivingLicense == null || begin == null || end == null) {
+			throw new CarException("At least one of (drivingLicense, begin or end dates) is null.");
+		} if (!isFree(begin, end)) {
+			throw new CarException("Vehicle is already rented to someone else during the chosen period.");
+		}
+
+		Renting renting = new Renting(this.dealer, begin, end);
+		this.rentingsList.add(renting);
+
+		return renting;
 	}
 }
