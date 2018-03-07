@@ -21,11 +21,11 @@ public class SellerConstructorMethodTest {
 	public void success() {
 		Seller seller = new Seller(SELLER_NIF, SELLER_NAME,SELLER_ADDRESS);
 
-		Assert.assertEquals(SELLER_NIF, Seller.getNif());
-		Assert.assertEquals(SELLER_NAME, Seller.getName());
-		Assert.assertEquals(SELLER_ADDRESS, Seller.getAddress());
+		Assert.assertEquals(SELLER_NIF, seller.getNif());
+		Assert.assertEquals(SELLER_NAME, seller.getName());
+		Assert.assertEquals(SELLER_ADDRESS, seller.getAddress());
 		
-		Assert.assertTrue(Seller.getNif().length() > TaxPayer.NIF_SIZE);
+		Assert.assertTrue(seller.getNif().length() > TaxPayer.NIF_SIZE);
 	}
 
 	@Test(expected = TaxException.class)
@@ -54,7 +54,7 @@ public class SellerConstructorMethodTest {
 	}
 
 	@Test(expected = TaxException.class)
-	public void emptySellerName() {
+	public void emptySellerAddress() {
 		new Seller(SELLER_NIF, SELLER_NAME, "    ");
 	}
 

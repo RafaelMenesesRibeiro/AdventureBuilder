@@ -25,7 +25,7 @@ public class BuyerConstructorMethodTest {
 		Assert.assertEquals(BUYER_NAME, buyer.getName());
 		Assert.assertEquals(BUYER_ADDRESS, buyer.getAddress());
 		
-		Assert.assertTrue(buyer.getNif().length() > TaxPayer.NIF_SIZE);
+		Assert.assertTrue(buyer.getNif().length() == TaxPayer.NIF_SIZE);
 	}
 
 	@Test(expected = TaxException.class)
@@ -54,7 +54,7 @@ public class BuyerConstructorMethodTest {
 	}
 
 	@Test(expected = TaxException.class)
-	public void emptyBuyerName() {
+	public void emptyBuyerAddress() {
 		new Buyer(BUYER_NIF, BUYER_NAME, "    ");
 	}
 
