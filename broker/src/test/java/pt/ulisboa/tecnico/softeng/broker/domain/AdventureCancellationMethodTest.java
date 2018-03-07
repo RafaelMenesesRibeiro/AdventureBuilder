@@ -89,8 +89,8 @@ public class AdventureCancellationMethodTest {
 	public void failurePaymentCancellation() {
 		Adventure adventure = new Adventure(this.broker, this.begin, this.end, AGE, IBAN, AMOUNT);
 
-		Assert.assertFalse(adventure.cancelPayment());
-
+		Assert.assertFalse(adventure.cancelPayment()); 
+		
 	}
 
 
