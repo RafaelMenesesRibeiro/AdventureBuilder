@@ -24,6 +24,7 @@ public class Vehicle {
 		this.rentingsList = new ArrayList<Renting>();
 		this.kilometers = 0;
 		this.dealer = dealer;
+		this.dealer.addVehicle(this);
 	}
 
 	public Vehicle(String plate, int kilometers, RentACar dealer) {
@@ -32,6 +33,7 @@ public class Vehicle {
 		this.rentingsList = new ArrayList<Renting>();
 		this.kilometers = kilometers;
 		this.dealer = dealer;
+		this.dealer.addVehicle(this);
 	}
 
 	private void checkArguments(String plate, RentACar dealer) {
