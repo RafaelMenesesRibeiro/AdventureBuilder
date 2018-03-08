@@ -35,17 +35,6 @@ public class Invoice {
 		//TODO: ADD TO IRS LIST.
 	}
 
-	public Invoice() {
-		this._seller = null;
-		this._buyer = null;
-		this._reference = "";
-		this._itemType = new ItemType();
-		this._IVA = calculateIVA(0);
-		this._value = calculateTotal(0);
-		this._date = LocalDate.now();
-		//USED WILE SELLER NOT FULLY IMPPLEMENTED.
-	}
-
 	private void checkArguments(float value, LocalDate date, String type, TaxPayer seller, TaxPayer buyer) throws TaxException {
 		if (date == null) {
 			throw new TaxException();
