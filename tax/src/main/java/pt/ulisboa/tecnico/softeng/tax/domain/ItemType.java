@@ -1,10 +1,16 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import pt.ulisboa.tecnico.softeng.tax.domain.Invoice;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class ItemType {
 	private final String _name;
 	private int _tax;
+	public static Set<Invoice> invoices = new HashSet<>();
+	private Set<Invoice> _invoices = new HashSet<>();
 	
 	public ItemType(String itemType, int tax) {
 		checkArguments(itemType, tax);
@@ -28,7 +34,16 @@ public class ItemType {
 		}
 	}
 
+	public String getName() {
+		return this._name;
+	}
+
 	public float getTax() {
-		return _tax;
+		return this._tax;
+	}
+
+	public int getNumberOfInvoices() {
+		return 1;
+		//return this._invoices.size();
 	}
 }

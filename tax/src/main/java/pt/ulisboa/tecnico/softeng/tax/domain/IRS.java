@@ -27,4 +27,8 @@ public final class IRS {
 	}
 
 	public static void submitInvoice(InvoiceData invoice) {  }
+
+	public static int getNumberOfItems() {
+		return 1;
+	}
 }
