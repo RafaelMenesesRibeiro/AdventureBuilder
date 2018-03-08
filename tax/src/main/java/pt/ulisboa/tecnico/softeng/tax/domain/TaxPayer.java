@@ -52,6 +52,10 @@ public class TaxPayer {
 		return this._address;
 	}
 
+	public Map<String, Invoice> getInvoices() {
+		return this._invoices;
+	}
+
 	public void addInvoice(Invoice invoice) {
 		String ref = invoice.getReference();
 		_invoices.put(ref, invoice);
