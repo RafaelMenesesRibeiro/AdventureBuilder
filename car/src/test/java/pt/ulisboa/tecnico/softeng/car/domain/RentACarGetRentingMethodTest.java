@@ -31,7 +31,7 @@ public class RentACarGetRentingMethodTest {
 	
 	@Test
 	public void success() {
-		Renting result = this.renter.getRenting(renting.getReference());
+		Renting result = this.renter.getRenting(this.renting.getReference());
 		Assert.assertEquals(this.renting, result);
 	}
 	
@@ -50,9 +50,9 @@ public class RentACarGetRentingMethodTest {
 		this.renter.getRenting("  ");
 	}
 
-	@Test (expected = CarException.class)
+	@Test
 	public void noMatchReferenceArgument() {
-		this.renter.getRenting("XPTO");
+		Assert.assertEquals(null, this.renter.getRenting("XPTO"));
 	}
 
 	@After
