@@ -10,7 +10,7 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 public class ItemTypeConstructorMethodTest {
 	private static final int TAX = 23;
 	private static final String ITEM_TYPE = "Videojogo";
-	}
+	
 
 
 	@Before
