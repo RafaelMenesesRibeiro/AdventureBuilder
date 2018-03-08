@@ -1,5 +1,6 @@
 package pt.ulisboa.tecnico.softeng.car.domain;
 
+import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
 import org.junit.After;
@@ -34,14 +35,58 @@ public class RentACarGetAllAvailableCarsMethodTest {
 	}
 
 	@Test
-	public void noAvailableCars() {
+	public void sameDatesOfRenting() {
 		List<Car> cars = renter.getAllAvailableCars(this.unavailableBegin, this.unavailableEnd);
 		Assert.assertTrue(cars.size() == 0);
 	}
 
+	@Test
+	public void subsetDates() {
+		LocalDate begin = this.unavailableBegin.plusDays(1);
+		LocalDate end = this.unavailableEnd.minusDays(1);
+		List<Car> cars = renter.getAllAvailableCars(begin, end);
+		Assert.assertTrue(cars.size() == 0);
+	}
+	
+	@Test
+	public void leftOverlapOfDates() {
+		LocalDate begin = this.unavailableBegin.minusDays(1);
+		LocalDate end = this.unavailableBegin.plusDays(1);
+		List<Car> cars = renter.getAllAvailableCars(begin, end);
+		Assert.assertTrue(cars.size() == 0);
+	}
+
+	@Test
+	public void rightOverlapOfDates() {
+		LocalDate begin = this.unavailableEnd.minusDays(1);
+		LocalDate end = this.unavailableEnd.plusDays(1);
+		List<Car> cars = renter.getAllAvailableCars(begin, end);
+		Assert.assertTrue(cars.size() == 0);
+	}
+
+	@Test (expected = CarException.class)
+	public void swappedDates() {
+		renter.getAllAvailableCars(this.unavailableEnd, this.unavailableBegin);
+	}
+
+	@Test (expected = CarException.class)
+	public void nullBegin() {
+		renter.getAllAvailableCars(null, this.unavailableEnd);
+	}
+
+	@Test (expected = CarException.class)
+	public void nullEnd() {
+		renter.getAllAvailableCars(this.unavailableBegin, null);
+	}
+
 	@After
 	public void tearDown() {
-		
+		for (Iterator<RentACar> iterator = RentACar.rentingCompanies.iterator(); iterator.hasNext();) {
+    		RentACar renter = iterator.next();
+    		if (renter.equals(this.renter)) {
+    			iterator.remove();
+    		}
+    	}
 	}
 
 }
