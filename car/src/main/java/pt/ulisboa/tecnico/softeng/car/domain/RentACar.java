@@ -68,9 +68,9 @@ public class RentACar {
 		}
 	}
 
-	private void checkName(String name) {
-		if (name == null || name.trim().length() == 0) {
-			throw new CarException("Name must have at least more than a character and cannot be null.");
+	private void checkName(String str) {
+		if (str == null || str.trim().length() == 0) {
+			throw new CarException("Name or reference must have at least more than a character and cannot be null.");
 		}
 	}
 
@@ -91,6 +91,7 @@ public class RentACar {
 	}
 
 	public Renting getRenting(String reference) {
+		checkName(reference);
 		for (Vehicle vehicle : this.vehicleList) {
 			Renting renting = vehicle.getRenting(reference);
 			if (renting != null) {

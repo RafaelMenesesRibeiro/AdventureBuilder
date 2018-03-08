@@ -36,30 +36,7 @@ public class Renting {
 	}
 
 	private void checkDrivingLicense(String drivingLicense) {
-		int index = 0;
-		int letterCount = 0;
-		int numberCount = 0;
-		int drivingLicenseLength = drivingLicense.length();
-
-		if (drivingLicenseLength < 2) {
-			throw new CarException("Invalid driving license.");
-		}
-
-		while (Character.isLetter(drivingLicense.charAt(index)) && index < drivingLicenseLenght) {
-			index++;
-			letterCount++;
-		}
-
-		if (index < 1 || letterCount == drivingLicenseLength) {
-			throw new CarException("Invalid driving license.");
-		}
-
-		while(Character.isDigit(drivingLicense.charAt(index))  && index < drivingLicenseLenght) {
-			index++;
-			numberCount++;
-		}
-
-		if ((numberCount + letterCount) != drivingLicenseLength) {
+		if (!drivingLicense.matches("[a-zA-Z]+[0-9]+")) {
 			throw new CarException("Invalid driving license.");
 		}
 	}
