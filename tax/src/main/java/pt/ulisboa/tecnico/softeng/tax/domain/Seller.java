@@ -1,5 +1,8 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
+import java.util.Map;
+import java.util.Iterator;
+
 import pt.ulisboa.tecnico.softeng.tax.domain.IRS;
 import pt.ulisboa.tecnico.softeng.tax.domain.TaxPayer;
 import pt.ulisboa.tecnico.softeng.tax.domain.Invoice;
@@ -25,6 +28,13 @@ public class Seller extends TaxPayer{
 			throw new TaxException();
 		}
 
-		return new Invoice();
+		for (Iterator iter = this._invoices.entrySet().iterator(); iter.hasNext(); ) {
+			Map.Entry pair = (Map.Entry) iter.next();
+			if (pair.getKey().equals(reference)) {
+				return (Invoice) pair.getValue();
+			}
+		}
+		
+		throw new TaxException();
 	}
 }

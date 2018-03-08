@@ -1,6 +1,6 @@
 package pt.ulisboa.tecnico.softeng.tax.dataobjects;
 
-import java.time.LocalDate;
+import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 

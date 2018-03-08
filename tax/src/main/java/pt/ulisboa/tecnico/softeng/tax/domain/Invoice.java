@@ -2,6 +2,7 @@ package pt.ulisboa.tecnico.softeng.tax.domain;
 
 import org.joda.time.LocalDate;
 
+import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
 import pt.ulisboa.tecnico.softeng.tax.domain.ItemType;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
@@ -19,11 +20,18 @@ public class Invoice {
 
 		this._seller = seller;
 		this._buyer = buyer;
-		this._reference = createNewReference();
+		this._reference = createNewReference(date, seller, buyer, value);
 		this._itemType = IRS.getItemTypeByName(type);
 		this._IVA = calculateIVA(value);
 		this._value = calculateTotal(value);
 		this._date = date;
+		
+		InvoiceData data = new InvoiceData(seller.getNif(), buyer.getNif(), type, value, date);
+		IRS.submitInvoice(data);
+		seller.addInvoice(this);
+		buyer.addInvoice(this);
+		ItemType item = IRS.getItemTypeByName(type);
+		item.submitInvoice(this);
 		//TODO: ADD TO IRS LIST.
 	}
 
@@ -53,8 +61,10 @@ public class Invoice {
 		}
 	}
 
-	private String createNewReference() { 
-		return "";
+	private String createNewReference(LocalDate date, TaxPayer seller, TaxPayer buyer, float value) {
+		String sellerNIF = seller.getNif();
+		String buyerNIF = buyer.getNif();
+		return date.toString("MM/dd/yyyy") + sellerNIF + buyerNIF + String.valueOf(value);
 	}
 
 	private float calculateIVA(float value) {
@@ -65,11 +75,9 @@ public class Invoice {
 		return value;
 	}
 
-	public float getValue() {
-		return this._value;
-	}
-
-	public LocalDate getDate() {
-		return this._date;
-	}
+	public float getValue() { return this._value; }
+	public LocalDate getDate() { return this._date;	}
+	public String getReference() { return this._reference; }
+	public TaxPayer getSeller() { return this._seller; }
+	public TaxPayer getBuyer() { return this._buyer; }
 }

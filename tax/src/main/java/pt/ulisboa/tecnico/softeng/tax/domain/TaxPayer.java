@@ -1,5 +1,8 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import pt.ulisboa.tecnico.softeng.tax.domain.IRS;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
@@ -9,6 +12,7 @@ public class TaxPayer {
 	private final String _NIF;
 	private String _name;
 	private String _address;
+	protected Map<String, Invoice> _invoices = new HashMap<>();
 
 	public TaxPayer(String nif, String name, String address) {
 		checkArgumetns(nif, name, address);
@@ -16,6 +20,7 @@ public class TaxPayer {
 		this._NIF = nif;
 		this._name = name;
 		this._address = address;
+		IRS.addTaxPayer(this);
 		//TODO: ADD TO IRS LIST.
 	}
 
@@ -45,5 +50,10 @@ public class TaxPayer {
 
 	public String getAddress() {
 		return this._address;
+	}
+
+	public void addInvoice(Invoice invoice) {
+		String ref = invoice.getReference();
+		_invoices.put(ref, invoice);
 	}
 }

@@ -32,7 +32,7 @@ public class ItemTypeConstructorMethodTest {
 
 	@After
 	public void tearDown() {
-		ItemType.invoices.clear();
+		//ItemType.invoices.clear();
 	}
 
 
