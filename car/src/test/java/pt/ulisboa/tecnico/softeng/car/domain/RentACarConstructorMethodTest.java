@@ -15,7 +15,7 @@ public class RentACarConstructorMethodTest {
 	
 	@Before
 	public void setUp() {
-		this.name = "RentACar";
+		this.name = "Renter";
 	}
 
 	@Test

@@ -11,7 +11,6 @@ import org.junit.Test;
 import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 
 public class RentACarGetRentingMethodTest {
-	
 	private String drivingLicense;
 	private LocalDate begin;
 	private LocalDate end;
@@ -25,7 +24,7 @@ public class RentACarGetRentingMethodTest {
 		this.begin = LocalDate.now();
 		this.end = this.begin.plusDays(1);
 		this.renter = new RentACar("Renter");
-		this.vehicle = new Vehicle("ZZ-ZZ-ZZ", this.renter);
+		this.vehicle = new Vehicle("ZZ-ZZ-ZZ", 0, this.renter);
 		this.renting = this.vehicle.rent(this.drivingLicense, this.begin, this.end);
 	}
 	
