@@ -91,35 +91,62 @@ public class RentACar {
 	}
 
 	public Renting getRenting(String reference) {
+		for (Vehicle vehicle : this.vehicleList) {
+			Renting renting = vehicle.getRenting(reference);
+			if (renting != null) {
+				return renting;
+			}
+		}
 		return null;
-		// TODO
 	}
 
 	public RentingData getRentingData(String reference) {
-		return null;
-		// TODO
+		for (RentACar rentACar : rentingCompanies) {
+			for (Vehicle vehicle : rentACar.vehicleList) {
+				Renting renting = vehicle.getRenting(reference);
+				if (renting != null) {
+					return newRentingData(reference, vehicle, renting);
+				}
+			}
+		}
+		throw new CarException("No renting with given reference was found.");
 	}
 
-	// TODO
+	private RentingData newRentingData(String reference, Vehicle vehicle, Renting renting) {
+		String plate = vehicle.getPlate();
+		String drivingLicense = renting.getDrivingLicense();
+		String rentACarCode = renting.getVehicle().getDealer().getCode();
+		LocalDate begin = renting.getBeginDate();
+		LocalDate end = renting.getEndDate();
+		return new RentingData(reference, plate, drivingLicense, rentACarCode, begin, end);
+	}
+
   public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
-		List<Car> temp = new ArrayList<Car>();
-		for(Vehicle vehicle : vehicleList) {
-			if (vehicle instanceof Car) {
-				temp.add((Car) vehicle);
-			}
-		}
-		return temp;
+		List<Car> availableCars = new ArrayList<Car>();
+		for (RentACar  rentingCompany : rentingCompanies){
+              for (Vehicle vehicle : vehicleList) {
+                  if (vehicle instanceof Car && isAvailable(vehicle, begin, end)) {
+                      availableCars.add((Car) vehicle);
+                  }
+              }
+        }
+		return availableCars;
 	}
 
-	// TODO
 	public List<Motorcycle> getAllAvailableMotorcycles(LocalDate begin, LocalDate end) {
-		List<Motorcycle> temp = new ArrayList<Motorcycle>();
-		for(Vehicle vehicle : vehicleList) {
-			if (vehicle instanceof Motorcycle) {
-				temp.add((Motorcycle) vehicle);
-			}
-		}
-		return temp;
+		List<Motorcycle> availableMotorcycles = new ArrayList<Motorcycle>();
+        for (RentACar  rentingCompany : rentingCompanies) {
+            for (Vehicle vehicle : vehicleList) {
+                if (vehicle instanceof Motorcycle && isAvailable(vehicle, begin, end)) {
+                    availableMotorcycles.add((Motorcycle) vehicle);
+                }
+            }
+        }
+		return availableMotorcycles;
+	}
+
+	private boolean isAvailable(Vehicle vehicle, LocalDate begin, LocalDate end) {
+		return vehicle.isFree(begin, end);
 	}
 
 }
