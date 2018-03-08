@@ -45,7 +45,7 @@ public class Renting {
 			throw new CarException("Invalid driving license.");
 		}
 
-		while (Character.isLetter(drivingLicense.charAt(index))) {
+		while (Character.isLetter(drivingLicense.charAt(index)) && index < drivingLicenseLenght) {
 			index++;
 			letterCount++;
 		}
@@ -54,7 +54,7 @@ public class Renting {
 			throw new CarException("Invalid driving license.");
 		}
 
-		while(Character.isDigit(drivingLicense.charAt(index))) {
+		while(Character.isDigit(drivingLicense.charAt(index))  && index < drivingLicenseLenght) {
 			index++;
 			numberCount++;
 		}
