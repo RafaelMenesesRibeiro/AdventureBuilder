@@ -16,6 +16,9 @@ import pt.ulisboa.tecnico.softeng.car.dataobjects.RentingData;
 * Each rental company knows may rent two types of vehicles. Cars or Motorcycles.
 * It's identified by a unique code and it has some name.
 * All Companies know about the existence of other companies through a static HashSet of RentingCompanies.
+* @member: vehicleList is a list of Vehicle objects belonging to this rental enterprise.
+* Do not confuse vehicleList with vehicles in {@link package.Vehicle#vehicles} which is
+* a list of all existing vehicles
 */
 public class RentACar {
 	public static Set<RentACar> rentingCompanies = new HashSet<>();
@@ -75,38 +78,6 @@ public class RentACar {
 		this.vehicleList.add(vehicle);
 	}
 
-	public Renting getRenting(String reference) {
-		return null;
-		// TODO
-	}
-
-	// TODO
-  public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
-		List<Car> temp = new ArrayList<Car>();
-		for(Vehicle vehicle : vehicleList) {
-			if (vehicle instanceof Car) {
-				temp.add((Car) vehicle);
-			}
-		}
-		return temp;
-	}
-
-	// TODO
-	public List<Motorcycle> getAllAvailableMotorcycles(LocalDate begin, LocalDate end) {
-		List<Motorcycle> temp = new ArrayList<Motorcycle>();
-		for(Vehicle vehicle : vehicleList) {
-			if (vehicle instanceof Motorcycle) {
-				temp.add((Motorcycle) vehicle);
-			}
-		}
-		return temp;
-	}
-
-	public RentingData getRentingData(String reference) {
-		return null;
-		// TODO
-	}
-
 	public String getName() {
 		return this.name;
 	}
@@ -118,4 +89,64 @@ public class RentACar {
 	public List<Vehicle> getVehicleList() {
 		return this.vehicleList;
 	}
+
+	public Renting getRenting(String reference) {
+		for (Vehicle vehicle : this.vehicleList) {
+			Renting renting = vehicle.getRenting(reference);
+			if (renting != null) {
+				return renting;
+			}
+		}
+		return null;
+	}
+
+	public RentingData getRentingData(String reference) {
+		for (RentACar rentACar : rentingCompanies) {
+			for (Vehicle vehicle : rentACar.vehicleList) {
+				Renting renting = vehicle.getRenting(reference);
+				if (renting != null) {
+					return newRentingData(reference, vehicle, renting);
+				}
+			}
+		}
+		throw new CarException("No renting with given reference was found.");
+	}
+
+	private RentingData newRentingData(String reference, Vehicle vehicle, Renting renting) {
+		String plate = vehicle.getPlate();
+		String drivingLicense = renting.getDrivingLicense();
+		String rentACarCode = renting.getVehicle().getDealer().getCode();
+		LocalDate begin = renting.getBeginDate();
+		LocalDate end = renting.getEndDate();
+		return new RentingData(reference, plate, drivingLicense, rentACarCode, begin, end);
+	}
+
+  public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
+		List<Car> availableCars = new ArrayList<Car>();
+		for (RentACar  rentingCompany : rentingCompanies){
+              for (Vehicle vehicle : vehicleList) {
+                  if (vehicle instanceof Car && isAvailable(vehicle, begin, end)) {
+                      availableCars.add((Car) vehicle);
+                  }
+              }
+        }
+		return availableCars;
+	}
+
+	public List<Motorcycle> getAllAvailableMotorcycles(LocalDate begin, LocalDate end) {
+		List<Motorcycle> availableMotorcycles = new ArrayList<Motorcycle>();
+        for (RentACar  rentingCompany : rentingCompanies) {
+            for (Vehicle vehicle : vehicleList) {
+                if (vehicle instanceof Motorcycle && isAvailable(vehicle, begin, end)) {
+                    availableMotorcycles.add((Motorcycle) vehicle);
+                }
+            }
+        }
+		return availableMotorcycles;
+	}
+
+	private boolean isAvailable(Vehicle vehicle, LocalDate begin, LocalDate end) {
+		return vehicle.isFree(begin, end);
+	}
+
 }

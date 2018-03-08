@@ -1,29 +1,37 @@
 package pt.ulisboa.tecnico.softeng.car.domain;
 
 import java.util.Set;
+import java.util.List;
 import java.util.HashSet;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+
+import org.joda.time.LocalDate;
+
 import pt.ulisboa.tecnico.softeng.car.exception.CarException;
+import pt.ulisboa.tecnico.softeng.car.domain.Renting;
 
 public class Vehicle {
 	public static Set<Vehicle> vehicles = new HashSet<>();
 	public static final int CODE_SIZE = 8;
 	private final String plate;
+	private List<Renting> rentingsList;
 	private int kilometers;
 	private RentACar dealer;
 
 	public Vehicle(String plate, RentACar dealer) {
 		checkArguments(plate, dealer);
 		this.plate = plate;
-		this.dealer = dealer;
+		this.rentingsList = new ArrayList<Renting>();
 		this.kilometers = 0;
+		this.dealer = dealer;
 	}
 
-	public Vehicle(String plate, RentACar dealer, int kilometers) {
-		checkArguments(plate, dealer, kilometers);
+	public Vehicle(String plate, int kilometers, RentACar dealer) {
+		checkArguments(plate, kilometers, dealer);
 		this.plate = plate;
-		this.dealer = dealer;
+		this.rentingsList = new ArrayList<Renting>();
 		this.kilometers = kilometers;
+		this.dealer = dealer;
 	}
 
 	private void checkArguments(String plate, RentACar dealer) {
@@ -31,7 +39,7 @@ public class Vehicle {
 		checkDealer(dealer);
 	}
 
-	private void checkArguments(String plate, RentACar dealer, int kilometers) {
+	private void checkArguments(String plate, int kilometers, RentACar dealer) {
 		checkArguments(plate, dealer);
 		checkKilometers(kilometers);
 	}
@@ -76,6 +84,15 @@ public class Vehicle {
 		}
 	}
 
+	public Renting getRenting(String reference) {
+        for (Renting renting : this.rentingsList) {
+            if (renting.getReference().equals(reference)) {
+                return renting;
+            }
+        }
+        return null;
+    }
+
 	public String getPlate() {
 		return this.plate;
 	}
@@ -109,11 +126,25 @@ public class Vehicle {
 		return this.dealer;
 	}
 
-	public void isFree(LocalDateTime begin, LocalDateTime end) {
-		// TODO
+	public boolean isFree(LocalDate begin, LocalDate end) {
+		for (Renting renting : this.rentingsList) {
+			if (renting.conflict(begin, end)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	public void rent(String drivingLicense, LocalDateTime begin, LocalDateTime end) {
-		// TODO
+	public Renting rent(String drivingLicense, LocalDate begin, LocalDate end) {
+		if (drivingLicense == null || begin == null || end == null) {
+			throw new CarException("At least one of (drivingLicense, begin or end dates) is null.");
+		} if (!isFree(begin, end)) {
+			throw new CarException("Vehicle is already rented to someone else during the chosen period.");
+		}
+
+		Renting renting = new Renting(drivingLicense, begin, end, this);
+		this.rentingsList.add(renting);
+
+		return renting;
 	}
 }
