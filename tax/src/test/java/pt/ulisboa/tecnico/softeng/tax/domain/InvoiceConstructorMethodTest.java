@@ -32,31 +32,15 @@ public class InvoiceConstructorMethodTest {
 
 		Assert.assertEquals(INVOICE_VALUE, invoice.getValue(), 0.0f);
 		Assert.assertEquals(this.date, invoice.getDate());
+
 		Assert.assertTrue(invoice.getValue() > 0);
 		Assert.assertTrue(invoice.getDate().getYear() > 1970);
+
+		assertNotNull(this.buyer.getInvoices());
+		assertNotNull(this.seller.getInvoices());
+		assertNotNull(this.itemType.getInvoice());
 	}
 
-
-	@Test(expected = TaxException.class)
-	public void nullInvoiceItemType() {
-		new Invoice(INVOICE_VALUE, this.date, null, this.seller, this.buyer);
-	}
-	@Test(expected = TaxException.class)
-	public void emptyInvoiceRef() {
-		new Invoice(INVOICE_VALUE, this.date, "    ", this.seller, this.buyer);
-	}
-	@Test(expected = TaxException.class)
-	public void nullInvoiceDate() {
-		new Invoice(INVOICE_VALUE, null, ITEM_TYPE, this.seller, this.buyer);
-	}
-	@Test(expected = TaxException.class)
-	public void nullSeller() {
-		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, null, this.buyer);
-	}
-	@Test(expected = TaxException.class)
-	public void nullBuyer() {
-		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.seller, null);
-	}
 
 
 	@After
