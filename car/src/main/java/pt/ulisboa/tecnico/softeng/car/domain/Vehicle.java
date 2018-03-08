@@ -84,6 +84,15 @@ public class Vehicle {
 		}
 	}
 
+	public Renting getRenting(String reference) {
+        for (Renting renting : this.rentingsList) {
+            if (renting.getReference().equals(reference)) {
+                return renting;
+            }
+        }
+        return null;
+    }
+
 	public String getPlate() {
 		return this.plate;
 	}
