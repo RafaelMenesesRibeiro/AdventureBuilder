@@ -18,7 +18,7 @@ To see the coverage reports, go to <module name>/target/site/jacoco/index.html.
 
 ## Tasks - First Delivery  
 
-|   Number   |          Name           |   Name GitHUb   | Module |   Task   |
+|   Number   |          Name           |   GitHub Name   | Module |   Task   |
 | ---------- | ----------------------- | ----------------| ------ | -------- |
 | 84758      | Rafael Ribeiro          | RafaelRibeiro97 |   Tax  |   Code   |
 | 83391      | Andreia Valente         | AndreiaValente  |   Tax  |  Tester  |
@@ -29,3 +29,8 @@ To see the coverage reports, go to <module name>/target/site/jacoco/index.html.
 | 84711      | Diogo Redin             | diogoredin      |  Hotel |  Tester  |
 | 77921      | Mafalda Gaspar          | mafsgasp        |  Bank  |  Tester  |
 
+## Memos - First Delivery
+
+|        PosterID     |         TargetId        |   Post Date     |                              Message                             |
+| --------------------| ----------------------- | ----------------| -----------------------------------------------------------------|
+| FranciscoKloganB    | DiogoFSVilela           | 08-03-2018      | Created pull request - Code ready for revision and final testing |
