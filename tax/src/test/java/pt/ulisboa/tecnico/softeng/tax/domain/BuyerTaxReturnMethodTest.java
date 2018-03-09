@@ -48,7 +48,7 @@ public class BuyerTaxReturnMethodTest {
 
 		for (Iterator iter = buyer.getInvoices().entrySet().iterator(); iter.hasNext(); ) {
 			Map.Entry pair = (Map.Entry) iter.next();
-			Invoice selectedInvoice = pair.getValue();
+			Invoice selectedInvoice = (Invoice) pair.getValue();
 
 			float selectedInvoiceValue = selectedInvoice.getValue();
 			int selectedItemTax = selectedInvoice.getItemType().getTaxReturn();
