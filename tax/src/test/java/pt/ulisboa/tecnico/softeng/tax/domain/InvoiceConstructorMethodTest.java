@@ -57,6 +57,11 @@ public class InvoiceConstructorMethodTest {
 	}
 
 	@Test(expected = TaxException.class)
+	public void beforeSeventyDate() {
+		new Invoice(INVOICE_VALUE, new LocalDate(1970, 12, 31), ITEM_TYPE, this.seller, this.buyer);
+	}
+
+	@Test(expected = TaxException.class)
 	public void nullDate() {
 		new Invoice(INVOICE_VALUE, null, ITEM_TYPE, this.seller, this.buyer);
 	}
@@ -65,6 +70,7 @@ public class InvoiceConstructorMethodTest {
 	public void nullItemType() {
 		new Invoice(INVOICE_VALUE, this.date, null, this.seller, this.buyer);
 	}
+
 	@Test(expected = TaxException.class)
 	public void emptyItemType() {
 		new Invoice(INVOICE_VALUE, this.date, "    ", this.seller, this.buyer);
@@ -74,6 +80,7 @@ public class InvoiceConstructorMethodTest {
 	public void nullSeller() {
 		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, null, this.buyer);
 	}
+
 	@Test(expected = TaxException.class)
 	public void nullBuyer() {
 		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.seller, null);
