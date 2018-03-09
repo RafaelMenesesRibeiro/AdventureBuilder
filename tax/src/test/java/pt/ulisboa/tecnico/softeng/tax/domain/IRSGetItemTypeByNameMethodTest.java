@@ -20,12 +20,13 @@ public class IRSGetItemTypeByNameMethodTest {
 		this.bolacha = new ItemType ("Bolacha", 10);
 		this.brinquedo = new ItemType ("Brinquedo", 40);
 		this.cerveja = new ItemType ("Cerveja", 10);
+		this.itemTypes = IRS.getItemTypes();
 	}
 
 	@Test
 	public void success() {
 
-		this.itemTypes = IRS.getItemTypes();
+	
 		int index = 0;
 		for (ItemType type: this.itemTypes) {
 			if (type.getName().equals("Brinquedo")) {

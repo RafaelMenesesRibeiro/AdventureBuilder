@@ -21,47 +21,47 @@ public class SellerConstructorMethodTest {
 	public void success() {
 		this.seller = new Seller(SELLER_NIF, SELLER_NAME,SELLER_ADDRESS);
 
-		Assert.assertEquals(SELLER_NIF, seller.getNif());
+		Assert.assertEquals(SELLER_NIF, seller.getNIF());
 		Assert.assertEquals(SELLER_NAME, seller.getName());
 		Assert.assertEquals(SELLER_ADDRESS, seller.getAddress());
 		
-		Assert.assertTrue(seller.getNif().length() == TaxException.NIF_SIZE);
+		Assert.assertTrue(seller.getNIF().length() == TaxException.NIF_SIZE);
 	}
 
 	@Test
 	public void successCreationWithSameName() {
 		Seller sellerWithSameName = new Seller("111111112", "Joao Antonio", "Rua Dos Vendedores Pobres");
 
-		Assert.assertEquals("111111112", sellerWithSameName.getNif());
+		Assert.assertEquals("111111112", sellerWithSameName.getNIF());
 		Assert.assertEquals(SELLER_NAME, sellerWithSameName.getName());
 		Assert.assertEquals("Rua Dos Vendedores Pobres", sellerWithSameName.getAddress());
 		
-		Assert.assertTrue(sellerWithSameName.getNif().length() == TaxException.NIF_SIZE);
+		Assert.assertTrue(sellerWithSameName.getNIF().length() == TaxException.NIF_SIZE);
 	}
 	@Test
 	public void successCreationWithSameAddress() {
 		Seller sellerWithSameAddress = new Seller("111111113", "Francisco Santos", SELLER_ADDRESS);
 
-		Assert.assertEquals("111111113", sellerWithSameAddress.getNif());
+		Assert.assertEquals("111111113", sellerWithSameAddress.getNIF());
 		Assert.assertEquals("Francisco Santos", sellerWithSameAddress.getName());
 		Assert.assertEquals(SELLER_ADDRESS, sellerWithSameAddress.getAddress());
 		
-		Assert.assertTrue(sellerWithSameAddress.getNif().length() == TaxException.NIF_SIZE);
+		Assert.assertTrue(sellerWithSameAddress.getNIF().length() == TaxException.NIF_SIZE);
 	}
 
 
 	@Test(expected = TaxException.class)
-	public void existingNif() {
+	public void existingNIF() {
 		new Seller(SELLER_NIF, "Maria dos Anjos", "Rua dos Ladrões de Identidade");
 	}	
 
 	@Test(expected = TaxException.class)
-	public void nullSellerNif() {
+	public void nullSellerNIF() {
 		new Seller(null, SELLER_NAME, SELLER_ADDRESS);
 	}
 
 	@Test(expected = TaxException.class)
-	public void emptySellerNif() {
+	public void emptySellerNIF() {
 		new Seller("    ", SELLER_NAME, SELLER_ADDRESS);
 	}
 
