@@ -25,8 +25,9 @@ public class ItemTypeConstructorMethodTest {
 		Assert.assertEquals(ITEM_TYPE, this.itemType.getName());
 		Assert.assertEquals(TAX, this.itemType.getTax(), 0.0f);
 
-		Assert.assertTrue(this.itemType.getNumberOfInvoices() >= 1);	
-		Assert.assertTrue(IRS.getNumberOfItems() >= 1);		
+		Assert.assertNotNull(IRS.getItemTypes());
+		Assert.assertNotNull(this.itemType.getInvoices());
+
 	}
 
 	@Test(expected = TaxException.class)
