@@ -10,8 +10,6 @@ public class RentingData {
 	private LocalDate begin;
 	private LocalDate end;
 
-	public RentingData() {}
-
 	public RentingData(String reference, String plate, String drivingLicense, String rentACarCode, LocalDate begin, LocalDate end) {
 		this.reference = reference;
 		this.plate = plate;

@@ -30,43 +30,13 @@ public class RentACar {
 
 	public RentACar(String name) {
 		String code = String.valueOf(uniqueCode.incrementAndGet());
-		checkArguments(code, name);
-		this.code = code;
-		this.name = name;
-		this.vehicleList = new ArrayList<Vehicle>();
-		RentACar.rentingCompanies.add(this);
-	}
-
-	public RentACar(String code, String name) {
-		checkArguments(code, name);
-		this.code = code;
-		this.name = name;
-		this.vehicleList = new ArrayList<Vehicle>();
-		RentACar.rentingCompanies.add(this);
-	}
-
-	private void checkArguments(String name) {
 		checkName(name);
+		this.code = code;
+		this.name = name;
+		this.vehicleList = new ArrayList<Vehicle>();
+		RentACar.rentingCompanies.add(this);
 	}
 
-	private void checkArguments(String code, String name) {
-		checkCode(code);
-		checkArguments(name);
-	}
-
-	private void checkCode(String code) {
-		if (code == null) {
-			throw new CarException("Code cannot be null.");
-		} if (code.trim().length() != RentACar.CODE_SIZE) {
-			throw new CarException("Code length must be composed of exactly four alphanumeric characters.");
-		}
-
-		for (RentACar rentingCompany : rentingCompanies) {
-			if (String.valueOf(rentingCompany.getCode()).equals(code)) {
-				throw new CarException("A company with this code as already been registred.");
-			}
-		}
-	}
 
 	private void checkName(String str) {
 		if (str == null || str.trim().length() == 0) {

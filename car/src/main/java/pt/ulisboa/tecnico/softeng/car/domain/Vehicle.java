@@ -18,15 +18,6 @@ public class Vehicle {
 	private int kilometers;
 	private RentACar dealer;
 
-	public Vehicle(String plate, RentACar dealer) {
-		checkArguments(plate, dealer);
-		this.plate = plate;
-		this.rentingsList = new ArrayList<Renting>();
-		this.kilometers = 0;
-		this.dealer = dealer;
-		this.dealer.addVehicle(this);
-	}
-
 	public Vehicle(String plate, int kilometers, RentACar dealer) {
 		checkArguments(plate, kilometers, dealer);
 		this.plate = plate;
@@ -101,14 +92,6 @@ public class Vehicle {
 
 	public int getKilometers() {
 		return this.kilometers;
-	}
-
-	public void setKilometers(int km) {
-		if (km < this.kilometers) {
-			throw new CarException("Car kilometers may only be raised.");
-		} else {
-			this.kilometers = km;
-		}
 	}
 
 	public void increaseKilometers(int km) {
