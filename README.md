@@ -32,5 +32,4 @@ To see the coverage reports, go to <module name>/target/site/jacoco/index.html.
 ## Memos - First Delivery
 
 |        PosterID     |         TargetId        |   Post Date     |                              Message                             |
-| --------------------| ----------------------- | ----------------| -----------------------------------------------------------------|
-| FranciscoKloganB    | DiogoFSVilela           | 08-03-2018      | Created pull request - Code ready for revision and final testing |
+| --------------------| ----------------------- | ----------------| 
