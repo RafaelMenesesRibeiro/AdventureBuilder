@@ -51,8 +51,8 @@ public class BuyerTaxReturnMethodTest {
 			Invoice selectedInvoice = (Invoice) pair.getValue();
 
 			float selectedInvoiceValue = selectedInvoice.getValue();
-			int selectedItemTax = selectedInvoice.getItemType().getTaxReturn();
-			int year = pair.getValue().getYear();
+			int selectedItemTax = selectedInvoice.getItemType().getTax();
+			int year = selectedInvoice.getYear();
 
 			if (year == 2014) {
 				expectedReturn += (float)selectedInvoiceValue * selectedItemTax * 0.05;
