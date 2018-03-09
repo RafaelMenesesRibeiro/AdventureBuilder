@@ -6,6 +6,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Map;
+import java.util.Iterator;
+
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class BuyerTaxReturnMethodTest {
@@ -41,14 +44,20 @@ public class BuyerTaxReturnMethodTest {
 	public void success() {
 
 
-		float result = 0.0f;
-		for (int i=0; i< buyer.getInvoices().size(); i++) {
+		float expectedReturn = 0.0f;
 
+		for (Iterator iter = buyer.getInvoices().entrySet().iterator(); iter.hasNext(); ) {
+			Map.Entry pair = (Map.Entry) iter.next();
+			Invoice selected = pair.getValue();
+			int year = selected.getYear();
+			if (year == 2014) {
+				expectedReturn += selected.getTaxReturn();
+			}
 		}
 
 
 
-
+		Assert.assertEquals(expectedReturn, buyer.getTaxReturn());
 	}
 
 
