@@ -22,6 +22,7 @@ public class RentACarGetAllAvailableCarsMethodTest {
 		this.unavailableEnd = this.unavailableBegin.plusDays(7);
 		this.renter = new RentACar("Renter");
 		this.car = new Car("ZZ-ZZ-ZZ", 0, this.renter);
+		new Motorcycle("AA-AA-AA", 0, this.renter);
 		this.car.rent("VC12345", this.unavailableBegin, this.unavailableEnd);
 	}
 
@@ -68,7 +69,7 @@ public class RentACarGetAllAvailableCarsMethodTest {
 	public void swappedDates() {
 		renter.getAllAvailableCars(this.unavailableEnd, this.unavailableBegin);
 	}
-
+	
 	@Test (expected = CarException.class)
 	public void nullBegin() {
 		renter.getAllAvailableCars(null, this.unavailableEnd);

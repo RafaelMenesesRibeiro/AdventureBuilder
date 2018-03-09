@@ -6,7 +6,6 @@ import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.car.exception.CarException;
@@ -23,6 +22,7 @@ public class RentACarGetAllAvailableMotorcyclesMethodTest {
 		this.unavailableEnd = this.unavailableBegin.plusDays(7);
 		this.renter = new RentACar("Renter");
 		this.motorcycle = new Motorcycle("ZZ-ZZ-ZZ", 0, this.renter);
+		new Car("AA-AA-AA", 0, this.renter);
 		this.motorcycle.rent("VC12345", this.unavailableBegin, this.unavailableEnd);
 	}
 
@@ -70,13 +70,11 @@ public class RentACarGetAllAvailableMotorcyclesMethodTest {
 		renter.getAllAvailableMotorcycles(this.unavailableEnd, this.unavailableBegin);
 	}
 
-	@Ignore
 	@Test (expected = CarException.class)
 	public void nullBegin() {
 		renter.getAllAvailableMotorcycles(null, this.unavailableEnd);
 	}
 
-	@Ignore
 	@Test (expected = CarException.class)
 	public void nullEnd() {
 		renter.getAllAvailableMotorcycles(this.unavailableBegin, null);

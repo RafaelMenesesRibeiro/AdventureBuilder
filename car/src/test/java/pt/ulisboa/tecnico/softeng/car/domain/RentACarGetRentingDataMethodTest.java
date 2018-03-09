@@ -37,6 +37,11 @@ public class RentACarGetRentingDataMethodTest {
 		Assert.assertEquals(rentingData.getEndDate(), this.end);
 	}
 
+	@Test (expected = CarException.class)
+	public void noFoundReference() {
+		this.renter.getRentingData("XPTO");
+	}	
+
 	@After
 	public void tearDown() {
 		
