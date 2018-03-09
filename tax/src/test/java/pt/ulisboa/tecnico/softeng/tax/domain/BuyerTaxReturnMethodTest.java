@@ -58,7 +58,7 @@ public class BuyerTaxReturnMethodTest {
 				expectedReturn += (float)selectedInvoiceValue * selectedItemTax * 0.05;
 			}
 		}
-		Assert.assertEquals(expectedReturn, buyer.getTaxReturn(2014));
+		Assert.assertEquals(expectedReturn, buyer.taxReturn(2014));
 	}
 
 
