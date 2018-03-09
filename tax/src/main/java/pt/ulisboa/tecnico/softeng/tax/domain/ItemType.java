@@ -1,7 +1,7 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
 import pt.ulisboa.tecnico.softeng.tax.domain.Invoice;
@@ -10,7 +10,7 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 public class ItemType {
 	private final String _name;
 	private int _tax;
-	private static Set<Invoice> _invoices = new HashSet<>();
+	private static Map<String, Invoice> _invoices = new HashMap<>();
 	
 	public ItemType(String itemType, int tax) {
 		checkArguments(itemType, tax);
@@ -47,7 +47,11 @@ public class ItemType {
 		//return this._invoices.size();
 	}
 
+	public Map<String, Invoice> getInvoices() {
+		return this._invoices;
+	}
+
 	public static void submitInvoice(Invoice data) {
-		_invoices.add(data);
+		_invoices.put(data.getReference(), data);
 	}
 }
