@@ -22,12 +22,13 @@ public class ItemTypeConstructorMethodTest {
 	public void success() {
 		this.itemType = new ItemType(ITEM_TYPE, TAX);
 
+		Assert.assertTrue(this.itemType.getTax() >= 0);
+
 		Assert.assertEquals(ITEM_TYPE, this.itemType.getName());
 		Assert.assertEquals(TAX, this.itemType.getTax(), 0.0f);
 
 		Assert.assertNotNull(IRS.getItemTypes());
 		Assert.assertNotNull(this.itemType.getInvoices());
-
 	}
 
 	@Test(expected = TaxException.class)
@@ -35,6 +36,15 @@ public class ItemTypeConstructorMethodTest {
 		new ItemType(ITEM_TYPE, 12);
 	}
 
+	@Test(expected = TaxException.class)
+	public void nullItemType() {
+		new ItemType(null, TAX);
+	}
+
+	@Test(expected = TaxException.class)
+	public void emptyItemType() {
+		new ItemType("    ", TAX);
+	}
 
 	@After
 	public void tearDown() {
