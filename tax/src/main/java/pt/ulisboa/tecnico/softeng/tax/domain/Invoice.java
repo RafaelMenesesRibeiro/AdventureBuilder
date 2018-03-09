@@ -67,7 +67,9 @@ public class Invoice {
 	public float getValue() { return this._value; }
 	public float getIVA() { return this._IVA; }
 	public LocalDate getDate() { return this._date;	}
+	public int getYear() { return this._date.getYear(); }
 	public String getReference() { return this._reference; }
+	public ItemType getItemType() { return this._itemType; }
 	public TaxPayer getSeller() { return this._seller; }
 	public TaxPayer getBuyer() { return this._buyer; }
 }

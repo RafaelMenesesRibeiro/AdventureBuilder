@@ -38,7 +38,7 @@ public class ItemType {
 		return this._name;
 	}
 
-	public float getTax() {
+	public int getTax() {
 		return this._tax;
 	}
 
