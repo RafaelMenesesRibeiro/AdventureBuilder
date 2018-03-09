@@ -36,9 +36,9 @@ public class InvoiceConstructorMethodTest {
 		Assert.assertTrue(invoice.getValue() > 0);
 		Assert.assertTrue(invoice.getDate().getYear() > 1970);
 
-		assertNotNull(this.buyer.getInvoices());
-		assertNotNull(this.seller.getInvoices());
-		assertNotNull(this.itemType.getInvoice());
+		Assert.assertNotNull(this.buyer.getInvoices());
+		Assert.assertNotNull(this.seller.getInvoices());
+		Assert.assertNotNull(this.itemType.getInvoices());
 	}
 
 
