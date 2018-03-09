@@ -10,7 +10,7 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 public class ItemTypeConstructorMethodTest {
 	private static final int TAX = 23;
 	private static final String ITEM_TYPE = "Videojogo";
-	
+	private ItemType itemType;
 
 
 	@Before
@@ -20,13 +20,18 @@ public class ItemTypeConstructorMethodTest {
 
 	@Test
 	public void success() {
-		ItemType itemType = new ItemType(ITEM_TYPE, TAX);
+		this.itemType = new ItemType(ITEM_TYPE, TAX);
 
-		Assert.assertEquals(ITEM_TYPE, itemType.getName());
-		Assert.assertEquals(TAX, itemType.getTax(), 0.0f);
+		Assert.assertEquals(ITEM_TYPE, this.itemType.getName());
+		Assert.assertEquals(TAX, this.itemType.getTax(), 0.0f);
 
-		Assert.assertTrue(itemType.getNumberOfInvoices() >= 1);	
+		Assert.assertTrue(this.itemType.getNumberOfInvoices() >= 1);	
 		Assert.assertTrue(IRS.getNumberOfItems() >= 1);		
+	}
+
+	@Test(expected = TaxException.class)
+	public void existingItemType() {
+		new ItemType(ITEM_TYPE, 12);
 	}
 
 
