@@ -15,6 +15,7 @@ public class InvoiceConstructorMethodTest {
 	private Buyer buyer;
 	private Seller seller;
 	private ItemType itemType;
+	private Invoice invoice;
 
 
 
@@ -28,7 +29,7 @@ public class InvoiceConstructorMethodTest {
 
 	@Test
 	public void success() {
-		Invoice invoice = new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.seller, this.buyer);
+		this.invoice = new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.seller, this.buyer);
 
 		Assert.assertEquals(INVOICE_VALUE, invoice.getValue(), 0.0f);
 		Assert.assertEquals(this.date, invoice.getDate());
@@ -41,6 +42,16 @@ public class InvoiceConstructorMethodTest {
 		Assert.assertNotNull(this.itemType.getInvoices());
 	}
 
+	@Test(expected = TaxException.class)
+	public void sameBuyerAndSeller() {
+		Seller  sameSeller = new Seller("177777777", "Antonio Sarmento", "Estrela da lapa");
+		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, sameSeller, this.buyer);
+	}
+
+	@Test(expected = TaxException.class)
+	public void copyOfInvoice() {
+		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.seller, this.buyer);
+	}
 
 
 	@After
