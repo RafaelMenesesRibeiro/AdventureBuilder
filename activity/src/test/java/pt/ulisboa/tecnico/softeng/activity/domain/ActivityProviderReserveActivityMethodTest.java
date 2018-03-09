@@ -23,23 +23,33 @@ public class ActivityProviderReserveActivityMethodTest {
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
 	private ActivityProvider provider;
-	private ActivityOffer offer;
-	private String reference;
 
 	@Before
 	public void setUp() {
 		this.provider = new ActivityProvider(CODE, NAME);
-
-		Activity activity = new Activity(this.provider, "Bush Walking", MIN_AGE, MAX_AGE, CAPACITY);
-		this.offer = new ActivityOffer(activity, this.begin, this.end);
 	}
 
 	@Test
 	public void success() {
-		reference = this.provider.reserveActivity(this.begin, this.end, AGE);
-		Booking booking = this.offer.getBooking(reference);
+
+		Activity activity = new Activity(this.provider, "Bush Walking", MIN_AGE, MAX_AGE, CAPACITY);
+		ActivityOffer offer = new ActivityOffer(activity, this.begin, this.end);
+
+		String reference = this.provider.reserveActivity(this.begin, this.end, AGE);
+		Booking booking = offer.getBooking(reference);
 
 		assertEquals(reference, booking.getReference());
+	}
+
+	@Test(expected = ActivityException.class)
+	public void noCapacity() {
+		new Activity(this.provider, "Bush Walking", MIN_AGE, MAX_AGE, 0);
+		this.provider.reserveActivity(this.begin, this.end, AGE);
+	}
+
+	@Test(expected = ActivityException.class)
+	public void noOffers() {
+		this.provider.reserveActivity(this.begin, this.end, AGE);
 	}
 
 	@After
