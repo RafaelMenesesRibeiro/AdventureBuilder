@@ -30,12 +30,7 @@ public class BulkRoomBookingProcessBookingMethodTest {
 		bulk.processBooking();
 
 		Set<String> testRefs = bulk.getReferences();
-		Set<String> manualRefs = new HashSet<>();
-		for (int i = 0; i < roomsNumber; i++) {
-			manualRefs.add(hotelCode + Integer.toString(i + 1));
-		}
-		
-		Assert.assertEquals(manualRefs, testRefs);
+		Assert.assertEquals(roomsNumber, testRefs.size());
 		
 	}
 
