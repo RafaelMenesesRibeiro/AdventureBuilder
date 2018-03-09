@@ -33,3 +33,4 @@ To see the coverage reports, go to <module name>/target/site/jacoco/index.html.
 
 |        PosterID     |         TargetId        |   Post Date     |                              Message                             |
 | --------------------| ----------------------- | ----------------| 
+
