@@ -48,15 +48,16 @@ public class BuyerTaxReturnMethodTest {
 
 		for (Iterator iter = buyer.getInvoices().entrySet().iterator(); iter.hasNext(); ) {
 			Map.Entry pair = (Map.Entry) iter.next();
-			Invoice selected = pair.getValue();
-			int year = selected.getYear();
+			Invoice selectedInvoice = pair.getValue();
+
+			float selectedInvoiceValue = selectedInvoice.getValue();
+			int selectedItemTax = selectedInvoice.getItemType().getTaxReturn();
+			int year = pair.getValue().getYear();
+
 			if (year == 2014) {
-				expectedReturn += selected.getTaxReturn();
+				expectedReturn += (float)selectedInvoiceValue * selectedItemTax * 0.05;
 			}
 		}
-
-
-
 		Assert.assertEquals(expectedReturn, buyer.getTaxReturn());
 	}
 
