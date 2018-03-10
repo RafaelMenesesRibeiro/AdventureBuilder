@@ -50,11 +50,13 @@ public class BuyerConstructorMethodTest {
 		Assert.assertTrue(buyerWithSameAddress.getNIF().length() == TaxException.NIF_SIZE);
 	}
 
-
+	
 	@Test(expected = TaxException.class)
 	public void existingNIF() {
+		new Buyer(BUYER_NIF, "Luis Almeida", "Rua dos Ladrões de Cebolas");
 		new Buyer(BUYER_NIF, "Luis Putin", "Rua dos Ladrões de Identidade");
 	}
+	
 
 	@Test(expected = TaxException.class)
 	public void nullBuyerNIF() {
