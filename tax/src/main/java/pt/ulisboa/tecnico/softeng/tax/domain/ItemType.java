@@ -44,4 +44,8 @@ public class ItemType {
 	public static void submitInvoice(Invoice data) {
 		_invoices.put(data.getReference(), data);
 	}
+
+	public static void clear() {
+		_invoices.clear();
+	}
 }
