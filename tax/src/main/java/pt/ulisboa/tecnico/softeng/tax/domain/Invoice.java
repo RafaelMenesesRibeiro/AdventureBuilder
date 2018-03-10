@@ -26,13 +26,12 @@ public class Invoice {
 		this._value = calculateTotal(value);
 		this._date = date;
 		
-		InvoiceData data = new InvoiceData(seller.getNif(), buyer.getNif(), type, value, date);
+		InvoiceData data = new InvoiceData(seller.getNIF(), buyer.getNIF(), type, value, date);
 		IRS.submitInvoice(data);
 		seller.addInvoice(this);
 		buyer.addInvoice(this);
 		ItemType item = IRS.getItemTypeByName(type);
 		item.submitInvoice(this);
-		//TODO: ADD TO IRS LIST.
 	}
 
 	private void checkArguments(float value, LocalDate date, String type, TaxPayer seller, TaxPayer buyer) throws TaxException {
@@ -45,14 +44,14 @@ public class Invoice {
 		if (type == null || type.trim().equals("")) {
 			throw new TaxException();
 		}
-		if (seller == null || seller.getNif().length() != TaxException.NIF_SIZE || buyer == null || buyer.getNif().length() != TaxException.NIF_SIZE) {
+		if (seller == null || seller.getNIF().length() != TaxException.NIF_SIZE || buyer == null || buyer.getNIF().length() != TaxException.NIF_SIZE) {
 			throw new TaxException();
 		}
 	}
 
 	private String createNewReference(LocalDate date, TaxPayer seller, TaxPayer buyer, float value) {
-		String sellerNIF = seller.getNif();
-		String buyerNIF = buyer.getNif();
+		String sellerNIF = seller.getNIF();
+		String buyerNIF = buyer.getNIF();
 		return date.toString("MM/dd/yyyy") + sellerNIF + buyerNIF + String.valueOf(value);
 	}
 
