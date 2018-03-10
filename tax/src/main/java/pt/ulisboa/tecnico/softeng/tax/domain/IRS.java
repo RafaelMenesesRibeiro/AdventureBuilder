@@ -51,6 +51,7 @@ public final class IRS {
 	public static void submitInvoice(InvoiceData data) { _invoices.add(data); }
 
 	public static void clear() {
+		ItemType.clear();
 		_taxPayers.clear();
 		_itemTypes.clear();
 		_invoices.clear();

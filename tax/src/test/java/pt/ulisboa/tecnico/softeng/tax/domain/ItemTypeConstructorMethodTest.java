@@ -47,6 +47,11 @@ public class ItemTypeConstructorMethodTest {
 		new ItemType("    ", TAX);
 	}
 
+	@Test(expected = TaxException.class)
+	public void negativeTax() {
+		new ItemType(ITEM_TYPE, -1);
+	}
+
 	@After
 	public void tearDown() {
 		//ItemType.invoices.clear();
