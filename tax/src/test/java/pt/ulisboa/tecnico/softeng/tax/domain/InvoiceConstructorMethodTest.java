@@ -21,7 +21,7 @@ public class InvoiceConstructorMethodTest {
 
 	@Before
 	public void setUp() {
-		this.buyer = new Buyer ("177777777", "Antonio Sarmento", "Estrela da lapa");
+		this.buyer = new Buyer ("177777777", "DELTA", "Estrela da lapa");
 		this.seller = new Seller("111111111", "Joao Antonio", "Rua dos Vendedores");
 		this.itemType = IRS.getItemTypeByName(ITEM_TYPE);
 		this.date = new LocalDate(2018, 12, 21);
@@ -47,7 +47,7 @@ public class InvoiceConstructorMethodTest {
 
 	@Test(expected = TaxException.class)
 	public void sameBuyerAndSeller() {
-		Seller  sameSeller = new Seller("177777777", "Antonio Sarmento", "Estrela da lapa");
+		Seller  sameSeller = new Seller("177777777", "DELTA", "Estrela da lapa");
 		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, sameSeller, this.buyer);
 	}
 

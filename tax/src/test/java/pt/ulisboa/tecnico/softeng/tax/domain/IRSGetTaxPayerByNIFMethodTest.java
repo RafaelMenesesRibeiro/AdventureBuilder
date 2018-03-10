@@ -24,9 +24,9 @@ public class IRSGetTaxPayerByNIFMethodTest {
 
 	@Before
 	public void setUp() {
-		this.sellerA = new Seller("111111111", "António Lopes", "Rua A");
-		this.sellerB = new Seller("111111112", "Luis Neves", "Rua B");
-		this.sellerC = new Seller("111111113", "João Pedro", "Rua C");
+		this.sellerA = new Seller("111111111", "DELTA", "Rua A");
+		this.sellerB = new Seller("111111112", "GAP", "Rua B");
+		this.sellerC = new Seller("111111113", "SuperBock", "Rua C");
 		this.buyerA = new Buyer("111111114", "Luisa Maria", "Rua A");
 		this.buyerB = new Buyer ("111111115", "Lucia Poles", "Rua B");
 		this.buyerC = new Buyer("111111116", "Pedro Juna", "Rua C");
@@ -42,6 +42,8 @@ public class IRSGetTaxPayerByNIFMethodTest {
 		Assert.assertEquals(this.buyerB, IRS.getTaxPayerByNIF("111111115"));
 		Assert.assertEquals(this.buyerC, IRS.getTaxPayerByNIF("111111116"));
 	}
+
+
 
 	@Test(expected = TaxException.class)
 	public void nullNIF() {

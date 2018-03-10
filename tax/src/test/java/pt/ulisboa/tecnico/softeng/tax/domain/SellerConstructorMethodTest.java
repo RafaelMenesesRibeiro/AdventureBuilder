@@ -9,7 +9,7 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class SellerConstructorMethodTest {
 	private static final String SELLER_NIF = "111111111";
-	private static final String SELLER_NAME = "Joao Antonio";
+	private static final String SELLER_NAME = "DELTA";
 	private static final String SELLER_ADDRESS = "Rua dos Vendedores";
 	private Seller seller;
 
@@ -30,7 +30,7 @@ public class SellerConstructorMethodTest {
 
 	@Test
 	public void successCreationWithSameName() {
-		Seller sellerWithSameName = new Seller("111111112", "Joao Antonio", "Rua Dos Vendedores Pobres");
+		Seller sellerWithSameName = new Seller("111111112", "DELTA", "Rua Dos Vendedores Pobres");
 
 		Assert.assertEquals("111111112", sellerWithSameName.getNIF());
 		Assert.assertEquals(SELLER_NAME, sellerWithSameName.getName());
@@ -40,10 +40,10 @@ public class SellerConstructorMethodTest {
 	}
 	@Test
 	public void successCreationWithSameAddress() {
-		Seller sellerWithSameAddress = new Seller("111111113", "Francisco Santos", SELLER_ADDRESS);
+		Seller sellerWithSameAddress = new Seller("111111113", "GAP", SELLER_ADDRESS);
 
 		Assert.assertEquals("111111113", sellerWithSameAddress.getNIF());
-		Assert.assertEquals("Francisco Santos", sellerWithSameAddress.getName());
+		Assert.assertEquals("GAP", sellerWithSameAddress.getName());
 		Assert.assertEquals(SELLER_ADDRESS, sellerWithSameAddress.getAddress());
 		
 		Assert.assertTrue(sellerWithSameAddress.getNIF().length() == TaxException.NIF_SIZE);
@@ -52,7 +52,7 @@ public class SellerConstructorMethodTest {
 
 	@Test(expected = TaxException.class)
 	public void existingNIF() {
-		new Seller(SELLER_NIF, "Maria dos Anjos", "Rua dos Ladrões de Identidade");
+		new Seller(SELLER_NIF, "SuperBock", "Rua dos Ladrões de Identidade");
 	}	
 
 	@Test(expected = TaxException.class)

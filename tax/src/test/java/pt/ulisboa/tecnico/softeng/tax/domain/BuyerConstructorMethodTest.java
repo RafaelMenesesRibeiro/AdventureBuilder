@@ -9,9 +9,9 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class BuyerConstructorMethodTest {
 	private static final String BUYER_NIF = "177777777";
-	private static final String BUYER_NAME = "Antonio Sarmento";
+	private static final String BUYER_NAME = "DELTA";
 	private static final String BUYER_ADDRESS = "Estrela da lapa";
-	public Buyer buyer;
+	private Buyer buyer;
 
 	@Before
 	public void setUp() {

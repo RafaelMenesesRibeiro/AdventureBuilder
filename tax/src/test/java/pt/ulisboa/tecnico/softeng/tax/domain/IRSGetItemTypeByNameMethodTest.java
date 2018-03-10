@@ -10,10 +10,10 @@ import java.util.List;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class IRSGetItemTypeByNameMethodTest {
-	List<ItemType> itemTypes;
-	ItemType bolacha;
-	ItemType brinquedo;
-	ItemType cerveja;
+	private List<ItemType> itemTypes;
+	private ItemType bolacha;
+	private ItemType brinquedo;
+	private ItemType cerveja;
 
 	@Before
 	public void setUp() {
