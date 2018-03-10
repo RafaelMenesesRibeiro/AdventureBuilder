@@ -26,6 +26,7 @@ public class ItemTypeConstructorMethodTest {
 
 		Assert.assertEquals(ITEM_TYPE, this.itemType.getName());
 		Assert.assertEquals(TAX, this.itemType.getTax(), 0.0f);
+		Assert.assertEquals(0, this.itemType.getNumberOfInvoices());
 
 		Assert.assertNotNull(IRS.getItemTypes());
 		Assert.assertNotNull(this.itemType.getInvoices());
@@ -54,7 +55,6 @@ public class ItemTypeConstructorMethodTest {
 
 	@After
 	public void tearDown() {
-		//ItemType.invoices.clear();
 		IRS.clear();
 	}
 
