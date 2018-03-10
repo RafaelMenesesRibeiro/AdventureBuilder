@@ -1,5 +1,6 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
+import java.util.Iterator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.HashMap;
@@ -19,25 +20,39 @@ public final class IRS {
 	private IRS() {  }
 
 	public static ItemType getItemTypeByName(String type) { 
-		return new ItemType();
+		for (ItemType t : _itemTypes) {
+			if (t.getName().equals(type)) {
+				return t;
+			}
+		}
+		throw new TaxException();
 	}
 
 	public static int getNumberOfInvoices() { return 1; }
 	public static int getNumberOfItems() { return 1; }
 
-	public static TaxPayer getTaxPayerByNIF(String buyerNIF) throws TaxException {
-		if (buyerNIF.length() != TaxException.NIF_SIZE) {
-			throw new TaxException();
+	public static TaxPayer getTaxPayerByNIF(String nif) throws TaxException {
+		if (nif == null || nif.length() != TaxException.NIF_SIZE) { throw new TaxException(); }
+
+		for (Iterator iter = _taxPayers.entrySet().iterator(); iter.hasNext(); ) {
+			Map.Entry pair = (Map.Entry) iter.next();
+			if (pair.getKey().equals(nif)) {
+				return (TaxPayer) pair.getValue();				
+			}
 		}
-
-		return null;
+		throw new TaxException();
 	}
 
-	public static void addTaxPayer(TaxPayer payer) {
-		_taxPayers.put(payer.getNif(), payer);
-	}
+	public static Set<ItemType> getItemTypes() { return _itemTypes; }
+	
+	public static void addTaxPayer(TaxPayer payer) { _taxPayers.put(payer.getNIF(), payer); }
+	public static void addItemType(ItemType type) { _itemTypes.add(type); }
 
-	public static void submitInvoice(InvoiceData data) {
-		_invoices.add(data);
+	public static void submitInvoice(InvoiceData data) { _invoices.add(data); }
+
+	public static void clear() {
+		_taxPayers.clear();
+		_itemTypes.clear();
+		_invoices.clear();
 	}
 }
