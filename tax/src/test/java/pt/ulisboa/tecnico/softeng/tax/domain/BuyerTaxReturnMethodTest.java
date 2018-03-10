@@ -65,6 +65,7 @@ public class BuyerTaxReturnMethodTest {
 
 	@After
 	public void tearDown() {
+		IRS.clear();
 	}
 
 

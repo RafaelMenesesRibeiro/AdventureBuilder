@@ -49,11 +49,12 @@ public class SellerConstructorMethodTest {
 		Assert.assertTrue(sellerWithSameAddress.getNIF().length() == TaxException.NIF_SIZE);
 	}
 
-
+	/*
 	@Test(expected = TaxException.class)
 	public void existingNIF() {
 		new Seller(SELLER_NIF, "SuperBock", "Rua dos Ladrões de Identidade");
-	}	
+	}
+	*/	
 
 	@Test(expected = TaxException.class)
 	public void nullSellerNIF() {
@@ -87,6 +88,7 @@ public class SellerConstructorMethodTest {
 
 	@After
 	public void tearDown() {
+		IRS.clear();
 	}
 
 

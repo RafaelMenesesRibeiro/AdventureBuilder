@@ -91,7 +91,7 @@ public class InvoiceConstructorMethodTest {
 
 	@After
 	public void tearDown() {
-
+		IRS.clear();
 	}
 
 

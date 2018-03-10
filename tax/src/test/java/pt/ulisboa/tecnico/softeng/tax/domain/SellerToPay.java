@@ -39,6 +39,7 @@ public class SellerToPay{
 
 	@After
 	public void tearDown() {
+		IRS.clear();
 	}
 
 

@@ -49,6 +49,7 @@ public class ItemTypeConstructorMethodTest {
 	@After
 	public void tearDown() {
 		//ItemType.invoices.clear();
+		IRS.clear();
 	}
 
 

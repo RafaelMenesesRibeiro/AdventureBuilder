@@ -63,6 +63,7 @@ public class IRSGetTaxPayerByNIFMethodTest {
 
 	@After
 	public void tearDown() {
+		IRS.clear();
 	}
 
 

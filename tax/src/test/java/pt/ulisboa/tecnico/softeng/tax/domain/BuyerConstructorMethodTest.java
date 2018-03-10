@@ -90,6 +90,7 @@ public class BuyerConstructorMethodTest {
 
 	@After
 	public void tearDown() {
+		IRS.clear();
 	}
 
 
