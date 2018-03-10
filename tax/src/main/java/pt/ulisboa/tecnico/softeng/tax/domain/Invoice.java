@@ -23,7 +23,7 @@ public class Invoice {
 		this._reference = createNewReference(date, seller, buyer, value);
 		this._itemType = IRS.getItemTypeByName(type);
 		this._IVA = calculateIVA(value);
-		this._value = calculateTotal(value);
+		this._value = value;
 		this._date = date;
 		
 		InvoiceData data = new InvoiceData(seller.getNIF(), buyer.getNIF(), type, value, date);
@@ -44,10 +44,10 @@ public class Invoice {
 		if (type == null || type.trim().equals("")) {
 			throw new TaxException();
 		}
-		if (seller == null || seller.getNIF().length() != TaxException.NIF_SIZE || buyer == null || buyer.getNIF().length() != TaxException.NIF_SIZE) {
+		if (seller == null || buyer == null) {
 			throw new TaxException();
 		}
-		if (seller == buyer || seller.getNIF() == buyer.getNIF()) {
+		if (seller.getNIF().equals(buyer.getNIF())) {
 			throw new TaxException();
 		}
 	}
@@ -59,11 +59,7 @@ public class Invoice {
 	}
 
 	private float calculateIVA(float value) {
-		return 0;
-	}
-
-	private float calculateTotal(float value) {
-		return value;
+		return value * this._itemType.getTax();
 	}
 
 	public float getValue() { return this._value; }
