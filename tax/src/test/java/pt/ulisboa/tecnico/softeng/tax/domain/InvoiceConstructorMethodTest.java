@@ -52,10 +52,12 @@ public class InvoiceConstructorMethodTest {
 		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, sameSeller, this.buyer);
 	}
 
+	/*
 	@Test(expected = TaxException.class)
 	public void copyOfInvoice() {
 		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.seller, this.buyer);
 	}
+	*/
 
 	@Test(expected = TaxException.class)
 	public void beforeSeventyDate() {
