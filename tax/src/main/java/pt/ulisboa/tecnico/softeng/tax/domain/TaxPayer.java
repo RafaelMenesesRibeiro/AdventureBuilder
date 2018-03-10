@@ -3,8 +3,9 @@ package pt.ulisboa.tecnico.softeng.tax.domain;
 import java.util.Map;
 import java.util.HashMap;
 
-import pt.ulisboa.tecnico.softeng.tax.domain.IRS;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
+import pt.ulisboa.tecnico.softeng.tax.domain.IRS;
+
 
 public class TaxPayer {
 	public static final int NIF_SIZE = 9;
@@ -17,18 +18,17 @@ public class TaxPayer {
 	public TaxPayer(String nif, String name, String address) {
 		checkArgumetns(nif, name, address);
 
-		this._NIF = nif;
-		this._name = name;
-		this._address = address;
-		IRS.addTaxPayer(this);
-		//TODO: ADD TO IRS LIST.
-	}
-
-	public TaxPayer() {
-		this._NIF = "";
-		this._name = "";
-		this._address = "";
-		//USED WILE IRS NOT FULLY IMPPLEMENTED.
+		try { 
+			TaxPayer taxPayer = IRS.getTaxPayerByNIF(nif);
+		}
+		catch (TaxException e) {
+			this._NIF = nif;
+			this._name = name;
+			this._address = address;
+			IRS.addTaxPayer(this);	
+			return;
+		}
+		throw new TaxException();
 	}
 
 	private void checkArgumetns(String nif, String name, String address)  throws TaxException {
@@ -40,7 +40,7 @@ public class TaxPayer {
 		}
 	}
 
-	public String getNif() {
+	public String getNIF() {
 		return this._NIF;
 	}
 
