@@ -23,7 +23,8 @@ public class InvoiceConstructorMethodTest {
 	public void setUp() {
 		this.buyer = new Buyer ("177777777", "DELTA", "Estrela da lapa");
 		this.seller = new Seller("111111111", "Joao Antonio", "Rua dos Vendedores");
-		this.itemType = IRS.getItemTypeByName(ITEM_TYPE);
+		this.itemType = new ItemType(ITEM_TYPE, 12);
+		//this.itemType = IRS.getItemTypeByName(ITEM_TYPE);
 		this.date = new LocalDate(2018, 12, 21);
 	}
 
