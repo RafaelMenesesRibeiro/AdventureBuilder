@@ -47,6 +47,9 @@ public class Invoice {
 		if (seller == null || seller.getNIF().length() != TaxException.NIF_SIZE || buyer == null || buyer.getNIF().length() != TaxException.NIF_SIZE) {
 			throw new TaxException();
 		}
+		if (seller == buyer || seller.getNIF() == buyer.getNIF()) {
+			throw new TaxException();
+		}
 	}
 
 	private String createNewReference(LocalDate date, TaxPayer seller, TaxPayer buyer, float value) {
