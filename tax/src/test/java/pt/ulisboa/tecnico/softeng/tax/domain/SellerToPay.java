@@ -1,34 +1,30 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
+import org.joda.time.LocalDate;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-import java.util.HashMap;
-
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class SellerToPay{
-	/*private HashMap<String, Invoice> invoices;
 	private Seller seller;
-	private Buyer buyerA;
-	private Buyer buyerB;
-	private Invoice invoiceA;
-	private Invoice invoiceB;
-	private ItemType itemType;	*/
+	private Buyer buyer;
+	private Invoice invoice;
+	private String reference;
+	private String ITEM_TYPE = "Brinquedos";
+	private ItemType itemType;
 
 
 	@Before
 	public void setUp() {
-		/*this.seller = new Seller("11111111", "GALP", "Rua Principal");
-		this.buyerA = new Buyer("11111112", "Maria Inês", "Rua Secundária");
-		this.buyerB = new Buyer("11111112", "Filipa Otacvia", "Rua Secundária");
-
-		this.invoiceA = new Invoice(100.00f, new LocalDate(2018, 12, 21), ITEM_TYPE, this.seller, this.buyer);
-
-		this.invoices = this.seller.getInvoices();*/
+		this.seller = new Seller("111111111", "GALP", "Rua Principal");
+		this.buyer = new Buyer("111111112", "Maria Inês", "Rua Secundária");
+		this.itemType = new ItemType(ITEM_TYPE, 34);
+		this.invoice = new Invoice(100.00f, new LocalDate(2018, 12, 21), ITEM_TYPE, this.seller, this.buyer);
+		this.reference = this.invoice.getReference();
 	}
 
 	@Test
@@ -36,6 +32,10 @@ public class SellerToPay{
 
 	}
 
+	@Test(expected = TaxException.class)
+	public void beforeSeventyDate() {
+		this.seller.toPay(1969);
+	}
 
 	@After
 	public void tearDown() {
