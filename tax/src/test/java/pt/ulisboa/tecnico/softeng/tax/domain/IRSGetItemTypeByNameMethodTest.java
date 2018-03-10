@@ -27,7 +27,6 @@ public class IRSGetItemTypeByNameMethodTest {
 	public void success() {
 
 
-		int index = 0;
 		for (ItemType type: this.itemTypes) {
 			if (type.getName().equals("Brinquedo")) {
 				Assert.assertEquals(type, IRS.getItemTypeByName("Brinquedo"));
