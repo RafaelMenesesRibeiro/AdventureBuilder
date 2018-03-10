@@ -24,7 +24,6 @@ public class InvoiceConstructorMethodTest {
 		this.buyer = new Buyer ("177777777", "DELTA", "Estrela da lapa");
 		this.seller = new Seller("111111111", "Joao Antonio", "Rua dos Vendedores");
 		this.itemType = new ItemType(ITEM_TYPE, 12);
-		//this.itemType = IRS.getItemTypeByName(ITEM_TYPE);
 		this.date = new LocalDate(2018, 12, 21);
 	}
 
@@ -33,12 +32,14 @@ public class InvoiceConstructorMethodTest {
 		this.invoice = new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.seller, this.buyer);
 
 		Assert.assertEquals(INVOICE_VALUE, invoice.getValue(), 0.0f);
+		Assert.assertEquals(INVOICE_VALUE * this.itemType.getTax(), invoice.getIVA(), 0.0f);
 		Assert.assertEquals(this.date, invoice.getDate());
 		Assert.assertEquals(ITEM_TYPE, invoice.getItemType().getName());
 		Assert.assertEquals(this.seller, invoice.getSeller());
 		Assert.assertEquals(this.buyer, invoice.getBuyer());
 
 		Assert.assertTrue(invoice.getValue() > 0);
+		Assert.assertTrue(invoice.getIVA() > 0);
 		Assert.assertTrue(invoice.getDate().getYear() > 1970);
 
 		Assert.assertNotNull(this.buyer.getInvoices());
@@ -48,8 +49,7 @@ public class InvoiceConstructorMethodTest {
 
 	@Test(expected = TaxException.class)
 	public void sameBuyerAndSeller() {
-		Seller  sameSeller = new Seller("177777777", "DELTA", "Estrela da lapa");
-		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, sameSeller, this.buyer);
+		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.buyer, this.buyer);
 	}
 
 	/*
@@ -87,6 +87,11 @@ public class InvoiceConstructorMethodTest {
 	@Test(expected = TaxException.class)
 	public void nullBuyer() {
 		new Invoice(INVOICE_VALUE, this.date, ITEM_TYPE, this.seller, null);
+	}
+
+	@Test(expected = TaxException.class)
+	public void negativeValue() {
+		new Invoice(-1, this.date, ITEM_TYPE, this.seller, this.buyer);
 	}
 
 	@After
