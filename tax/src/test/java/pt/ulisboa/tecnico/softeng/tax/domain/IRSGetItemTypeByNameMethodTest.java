@@ -5,12 +5,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.Set;
 
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class IRSGetItemTypeByNameMethodTest {
-	private List<ItemType> itemTypes;
+	private Set<ItemType> itemTypes;
 	private ItemType bolacha;
 	private ItemType brinquedo;
 	private ItemType cerveja;
@@ -26,7 +26,7 @@ public class IRSGetItemTypeByNameMethodTest {
 	@Test
 	public void success() {
 
-	
+
 		int index = 0;
 		for (ItemType type: this.itemTypes) {
 			if (type.getName().equals("Brinquedo")) {
