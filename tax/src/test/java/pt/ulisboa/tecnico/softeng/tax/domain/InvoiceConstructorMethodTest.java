@@ -34,7 +34,7 @@ public class InvoiceConstructorMethodTest {
 
 		Assert.assertEquals(INVOICE_VALUE, invoice.getValue(), 0.0f);
 		Assert.assertEquals(this.date, invoice.getDate());
-		Assert.assertEquals(ITEM_TYPE, invoice.getItemType());
+		Assert.assertEquals(ITEM_TYPE, invoice.getItemType().getName());
 		Assert.assertEquals(this.seller, invoice.getSeller());
 		Assert.assertEquals(this.buyer, invoice.getBuyer());
 
