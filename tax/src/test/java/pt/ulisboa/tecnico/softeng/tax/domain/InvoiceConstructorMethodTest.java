@@ -61,7 +61,7 @@ public class InvoiceConstructorMethodTest {
 
 	@Test(expected = TaxException.class)
 	public void beforeSeventyDate() {
-		new Invoice(INVOICE_VALUE, new LocalDate(1970, 12, 31), ITEM_TYPE, this.seller, this.buyer);
+		new Invoice(INVOICE_VALUE, new LocalDate(1969, 12, 31), ITEM_TYPE, this.seller, this.buyer);
 	}
 
 	@Test(expected = TaxException.class)
