@@ -15,8 +15,16 @@ public class ItemType {
 	public ItemType(String itemType, int tax) {
 		checkArguments(itemType, tax);
 
-		this._name = itemType;
-		this._tax = tax;
+		try {
+			ItemType t = IRS.getItemTypeByName(itemType);
+		}
+		catch (TaxException e) {
+			this._name = itemType;
+			this._tax = tax;
+			IRS.addItemType(this);
+			return;
+		}
+		throw new TaxException();
 	}
 
 	public ItemType() {
@@ -43,10 +51,8 @@ public class ItemType {
 	}
 
 	public int getNumberOfInvoices() {
-		return 1;
-		//return this._invoices.size();
+		return this._invoices.size();
 	}
-
 	public Map<String, Invoice> getInvoices() {
 		return this._invoices;
 	}
