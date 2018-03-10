@@ -46,6 +46,7 @@ public class IRSGetItemTypeByNameMethodTest {
 
 	@After
 	public void tearDown() {
+		IRS.clear();
 	}
 
 
