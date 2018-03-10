@@ -33,6 +33,7 @@ public class ItemTypeConstructorMethodTest {
 
 	@Test(expected = TaxException.class)
 	public void existingItemType() {
+		new ItemType(ITEM_TYPE, 24);
 		new ItemType(ITEM_TYPE, 12);
 	}
 
