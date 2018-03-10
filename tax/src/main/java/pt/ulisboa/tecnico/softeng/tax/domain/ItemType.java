@@ -27,12 +27,6 @@ public class ItemType {
 		throw new TaxException();
 	}
 
-	public ItemType() {
-		this._name = "";
-		this._tax = 0;
-		//USED WILE IRS NOT FULLY IMPPLEMENTED.
-	}
-
 	private void checkArguments(String itemType, int tax) throws TaxException {
 		if (tax < TaxException.MIN_TAX) {
 			throw new TaxException();
