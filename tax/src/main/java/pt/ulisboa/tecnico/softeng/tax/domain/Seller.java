@@ -18,14 +18,11 @@ public class Seller extends TaxPayer{
 		if (year <= TaxException.MIN_YEAR) {
 			throw new TaxException();
 		}
-
 		return 0;
 	}
 
 	public Invoice getInvoiceByReference(String reference) throws TaxException {
-		if (reference == null || reference.trim().equals("")) {
-			throw new TaxException();
-		}
+		if (reference == null || reference.trim().equals("")) { throw new TaxException(); }
 
 		for (Iterator iter = this._invoices.entrySet().iterator(); iter.hasNext(); ) {
 			Map.Entry pair = (Map.Entry) iter.next();
@@ -33,7 +30,6 @@ public class Seller extends TaxPayer{
 				return (Invoice) pair.getValue();
 			}
 		}
-		
 		throw new TaxException();
 	}
 }

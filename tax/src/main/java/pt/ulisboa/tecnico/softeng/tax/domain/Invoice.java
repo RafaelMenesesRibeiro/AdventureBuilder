@@ -35,21 +35,11 @@ public class Invoice {
 	}
 
 	private void checkArguments(float value, LocalDate date, String type, TaxPayer seller, TaxPayer buyer) throws TaxException {
-		if (date == null) {
-			throw new TaxException();
-		}
-		if (value < 0 || date.getYear() < TaxException.MIN_YEAR) {
-			throw new TaxException();
-		}
-		if (type == null || type.trim().equals("")) {
-			throw new TaxException();
-		}
-		if (seller == null || buyer == null) {
-			throw new TaxException();
-		}
-		if (seller.getNIF().equals(buyer.getNIF())) {
-			throw new TaxException();
-		}
+		if (date == null) { throw new TaxException(); }
+		if (value < 0 || date.getYear() < TaxException.MIN_YEAR) { throw new TaxException(); }
+		if (type == null || type.trim().equals("")) { throw new TaxException(); }
+		if (seller == null || buyer == null) { throw new TaxException(); }
+		if (seller.getNIF().equals(buyer.getNIF())) { throw new TaxException(); }
 	}
 
 	private String createNewReference(LocalDate date, TaxPayer seller, TaxPayer buyer, float value) {

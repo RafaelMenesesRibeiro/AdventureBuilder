@@ -32,32 +32,14 @@ public class TaxPayer {
 	}
 
 	private void checkArgumetns(String nif, String name, String address)  throws TaxException {
-		if (nif == null || nif.length() != TaxException.NIF_SIZE) {
-			throw new TaxException();
-		}
-		if (name == null || name.trim().equals("") || address == null || address.trim().equals("")) {
-			throw new TaxException();	
-		}
+		if (nif == null || nif.length() != TaxException.NIF_SIZE) { throw new TaxException(); }
+		if (name == null || name.trim().equals("") || address == null || address.trim().equals("")) { throw new TaxException();	}
 	}
 
-	public String getNIF() {
-		return this._NIF;
-	}
+	public String getNIF() { return this._NIF; }
+	public String getName() { return this._name; }
+	public String getAddress() { return this._address; }
+	public Map<String, Invoice> getInvoices() { return this._invoices; }
 
-	public String getName() {
-		return this._name;
-	}
-
-	public String getAddress() {
-		return this._address;
-	}
-
-	public Map<String, Invoice> getInvoices() {
-		return this._invoices;
-	}
-
-	public void addInvoice(Invoice invoice) {
-		String ref = invoice.getReference();
-		_invoices.put(ref, invoice);
-	}
+	public void addInvoice(Invoice invoice) { _invoices.put(invoice.getReference(), invoice); }
 }

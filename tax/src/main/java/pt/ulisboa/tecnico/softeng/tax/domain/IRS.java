@@ -30,7 +30,7 @@ public final class IRS {
 
 	public static int getNumberOfInvoices() { return 1; }
 	public static int getNumberOfItems() { return 1; }
-
+	public static Set<ItemType> getItemTypes() { return _itemTypes; }
 	public static TaxPayer getTaxPayerByNIF(String nif) throws TaxException {
 		if (nif == null || nif.length() != TaxException.NIF_SIZE) { throw new TaxException(); }
 
@@ -43,8 +43,6 @@ public final class IRS {
 		throw new TaxException();
 	}
 
-	public static Set<ItemType> getItemTypes() { return _itemTypes; }
-	
 	public static void addTaxPayer(TaxPayer payer) { _taxPayers.put(payer.getNIF(), payer); }
 	public static void addItemType(ItemType type) { _itemTypes.add(type); }
 

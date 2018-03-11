@@ -28,12 +28,8 @@ public class ItemType {
 	}
 
 	private void checkArguments(String itemType, int tax) throws TaxException {
-		if (tax < TaxException.MIN_TAX) {
-			throw new TaxException();
-		}
-		if (itemType == null || itemType.trim().equals("")) {
-			throw new TaxException();	
-		}
+		if (tax < TaxException.MIN_TAX) { throw new TaxException(); }
+		if (itemType == null || itemType.trim().equals("")) { throw new TaxException();	}
 	}
 
 	public String getName() { return this._name; }
@@ -41,11 +37,7 @@ public class ItemType {
 	public int getNumberOfInvoices() { return this._invoices.size(); }
 	public Map<String, Invoice> getInvoices() { return this._invoices; }
 
-	public static void submitInvoice(Invoice data) {
-		_invoices.put(data.getReference(), data);
-	}
+	public static void submitInvoice(Invoice data) { _invoices.put(data.getReference(), data); }
 
-	public static void clear() {
-		_invoices.clear();
-	}
+	public static void clear() { _invoices.clear(); }
 }
