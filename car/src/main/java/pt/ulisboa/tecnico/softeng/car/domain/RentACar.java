@@ -72,8 +72,8 @@ public class RentACar {
 	}
 
 	public RentingData getRentingData(String reference) {
-		for (RentACar rentACar : rentingCompanies) {
-			for (Vehicle vehicle : rentACar.vehicleList) {
+		for (RentACar rentingCompany : rentingCompanies) {
+			for (Vehicle vehicle : rentingCompany.getVehicleList()) {
 				Renting renting = vehicle.getRenting(reference);
 				if (renting != null) {
 					return newRentingData(reference, vehicle, renting);
@@ -94,10 +94,10 @@ public class RentACar {
 
   public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
 		List<Car> availableCars = new ArrayList<Car>();
-		for (RentACar  rentingCompany : rentingCompanies){
-              for (Vehicle vehicle : vehicleList) {
+		for (RentACar  rentingCompany : RentACar.rentingCompanies){
+              for (Vehicle vehicle : rentingCompany.getVehicleList()) {
                   if (vehicle instanceof Car && isAvailable(vehicle, begin, end)) {
-                      availableCars.add((Car) vehicle);
+                    availableCars.add((Car) vehicle);
                   }
               }
         }
@@ -106,8 +106,8 @@ public class RentACar {
 
 	public List<Motorcycle> getAllAvailableMotorcycles(LocalDate begin, LocalDate end) {
 		List<Motorcycle> availableMotorcycles = new ArrayList<Motorcycle>();
-        for (RentACar  rentingCompany : rentingCompanies) {
-            for (Vehicle vehicle : vehicleList) {
+        for (RentACar  rentingCompany : RentACar.rentingCompanies) {
+            for (Vehicle vehicle : rentingCompany.getVehicleList()) {
                 if (vehicle instanceof Motorcycle && isAvailable(vehicle, begin, end)) {
                     availableMotorcycles.add((Motorcycle) vehicle);
                 }
