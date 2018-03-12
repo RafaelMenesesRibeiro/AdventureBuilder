@@ -66,6 +66,16 @@ public class SellerConstructorMethodTest {
 	}
 
 	@Test(expected = TaxException.class)
+	public void noANumericNIF() {
+		new Buyer("NotNumeric", SELLER_NAME, SELLER_ADDRESS);
+	}
+
+	@Test(expected = TaxException.class)
+	public void noNineDigitsNIF() {
+		new Buyer("1111111111", SELLER_NAME, SELLER_ADDRESS);
+	}
+
+	@Test(expected = TaxException.class)
 	public void nullSellerName() {
 		new Seller(SELLER_NIF, null, SELLER_ADDRESS);
 	}
