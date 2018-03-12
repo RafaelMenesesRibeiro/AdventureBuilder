@@ -15,12 +15,11 @@ public class SellerConstructorMethodTest {
 
 	@Before
 	public void setUp() {
+		this.seller = new Seller(SELLER_NIF, SELLER_NAME,SELLER_ADDRESS);
 	}
 
 	@Test
 	public void success() {
-		this.seller = new Seller(SELLER_NIF, SELLER_NAME,SELLER_ADDRESS);
-
 		Assert.assertEquals(SELLER_NIF, seller.getNIF());
 		Assert.assertEquals(SELLER_NAME, seller.getName());
 		Assert.assertEquals(SELLER_ADDRESS, seller.getAddress());
@@ -49,12 +48,12 @@ public class SellerConstructorMethodTest {
 		Assert.assertTrue(sellerWithSameAddress.getNIF().length() == TaxException.NIF_SIZE);
 	}
 
-	/*
+
 	@Test(expected = TaxException.class)
 	public void existingNIF() {
 		new Seller(SELLER_NIF, "SuperBock", "Rua dos Ladrões de Identidade");
 	}
-	*/	
+
 
 	@Test(expected = TaxException.class)
 	public void nullSellerNIF() {
