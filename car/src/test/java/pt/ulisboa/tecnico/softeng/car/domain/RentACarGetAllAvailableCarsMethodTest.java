@@ -29,8 +29,8 @@ public class RentACarGetAllAvailableCarsMethodTest {
 
 	@Test
 	public void success() {
-		LocalDate begin = this.unavailableEnd;
-		LocalDate end = this.unavailableEnd.plusDays(1);
+		LocalDate begin = this.unavailableEnd.plusDays(1);
+		LocalDate end = this.unavailableEnd.plusDays(7);
 		List<Car> cars = this.renter.getAllAvailableCars(begin, end);
 
 		Assert.assertTrue(cars.size() == 1);
@@ -75,13 +75,13 @@ public class RentACarGetAllAvailableCarsMethodTest {
 	@Ignore
 	@Test (expected = CarException.class)
 	public void nullBegin() {
-		renter.getAllAvailableMotorcycles(null, this.unavailableEnd);
+		renter.getAllAvailableCars(null, this.unavailableEnd);
 	}
 
 	@Ignore
 	@Test (expected = CarException.class)
 	public void nullEnd() {
-		renter.getAllAvailableMotorcycles(this.unavailableBegin, null);
+		renter.getAllAvailableCars(this.unavailableBegin, null);
 	}
 
 	@After
