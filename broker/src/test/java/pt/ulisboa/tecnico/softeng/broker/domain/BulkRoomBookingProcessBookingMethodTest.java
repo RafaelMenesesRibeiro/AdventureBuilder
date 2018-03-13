@@ -13,7 +13,7 @@ import pt.ulisboa.tecnico.softeng.broker.domain.BulkRoomBooking;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 
-@Ignore public class BulkRoomBookingProcessBookingMethodTest {
+public class BulkRoomBookingProcessBookingMethodTest {
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
 
