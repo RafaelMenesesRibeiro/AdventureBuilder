@@ -92,7 +92,10 @@ public class RentACar {
 		return new RentingData(reference, plate, drivingLicense, rentACarCode, begin, end);
 	}
 
-  public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
+	public List<Car> getAllAvailableCars(LocalDate begin, LocalDate end) {
+		if ( begin == null || end == null ) {
+			throw new CarException("At least one of the arguments is null.");
+		}
 		List<Car> availableCars = new ArrayList<Car>();
 		for (RentACar  rentingCompany : RentACar.rentingCompanies){
               for (Vehicle vehicle : rentingCompany.getVehicleList()) {
@@ -105,6 +108,9 @@ public class RentACar {
 	}
 
 	public List<Motorcycle> getAllAvailableMotorcycles(LocalDate begin, LocalDate end) {
+		if ( begin == null || end == null ) {
+			throw new CarException("At least one of the arguments is null.");
+		}
 		List<Motorcycle> availableMotorcycles = new ArrayList<Motorcycle>();
         for (RentACar  rentingCompany : RentACar.rentingCompanies) {
             for (Vehicle vehicle : rentingCompany.getVehicleList()) {
