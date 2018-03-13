@@ -70,7 +70,7 @@ public class BuyerConstructorMethodTest {
 
 	@Test(expected = TaxException.class)
 	public void noANumericNIF() {
-		new Buyer("NotNumeric", BUYER_NAME,BUYER_ADDRESS);
+		new Buyer("aaaaaaaaa", BUYER_NAME,BUYER_ADDRESS);
 	}
 
 	@Test(expected = TaxException.class)
