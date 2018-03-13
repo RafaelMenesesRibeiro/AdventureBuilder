@@ -7,6 +7,7 @@ import pt.ulisboa.tecnico.softeng.tax.domain.ItemType;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class Invoice {
+	private static int _counter = 0;
 	private final TaxPayer _seller;
 	private final TaxPayer _buyer;
 	private final String _reference;
@@ -43,9 +44,10 @@ public class Invoice {
 	}
 
 	private String createNewReference(LocalDate date, TaxPayer seller, TaxPayer buyer, float value) {
+		_counter++;
 		String sellerNIF = seller.getNIF();
 		String buyerNIF = buyer.getNIF();
-		return date.toString("MM/dd/yyyy") + sellerNIF + buyerNIF + String.valueOf(value);
+		return String.valueOf(_counter) + date.toString("MM/dd/yyyy") + sellerNIF + buyerNIF + String.valueOf(value);
 	}
 
 	private float calculateIVA(float value) {
