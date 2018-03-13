@@ -29,8 +29,6 @@ public final class IRS {
 	}
 
 	public static Set<InvoiceData> getInvoices() { return _invoices; }
-	public static int getNumberOfInvoices() { return 1; }
-	public static int getNumberOfItems() { return 1; }
 	public static Set<ItemType> getItemTypes() { return _itemTypes; }
 	public static TaxPayer getTaxPayerByNIF(String nif) throws TaxException {
 		if (nif == null || nif.length() != TaxException.NIF_SIZE) { throw new TaxException(); }
