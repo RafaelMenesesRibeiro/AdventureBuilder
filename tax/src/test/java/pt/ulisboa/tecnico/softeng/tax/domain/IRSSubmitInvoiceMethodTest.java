@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
+import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
 
 public class IRSSubmitInvoiceMethodTest {
 	private Seller seller;
@@ -23,16 +24,16 @@ public class IRSSubmitInvoiceMethodTest {
 
 	@Before
 	public void setUp() {
-		this.seller = new Seller("11111111", "GALP", "Rua Principal");
+		this.seller = new Seller("111111111", "GALP", "Rua Principal");
 
-		this.buyerA = new Buyer("11111112", "Maria Inês", "Rua Secundária");
-		this.buyerB = new Buyer("11111112", "Filipa Otacvia", "Rua Secundária");
+		this.buyerA = new Buyer("111111112", "Maria Inês", "Rua Secundária");
+		this.buyerB = new Buyer("111111113", "Filipa Otacvia", "Rua Secundária");
 
 		this.itemTypeA = new ItemType("Brinquedos", 10); 
 		this.itemTypeB = new ItemType("Bolachas", 20); 
 
-		this.invoiceA = new InvoiceData(this.seller.getNIF(), this.buyer.getNIF(), "Brinquedos", 100.0f, new LocalDate(2018, 12, 21));
-		this.invoiceB = new InvoiceData(this.seller.getNIF(), this.buyer.getNIF(), "Bolachas" , 100.0f, new LocalDate(2018, 12, 21));
+		this.invoiceA = new InvoiceData(this.seller.getNIF(), this.buyerA.getNIF(), "Brinquedos", 100.0f, new LocalDate(2018, 12, 21));
+		this.invoiceB = new InvoiceData(this.seller.getNIF(), this.buyerB.getNIF(), "Bolachas" , 100.0f, new LocalDate(2018, 12, 21));
 	}
 
 	@Test
@@ -47,7 +48,7 @@ public class IRSSubmitInvoiceMethodTest {
 
 	@Test(expected = TaxException.class)
 	public void nullInvoiceData() {
-		IRS.submitInvoice(this.invoiceA);
+		IRS.submitInvoice(null);
 	}
 
 	@After

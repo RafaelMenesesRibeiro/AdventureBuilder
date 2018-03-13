@@ -15,10 +15,16 @@ public class Seller extends TaxPayer{
 	}
 
 	public float toPay(int year)  throws TaxException {
-		if (year <= TaxException.MIN_YEAR) {
-			throw new TaxException();
+		if (year < TaxException.MIN_YEAR) { throw new TaxException(); }
+		float toPay = 0;
+		for (Iterator iter = this._invoices.entrySet().iterator(); iter.hasNext(); ) {
+			Map.Entry pair = (Map.Entry) iter.next();
+			Invoice inv = (Invoice) pair.getValue();
+			if (inv.getDate().getYear() == year) {
+				toPay += inv.getIVA();
+			}
 		}
-		return 0;
+		return toPay;
 	}
 
 	public Invoice getInvoiceByReference(String reference) throws TaxException {

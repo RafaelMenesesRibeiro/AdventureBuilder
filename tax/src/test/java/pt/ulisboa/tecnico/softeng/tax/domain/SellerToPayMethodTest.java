@@ -24,9 +24,9 @@ public class SellerToPayMethodTest{
 
 	@Before
 	public void setUp() {
-		this.seller = new Seller("11111111", "GALP", "Rua Principal");
-		this.buyerA = new Buyer("11111112", "Maria Inês", "Rua Secundária");
-		this.buyerB = new Buyer("11111112", "Filipa Otacvia", "Rua Secundária");
+		this.seller = new Seller("111111111", "GALP", "Rua Principal");
+		this.buyerA = new Buyer("111111112", "Maria Inês", "Rua Secundária");
+		this.buyerB = new Buyer("111111113", "Filipa Otacvia", "Rua Secundária");
 
 		this.itemTypeA = new ItemType("Brinquedos", 10); 
 		this.itemTypeB = new ItemType("Bolachas", 20); 
@@ -50,6 +50,7 @@ public class SellerToPayMethodTest{
 
 	@After
 	public void tearDown() {
+		IRS.clear();
 	}
 
 

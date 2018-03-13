@@ -49,7 +49,7 @@ public class Invoice {
 	}
 
 	private float calculateIVA(float value) {
-		return value * this._itemType.getTax();
+		return value * this._itemType.getTax() / 100;
 	}
 
 	public float getValue() { return this._value; }

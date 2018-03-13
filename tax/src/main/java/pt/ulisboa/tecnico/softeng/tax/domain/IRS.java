@@ -28,6 +28,7 @@ public final class IRS {
 		throw new TaxException();
 	}
 
+	public static Set<InvoiceData> getInvoices() { return _invoices; }
 	public static int getNumberOfInvoices() { return 1; }
 	public static int getNumberOfItems() { return 1; }
 	public static Set<ItemType> getItemTypes() { return _itemTypes; }
@@ -46,7 +47,9 @@ public final class IRS {
 	public static void addTaxPayer(TaxPayer payer) { _taxPayers.put(payer.getNIF(), payer); }
 	public static void addItemType(ItemType type) { _itemTypes.add(type); }
 
-	public static void submitInvoice(InvoiceData data) { _invoices.add(data); }
+	public static void submitInvoice(InvoiceData data) { 
+		if (data == null ) { throw new TaxException(); }
+		_invoices.add(data); }
 
 	public static void clear() {
 		ItemType.clear();
