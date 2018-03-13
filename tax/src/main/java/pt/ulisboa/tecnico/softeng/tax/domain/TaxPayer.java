@@ -33,6 +33,7 @@ public class TaxPayer {
 
 	private void checkArgumetns(String nif, String name, String address)  throws TaxException {
 		if (nif == null || nif.length() != TaxException.NIF_SIZE) { throw new TaxException(); }
+		try { Integer.parseInt(nif); } catch (NumberFormatException e) { throw new TaxException(); }
 		if (name == null || name.trim().equals("") || address == null || address.trim().equals("")) { throw new TaxException();	}
 	}
 
