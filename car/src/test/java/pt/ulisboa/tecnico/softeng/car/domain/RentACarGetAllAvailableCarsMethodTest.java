@@ -21,8 +21,8 @@ public class RentACarGetAllAvailableCarsMethodTest {
 		this.unavailableBegin = LocalDate.now();
 		this.unavailableEnd = this.unavailableBegin.plusDays(7);
 		this.renter = new RentACar("Renter");
-
 		this.car = new Car("ZZ-ZZ-ZZ", 0, this.renter);
+		new Motorcycle("AA-AA-AA", 0, this.renter);
 		this.car.rent("VC12345", this.unavailableBegin, this.unavailableEnd);
 	}
 
