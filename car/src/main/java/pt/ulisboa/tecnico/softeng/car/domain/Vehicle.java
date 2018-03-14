@@ -1,8 +1,6 @@
 package pt.ulisboa.tecnico.softeng.car.domain;
 
-import java.util.Set;
 import java.util.List;
-import java.util.HashSet;
 import java.util.ArrayList;
 
 import org.joda.time.LocalDate;
@@ -11,7 +9,6 @@ import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 import pt.ulisboa.tecnico.softeng.car.domain.Renting;
 
 public class Vehicle {
-	public static Set<Vehicle> vehicles = new HashSet<>();
 	public static final int CODE_SIZE = 8;
 	private final String plate;
 	private List<Renting> rentingsList;
@@ -28,8 +25,8 @@ public class Vehicle {
 	}
 
 	private void checkArguments(String plate, RentACar dealer) {
-		checkPlate(plate);
 		checkDealer(dealer);
+		checkPlate(plate, dealer);
 	}
 
 	private void checkArguments(String plate, int kilometers, RentACar dealer) {
@@ -37,16 +34,14 @@ public class Vehicle {
 		checkKilometers(kilometers);
 	}
 
-	private void checkPlate(String plate) {
+	private void checkPlate(String plate, RentACar dealer) {
 		if (plate == null) {
 			throw new CarException("Plate cannot be null.");
-		} if (plate.trim().length() != Vehicle.CODE_SIZE) {
-			throw new CarException("Plate must be composed composed of 6 alphanumeric characters in the following format XX-YY-ZZ.");
 		}
 
 		checkPlateFormat(plate);
 
-		for (Vehicle vehicle : vehicles) {
+		for (Vehicle vehicle : dealer.getVehicleList()) {
 			if (vehicle.getPlate().equals(plate)) {
 				throw new CarException("The chosen plate is already in use.");
 			}
@@ -100,11 +95,6 @@ public class Vehicle {
 		} else {
 			this.kilometers += km;
 		}
-	}
-
-	public void setDealer(RentACar dealer) {
-		checkDealer(dealer);
-		this.dealer = dealer;
 	}
 
 	public RentACar getDealer() {
