@@ -12,25 +12,27 @@ import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 
 public class CarConstructorMethodTest {
 
-	private static final int NO_KILOMETERS = 0;
-	private static final int KILOMETERS = 50;
-
-	private static final String COMPANY = "Renter";
-	private static final String PLATE = "ZZ-ZZ-ZZ";
+	private int NO_KILOMETERS;
+	private int KILOMETERS;
+	private String COMPANY;
+	private String PLATE;
 
 	private RentACar renter;
-	private Car car;
 
 	@Before
 	public void setUp() {
+		this.NO_KILOMETERS = 0;
+		this.KILOMETERS = 50;
+		this.COMPANY = "Renter";
+		this.PLATE = "ZZ-ZZ-ZZ";
 		this.renter = new RentACar(COMPANY);
-		this.car = new Car(PLATE, NO_KILOMETERS, this.renter);
     }
 
 	@Test
 	public void success() {
-		assertEquals(PLATE, this.car.getPlate());
-		assertEquals(0, this.car.getKilometers());
+		Car car = new Car(PLATE, NO_KILOMETERS, this.renter);
+		assertEquals(PLATE, car.getPlate());
+		assertEquals(0, car.getKilometers());
 	}
 
 	@Test(expected = CarException.class)
@@ -48,10 +50,21 @@ public class CarConstructorMethodTest {
 		new Car(PLATE, NO_KILOMETERS, null);
 	}
 
+	@Test(expected = CarException.class)
+	public void wrongFormatPlate() {
+		new Car("abcdef", NO_KILOMETERS, this.renter);
+	}
+
+	@Test(expected = CarException.class)
+	public void usedPlate() {
+		new Car(PLATE, NO_KILOMETERS, this.renter);
+		new Car(PLATE, NO_KILOMETERS, this.renter);
+	}
+
 	@Test
 	public void moreThanZeroKms() {
-		Car car_b = new Car(PLATE, KILOMETERS, this.renter);
-		assertEquals(KILOMETERS, car_b.getKilometers());
+		Car car = new Car(PLATE, KILOMETERS, this.renter);
+		assertEquals(KILOMETERS, car.getKilometers());
 	}
 
 	@After
