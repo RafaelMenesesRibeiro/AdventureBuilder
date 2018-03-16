@@ -76,7 +76,6 @@ public class RentACarGetAllAvailableCarsMethodTest {
 		renter.getAllAvailableCars(null, this.unavailableEnd);
 	}
 
-	@Ignore
 	@Test (expected = CarException.class)
 	public void nullEnd() {
 		renter.getAllAvailableCars(this.unavailableBegin, null);

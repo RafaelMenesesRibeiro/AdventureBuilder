@@ -19,8 +19,8 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 		<coverage.instruction.ratio>0.70</coverage.instruction.ratio>
 		<coverage.method.ratio>0.70</coverage.method.ratio>
 		<coverage.branch.ratio>0.70</coverage.branch.ratio>
-		<coverage.complexity.ratio>0.70</coverage.complexity.ratio>
-		<coverage.line.ratio>0.70</coverage.line.ratio>
+		<coverage.complexity.ratio>0.20</coverage.complexity.ratio>
+		<coverage.line.ratio>0.20</coverage.line.ratio>
 	</properties>
 
 
