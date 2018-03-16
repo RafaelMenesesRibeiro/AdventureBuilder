@@ -52,6 +52,11 @@ public class SellerGetInvoiceByReferenceMethodTest{
 
 	@After
 	public void tearDown() {
+		this.seller.clear();
+		this.buyer.clear();
+		this.itemType.clear();
+		this.invoice.clear();
+		this.reference.clear();
 		IRS.clear();
 	}
 }
