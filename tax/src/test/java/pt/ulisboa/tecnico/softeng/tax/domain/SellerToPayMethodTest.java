@@ -57,7 +57,7 @@ public class SellerToPayMethodTest{
 
 		this.invoiceA.clear();
 		this.invoiceB.clear();
-	}
+	
 		IRS.clear();
 	}
 
