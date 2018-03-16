@@ -34,7 +34,6 @@ public class ItemType {
 
 	public String getName() { return this._name; }
 	public int getTax() { return this._tax; }
-	public int getNumberOfInvoices() { return this._invoices.size(); }
 	public Map<String, Invoice> getInvoices() { return this._invoices; }
 
 	public void submitInvoice(Invoice data) { this._invoices.put(data.getReference(), data); }
