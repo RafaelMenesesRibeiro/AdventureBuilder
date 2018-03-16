@@ -1,9 +1,12 @@
-.classpath
-.project
-.settings
 target
 jmeter.log
 infer-out
-*.iml
+.classpath
+.project
+.settings
 .idea
 .DS_Store
+*.iml
+*.class
+*.jar
+.vscode/settings.json
