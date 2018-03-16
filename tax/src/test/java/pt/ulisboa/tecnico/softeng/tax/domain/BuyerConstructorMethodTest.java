@@ -15,12 +15,11 @@ public class BuyerConstructorMethodTest {
 
 	@Before
 	public void setUp() {
+		this.buyer = new Buyer(BUYER_NIF, BUYER_NAME,BUYER_ADDRESS);
 	}
 
 	@Test
 	public void success() {
-		this.buyer = new Buyer(BUYER_NIF, BUYER_NAME,BUYER_ADDRESS);
-
 		Assert.assertEquals(BUYER_NIF, buyer.getNIF());
 		Assert.assertEquals(BUYER_NAME, buyer.getName());
 		Assert.assertEquals(BUYER_ADDRESS, buyer.getAddress());
@@ -68,14 +67,16 @@ public class BuyerConstructorMethodTest {
 		new Buyer("    ", BUYER_NAME, BUYER_ADDRESS);
 	}
 
-	@Test(expected = TaxException.class)
-	public void noANumericNIF() {
-		new Buyer("aaaaaaaaa", BUYER_NAME,BUYER_ADDRESS);
-	}
 
 	@Test(expected = TaxException.class)
 	public void noNineDigitsNIF() {
 		new Buyer("1111111111", BUYER_NAME,BUYER_ADDRESS);
+	}
+
+	@Test(expected = TaxException.class)
+	public void NIFwithChars() {
+		new Buyer("111A11111", BUYER_NAME, BUYER_ADDRESS);
+		new Buyer("11111111?", BUYER_NAME, BUYER_ADDRESS);
 	}
 	
 	@Test(expected = TaxException.class)
@@ -99,8 +100,10 @@ public class BuyerConstructorMethodTest {
 	}
 
 
+
 	@After
 	public void tearDown() {
+		this.buyer.clear();
 		IRS.clear();
 	}
 

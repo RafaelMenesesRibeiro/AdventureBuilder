@@ -95,6 +95,12 @@ public class SellerConstructorMethodTest {
 		new Seller(SELLER_NIF, SELLER_NAME, "    ");
 	}
 
+	@Test(expected = TaxException.class)
+	public void NIFwithChars() {
+		new Seller("111A11111", SELLER_NAME, SELLER_ADDRESS);
+		new Seller("11111111?", SELLER_NAME, SELLER_ADDRESS);
+	}
+
 	@After
 	public void tearDown() {
 		IRS.clear();
