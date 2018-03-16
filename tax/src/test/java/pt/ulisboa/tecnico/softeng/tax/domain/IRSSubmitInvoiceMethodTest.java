@@ -44,6 +44,7 @@ public class IRSSubmitInvoiceMethodTest {
 
 		Assert.assertTrue(IRS.getInvoices().contains(this.invoiceA));
 		Assert.assertTrue(IRS.getInvoices().contains(this.invoiceB));
+		Assert.assertTrue(IRS.getInvoices().size() == 2);
 	}
 
 	@Test(expected = TaxException.class)
@@ -53,6 +54,13 @@ public class IRSSubmitInvoiceMethodTest {
 
 	@After
 	public void tearDown() {
+		this.seller.clear();
+		this.buyerA.clear();
+		this.buyerB.clear();
+		this.itemTypeA.clear();
+		this.itemTypeB.clear();
+		this.invoiceA.clear();
+		this.invoiceB.clear();
 		IRS.clear();
 	}
 

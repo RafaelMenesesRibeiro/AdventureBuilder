@@ -56,11 +56,16 @@ public class IRSGetTaxPayerByNIFMethodTest {
 	}
 
 	@Test(expected = TaxException.class)
-	public void notValidNIF() {
+	public void NIFTenDigits() {
 		IRS.getTaxPayerByNIF("1111111111");
-		IRS.getTaxPayerByNIF("1111111a1");
-		IRS.getTaxPayerByNIF("11?111111");
 	}
+
+
+	@Test(expected = TaxException.class)
+	public void NIFWithChar() {
+		IRS.getTaxPayerByNIF("1111111a1");
+	}
+
 
 	@Test(expected = TaxException.class)
 	public void NIFNotExists() {
