@@ -9,3 +9,4 @@ infer-out
 *.iml
 *.class
 *.jar
+.vscode/settings.json
