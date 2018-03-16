@@ -33,8 +33,6 @@ public class SellerToPayMethodTest{
 
 		this.invoiceA = new Invoice(100.00f, new LocalDate(2018, 12, 21), "Brinquedos", this.seller, this.buyerA);
 		this.invoiceB = new Invoice(100.00f, new LocalDate(2018, 12, 21), "Bolachas", this.seller, this.buyerB);
-		
-
 	}
 
 	@Test
@@ -50,6 +48,16 @@ public class SellerToPayMethodTest{
 
 	@After
 	public void tearDown() {
+		this.seller.clear();
+		this.buyerA.clear();
+		this.buyerB.clear();
+
+		this.itemTypeA.clear(); 
+		this.itemTypeB.clear();
+
+		this.invoiceA.clear();
+		this.invoiceB.clear();
+	}
 		IRS.clear();
 	}
 
