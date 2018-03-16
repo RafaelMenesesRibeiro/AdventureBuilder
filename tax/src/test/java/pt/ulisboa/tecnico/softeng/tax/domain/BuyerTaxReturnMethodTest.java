@@ -59,12 +59,19 @@ public class BuyerTaxReturnMethodTest {
 			}
 		}
 		Assert.assertEquals(expectedReturn, this.buyer.taxReturn(2014), 0.0f);
+		Assert.assertEquals(0.0f, this.buyer.taxReturn(2010), 0.0f);
 	}
 
+	@Test(expected = TaxException.class)
+	public void yearBeforeSeventy() {
+		this.buyer.taxReturn(1969);
+	}
 
 
 	@After
 	public void tearDown() {
+		this.buyer.clear();
+		this.seller.clear();
 		IRS.clear();
 	}
 
