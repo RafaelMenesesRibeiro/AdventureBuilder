@@ -55,8 +55,6 @@ public class SellerGetInvoiceByReferenceMethodTest{
 		this.seller.clear();
 		this.buyer.clear();
 		this.itemType.clear();
-		this.invoice.clear();
-		this.reference.clear();
 		IRS.clear();
 	}
 }

@@ -10,7 +10,7 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 public class ItemType {
 	private final String _name;
 	private int _tax;
-	private static Map<String, Invoice> _invoices = new HashMap<>();
+	private Map<String, Invoice> _invoices = new HashMap<>();
 	
 	public ItemType(String itemType, int tax) {
 		checkArguments(itemType, tax);
@@ -37,7 +37,7 @@ public class ItemType {
 	public int getNumberOfInvoices() { return this._invoices.size(); }
 	public Map<String, Invoice> getInvoices() { return this._invoices; }
 
-	public static void submitInvoice(Invoice data) { _invoices.put(data.getReference(), data); }
+	public void submitInvoice(Invoice data) { this._invoices.put(data.getReference(), data); }
 
-	public static void clear() { _invoices.clear(); }
+	public void clear() { _invoices.clear(); }
 }

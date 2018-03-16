@@ -59,8 +59,6 @@ public class IRSSubmitInvoiceMethodTest {
 		this.buyerB.clear();
 		this.itemTypeA.clear();
 		this.itemTypeB.clear();
-		this.invoiceA.clear();
-		this.invoiceB.clear();
 		IRS.clear();
 	}
 

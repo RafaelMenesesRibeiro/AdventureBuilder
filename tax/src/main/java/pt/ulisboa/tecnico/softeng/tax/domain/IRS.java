@@ -50,7 +50,6 @@ public final class IRS {
 		_invoices.add(data); }
 
 	public static void clear() {
-		ItemType.clear();
 		_taxPayers.clear();
 		_itemTypes.clear();
 		_invoices.clear();

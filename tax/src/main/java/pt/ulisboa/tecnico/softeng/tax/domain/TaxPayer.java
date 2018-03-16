@@ -43,4 +43,6 @@ public class TaxPayer {
 	public Map<String, Invoice> getInvoices() { return this._invoices; }
 
 	public void addInvoice(Invoice invoice) { _invoices.put(invoice.getReference(), invoice); }
+
+	public void clear() { this._invoices.clear(); }
 }

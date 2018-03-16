@@ -28,7 +28,6 @@ public class IRSGetItemTypeByNameMethodTest {
 		Assert.assertEquals(this.brinquedo, IRS.getItemTypeByName("Brinquedo"));
 		Assert.assertEquals(this.bolacha, IRS.getItemTypeByName("Bolacha"));
 		Assert.assertEquals(this.cerveja, IRS.getItemTypeByName("Cerveja"));
-		Assert.assertNull(IRS.getItemTypeByName("Videojogo"));
 	}
 
 	@Test(expected = TaxException.class)
@@ -39,6 +38,11 @@ public class IRSGetItemTypeByNameMethodTest {
 	@Test(expected = TaxException.class)
 	public void emptyName() {
 		IRS.getItemTypeByName("");
+	}
+
+	@Test(expected = TaxException.class)
+	public void ItemTypeNotExists() {
+		IRS.getItemTypeByName("Videojogo");
 	}
 
 	@After

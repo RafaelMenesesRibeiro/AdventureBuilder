@@ -14,6 +14,8 @@ public class Buyer extends TaxPayer{
 	}
 
 	public float taxReturn(int year) throws TaxException {
+		if (year < TaxException.MIN_YEAR) { throw new TaxException(); }
+
 		Map<String, Invoice> invoices = this.getInvoices();
 		float taxReturn = 0.00f;
 		for (Iterator iter = invoices.entrySet().iterator(); iter.hasNext(); ) {

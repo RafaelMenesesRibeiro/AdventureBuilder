@@ -93,7 +93,6 @@ public class InvoiceConstructorMethodTest {
 		this.buyer.clear();
 		this.seller.clear();
 		this.itemType.clear();
-		this.date.clear();
 		IRS.clear();
 	}
 
