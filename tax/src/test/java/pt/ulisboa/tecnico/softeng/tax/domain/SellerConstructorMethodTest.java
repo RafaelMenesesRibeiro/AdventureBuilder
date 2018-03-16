@@ -38,6 +38,8 @@ public class SellerConstructorMethodTest {
 		
 		Assert.assertTrue(sellerWithSameName.getNIF().length() == TaxException.NIF_SIZE);
 	}
+
+	
 	@Test
 	public void successCreationWithSameAddress() {
 		Seller sellerWithSameAddress = new Seller("111111113", "GAP", SELLER_ADDRESS);
@@ -69,7 +71,6 @@ public class SellerConstructorMethodTest {
 	@Test(expected = TaxException.class)
 	public void NIFwithChars() {
 		new Seller("111A11111", SELLER_NAME, SELLER_ADDRESS);
-		new Seller("11111111?", SELLER_NAME, SELLER_ADDRESS);
 	}
 
 	@Test(expected = TaxException.class)
