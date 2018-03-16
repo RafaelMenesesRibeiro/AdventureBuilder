@@ -53,7 +53,6 @@ public class BuyerConstructorMethodTest {
 	@Test(expected = TaxException.class)
 	public void existingNIF() {
 		new Buyer(BUYER_NIF, "Luis Almeida", "Rua dos Ladrões de Cebolas");
-		new Buyer(BUYER_NIF, "Luis Putin", "Rua dos Ladrões de Identidade");
 	}
 	
 
@@ -76,7 +75,6 @@ public class BuyerConstructorMethodTest {
 	@Test(expected = TaxException.class)
 	public void NIFwithChars() {
 		new Buyer("111A11111", BUYER_NAME, BUYER_ADDRESS);
-		new Buyer("11111111?", BUYER_NAME, BUYER_ADDRESS);
 	}
 	
 	@Test(expected = TaxException.class)

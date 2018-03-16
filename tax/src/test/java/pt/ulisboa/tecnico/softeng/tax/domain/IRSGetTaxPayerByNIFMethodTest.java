@@ -56,13 +56,26 @@ public class IRSGetTaxPayerByNIFMethodTest {
 	}
 
 	@Test(expected = TaxException.class)
-	public void NIFNotExist() {
-		IRS.getTaxPayerByNIF("Videojogo");
+	public void notValidNIF() {
+		IRS.getTaxPayerByNIF("1111111111");
+		IRS.getTaxPayerByNIF("1111111a1");
+		IRS.getTaxPayerByNIF("11?111111");
+	}
+
+	@Test(expected = TaxException.class)
+	public void NIFNotExists() {
+		IRS.getTaxPayerByNIF("000000000");
 	}
 
 
 	@After
 	public void tearDown() {
+		this.sellerA.clear();
+		this.sellerB.clear();
+		this.sellerC.clear();
+		this.buyerA.clear();
+		this.buyerB.clear();
+		this.buyerC.clear();
 		IRS.clear();
 	}
 
