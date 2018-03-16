@@ -15,27 +15,29 @@ public class ItemTypeConstructorMethodTest {
 
 	@Before
 	public void setUp() {
-
+		this.itemType = new ItemType(ITEM_TYPE, TAX);
 	}
+
 
 	@Test
 	public void success() {
-		this.itemType = new ItemType(ITEM_TYPE, TAX);
 
 		Assert.assertTrue(this.itemType.getTax() >= 0);
 
 		Assert.assertEquals(ITEM_TYPE, this.itemType.getName());
 		Assert.assertEquals(TAX, this.itemType.getTax(), 0.0f);
-		Assert.assertEquals(0, this.itemType.getNumberOfInvoices());
+		Assert.assertEquals(0, this.itemType.getInvoices().size());
 
 		Assert.assertNotNull(IRS.getItemTypes());
+		Assert.assertTrue(IRS.getItemTypes().contains(this.itemType));
+
 		Assert.assertNotNull(this.itemType.getInvoices());
 	}
+
 
 	@Test(expected = TaxException.class)
 	public void existingItemType() {
 		new ItemType(ITEM_TYPE, 24);
-		new ItemType(ITEM_TYPE, 12);
 	}
 
 	@Test(expected = TaxException.class)
@@ -55,6 +57,7 @@ public class ItemTypeConstructorMethodTest {
 
 	@After
 	public void tearDown() {
+		this.itemType.clear();
 		IRS.clear();
 	}
 
