@@ -16,29 +16,12 @@ public class Renting {
 	private int kilometers;
 
 	public Renting(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle) {
-		checkArguments(drivingLicense, begin, end, vehicle);
 		this.reference = vehicle.getDealer().getCode() + Integer.toString(++Renting.counter);
 		this.drivingLicense = drivingLicense;
 		this.begin = begin;
 		this.end = end;
 		this.vehicle = vehicle;
 		this.kilometers = 0;
-	}
-
-	private void checkArguments(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle) {
-		if (drivingLicense == null || begin == null || end == null || vehicle == null) {
-			throw new CarException("At least one of the arguments is null.");
-		}
-		checkDrivingLicense(drivingLicense);
-		if (end.isBefore(begin)) {
-			throw new CarException("End of renting period can't happen before the start of the renting period.");
-		}
-	}
-
-	private void checkDrivingLicense(String drivingLicense) {
-		if (!drivingLicense.matches("[a-zA-Z]+[0-9]+")) {
-			throw new CarException("Invalid driving license.");
-		}
 	}
 
 	public String getReference() {
@@ -65,26 +48,6 @@ public class Renting {
 		return this.vehicle;
 	}
 
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
-
-	public void setDrivingLicense(String drivingLicense) {
-		this.drivingLicense = drivingLicense;
-	}
-
-	public void setBegin(LocalDate begin) {
-		this.begin = begin;
-	}
-
-	public void setEnd(LocalDate end) {
-		this.end = end;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
 	public void increaseKilometers(int kilometers) {
 		if (kilometers < 0) {
 			throw new CarException("Car kilometers may only be raised.");
@@ -95,8 +58,8 @@ public class Renting {
 	}
 
 	public boolean conflict(LocalDate begin, LocalDate end) {
-		if (begin.equals(end)) {
-			return true;
+		if (begin == null || end == null) {
+			throw new CarException("At least one of the arguments is null.");
 		}
 
 		if (begin.isAfter(end)) {

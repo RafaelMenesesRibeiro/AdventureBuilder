@@ -102,6 +102,14 @@ public class Vehicle {
 	}
 
 	public boolean isFree(LocalDate begin, LocalDate end) {
+		if (begin == null || end == null) {
+			throw new CarException("At least one of (begin or end dates) is null.");
+		}
+
+		if (end.isBefore(begin)) {
+			throw new CarException("End of renting period can't happen before the start of the renting period.");
+		}
+		
 		for (Renting renting : this.rentingsList) {
 			if (renting.conflict(begin, end)) {
 				return false;

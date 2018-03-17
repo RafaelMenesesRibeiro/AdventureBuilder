@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.softeng.car.domain;
 
+import java.util.Iterator;
+
 import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Assert;
@@ -15,7 +17,8 @@ public class RentACarGetRentingDataMethodTest {
 	private LocalDate end;
 	private RentACar renter;
 	private Vehicle vehicle;
-	private Renting renting;	
+	private Renting renting;
+
 	@Before
 	public void setUp() {
 		this.drivingLicense = "VC12345";
@@ -44,7 +47,12 @@ public class RentACarGetRentingDataMethodTest {
 
 	@After
 	public void tearDown() {
-		
+		for (Iterator<RentACar> iterator = RentACar.rentingCompanies.iterator(); iterator.hasNext();) {
+    		RentACar renter = iterator.next();
+    		if (renter.equals(this.renter)) {
+    			iterator.remove();
+    		}
+    	}
 	}
 
 }
