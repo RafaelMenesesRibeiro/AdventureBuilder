@@ -65,26 +65,6 @@ public class Renting {
 		return this.vehicle;
 	}
 
-	public void setReference(String reference) {
-		this.reference = reference;
-	}
-
-	public void setDrivingLicense(String drivingLicense) {
-		this.drivingLicense = drivingLicense;
-	}
-
-	public void setBegin(LocalDate begin) {
-		this.begin = begin;
-	}
-
-	public void setEnd(LocalDate end) {
-		this.end = end;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
 	public void increaseKilometers(int kilometers) {
 		if (kilometers < 0) {
 			throw new CarException("Car kilometers may only be raised.");
@@ -95,6 +75,9 @@ public class Renting {
 	}
 
 	public boolean conflict(LocalDate begin, LocalDate end) {
+		if (begin == null || end == null || vehicle == null) {
+			throw new CarException("At least one of the arguments is null.");
+		}
 		if (begin.equals(end)) {
 			return true;
 		}
