@@ -56,6 +56,12 @@ public class VehicleIsFreeMethodTest {
 		Assert.assertFalse(this.vehicle.isFree(begin, end));
 	}
 
+	@Test
+	public void supersetDates() {
+		LocalDate begin = this.unavailableBegin.minusDays(1);
+		LocalDate end = this.unavailableEnd.plusDays(1);
+		Assert.assertFalse(this.vehicle.isFree(begin, end));
+	}
 
 	@Test
 	public void leftOverlapOfDates() {
