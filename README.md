@@ -16,12 +16,12 @@ To see the coverage reports, go to module_name/target/site/jacoco/index.html.
 | 83391      | Andreia Valente         | andreia.valente@tecnico.ulisboa.pt       | AndreiaValente  |   17  |
 
 
-## Tasks - First Delivery  
+## Tasks - Second Delivery  
 
 |   Number   |          Name           |   GitHub Name   |       Module     |     Task    |
 | ---------- | ----------------------- | ----------------| ---------------- | ----------- |
 | 84758      | Rafael Ribeiro          | RafaelRibeiro97 |       Broker     |Tester / Code|
-| 83391      | Andreia Valente         | AndreiaValente  |       Broker     |     Code    |
+| 83391      | Andreia Valente         | AndreiaValente  |       Broker     |Tester / Code|
 | 85069      | Francisco Barros        | FranciscoKloganB|Tax / Bank / Hotel|Tester / Code|
 | 84710      | Diogo Vilela            | DiogoFSVilela   |      Tax / Bank  |Tester / Code|
 | 83405      | João Neves              | JoaoMiguelNeves |Tax / Bank / Hotel|Tester / Code|
