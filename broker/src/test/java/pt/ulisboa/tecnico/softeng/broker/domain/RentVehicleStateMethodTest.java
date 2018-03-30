@@ -121,17 +121,13 @@ public class RentVehicleStateMethodTest {
 			{
 				CarInterface.reserveCar();
 				this.result = new Delegate() {
-					int i = 0;
-
+					short i = 0;
 					public String delegate() {
-						if (this.i < 5) {
-							this.i++;
-							throw new RemoteAccessException();
-						} 
+						if (this.i++ < 5) { throw new RemoteAccessException(); } 
 						else { return VEHICLE_CONFIRMATION; }
 					}
 				};
-				this.times = 5 + 1;
+				this.times = 6;
 			}
 		};
 
