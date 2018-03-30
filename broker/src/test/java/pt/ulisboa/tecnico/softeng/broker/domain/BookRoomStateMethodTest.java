@@ -46,6 +46,7 @@ public class BookRoomStateMethodTest {
 		};
 
 		this.adventure.process();
+		this.adventure.process();
 
 		Assert.assertEquals(State.CONFIRMED, this.adventure.getState());
 	}
@@ -133,6 +134,7 @@ public class BookRoomStateMethodTest {
 			}
 		};
 
+		this.adventure.process();
 		this.adventure.process();
 		this.adventure.process();
 		this.adventure.process();

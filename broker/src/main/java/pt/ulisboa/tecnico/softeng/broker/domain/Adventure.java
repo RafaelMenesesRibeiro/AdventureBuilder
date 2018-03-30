@@ -28,6 +28,8 @@ public class Adventure {
 	private String roomCancellation;
 	private String activityConfirmation;
 	private String activityCancellation;
+	private String vehicleConfirmation;
+	private String vehicleCancellation;
 
 	private AdventureState state;
 
@@ -141,6 +143,11 @@ public class Adventure {
 		this.roomCancellation = roomCancellation;
 	}
 
+	public String getVehicleConfirmation() { return this.vehicleConfirmation; }
+	public void setVehicleConfirmation(String vehicleConfirmation) { this.vehicleConfirmation = vehicleConfirmation; }
+	public String getVehicleCancellation() { return this.vehicleCancellation; }
+	public void setVehicleCancellation(String vehicleCancellation) { this.vehicleCancellation = vehicleCancellation; }
+
 	public State getState() {
 		return this.state.getState();
 	}
@@ -155,6 +162,9 @@ public class Adventure {
 			break;
 		case BOOK_ROOM:
 			this.state = new BookRoomState();
+			break;
+		case RENT_VEHICLE:
+			this.state = new RentVehicleState();
 			break;
 		case UNDO:
 			this.state = new UndoState();
