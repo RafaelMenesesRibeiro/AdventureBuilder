@@ -76,7 +76,7 @@ public class AdventureSequenceTest {
 
 	@Test
 	public void successSequenceTwo(@Mocked final BankInterface bankInterface,
-			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface) {
+			@Mocked final ActivityInterface activityInterface) {
 		new Expectations() {
 			{
 				BankInterface.processPayment(IBAN, AMOUNT);
@@ -101,8 +101,7 @@ public class AdventureSequenceTest {
 	}
 
 	@Test
-	public void unsuccessSequenceOne(@Mocked final BankInterface bankInterface,
-			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface) {
+	public void unsuccessSequenceOne(@Mocked final BankInterface bankInterface) {
 		new Expectations() {
 			{
 				BankInterface.processPayment(IBAN, AMOUNT);
@@ -119,7 +118,7 @@ public class AdventureSequenceTest {
 
 	@Test
 	public void unsuccessSequenceTwo(@Mocked final BankInterface bankInterface,
-			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface) {
+			@Mocked final ActivityInterface activityInterface) {
 		new Expectations() {
 			{
 				BankInterface.processPayment(IBAN, AMOUNT);
