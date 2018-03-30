@@ -333,4 +333,25 @@ public class UndoStateProcessMethodTest {
 
 		Assert.assertEquals(State.CANCELLED, this.adventure.getState());
 	}
+
+	@Test
+	public void successRevertPaymentAndVehicle(@Mocked final BankInterface bankInterface,
+			@Mocked final CarInterface carInterface) {
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setActivityCancellation(ACTIVITY_CANCELLATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
+		new Expectations() {
+			{
+				BankInterface.cancelPayment(PAYMENT_CONFIRMATION);
+				this.result = PAYMENT_CANCELLATION;
+
+				CarInterface.cancelRenting(VEHICLE_CONFIRMATION);
+				this.result = VEHICLE_CANCELLATION;
+			}
+		};
+
+		this.adventure.process();
+
+		Assert.assertEquals(State.CANCELLED, this.adventure.getState());
+	}
 }
