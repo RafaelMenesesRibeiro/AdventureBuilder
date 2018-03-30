@@ -391,6 +391,32 @@ public class ConfirmedStateProcessMethodTest {
 	}
 
 	@Test
+	public void oneRemoteAccessExceptionStartingInVehicle(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface,
+			@Mocked final CarInterface carInterface) {
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
+		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
+		new Expectations() {
+			{
+				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
+
+				ActivityInterface.getActivityReservationData(ACTIVITY_CONFIRMATION);
+
+				HotelInterface.getRoomBookingData(ROOM_CONFIRMATION);
+
+				CarInterface.getRentingData(VEHICLE_CONFIRMATION);
+				
+			}
+		};
+
+		this.adventure.process();
+
+		Assert.assertEquals(State.CONFIRMED, this.adventure.getState());
+	}
+
+	@Test
 	public void activityException(@Mocked final BankInterface bankInterface,
 			@Mocked final ActivityInterface activityInterface) {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
