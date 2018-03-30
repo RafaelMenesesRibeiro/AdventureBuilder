@@ -67,5 +67,17 @@ public class RentVehicleStateMethodTest {
 		Assert.assertNull(this.adventure.getVehicleCancellation());
 	}
 
-	
+	@Test
+	public void singleRemoteAccessException(@Mocked final CarInterface carInterface) {
+		new Expectations() {
+			{
+				CarInterface.reserveCar();
+				this.result = new RemoteAccessException();
+			}
+		};
+
+		this.adventure.process();
+
+		Assert.assertEquals(State.RENT_VEHICLE, this.adventure.getState());
+	}
 }
