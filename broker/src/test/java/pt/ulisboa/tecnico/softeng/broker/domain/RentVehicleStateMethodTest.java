@@ -21,6 +21,7 @@ public class RentVehicleStateMethodTest {
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final int AGE = 20;
+	private static final String VEHICLE_CONFIRMATION = "VehileConfirmation";
 	private static final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private static final LocalDate departure = new LocalDate(2016, 12, 21);
 	private Adventure adventure;
@@ -38,9 +39,15 @@ public class RentVehicleStateMethodTest {
 	public void successRentVehicle(@Mocked final CarInterface carInterface) {
 		new Expectations() {
 			{
-				
+				CarInterface.reserveCar();
+				this.result = VEHICLE_CONFIRMATION;
 			}
 		};
 
+		this.adventure.process();
+
+		Assert.assertEquals(State.CONFIRMED, this.adventure.getState());
+		Assert.assertNotNull(this.adventure.getVehicleConfirmation());
+		Assert.assertNull(this.adventure.getVehicleCancellation());
 	}
 }
