@@ -36,6 +36,7 @@ public class AdventureConstructorMethodTest {
 		Assert.assertNull(adventure.getPaymentConfirmation());
 		Assert.assertNull(adventure.getActivityConfirmation());
 		Assert.assertNull(adventure.getRoomConfirmation());
+		Assert.assertNull(adventure.getVehicleConfirmation());
 	}
 
 	@Test(expected = BrokerException.class)
@@ -68,6 +69,7 @@ public class AdventureConstructorMethodTest {
 		Assert.assertNull(adventure.getPaymentConfirmation());
 		Assert.assertNull(adventure.getActivityConfirmation());
 		Assert.assertNull(adventure.getRoomConfirmation());
+		Assert.assertNull(adventure.getVehicleConfirmation());
 	}
 
 	@Test(expected = BrokerException.class)
@@ -90,6 +92,7 @@ public class AdventureConstructorMethodTest {
 		Assert.assertNull(adventure.getPaymentConfirmation());
 		Assert.assertNull(adventure.getActivityConfirmation());
 		Assert.assertNull(adventure.getRoomConfirmation());
+		Assert.assertNull(adventure.getVehicleConfirmation());
 	}
 
 	@Test(expected = BrokerException.class)
@@ -127,6 +130,7 @@ public class AdventureConstructorMethodTest {
 		Assert.assertNull(adventure.getPaymentConfirmation());
 		Assert.assertNull(adventure.getActivityConfirmation());
 		Assert.assertNull(adventure.getRoomConfirmation());
+		Assert.assertNull(adventure.getVehicleConfirmation());
 	}
 
 	@Test(expected = BrokerException.class)
@@ -149,6 +153,7 @@ public class AdventureConstructorMethodTest {
 		Assert.assertNull(adventure.getPaymentConfirmation());
 		Assert.assertNull(adventure.getActivityConfirmation());
 		Assert.assertNull(adventure.getRoomConfirmation());
+		Assert.assertNull(adventure.getVehicleConfirmation());
 	}
 
 	@Test(expected = BrokerException.class)
