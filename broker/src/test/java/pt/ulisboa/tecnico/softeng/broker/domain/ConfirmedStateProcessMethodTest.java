@@ -91,6 +91,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -108,6 +109,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -127,6 +129,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -146,6 +149,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -163,6 +167,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -182,6 +187,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -202,6 +208,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -222,6 +229,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -256,6 +264,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -290,6 +299,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -312,6 +322,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -348,6 +359,7 @@ public class ConfirmedStateProcessMethodTest {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
