@@ -80,4 +80,21 @@ public class RentVehicleStateMethodTest {
 
 		Assert.assertEquals(State.RENT_VEHICLE, this.adventure.getState());
 	}
+
+	@Test
+	public void maxRemoteAccessException(@Mocked final CarInterface carInterface) {
+		new Expectations() {
+			{
+				CarInterface.reserveCar();
+				this.result = new RemoteAccessException();
+				this.times = RentVehicleState.MAX_REMOTE_ERRORS;
+			}
+		};
+
+		for (short i = 0; i < RentVehicleState.MAX_REMOTE_ERRORS; i++) {
+			this.adventure.process();
+		}
+
+		Assert.assertEquals(State.UNDO, this.adventure.getState());
+	}
 }
