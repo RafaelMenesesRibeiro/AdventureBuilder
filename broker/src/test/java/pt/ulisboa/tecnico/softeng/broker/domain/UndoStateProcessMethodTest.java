@@ -18,6 +18,8 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.broker.interfaces.CarInterface;
+import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 
 @RunWith(JMockit.class)
 public class UndoStateProcessMethodTest {
@@ -30,6 +32,8 @@ public class UndoStateProcessMethodTest {
 	private static final String ACTIVITY_CANCELLATION = "ActivityCancellation";
 	private static final String ROOM_CONFIRMATION = "RoomConfirmation";
 	private static final String ROOM_CANCELLATION = "RoomCancellation";
+	private static final String VEHICLE_CONFIRMATION = "VehicleConfirmation";
+	private static final String VEHICLE_CANCELLATION = "VehicleCancellation";
 	private static final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private static final LocalDate departure = new LocalDate(2016, 12, 21);
 	private Adventure adventure;
@@ -279,5 +283,35 @@ public class UndoStateProcessMethodTest {
 
 		Assert.assertEquals(State.UNDO, this.adventure.getState());
 	}
+
+	@Test
+	public void successRevertPaymentAndActivityAndRoomAndVehicle(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface,
+			@Mocked final CarInterface carInterface) {
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
+		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
+		new Expectations() {
+			{
+				BankInterface.cancelPayment(PAYMENT_CONFIRMATION);
+				this.result = PAYMENT_CANCELLATION;
+
+				ActivityInterface.cancelReservation(ACTIVITY_CONFIRMATION);
+				this.result = ACTIVITY_CANCELLATION;
+
+				HotelInterface.cancelBooking(ROOM_CONFIRMATION);
+				this.result = ROOM_CANCELLATION;
+
+				CarInterface.cancelRenting(VEHICLE_CONFIRMATION);
+				this.result = VEHICLE_CANCELLATION;
+			}
+		};
+
+		this.adventure.process();
+
+		Assert.assertEquals(State.CANCELLED, this.adventure.getState());
+	}
+
 
 }
