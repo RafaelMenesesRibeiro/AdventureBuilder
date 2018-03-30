@@ -46,15 +46,16 @@ public class AdventureProcessMethodTest {
 	@Test
 	public void success() {
 		Adventure adventure = new Adventure(this.broker, this.begin, this.end, 20, this.IBAN, 300);
-
 		adventure.process();
 		adventure.process();
 		adventure.process();
-
+		adventure.process();
 		assertEquals(Adventure.State.CONFIRMED, adventure.getState());
 		assertNotNull(adventure.getPaymentConfirmation());
 		assertNotNull(adventure.getRoomConfirmation());
 		assertNotNull(adventure.getActivityConfirmation());
+		assertNotNull(adventure.getVehicleConfirmation());
+		assertNotNull(adventure.getVehicleConfirmation());
 	}
 
 	@Test
