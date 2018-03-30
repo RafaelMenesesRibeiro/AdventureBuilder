@@ -55,6 +55,7 @@ public class AdventureProcessMethodTest {
 		assertNotNull(adventure.getRoomConfirmation());
 		assertNotNull(adventure.getActivityConfirmation());
 		assertNotNull(adventure.getVehicleConfirmation());
+		assertNotNull(adventure.getVehicleConfirmation());
 	}
 
 	@Test
