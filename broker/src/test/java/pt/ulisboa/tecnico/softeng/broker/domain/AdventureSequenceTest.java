@@ -18,6 +18,7 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.CarInterface;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 
 @RunWith(JMockit.class)
 public class AdventureSequenceTest {
@@ -222,5 +223,45 @@ public class AdventureSequenceTest {
 
 		Assert.assertEquals(State.CANCELLED, adventure.getState());
 	}
+
+	@Test
+	public void unsuccessSequenceFive(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface, 
+			@Mocked final CarInterface carInterface) {
+		new Expectations() {
+			{
+				BankInterface.processPayment(IBAN, AMOUNT);
+				this.result = PAYMENT_CONFIRMATION;
+
+				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				this.result = ACTIVITY_CONFIRMATION;
+
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
+				this.result = ROOM_CONFIRMATION;
+
+				CarInterface.reserveCar();
+				this.result = new CarException();
+
+				BankInterface.cancelPayment(PAYMENT_CONFIRMATION);
+				this.result = PAYMENT_CANCELLATION;
+
+				ActivityInterface.cancelReservation(ACTIVITY_CONFIRMATION);
+				this.result = ACTIVITY_CANCELLATION;
+
+				HotelInterface.cancelBooking(ROOM_CONFIRMATION);
+				this.result = ROOM_CANCELLATION;
+			}
+		};
+
+		Adventure adventure = new Adventure(this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+
+		adventure.process();
+		adventure.process();
+		adventure.process();
+		adventure.process();
+		adventure.process();
+
+		Assert.assertEquals(State.CANCELLED, adventure.getState());
+	}	
 
 }
