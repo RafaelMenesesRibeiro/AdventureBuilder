@@ -19,6 +19,8 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.broker.interfaces.CarInterface;
+import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 
 @RunWith(JMockit.class)
 public class ConfirmedStateProcessMethodTest {
@@ -28,6 +30,7 @@ public class ConfirmedStateProcessMethodTest {
 	private static final String PAYMENT_CONFIRMATION = "PaymentConfirmation";
 	private static final String ACTIVITY_CONFIRMATION = "ActivityConfirmation";
 	private static final String ROOM_CONFIRMATION = "RoomConfirmation";
+	private static final String VEHICLE_CONFIRMATION = "VehicleConfirmation";
 	private static final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private static final LocalDate departure = new LocalDate(2016, 12, 21);
 	private Adventure adventure;
@@ -43,10 +46,11 @@ public class ConfirmedStateProcessMethodTest {
 
 	@Test
 	public void successAll(@Mocked final BankInterface bankInterface, @Mocked final ActivityInterface activityInterface,
-			@Mocked final HotelInterface roomInterface) {
+			@Mocked final HotelInterface roomInterface, @Mocked final CarInterface carInterface) {
 		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
 		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
 		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
 		new Expectations() {
 			{
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -54,6 +58,8 @@ public class ConfirmedStateProcessMethodTest {
 				ActivityInterface.getActivityReservationData(ACTIVITY_CONFIRMATION);
 
 				HotelInterface.getRoomBookingData(ROOM_CONFIRMATION);
+
+				CarInterface.getRentingData(VEHICLE_CONFIRMATION);
 			}
 		};
 
