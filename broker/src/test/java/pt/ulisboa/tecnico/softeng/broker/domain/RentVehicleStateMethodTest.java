@@ -50,4 +50,22 @@ public class RentVehicleStateMethodTest {
 		Assert.assertNotNull(this.adventure.getVehicleConfirmation());
 		Assert.assertNull(this.adventure.getVehicleCancellation());
 	}
+
+	@Test
+	public void carException(@Mocked final CarInterface carInterface) {
+		new Expectations() {
+			{
+				CarInterface.reserveCar();
+				this.result = new CarException();
+			}
+		};
+
+		this.adventure.process();
+
+		Assert.assertEquals(State.UNDO, this.adventure.getState());
+		Assert.assertNull(this.adventure.getVehicleConfirmation());
+		Assert.assertNull(this.adventure.getVehicleCancellation());
+	}
+
+	
 }
