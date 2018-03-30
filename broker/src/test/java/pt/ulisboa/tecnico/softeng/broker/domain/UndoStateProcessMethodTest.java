@@ -405,4 +405,33 @@ public class UndoStateProcessMethodTest {
 
 		Assert.assertEquals(State.UNDO, this.adventure.getState());
 	}
+
+	@Test
+	public void successRevertPaymentAndActivityAndRoomAndVehicleButRemoteAccessException(
+			@Mocked final BankInterface bankInterface, @Mocked final ActivityInterface activityInterface,
+			@Mocked final HotelInterface roomInterface, @Mocked final CarInterface carInterface) {
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
+		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
+		new Expectations() {
+			{
+				BankInterface.cancelPayment(PAYMENT_CONFIRMATION);
+				this.result = PAYMENT_CANCELLATION;
+
+				ActivityInterface.cancelReservation(ACTIVITY_CONFIRMATION);
+				this.result = ACTIVITY_CANCELLATION;
+
+				HotelInterface.cancelBooking(ROOM_CONFIRMATION);
+				this.result = ROOM_CANCELLATION;
+
+				CarInterface.cancelRenting(VEHICLE_CONFIRMATION);
+				this.result = new RemoteAccessException();				
+			}
+		};
+
+		this.adventure.process();
+
+		Assert.assertEquals(State.UNDO, this.adventure.getState());
+	}
 }
