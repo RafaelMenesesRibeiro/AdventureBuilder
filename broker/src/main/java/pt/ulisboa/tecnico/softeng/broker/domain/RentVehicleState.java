@@ -9,9 +9,7 @@ public class RentVehicleState extends AdventureState {
 	public static final int MAX_REMOTE_ERRORS = 10;
 
 	@Override
-	public State getState() {
-		return State.RENT_VEHICLE;
-	}
+	public State getState() { return State.RENT_VEHICLE; }
 
 	@Override
 	public void process(Adventure adventure) {
@@ -30,5 +28,4 @@ public class RentVehicleState extends AdventureState {
 
 		adventure.setState(State.CONFIRMED);
 	}
-
 }
