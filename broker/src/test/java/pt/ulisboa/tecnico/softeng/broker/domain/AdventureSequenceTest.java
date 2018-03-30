@@ -57,16 +57,17 @@ public class AdventureSequenceTest {
 				CarInterface.reserveCar();
 				this.result = VEHICLE_CONFIRMATION;
 
-				//BankInterface.getOperationData(PAYMENT_CONFIRMATION);
+				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
 
-				//ActivityInterface.getActivityReservationData(ACTIVITY_CONFIRMATION);
+				ActivityInterface.getActivityReservationData(ACTIVITY_CONFIRMATION);
 
-				//HotelInterface.getRoomBookingData(ROOM_CONFIRMATION);
+				HotelInterface.getRoomBookingData(ROOM_CONFIRMATION);
 			}
 		};
 
 		Adventure adventure = new Adventure(this.broker, arrival, departure, AGE, IBAN, AMOUNT);
 
+		adventure.process();
 		adventure.process();
 		adventure.process();
 		adventure.process();
