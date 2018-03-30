@@ -538,4 +538,29 @@ public class ConfirmedStateProcessMethodTest {
 		Assert.assertEquals(State.UNDO, this.adventure.getState());
 	}
 
+	@Test
+	public void carException(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface, 
+			@Mocked final CarInterface carInterface) {
+		this.adventure.setPaymentConfirmation(PAYMENT_CONFIRMATION);
+		this.adventure.setActivityConfirmation(ACTIVITY_CONFIRMATION);
+		this.adventure.setRoomConfirmation(ROOM_CONFIRMATION);
+		this.adventure.setVehicleConfirmation(VEHICLE_CONFIRMATION);
+		new Expectations() {
+			{
+				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
+
+				ActivityInterface.getActivityReservationData(ACTIVITY_CONFIRMATION);
+
+				HotelInterface.getRoomBookingData(ROOM_CONFIRMATION);
+				
+				CarInterface.getRentingData(VEHICLE_CONFIRMATION);
+				this.result = new CarException();
+			}
+		};
+
+		this.adventure.process();
+
+		Assert.assertEquals(State.UNDO, this.adventure.getState());
+	}
 }
