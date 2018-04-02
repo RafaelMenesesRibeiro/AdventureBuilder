@@ -9,21 +9,32 @@ import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 
 public class RentACarConstructorTest {
 	private static final String NAME = "eartz";
+	private static final String NIF = "123456789";
 
 	@Test
 	public void success() {
-		RentACar rentACar = new RentACar(NAME);
+		RentACar rentACar = new RentACar(NAME, NIF);
 		assertEquals(NAME, rentACar.getName());
 	}
 
 	@Test(expected = CarException.class)
 	public void nullName() {
-		new RentACar(null);
+		new RentACar(null, NIF);
 	}
 
 	@Test(expected = CarException.class)
 	public void emptyName() {
-		new RentACar("");
+		new RentACar("", NIF);
+	}
+
+	@Test(expected = CarException.class)
+	public void nullNif() {
+		new RentACar(NAME, null);
+	}
+
+	@Test(expected = CarException.class)
+	public void emptyNif() {
+		new RentACar(NAME, "");
 	}
 
 	@After

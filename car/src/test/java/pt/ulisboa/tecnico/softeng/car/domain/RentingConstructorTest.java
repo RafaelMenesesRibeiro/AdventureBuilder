@@ -15,53 +15,56 @@ public class RentingConstructorTest {
 	private static final String DRIVING_LICENSE = "br112233";
 	private static final LocalDate date1 = LocalDate.parse("2018-01-06");
 	private static final LocalDate date2 = LocalDate.parse("2018-01-07");
+	private static final String IBAN = "IBAN";
+	private static final String NIF = "123456789";
+	private static final String NIF2 = "123456789";
 	private Car car;
 
 	@Before
 	public void setUp() {
-		RentACar rentACar1 = new RentACar(RENT_A_CAR_NAME);
+		RentACar rentACar1 = new RentACar(RENT_A_CAR_NAME, NIF2);
 		this.car = new Car(PLATE_CAR, 10, rentACar1);
 	}
 
 	@Test
 	public void success() {
-		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car);
+		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car, NIF, IBAN);
 		assertEquals(DRIVING_LICENSE, renting.getDrivingLicense());
 	}
 
 	@Test(expected = CarException.class)
 	public void nullDrivingLicense() {
-		new Renting(null, date1, date2, car);
+		new Renting(null, date1, date2, car, NIF, IBAN);
 	}
 
 	@Test(expected = CarException.class)
 	public void emptyDrivingLicense() {
-		new Renting("", date1, date2, car);
+		new Renting("", date1, date2, car, NIF, IBAN);
 	}
 
 	@Test(expected = CarException.class)
 	public void invalidDrivingLicense() {
-		new Renting("12", date1, date2, car);
+		new Renting("12", date1, date2, car, NIF, IBAN);
 	}
 
 	@Test(expected = CarException.class)
 	public void nullBegin() {
-		new Renting(DRIVING_LICENSE, null, date2, car);
+		new Renting(DRIVING_LICENSE, null, date2, car, NIF, IBAN);
 	}
 
 	@Test(expected = CarException.class)
 	public void nullEnd() {
-		new Renting(DRIVING_LICENSE, date1, null, car);
+		new Renting(DRIVING_LICENSE, date1, null, car, NIF, IBAN);
 	}
 	
 	@Test(expected = CarException.class)
 	public void endBeforeBegin() {
-		new Renting(DRIVING_LICENSE, date2, date1, car);
+		new Renting(DRIVING_LICENSE, date2, date1, car, NIF, IBAN);
 	}
 
 	@Test(expected = CarException.class)
 	public void nullCar() {
-		new Renting(DRIVING_LICENSE, date1, date2, null);
+		new Renting(DRIVING_LICENSE, date1, date2, null, NIF, IBAN);
 	}
 
 	@After

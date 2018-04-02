@@ -17,17 +17,20 @@ public class RentACarGetRentingDataTest {
 	private static final String DRIVING_LICENSE = "br123";
 	private static final LocalDate date1 = LocalDate.parse("2018-01-06");
 	private static final LocalDate date2 = LocalDate.parse("2018-01-07");
+	private static final String NIF = "123456789";
+	private static final String IBAN = "IBAN";
+	private static final String NIF2 = "123456789";
 	private Car car;
 
 	@Before
 	public void setUp() {
-		RentACar rentACar1 = new RentACar(NAME1);
+		RentACar rentACar1 = new RentACar(NAME1, NIF2);
 		this.car = new Car(PLATE_CAR1, 10, rentACar1);
 	}
 
 	@Test
 	public void success() {
-		Renting renting = car.rent(DRIVING_LICENSE, date1, date2);
+		Renting renting = car.rent(DRIVING_LICENSE, date1, date2, NIF, IBAN);
 		RentingData rentingData = RentACar.getRentingData(renting.getReference());
 		assertEquals(renting.getReference(), rentingData.getReference());
 		assertEquals(DRIVING_LICENSE, rentingData.getDrivingLicense());
