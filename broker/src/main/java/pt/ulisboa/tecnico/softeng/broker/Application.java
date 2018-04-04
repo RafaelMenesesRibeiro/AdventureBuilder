@@ -17,7 +17,7 @@ public class Application {
 		Account account = new Account(bank, new Client(bank, "José dos Anzóis"));
 		account.deposit(1000);
 
-		Broker broker = new Broker("BR01", "Fun");
+		Broker broker = new Broker("BR01", "Fun", "123456789", "98765432");
 		Adventure adventure = new Adventure(broker, new LocalDate(), new LocalDate(), 33, account.getIBAN(), 50);
 
 		adventure.process();
