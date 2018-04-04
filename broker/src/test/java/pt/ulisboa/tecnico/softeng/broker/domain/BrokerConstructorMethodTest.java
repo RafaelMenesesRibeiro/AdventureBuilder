@@ -16,8 +16,8 @@ public class BrokerConstructorMethodTest {
 		Assert.assertEquals("WeExplore", broker.getName());
 		Assert.assertEquals(0, broker.getNumberOfAdventures());
 		Assert.assertTrue(Broker.brokers.contains(broker));
-		Assert.assertEquals("123456789", broker.getnifbuyer());
-		Assert.assertEquals("987654321", broker.getnifseller());
+		Assert.assertEquals("123456789", broker.getNIFBuyer());
+		Assert.assertEquals("987654321", broker.getNIFSeller());
 
 	}
 
