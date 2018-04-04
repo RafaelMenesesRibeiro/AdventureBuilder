@@ -7,4 +7,8 @@ public class TaxInterface {
 	public static String submitInvoice(InvoiceData invoiceData) {
         return IRS.submitInvoice(invoiceData);
     }
+
+    public static String cancelInvoice(String referString) {
+        return IRS.cancelInvoice(referString);
+    }
 }
