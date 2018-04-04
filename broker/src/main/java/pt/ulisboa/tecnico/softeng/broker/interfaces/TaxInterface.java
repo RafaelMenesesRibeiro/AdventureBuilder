@@ -10,7 +10,7 @@ public class TaxInterface {
 		return IRS.submitInvoice(new InvoiceData(sellerNIF, buyerNIF, itemType, value, date));
 	}
 
-	public static String submitCancelInvoice(String reference) {
+	public static String submitCancelInvoice(String reference) { 
 		return IRS.cancelInvoice(reference);
 	}
 }
