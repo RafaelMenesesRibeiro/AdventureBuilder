@@ -33,7 +33,7 @@ public class RentACarGetAllAvailableVehiclesTest {
 	@Test
 	public void onlyCars() {
 		Vehicle car1 = new Car(PLATE_CAR1, 10, rentACar1);
-		car1.rent(DRIVING_LICENSE, date1, date2);
+		car1.rent(DRIVING_LICENSE, date1, date2, "123456789", "123");
 		Vehicle car2 = new Car(PLATE_CAR2, 10, rentACar2);
 		Vehicle motorcycle = new Motorcycle(PLATE_MOTORCYCLE, 10, rentACar1);
 
@@ -48,7 +48,7 @@ public class RentACarGetAllAvailableVehiclesTest {
 		Vehicle car1 = new Car(PLATE_CAR1, 10, rentACar1);
 		Vehicle car2 = new Car(PLATE_CAR2, 10, rentACar2);
 
-		car1.rent(DRIVING_LICENSE, date1, date2);
+		car1.rent(DRIVING_LICENSE, date1, date2, "123456789", "123");
 		Set<Vehicle> cars = RentACar.getAllAvailableCars(date1, date2);
 
 		assertFalse(cars.contains(car1));

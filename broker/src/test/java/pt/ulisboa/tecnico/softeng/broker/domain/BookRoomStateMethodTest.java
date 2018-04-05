@@ -16,13 +16,16 @@ import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.broker.interfaces.CarInterface;
 
 @RunWith(JMockit.class)
 public class BookRoomStateMethodTest {
+	private static final String NIF = "123456789";
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final int AGE = 20;
 	private static final String ROOM_CONFIRMATION = "RoomConfirmation";
+	private static final String VEHICLE_CONFIRMATION = "VehicleConfirmation";
 	private static final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private static final LocalDate departure = new LocalDate(2016, 12, 21);
 	private Adventure adventure;
@@ -37,14 +40,22 @@ public class BookRoomStateMethodTest {
 	}
 
 	@Test
-	public void successBookRoom(@Mocked final HotelInterface hotelInterface) {
+	public void successBookRoom(@Mocked final HotelInterface hotelInterface, 
+		@Mocked final CarInterface carInterface) {
 		new Expectations() {
 			{
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
 				this.result = ROOM_CONFIRMATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				CarInterface.reserveCar(arrival, departure, NIF, IBAN);
+				this.result = VEHICLE_CONFIRMATION;
 			}
 		};
 
+		this.adventure.process();
 		this.adventure.process();
 
 		Assert.assertEquals(State.CONFIRMED, this.adventure.getState());
@@ -113,7 +124,8 @@ public class BookRoomStateMethodTest {
 	}
 
 	@Test
-	public void fiveRemoteAccessExceptionOneSuccess(@Mocked final HotelInterface hotelInterface) {
+	public void fiveRemoteAccessExceptionOneSuccess(@Mocked final HotelInterface hotelInterface, 
+		@Mocked final CarInterface carInterface) {
 		new Expectations() {
 			{
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
@@ -130,9 +142,16 @@ public class BookRoomStateMethodTest {
 					}
 				};
 				this.times = 6;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				CarInterface.reserveCar(arrival, departure, NIF, IBAN);
+				this.result = VEHICLE_CONFIRMATION;
 			}
 		};
 
+		this.adventure.process();
 		this.adventure.process();
 		this.adventure.process();
 		this.adventure.process();

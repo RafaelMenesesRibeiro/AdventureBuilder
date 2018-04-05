@@ -70,4 +70,9 @@ public class IRS {
 		removeTaxPayers();
 	}
 
+	public static String cancelInvoice(String referString) {
+		// TODO: Complete this
+		return null;
+	}
+
 }

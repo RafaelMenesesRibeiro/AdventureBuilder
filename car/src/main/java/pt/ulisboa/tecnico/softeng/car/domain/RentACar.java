@@ -113,4 +113,8 @@ public class RentACar {
 			renting.getEnd()
 		);
 	}
+	
+	public static void clear() {
+		rentACars.clear();
+	}
 }

@@ -18,14 +18,20 @@ public class Broker {
 	private final String name;
 	private final Set<Adventure> adventures = new HashSet<>();
 	private final Set<BulkRoomBooking> bulkBookings = new HashSet<>();
+	private final String NIFBuyer;
+	private final String NIFSeller;
 
-	public Broker(String code, String name) {
+
+	public Broker(String code, String name, String NIFBuyer, String NIFSeller) {
 		checkCode(code);
 		this.code = code;
 
 		checkName(name);
 		this.name = name;
-
+		checkNIFBuyer(NIFBuyer);
+		this.NIFBuyer = NIFBuyer;
+		checkNIFSeller(NIFSeller);
+		this.NIFSeller = NIFSeller;
 		Broker.brokers.add(this);
 	}
 
@@ -47,12 +53,45 @@ public class Broker {
 		}
 	}
 
+	private void checkNIFBuyer(String NIFBuyer) {
+		if (NIFBuyer == null || NIFBuyer.trim().length() == 0 || NIFBuyer.trim().length() != 9) {
+			throw new BrokerException();
+		}
+		for (Broker broker : Broker.brokers) {
+			if (broker.getNIFBuyer().equals(NIFBuyer)) {
+				throw new BrokerException();
+			}
+		}
+	}
+
+	private void checkNIFSeller(String NIFSeller) {
+		if (NIFSeller == null || NIFSeller.trim().length() == 0 || NIFSeller.trim().length() != 9) {
+			throw new BrokerException();
+		}
+		if (NIFSeller.equals(this.NIFBuyer)) {
+			throw new BrokerException();
+		}
+
+		for (Broker broker : Broker.brokers) {
+			if (broker.getNIFSeller().equals(NIFSeller)) {
+				throw new BrokerException();
+			}
+		}
+	}
 	String getCode() {
 		return this.code;
 	}
 
 	String getName() {
 		return this.name;
+	}
+
+	String getNIFBuyer(){
+		return this.NIFBuyer;
+	}
+
+	String getNIFSeller(){
+		return this.NIFSeller;
 	}
 
 	public int getNumberOfAdventures() {
