@@ -21,6 +21,7 @@ public class ProcessPaymentState extends AdventureState {
 			adventure.setState(State.CANCELLED);
 			return;
 		} catch (RemoteAccessException rae) {
+			System.out.println("RemoteAccessException");
 			incNumOfRemoteErrors();
 			if (getNumOfRemoteErrors() == MAX_REMOTE_ERRORS) {
 				adventure.setState(State.CANCELLED);

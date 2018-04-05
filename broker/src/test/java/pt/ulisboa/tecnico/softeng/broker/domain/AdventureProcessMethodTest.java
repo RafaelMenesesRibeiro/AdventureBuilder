@@ -17,6 +17,9 @@ import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
+import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
+import pt.ulisboa.tecnico.softeng.car.domain.Vehicle;
+import pt.ulisboa.tecnico.softeng.car.domain.Car;
 
 public class AdventureProcessMethodTest {
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
@@ -36,6 +39,9 @@ public class AdventureProcessMethodTest {
 
 		Hotel hotel = new Hotel("XPTO123", "Paris");
 		new Room(hotel, "01", Type.SINGLE);
+
+	
+		Vehicle vehicle = new Car("22-33-HZ", 10, new RentACar("John's Cars"));
 
 		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure", "NIF", "IBAN");
 		Activity activity = new Activity(provider, "Bush Walking", 18, 80, 10);
@@ -76,5 +82,7 @@ public class AdventureProcessMethodTest {
 		Hotel.hotels.clear();
 		ActivityProvider.providers.clear();
 		Broker.brokers.clear();
+		RentACar.clear();
+		Vehicle.clear();
 	}
 }
