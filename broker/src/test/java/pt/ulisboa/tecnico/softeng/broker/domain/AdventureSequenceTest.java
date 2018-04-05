@@ -3,6 +3,7 @@ package pt.ulisboa.tecnico.softeng.broker.domain;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.After;
 import org.junit.runner.RunWith;
 
 import mockit.Expectations;
@@ -19,9 +20,12 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.CarInterface;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.car.exception.CarException;
+import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
+import pt.ulisboa.tecnico.softeng.broker.domain.Adventure;
 
 @RunWith(JMockit.class)
 public class AdventureSequenceTest {
+	private static final String NIF = "123456789";
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final int AGE = 20;
@@ -54,7 +58,10 @@ public class AdventureSequenceTest {
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
 				this.result = ROOM_CONFIRMATION;
 
-				CarInterface.reserveCar();
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				CarInterface.reserveCar(arrival, departure, NIF, IBAN);
 				this.result = VEHICLE_CONFIRMATION;
 
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -190,7 +197,10 @@ public class AdventureSequenceTest {
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
 				this.result = ROOM_CONFIRMATION;
 
-				CarInterface.reserveCar();
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				CarInterface.reserveCar(arrival, departure, NIF, IBAN);
 				this.result = VEHICLE_CONFIRMATION;
 
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -240,7 +250,10 @@ public class AdventureSequenceTest {
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
 				this.result = ROOM_CONFIRMATION;
 
-				CarInterface.reserveCar();
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				CarInterface.reserveCar(arrival, departure, NIF, IBAN);
 				this.result = new CarException();
 
 				BankInterface.cancelPayment(PAYMENT_CONFIRMATION);
@@ -265,4 +278,8 @@ public class AdventureSequenceTest {
 		Assert.assertEquals(State.CANCELLED, adventure.getState());
 	}	
 
+	@After
+	public void tearDown() {
+		RentACar.clear();
+	}
 }
