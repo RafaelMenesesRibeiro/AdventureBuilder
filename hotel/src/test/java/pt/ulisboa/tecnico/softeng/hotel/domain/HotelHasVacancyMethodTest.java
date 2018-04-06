@@ -16,6 +16,8 @@ public class HotelHasVacancyMethodTest {
 	private final LocalDate departure = new LocalDate(2016, 12, 21);
 	private final double SINGLE_PRICE = 200;
 	private final double DOUBLE_PRICE = 300;
+	private static final String NIF = "123456789";
+	private static final String IBAN = "IBAN";
 	private Hotel hotel;
 	private Room room;
 
@@ -35,7 +37,7 @@ public class HotelHasVacancyMethodTest {
 
 	@Test
 	public void noVacancy() {
-		this.room.reserve(Type.DOUBLE, this.arrival, this.departure);
+		this.room.reserve(Type.DOUBLE, this.arrival, this.departure, NIF, IBAN);
 
 		assertNull(this.hotel.hasVacancy(Type.DOUBLE, this.arrival, this.departure));
 	}

@@ -20,16 +20,17 @@ public class Broker {
 	private final Set<BulkRoomBooking> bulkBookings = new HashSet<>();
 	private final String NIFBuyer;
 	private final String NIFSeller;
+	private final String IBAN;
 
-
-	public Broker(String code, String name, String NIFBuyer, String NIFSeller) {
+	public Broker(String code, String name, String NIFBuyer, String NIFSeller, String IBAN) {
 		checkCode(code);
 		this.code = code;
-
 		checkName(name);
 		this.name = name;
 		checkNIFBuyer(NIFBuyer);
 		this.NIFBuyer = NIFBuyer;
+		checkIBAN(IBAN);
+		this.IBAN = IBAN;
 		checkNIFSeller(NIFSeller);
 		this.NIFSeller = NIFSeller;
 		Broker.brokers.add(this);
@@ -49,6 +50,12 @@ public class Broker {
 
 	private void checkName(String name) {
 		if (name == null || name.trim().length() == 0) {
+			throw new BrokerException();
+		}
+	}
+
+	private void checkIBAN(String IBAN) {
+		if (IBAN == null || IBAN.trim().length() == 0) {
 			throw new BrokerException();
 		}
 	}
@@ -78,8 +85,13 @@ public class Broker {
 			}
 		}
 	}
+
 	String getCode() {
 		return this.code;
+	}
+
+	String getIBAN() {
+		return this.IBAN;
 	}
 
 	String getName() {
@@ -106,8 +118,8 @@ public class Broker {
 		return this.adventures.contains(adventure);
 	}
 
-	public void bulkBooking(int number, LocalDate arrival, LocalDate departure) {
-		BulkRoomBooking bulkBooking = new BulkRoomBooking(number, arrival, departure);
+	public void bulkBooking(int number, LocalDate arrival, LocalDate departure, String nif, String iban) {
+		BulkRoomBooking bulkBooking = new BulkRoomBooking(number, arrival, departure, nif, iban);
 		this.bulkBookings.add(bulkBooking);
 		bulkBooking.processBooking();
 	}

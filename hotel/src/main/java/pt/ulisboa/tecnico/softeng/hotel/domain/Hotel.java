@@ -112,11 +112,11 @@ public class Hotel {
 		return null;
 	}
 
-	public static String reserveRoom(Room.Type type, LocalDate arrival, LocalDate departure) {
+	public static String reserveRoom(Room.Type type, LocalDate arrival, LocalDate departure, String nif, String iban) {
 		for (Hotel hotel : Hotel.hotels) {
 			Room room = hotel.hasVacancy(type, arrival, departure);
 			if (room != null) {
-				return room.reserve(type, arrival, departure).getReference();
+				return room.reserve(type, arrival, departure, nif, iban).getReference();
 			}
 		}
 		throw new HotelException();
@@ -144,7 +144,7 @@ public class Hotel {
 		throw new HotelException();
 	}
 
-	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure) {
+	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure, String nif, String iban) {
 		if (number < 1) {
 			throw new HotelException();
 		}
@@ -156,7 +156,7 @@ public class Hotel {
 
 		Set<String> references = new HashSet<>();
 		for (Room room : rooms) {
-			references.add(room.reserve(room.getType(), arrival, departure).getReference());
+			references.add(room.reserve(room.getType(), arrival, departure, nif, iban).getReference());
 		}
 
 		return references;

@@ -24,10 +24,10 @@ public class RentACar {
 	public RentACar(String name, String nif, String iban) {
 		checkArguments(name, nif, iban);
 
-		this.iban = iban;
-		this.nif = nif;
 		this.name = name;
 		this.code = Integer.toString(++RentACar.counter);
+		this.iban = iban;
+		this.nif = nif;
 
 		rentACars.add(this);
 	}
