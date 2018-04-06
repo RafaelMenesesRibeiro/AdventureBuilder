@@ -17,23 +17,23 @@ public class RentACar {
 
 	private final String name;
 	private final String code;
-	private final String nif;
-	private final String iban;
+	private final String NIF;
+	private final String IBAN;
 	private final Map<String, Vehicle> vehicles = new HashMap<>();
 
-	public RentACar(String name, String nif, String iban) {
-		checkArguments(name, nif, iban);
+	public RentACar(String name, String NIF, String IBAN) {
+		checkArguments(name, NIF, IBAN);
 
 		this.name = name;
 		this.code = Integer.toString(++RentACar.counter);
-		this.iban = iban;
-		this.nif = nif;
+		this.IBAN = IBAN;
+		this.NIF = NIF;
 
 		rentACars.add(this);
 	}
 
-	private void checkArguments(String name, String nif, String iban) {
-		if (name == null || name.isEmpty() || nif == null || nif.isEmpty() || iban == null || iban.isEmpty()) {
+	private void checkArguments(String name, String NIF, String IBAN) {
+		if (name == null || name.isEmpty() || NIF == null || NIF.isEmpty() || IBAN == null || IBAN.isEmpty()) {
 			throw new CarException();
 		}
 	}
@@ -53,17 +53,17 @@ public class RentACar {
 	}
 
 	/**
-	 * @return the nif
+	 * @return the NIF
 	 */
 	public String getNif() {
-		return this.nif;
+		return this.NIF;
 	}
 
 	/**
-	 * @return the iban
+	 * @return the IBAN
 	 */
 	public String getIban() {
-		return this.iban;
+		return this.IBAN;
 	}
 
 	void addVehicle(Vehicle vehicle) {
