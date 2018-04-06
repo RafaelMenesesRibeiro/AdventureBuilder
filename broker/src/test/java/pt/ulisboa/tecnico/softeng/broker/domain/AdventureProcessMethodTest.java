@@ -40,7 +40,6 @@ public class AdventureProcessMethodTest {
 		Hotel hotel = new Hotel("XPTO123", "Paris");
 		new Room(hotel, "01", Type.SINGLE);
 
-	
 		Vehicle vehicle = new Car("22-33-HZ", 10, new RentACar("John's Cars"));
 
 		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure", "NIF", "IBAN");
