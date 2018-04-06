@@ -11,11 +11,13 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class BookingConstructorTest {
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private final LocalDate departure = new LocalDate(2016, 12, 21);
+	private final double SINGLE_PRICE = 200;
+	private final double DOUBLE_PRICE = 300;
 	private Hotel hotel;
 
 	@Before
 	public void setUp() {
-		this.hotel = new Hotel("XPTO123", "Londres");
+		this.hotel = new Hotel("XPTO123", "Londres", SINGLE_PRICE, DOUBLE_PRICE);
 	}
 
 	@Test
