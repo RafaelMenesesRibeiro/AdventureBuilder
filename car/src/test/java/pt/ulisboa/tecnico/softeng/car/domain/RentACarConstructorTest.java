@@ -53,5 +53,6 @@ public class RentACarConstructorTest {
 	@After
 	public void tearDown() {
 		RentACar.rentACars.clear();
+		Vehicle.plates.clear();
 	}
 }

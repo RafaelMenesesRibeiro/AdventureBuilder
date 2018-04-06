@@ -36,6 +36,7 @@ public abstract class Vehicle {
 
 	private void checkArguments(String plate, int kilometers, RentACar rentACar) {
 		if (plate == null || !plate.matches(plateFormat) || plates.contains(plate.toUpperCase())) {
+			System.out.println("\n\n\n\nPLATE\n\n\n\n\n\n\n");
 			throw new CarException();
 		} else if (kilometers < 0) {
 			throw new CarException();
@@ -113,14 +114,18 @@ public abstract class Vehicle {
 	 * @param end
 	 * @return
 	 */
-	public Renting rent(String drivingLicense, LocalDate begin, LocalDate end, String buyerNif, String buyerIban) {
+	public Renting rent(String drivingLicense, LocalDate begin, LocalDate end, String NIF, String IBAN) {
 		if (!isFree(begin, end)) {
 			throw new CarException();
 		}
 
-		Renting renting = new Renting(drivingLicense, begin, end, this, buyerNif, buyerIban);
+		Renting renting = new Renting(drivingLicense, begin, end, this, NIF, IBAN);
 		this.addRenting(renting);
 
 		return renting;
+	}
+
+	public static void clear() {
+		plates.clear();
 	}
 }
