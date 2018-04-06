@@ -35,17 +35,6 @@ public abstract class Vehicle {
 	}
 
 	private void checkArguments(String plate, int kilometers, RentACar rentACar) {
-		
-		if (plate == null) {
-			System.out.println("PLATE IS NULL");		
-		}
-		else if (!plate.matches(plateFormat)) {
-			System.out.println("PLATE DOESN T MATCH");
-		}
-		else if (plates.contains(plate.toUpperCase())) {
-			System.out.println("PLATE CONSTAINED");
-		}
-		
 		if (plate == null || !plate.matches(plateFormat) || plates.contains(plate.toUpperCase())) {
 			System.out.println("\n\n\n\nPLATE\n\n\n\n\n\n\n");
 			throw new CarException();
