@@ -16,14 +16,33 @@ public class Hotel {
 	private final String code;
 	private final String name;
 	private final Set<Room> rooms = new HashSet<>();
+	private double priceSingle;
+	private double priceDouble;
 
-	public Hotel(String code, String name) {
+	public Hotel(String code, String name, double priceSingle, double priceDouble) throws HotelException {
+
 		checkArguments(code, name);
-
 		this.code = code;
 		this.name = name;
+		if (priceSingle > 0 && priceDouble > 0) {
+			this.priceSingle = priceSingle;
+			this.priceDouble = priceDouble;
+		} else {
+			throw new HotelException();
+		}
+
 		Hotel.hotels.add(this);
+
 	}
+
+	public double getSingleRoomPrice() {
+		return this.priceSingle;
+	}
+
+	public double getDoubleRoomPrice() {
+		return this.priceDouble;
+	}
+
 
 	private void checkArguments(String code, String name) {
 		if (code == null || name == null || code.trim().length() == 0 || name.trim().length() == 0) {
