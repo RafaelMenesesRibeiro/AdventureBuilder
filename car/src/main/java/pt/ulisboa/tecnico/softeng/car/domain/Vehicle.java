@@ -59,8 +59,7 @@ public abstract class Vehicle {
 	}
 
 	/**
-	 * @param kilometers
-	 *            the kilometers to set
+	 * @param kilometers the kilometers to set
 	 */
 	public void addKilometers(int kilometers) {
 		if (kilometers < 0) {
