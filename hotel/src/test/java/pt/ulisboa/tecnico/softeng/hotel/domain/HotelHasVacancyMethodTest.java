@@ -14,12 +14,14 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class HotelHasVacancyMethodTest {
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private final LocalDate departure = new LocalDate(2016, 12, 21);
+	private final double SINGLE_PRICE = 200;
+	private final double DOUBLE_PRICE = 300;
 	private Hotel hotel;
 	private Room room;
 
 	@Before
 	public void setUp() {
-		this.hotel = new Hotel("XPTO123", "Paris");
+		this.hotel = new Hotel("XPTO123", "Paris", SINGLE_PRICE, DOUBLE_PRICE);
 		this.room = new Room(this.hotel, "01", Type.DOUBLE);
 	}
 
@@ -40,7 +42,7 @@ public class HotelHasVacancyMethodTest {
 
 	@Test
 	public void noVacancyEmptyRoomSet() {
-		Hotel otherHotel = new Hotel("XPTO124", "Paris Germain");
+		Hotel otherHotel = new Hotel("XPTO124", "Paris Germain", SINGLE_PRICE, DOUBLE_PRICE);
 
 		assertNull(otherHotel.hasVacancy(Type.DOUBLE, this.arrival, this.departure));
 	}
