@@ -52,7 +52,7 @@ public class AdventureSequenceTest {
 				BankInterface.processPayment(IBAN, AMOUNT);
 				this.result = PAYMENT_CONFIRMATION;
 
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				ActivityInterface.reserveActivity(arrival, departure, AGE, anyString, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
@@ -91,7 +91,7 @@ public class AdventureSequenceTest {
 				BankInterface.processPayment(IBAN, AMOUNT);
 				this.result = PAYMENT_CONFIRMATION;
 
-				ActivityInterface.reserveActivity(arrival, arrival, AGE);
+				ActivityInterface.reserveActivity(arrival, arrival, AGE, anyString, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				BankInterface.getOperationData(PAYMENT_CONFIRMATION);
@@ -133,7 +133,7 @@ public class AdventureSequenceTest {
 				BankInterface.processPayment(IBAN, AMOUNT);
 				this.result = PAYMENT_CONFIRMATION;
 
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				ActivityInterface.reserveActivity(arrival, departure, AGE, anyString, IBAN);
 				this.result = new ActivityException();
 
 				BankInterface.cancelPayment(PAYMENT_CONFIRMATION);
@@ -158,7 +158,7 @@ public class AdventureSequenceTest {
 				BankInterface.processPayment(IBAN, AMOUNT);
 				this.result = PAYMENT_CONFIRMATION;
 
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				ActivityInterface.reserveActivity(arrival, departure, AGE, anyString, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
@@ -191,7 +191,7 @@ public class AdventureSequenceTest {
 				BankInterface.processPayment(IBAN, AMOUNT);
 				this.result = PAYMENT_CONFIRMATION;
 
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				ActivityInterface.reserveActivity(arrival, departure, AGE, anyString, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
@@ -244,7 +244,7 @@ public class AdventureSequenceTest {
 				BankInterface.processPayment(IBAN, AMOUNT);
 				this.result = PAYMENT_CONFIRMATION;
 
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				ActivityInterface.reserveActivity(arrival, departure, AGE, anyString, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
