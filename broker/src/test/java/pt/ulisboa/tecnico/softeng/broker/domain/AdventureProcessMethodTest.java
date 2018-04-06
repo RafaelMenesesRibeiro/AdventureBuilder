@@ -37,7 +37,7 @@ public class AdventureProcessMethodTest {
 		this.IBAN = account.getIBAN();
 		account.deposit(1000);
 
-		Hotel hotel = new Hotel("XPTO123", "Paris");
+		Hotel hotel = new Hotel("XPTO123", "Paris", 200, 300);
 		new Room(hotel, "01", Type.SINGLE);
 
 		Vehicle vehicle = new Car("22-33-HZ", 10, new RentACar("John's Cars"));

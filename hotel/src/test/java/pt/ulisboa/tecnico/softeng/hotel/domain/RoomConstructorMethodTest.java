@@ -12,10 +12,12 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class RoomConstructorMethodTest {
 	private Hotel hotel;
+    private final double SINGLE_PRICE = 200;
+    private final double DOUBLE_PRICE = 300;
 
 	@Before
 	public void setUp() {
-		this.hotel = new Hotel("XPTO123", "Lisboa");
+		this.hotel = new Hotel("XPTO123", "Lisboa", SINGLE_PRICE, DOUBLE_PRICE);
 	}
 
 	@Test

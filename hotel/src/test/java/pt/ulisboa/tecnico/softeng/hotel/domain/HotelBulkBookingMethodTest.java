@@ -16,17 +16,19 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class HotelBulkBookingMethodTest {
 	private final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private final LocalDate departure = new LocalDate(2016, 12, 21);
+	private final double SINGLE_PRICE = 200;
+	private final double DOUBLE_PRICE = 300;
 	private Hotel hotel;
 
 	@Before
 	public void setUp() {
-		this.hotel = new Hotel("XPTO123", "Paris");
+		this.hotel = new Hotel("XPTO123", "Paris", SINGLE_PRICE, DOUBLE_PRICE);
 		new Room(this.hotel, "01", Type.DOUBLE);
 		new Room(this.hotel, "02", Type.SINGLE);
 		new Room(this.hotel, "03", Type.DOUBLE);
 		new Room(this.hotel, "04", Type.SINGLE);
 
-		this.hotel = new Hotel("XPTO124", "Paris");
+		this.hotel = new Hotel("XPTO124", "Paris", SINGLE_PRICE, DOUBLE_PRICE);
 		new Room(this.hotel, "01", Type.DOUBLE);
 		new Room(this.hotel, "02", Type.SINGLE);
 		new Room(this.hotel, "03", Type.DOUBLE);
@@ -48,7 +50,7 @@ public class HotelBulkBookingMethodTest {
 	@Test(expected = HotelException.class)
 	public void noRooms() {
 		Hotel.hotels.clear();
-		this.hotel = new Hotel("XPTO124", "Paris");
+		this.hotel = new Hotel("XPTO124", "Paris", SINGLE_PRICE, DOUBLE_PRICE);
 
 		Hotel.bulkBooking(3, this.arrival, this.departure);
 	}
