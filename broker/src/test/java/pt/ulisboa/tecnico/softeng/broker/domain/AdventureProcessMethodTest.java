@@ -24,12 +24,13 @@ import pt.ulisboa.tecnico.softeng.car.domain.Car;
 public class AdventureProcessMethodTest {
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
+	private static final String NIF_SELLER = "987654321";
 	private Broker broker;
 	private String IBAN;
 
 	@Before
 	public void setUp() {
-		this.broker = new Broker("BR01", "eXtremeADVENTURE", "123456789", "987654321");
+		this.broker = new Broker("BR01", "eXtremeADVENTURE", "123456789", "987654321", "IBAN");
 
 		Bank bank = new Bank("Money", "BK01");
 		Client client = new Client(bank, "António");
@@ -40,7 +41,7 @@ public class AdventureProcessMethodTest {
 		Hotel hotel = new Hotel("XPTO123", "Paris", 200, 300);
 		new Room(hotel, "01", Type.SINGLE);
 
-		Vehicle vehicle = new Car("22-33-HZ", 10, new RentACar("John's Cars"));
+		Vehicle vehicle = new Car("22-33-HZ", 10, new RentACar("John's Cars", NIF_SELLER, this.IBAN));
 
 		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure", "NIF", "IBAN");
 		Activity activity = new Activity(provider, "Bush Walking", 18, 80, 10);

@@ -17,18 +17,23 @@ public class RentACar {
 
 	private final String name;
 	private final String code;
+	private final String NIF;
+	private final String IBAN;
 	private final Map<String, Vehicle> vehicles = new HashMap<>();
 
-	public RentACar(String name) {
-		checkArguments(name);
+	public RentACar(String name, String NIF, String IBAN) {
+		checkArguments(name, NIF, IBAN);
+
 		this.name = name;
 		this.code = Integer.toString(++RentACar.counter);
+		this.IBAN = IBAN;
+		this.NIF = NIF;
 
 		rentACars.add(this);
 	}
 
-	private void checkArguments(String name) {
-		if (name == null || name.isEmpty()) {
+	private void checkArguments(String name, String NIF, String IBAN) {
+		if (name == null || name.isEmpty() || NIF == null || NIF.isEmpty() || IBAN == null || IBAN.isEmpty()) {
 			throw new CarException();
 		}
 	}
@@ -45,6 +50,20 @@ public class RentACar {
 	 */
 	public String getCode() {
 		return code;
+	}
+
+	/**
+	 * @return the NIF
+	 */
+	public String getNif() {
+		return this.NIF;
+	}
+
+	/**
+	 * @return the IBAN
+	 */
+	public String getIban() {
+		return this.IBAN;
 	}
 
 	void addVehicle(Vehicle vehicle) {

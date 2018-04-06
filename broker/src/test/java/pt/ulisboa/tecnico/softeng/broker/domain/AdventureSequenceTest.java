@@ -55,11 +55,8 @@ public class AdventureSequenceTest {
 				ActivityInterface.reserveActivity(arrival, departure, AGE);
 				this.result = ACTIVITY_CONFIRMATION;
 
-				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
 				this.result = ROOM_CONFIRMATION;
-
-				broker.getNIFBuyer();
-				this.result = NIF;
 
 				CarInterface.reserveCar(arrival, departure, NIF, IBAN);
 				this.result = VEHICLE_CONFIRMATION;
@@ -69,6 +66,12 @@ public class AdventureSequenceTest {
 				ActivityInterface.getActivityReservationData(ACTIVITY_CONFIRMATION);
 
 				HotelInterface.getRoomBookingData(ROOM_CONFIRMATION);
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				broker.getIBAN();
+				this.result = IBAN;
 			}
 		};
 
@@ -161,7 +164,7 @@ public class AdventureSequenceTest {
 				ActivityInterface.reserveActivity(arrival, departure, AGE);
 				this.result = ACTIVITY_CONFIRMATION;
 
-				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
 				this.result = new HotelException();
 
 				BankInterface.cancelPayment(PAYMENT_CONFIRMATION);
@@ -169,6 +172,12 @@ public class AdventureSequenceTest {
 
 				ActivityInterface.cancelReservation(ACTIVITY_CONFIRMATION);
 				this.result = ACTIVITY_CANCELLATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				broker.getIBAN();
+				this.result = IBAN;
 			}
 		};
 
@@ -194,11 +203,8 @@ public class AdventureSequenceTest {
 				ActivityInterface.reserveActivity(arrival, departure, AGE);
 				this.result = ACTIVITY_CONFIRMATION;
 
-				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
 				this.result = ROOM_CONFIRMATION;
-
-				broker.getNIFBuyer();
-				this.result = NIF;
 
 				CarInterface.reserveCar(arrival, departure, NIF, IBAN);
 				this.result = VEHICLE_CONFIRMATION;
@@ -218,6 +224,12 @@ public class AdventureSequenceTest {
 
 				CarInterface.cancelRenting(VEHICLE_CONFIRMATION);
 				this.result = VEHICLE_CANCELLATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				broker.getIBAN();
+				this.result = IBAN;
 			}
 		};
 
@@ -247,11 +259,8 @@ public class AdventureSequenceTest {
 				ActivityInterface.reserveActivity(arrival, departure, AGE);
 				this.result = ACTIVITY_CONFIRMATION;
 
-				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure);
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
 				this.result = ROOM_CONFIRMATION;
-
-				broker.getNIFBuyer();
-				this.result = NIF;
 
 				CarInterface.reserveCar(arrival, departure, NIF, IBAN);
 				this.result = new CarException();
@@ -264,6 +273,12 @@ public class AdventureSequenceTest {
 
 				HotelInterface.cancelBooking(ROOM_CONFIRMATION);
 				this.result = ROOM_CANCELLATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				broker.getIBAN();
+				this.result = IBAN;
 			}
 		};
 

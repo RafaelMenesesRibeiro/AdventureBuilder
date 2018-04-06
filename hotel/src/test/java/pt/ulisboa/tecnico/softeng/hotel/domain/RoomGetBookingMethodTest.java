@@ -15,6 +15,8 @@ public class RoomGetBookingMethodTest {
 	private final LocalDate departure = new LocalDate(2016, 12, 24);
 	private final double SINGLE_PRICE = 200;
 	private final double DOUBLE_PRICE = 300;
+	private static final String NIF = "123456789";
+	private static final String IBAN = "IBAN";
 	private Hotel hotel;
 	private Room room;
 	private Booking booking;
@@ -23,7 +25,7 @@ public class RoomGetBookingMethodTest {
 	public void setUp() {
 		this.hotel = new Hotel("XPTO123", "Lisboa", SINGLE_PRICE, DOUBLE_PRICE);
 		this.room = new Room(this.hotel, "01", Type.SINGLE);
-		this.booking = this.room.reserve(Type.SINGLE, this.arrival, this.departure);
+		this.booking = this.room.reserve(Type.SINGLE, this.arrival, this.departure, NIF, IBAN);
 	}
 
 	@Test

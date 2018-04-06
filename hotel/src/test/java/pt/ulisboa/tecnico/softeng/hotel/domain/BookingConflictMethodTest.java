@@ -13,13 +13,15 @@ public class BookingConflictMethodTest {
 	private final LocalDate departure = new LocalDate(2016, 12, 24);
 	private final double SINGLE_PRICE = 200;
 	private final double DOUBLE_PRICE = 300;
+	private static final String NIF = "123456789";
+	private static final String IBAN = "IBAN";
 	private Booking booking;
 
 	@Before
 	public void setUp() {
 		Hotel hotel = new Hotel("XPTO123", "Londres", SINGLE_PRICE, DOUBLE_PRICE);
 
-		this.booking = new Booking(hotel, this.arrival, this.departure);
+		this.booking = new Booking(hotel, this.arrival, this.departure, NIF, IBAN);
 	}
 
 	@Test
