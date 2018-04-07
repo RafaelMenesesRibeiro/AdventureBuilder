@@ -60,8 +60,7 @@ public abstract class Vehicle {
 	}
 
 	/**
-	 * @param kilometers
-	 *            the kilometers to set
+	 * @param kilometers the kilometers to set
 	 */
 	public void addKilometers(int kilometers) {
 		if (kilometers < 0) {
@@ -120,7 +119,7 @@ public abstract class Vehicle {
 			throw new CarException();
 		}
 
-		Renting renting = new Renting(drivingLicense, begin, end, this);
+		Renting renting = new Renting(drivingLicense, begin, end, this, NIF, IBAN);
 		this.addRenting(renting);
 
 		return renting;

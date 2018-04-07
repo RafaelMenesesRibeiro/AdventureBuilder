@@ -21,18 +21,20 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 @RunWith(JMockit.class)
 public class BulkRoomBookingGetReferenceMethodTest {
-	private static final String SINGLE = "SINGLE";
+	private static final String SINGLE = "SINGLE"; 
 	private static final String DOUBLE = "DOUBLE";
 	private static final String REF_1 = "ref1";
 	private static final String REF_2 = "ref2";
 	private static final int NUMBER = 20;
 	private static final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private static final LocalDate departure = new LocalDate(2016, 12, 21);
+	private static final String NIF = "123456789";
+	private static final String IBAN = "IBAN";
 	private BulkRoomBooking bulk;
 
 	@Before
 	public void setUp() {
-		this.bulk = new BulkRoomBooking(NUMBER, arrival, departure);
+		this.bulk = new BulkRoomBooking(NUMBER, arrival, departure, NIF, IBAN);
 		this.bulk.getReferences().addAll(Arrays.asList(REF_1, REF_2));
 	}
 

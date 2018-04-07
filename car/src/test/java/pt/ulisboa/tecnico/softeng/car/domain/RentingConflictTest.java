@@ -18,47 +18,54 @@ public class RentingConflictTest {
 	private static final LocalDate date3 = LocalDate.parse("2018-01-08");
 	private static final LocalDate date4 = LocalDate.parse("2018-01-09");
 	private static final String RENT_A_CAR_NAME = "Eartz";
+
+	private static final String NIF_SELLER = "987654321";
+	private static final String IBAN_SELLER = "IBAN1";
+
+	private static final String NIF_BUYER = "987654323";
+	private static final String IBAN_BUYER = "IBAN2";
+
 	private Car car;
 
 	@Before
 	public void setUp() {
-		RentACar rentACar = new RentACar(RENT_A_CAR_NAME);
+		RentACar rentACar = new RentACar(RENT_A_CAR_NAME, NIF_SELLER, IBAN_SELLER);
 		this.car = new Car(PLATE_CAR, 10, rentACar);
 	}
 
 	@Test()
 	public void retingIsBeforeDates() {
-		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car);
+		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car, NIF_BUYER, IBAN_BUYER);
 		assertFalse(renting.conflict(date3, date4));
 	}
 
 	@Test()
 	public void retingIsBeforeDatesSameDayInterval() {
-		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car);
+		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car, NIF_BUYER, IBAN_BUYER);
 		assertFalse(renting.conflict(date3, date3));
 	}
 
 	@Test()
 	public void rentingEndsOnStartDate() {
-		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car);
+		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car, NIF_BUYER, IBAN_BUYER);
 		assertTrue(renting.conflict(date2, date3));
 	}
 
 	@Test()
 	public void rentingStartsOnEndDate() {
-		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car);
+		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car, NIF_BUYER, IBAN_BUYER);
 		assertTrue(renting.conflict(date1, date1));
 	}
 
 	@Test()
 	public void rentingStartsDuringInterval() {
-		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car);
+		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car, NIF_BUYER, IBAN_BUYER);
 		assertTrue(renting.conflict(date0, date3));
 	}
 
 	@Test(expected = CarException.class)
 	public void endBeforeBegin() {
-		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car);
+		Renting renting = new Renting(DRIVING_LICENSE, date1, date2, car, NIF_BUYER, IBAN_BUYER);
 		renting.conflict(date2, date1);
 	}
 
