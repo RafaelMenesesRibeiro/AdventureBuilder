@@ -8,25 +8,37 @@ public class Renting {
 	private static String drivingLicenseFormat = "^[a-zA-Z]+\\d+$";
 	private static int counter;
 
+	private final RentACar rentACar;
 	private final String reference;
+	private final String providerNif;
+	private final String nif;
+	private final String iban;
 	private final String drivingLicense;
 	private final LocalDate begin;
 	private final LocalDate end;
 	private int kilometers = -1;
 	private final Vehicle vehicle;
+	private String paymentReference;
+	private String invoiceReference;
+	private String cancel;
 
-	public Renting(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle) {
-		checkArguments(drivingLicense, begin, end, vehicle);
+	public Renting(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle, String buyerNif, String buyerIban) {
+		checkArguments(drivingLicense, begin, end, vehicle, buyerNif, buyerIban);
+
 		this.reference = Integer.toString(++Renting.counter);
+		this.rentACar = vehicle.getRentACar();
+		this.providerNif = rentACar.getNif();
+		this.nif = buyerNif;
+		this.iban = buyerIban;
 		this.drivingLicense = drivingLicense;
 		this.begin = begin;
 		this.end = end;
 		this.vehicle = vehicle;
 	}
 
-	private void checkArguments(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle) {
+	private void checkArguments(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle, String buyerNif, String buyerIban) {
 		if (drivingLicense == null || !drivingLicense.matches(drivingLicenseFormat) || begin == null || end == null || vehicle == null
-				|| end.isBefore(begin))
+				|| end.isBefore(begin) || buyerNif == null || buyerNif.trim().length() == 0 || buyerIban == null || buyerIban.trim().length() == 0)
 			throw new CarException();
 	}
 
@@ -66,6 +78,27 @@ public class Renting {
 	}
 
 	/**
+	 * @return the rentACar company nif
+	 */
+	public String getProviderNif() {
+		return this.providerNif;
+	}
+
+	/**
+	 * @return the nif of the customer who is renting
+	 */
+	public String getNif() {
+		return this.nif;
+	}
+
+	/**
+	 * @return the iban of the customer who is renting
+	 */
+	public String getIban() {
+		return this.iban;
+	}
+
+	/**
 	 * @param begin
 	 * @param end
 	 * @return <code>true</code> if this Renting conflicts with the given date
@@ -95,6 +128,31 @@ public class Renting {
 	public void checkout(int kilometers) {
 		this.kilometers = kilometers;
 		this.vehicle.addKilometers(this.kilometers);
+	}
+
+	public boolean isCancelled() {
+		return this.cancel != null;
+	}
+
+	public double getAmount() {
+		//return this.vehicle.getCost();
+		return 0;
+	}
+
+	public String getPaymentReference() {
+		return this.paymentReference;
+	}
+
+	public void setPaymentReference(String paymentReference) {
+		this.paymentReference = paymentReference;
+	}
+
+	public String getInvoiceReference() {
+		return this.invoiceReference;
+	}
+
+	public void setInvoiceReference(String invoiceReference) {
+		this.invoiceReference = invoiceReference;
 	}
 
 }

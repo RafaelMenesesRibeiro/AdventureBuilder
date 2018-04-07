@@ -11,31 +11,45 @@ import org.junit.Test;
 
 public class RentACarGetAllAvailableVehiclesTest {
 
-	private static final String NAME1 = "eartz";
-	private static final String NAME2 = "eartz";
+	private static final String NAME_1 = "eartz";
+	private static final String NAME_2 = "avis";
+
 	private static final String PLATE_CAR1 = "aa-00-11";
 	private static final String PLATE_CAR2 = "aa-00-22";
 	private static final String PLATE_MOTORCYCLE = "44-33-HZ";
 	private static final String DRIVING_LICENSE = "br123";
+	private static final double CAR_PRICE = 10;
+	private static final double MOTORCYCLE_PRICE = 5;
+
+	private static final String NIF_SELLER_1 = "987654321";
+	private static final String IBAN_SELLER_1 = "IBAN1";
+
+	private static final String NIF_SELLER_2 = "987654322";
+	private static final String IBAN_SELLER_2 = "IBAN2";
+
+	private static final String NIF_BUYER = "987654323";
+	private static final String IBAN_BUYER = "IBAN3";
+
 	private static final LocalDate date1 = LocalDate.parse("2018-01-06");
 	private static final LocalDate date2 = LocalDate.parse("2018-01-07");
 	private static final LocalDate date3 = LocalDate.parse("2018-01-08");
 	private static final LocalDate date4 = LocalDate.parse("2018-01-09");
+
 	private RentACar rentACar1;
 	private RentACar rentACar2;
 
 	@Before
 	public void setUp() {
-		this.rentACar1 = new RentACar(NAME1);
-		this.rentACar2 = new RentACar(NAME2);
+		this.rentACar1 = new RentACar(NAME_1, NIF_SELLER_1, IBAN_SELLER_1);
+		this.rentACar2 = new RentACar(NAME_2, NIF_SELLER_2, IBAN_SELLER_2);
 	}
 
 	@Test
 	public void onlyCars() {
-		Vehicle car1 = new Car(PLATE_CAR1, 10, rentACar1);
-		car1.rent(DRIVING_LICENSE, date1, date2, "123456789", "123");
-		Vehicle car2 = new Car(PLATE_CAR2, 10, rentACar2);
-		Vehicle motorcycle = new Motorcycle(PLATE_MOTORCYCLE, 10, rentACar1);
+		Vehicle car1 = new Car(PLATE_CAR1, 10, CAR_PRICE, rentACar1);
+		car1.rent(DRIVING_LICENSE, date1, date2, NIF_BUYER, IBAN_BUYER);
+		Vehicle car2 = new Car(PLATE_CAR2, 10, CAR_PRICE, rentACar2);
+		Vehicle motorcycle = new Motorcycle(PLATE_MOTORCYCLE, 10, MOTORCYCLE_PRICE, rentACar1);
 
 		Set<Vehicle> cars = RentACar.getAllAvailableCars(date3, date4);
 		assertTrue(cars.contains(car1));
@@ -45,10 +59,10 @@ public class RentACarGetAllAvailableVehiclesTest {
 
 	@Test
 	public void onlyAvailableCars() {
-		Vehicle car1 = new Car(PLATE_CAR1, 10, rentACar1);
-		Vehicle car2 = new Car(PLATE_CAR2, 10, rentACar2);
+		Vehicle car1 = new Car(PLATE_CAR1, 10, CAR_PRICE, rentACar1);
+		Vehicle car2 = new Car(PLATE_CAR2, 10, CAR_PRICE, rentACar2);
 
-		car1.rent(DRIVING_LICENSE, date1, date2, "123456789", "123");
+		car1.rent(DRIVING_LICENSE, date1, date2, NIF_BUYER, IBAN_BUYER);
 		Set<Vehicle> cars = RentACar.getAllAvailableCars(date1, date2);
 
 		assertFalse(cars.contains(car1));
@@ -57,8 +71,8 @@ public class RentACarGetAllAvailableVehiclesTest {
 	
 	@Test
 	public void onlyMotorcycles() {
-		Vehicle car = new Car(PLATE_CAR1, 10, rentACar1);
-		Vehicle motorcycle = new Motorcycle(PLATE_MOTORCYCLE, 10, rentACar1);
+		Vehicle car = new Car(PLATE_CAR1, 10, CAR_PRICE, rentACar1);
+		Vehicle motorcycle = new Motorcycle(PLATE_MOTORCYCLE, 10, MOTORCYCLE_PRICE, rentACar1);
 
 		Set<Vehicle> cars = RentACar.getAllAvailableMotorcycles(date3, date4);
 		assertTrue(cars.contains(motorcycle));

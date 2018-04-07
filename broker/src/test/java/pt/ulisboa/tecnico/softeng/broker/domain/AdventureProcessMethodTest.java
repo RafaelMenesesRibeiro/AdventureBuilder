@@ -13,34 +13,37 @@ import pt.ulisboa.tecnico.softeng.activity.domain.ActivityOffer;
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.bank.domain.Account;
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
-import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
 import pt.ulisboa.tecnico.softeng.car.domain.Vehicle;
 import pt.ulisboa.tecnico.softeng.car.domain.Car;
+import pt.ulisboa.tecnico.softeng.broker.domain.Client;
 
 public class AdventureProcessMethodTest {
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
+	private static final String NIF_SELLER = "987654321";
 	private Broker broker;
+	private Client client;
 	private String IBAN;
 
 	@Before
 	public void setUp() {
-		this.broker = new Broker("BR01", "eXtremeADVENTURE", "123456789", "987654321");
+		this.client = new Client("123", 20, "123444661");
+		this.broker = new Broker("BR01", "eXtremeADVENTURE", "123456789", "987654321", "IBAN");
 
 		Bank bank = new Bank("Money", "BK01");
-		Client client = new Client(bank, "António");
-		Account account = new Account(bank, client);
+		
+		Account account = new Account(bank, new pt.ulisboa.tecnico.softeng.bank.domain.Client(bank, "António"));
 		this.IBAN = account.getIBAN();
 		account.deposit(1000);
 
-		Hotel hotel = new Hotel("XPTO123", "Paris");
+		Hotel hotel = new Hotel("XPTO123", "Paris", 200, 300);
 		new Room(hotel, "01", Type.SINGLE);
 
-		Vehicle vehicle = new Car("22-33-HZ", 10, new RentACar("John's Cars"));
+		Vehicle vehicle = new Car("22-33-HZ", 10, 10.0, new RentACar("John's Cars", NIF_SELLER, this.IBAN));
 
 		ActivityProvider provider = new ActivityProvider("XtremX", "ExtremeAdventure", "NIF", "IBAN");
 		Activity activity = new Activity(provider, "Bush Walking", 18, 80, 10);
@@ -50,7 +53,7 @@ public class AdventureProcessMethodTest {
 
 	@Test
 	public void success() {
-		Adventure adventure = new Adventure(this.broker, this.begin, this.end, 20, this.IBAN, 300);
+		Adventure adventure = new Adventure(this.client, this.broker, this.begin, this.end, 20, this.IBAN, 300);
 		adventure.process();
 		adventure.process();
 		adventure.process();
@@ -65,7 +68,7 @@ public class AdventureProcessMethodTest {
 
 	@Test
 	public void successNoHotelBooking() {
-		Adventure adventure = new Adventure(this.broker, this.begin, this.begin, 20, this.IBAN, 300);
+		Adventure adventure = new Adventure(this.client, this.broker, this.begin, this.begin, 20, this.IBAN, 300);
 
 		adventure.process();
 		adventure.process();
@@ -83,5 +86,6 @@ public class AdventureProcessMethodTest {
 		Broker.brokers.clear();
 		RentACar.clear();
 		Vehicle.clear();
+		Client.clients.clear();
 	}
 }

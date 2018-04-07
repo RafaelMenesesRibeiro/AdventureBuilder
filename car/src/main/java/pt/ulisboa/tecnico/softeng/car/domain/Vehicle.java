@@ -19,27 +19,31 @@ public abstract class Vehicle {
 	static Set<String> plates = new HashSet<>();
 
 	private final String plate;
+	private final double price;
 	private int kilometers;
 	private final RentACar rentACar;
 	public final Map<String, Renting> rentings = new HashMap<>();
 
-	public Vehicle(String plate, int kilometers, RentACar rentACar) {
+	public Vehicle(String plate, int kilometers, double price, RentACar rentACar) {
 		logger.debug("Vehicle plate: {}", plate);
-		checkArguments(plate, kilometers, rentACar);
+		checkArguments(plate, kilometers, price, rentACar);
 
 		this.plate = plate;
 		this.kilometers = kilometers;
+		this.price = price;
 		this.rentACar = rentACar;
 
 		plates.add(plate.toUpperCase());
 		rentACar.addVehicle(this);
 	}
 
-	private void checkArguments(String plate, int kilometers, RentACar rentACar) {
+	private void checkArguments(String plate, int kilometers, double price, RentACar rentACar) {
 		if (plate == null || !plate.matches(plateFormat) || plates.contains(plate.toUpperCase())) {
 			System.out.println("\n\n\n\nPLATE\n\n\n\n\n\n\n");
 			throw new CarException();
 		} else if (kilometers < 0) {
+			throw new CarException();
+		} else if (price <= 0) {
 			throw new CarException();
 		} else if (rentACar == null) {
 			throw new CarException();
@@ -61,8 +65,14 @@ public abstract class Vehicle {
 	}
 
 	/**
-	 * @param kilometers
-	 *            the kilometers to set
+	 * @return the car price
+	 */
+	public double getPrice() {
+		return this.price;
+	}
+
+	/**
+	 * @param kilometers the kilometers to set
 	 */
 	public void addKilometers(int kilometers) {
 		if (kilometers < 0) {
@@ -125,9 +135,10 @@ public abstract class Vehicle {
 			throw new CarException();
 		}
 
-		Renting renting = new Renting(drivingLicense, begin, end, this);
+		Renting renting = new Renting(drivingLicense, begin, end, this, NIF, IBAN);
 		this.addRenting(renting);
-
+		this.rentACar.getProcessor().submitRenting(renting);
+		
 		return renting;
 	}
 
