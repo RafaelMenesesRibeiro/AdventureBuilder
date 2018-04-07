@@ -21,6 +21,9 @@ public class Renting {
 	private String paymentReference;
 	private String invoiceReference;
 	private String cancel;
+	private LocalDate cancellationDate;
+	private boolean cancelledInvoice = false;
+	private String cancelledPaymentReference = null;
 
 	public Renting(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle, String buyerNif, String buyerIban) {
 		checkArguments(drivingLicense, begin, end, vehicle, buyerNif, buyerIban);
@@ -155,4 +158,37 @@ public class Renting {
 		this.invoiceReference = invoiceReference;
 	}
 
+	public String getCancellation() {
+		return this.cancel;
+	}
+
+	public LocalDate getCancellationDate() {
+		return this.cancellationDate;
+	}
+
+	public boolean isCancelledInvoice() {
+		return this.cancelledInvoice;
+	}
+
+	public void setCancelledInvoice(boolean cancelledInvoice) {
+		this.cancelledInvoice = cancelledInvoice;
+	}
+
+	public String getCancelledPaymentReference() {
+		return this.cancelledPaymentReference;
+	}
+
+	public void setCancelledPaymentReference(String cancelledPaymentReference) {
+		this.cancelledPaymentReference = cancelledPaymentReference;
+	}
+
+	public String cancel() {
+		this.cancel = "CANCEL" + this.reference;
+		this.cancellationDate = new LocalDate();
+
+		this.rentACar.getProcessor().submitRenting(this);
+
+		return this.cancel;
+	}
+	
 }

@@ -124,6 +124,14 @@ public class RentACar {
 		return this.processor;
 	}
 
+	public static String cancelReservation(String reference) {
+		Renting renting = getRenting(reference);
+		if (renting != null) {
+			return renting.cancel();
+		}
+		throw new CarException();
+	}
+
 	public static RentingData getRentingData(String reference) {
 		Renting renting = getRenting(reference);
 		if (renting == null) {

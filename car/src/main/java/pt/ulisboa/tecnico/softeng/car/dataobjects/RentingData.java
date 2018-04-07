@@ -2,13 +2,17 @@ package pt.ulisboa.tecnico.softeng.car.dataobjects;
 
 import org.joda.time.LocalDate;
 
+import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
+
 public class RentingData {
 	private String reference;
+	private String cancellation;
 	private String plate;
 	private String drivingLicense;
 	private String rentACarCode;
 	private LocalDate begin;
 	private LocalDate end;
+	private LocalDate cancellationDate;
 
 	public RentingData() {
 	}
@@ -21,6 +25,8 @@ public class RentingData {
 		this.rentACarCode = rentACarCode;
 		this.begin = begin;
 		this.end = end;
+		this.cancellation = RentACar.getRenting(reference).getCancellation();
+		this.cancellationDate = RentACar.getRenting(reference).getCancellationDate();
 	}
 
 	/**
@@ -111,5 +117,13 @@ public class RentingData {
 	 */
 	public void setEnd(LocalDate end) {
 		this.end = end;
+	}
+
+	public String getCancellation() {
+		return this.cancellation;
+	}
+
+	public LocalDate getCancellationDate() {
+		return this.cancellationDate;
 	}
 }
