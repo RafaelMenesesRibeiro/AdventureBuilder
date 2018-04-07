@@ -18,6 +18,9 @@ public class Renting {
 	private final LocalDate end;
 	private int kilometers = -1;
 	private final Vehicle vehicle;
+	private String paymentReference;
+	private String invoiceReference;
+	private String cancel;
 
 	public Renting(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle, String buyerNif, String buyerIban) {
 		checkArguments(drivingLicense, begin, end, vehicle, buyerNif, buyerIban);
@@ -125,6 +128,31 @@ public class Renting {
 	public void checkout(int kilometers) {
 		this.kilometers = kilometers;
 		this.vehicle.addKilometers(this.kilometers);
+	}
+
+	public boolean isCancelled() {
+		return this.cancel != null;
+	}
+
+	public double getAmount() {
+		//return this.vehicle.getCost();
+		return 0;
+	}
+
+	public String getPaymentReference() {
+		return this.paymentReference;
+	}
+
+	public void setPaymentReference(String paymentReference) {
+		this.paymentReference = paymentReference;
+	}
+
+	public String getInvoiceReference() {
+		return this.invoiceReference;
+	}
+
+	public void setInvoiceReference(String invoiceReference) {
+		this.invoiceReference = invoiceReference;
 	}
 
 }
