@@ -13,11 +13,11 @@ public class Client {
 	public static Set<Client> clients = new HashSet<>();
 
 	public Client(String IBAN, int age, String NIF) {
-		checkIBAN(IBAN);
+		this.checkIBAN(IBAN);
 		this.IBAN = IBAN;
-		checkAge(age);
+		this.checkAge(age);
 		this.age = age;
-		checkNIF(NIF);
+		this.checkNIF(NIF);
 		this.NIF = NIF;
 		clients.add(this);
 	}
@@ -35,7 +35,7 @@ public class Client {
 	}
 
 	private void checkNIF(String NIF) {
-		if (NIF == null || NIF.trim().length() == 0 || NIF.trim().length() != 9) {
+		if (NIF == null || NIF.trim().length() != 9) {
 			throw new BrokerException();
 		}
 		for (Client client : clients) {

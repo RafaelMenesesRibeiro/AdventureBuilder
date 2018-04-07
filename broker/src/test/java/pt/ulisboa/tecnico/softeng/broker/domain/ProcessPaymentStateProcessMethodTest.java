@@ -28,9 +28,12 @@ public class ProcessPaymentStateProcessMethodTest {
 	@Injectable
 	private Broker broker;
 
+	@Injectable
+	private Client client;
+
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.broker, this.begin, this.end, 20, IBAN, AMOUNT);
+		this.adventure = new Adventure(this.client, this.broker, this.begin, this.end, 20, IBAN, AMOUNT);
 		this.adventure.setState(State.PROCESS_PAYMENT);
 	}
 
