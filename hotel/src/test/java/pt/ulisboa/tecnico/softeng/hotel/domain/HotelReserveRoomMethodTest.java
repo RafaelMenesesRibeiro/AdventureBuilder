@@ -13,6 +13,8 @@ public class HotelReserveRoomMethodTest {
 	private final LocalDate departure = new LocalDate(2016, 12, 24);
 	private final double SINGLE_PRICE = 200;
 	private final double DOUBLE_PRICE = 300;
+	private static final String NIFHotel = "123456788";
+	private static final String IBANHotel = "IBAC";
 	private static final String NIF = "123456789";
 	private static final String IBAN = "IBAN";
 	private Room room;
@@ -20,7 +22,7 @@ public class HotelReserveRoomMethodTest {
 
 	@Before
 	public void setUp() {
-		hotel = new Hotel("XPTO123", "Lisboa", SINGLE_PRICE, DOUBLE_PRICE);
+		hotel = new Hotel("XPTO123", "Lisboa", NIFHotel, IBANHotel, SINGLE_PRICE, DOUBLE_PRICE);
 		this.room = new Room(hotel, "01", Room.Type.SINGLE);
 	}
 

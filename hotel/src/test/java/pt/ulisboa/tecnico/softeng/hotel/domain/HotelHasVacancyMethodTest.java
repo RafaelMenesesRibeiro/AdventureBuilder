@@ -16,6 +16,8 @@ public class HotelHasVacancyMethodTest {
 	private final LocalDate departure = new LocalDate(2016, 12, 21);
 	private final double SINGLE_PRICE = 200;
 	private final double DOUBLE_PRICE = 300;
+	private static final String NIFHotel = "123456788";
+	private static final String IBANHotel = "IBAC";
 	private static final String NIF = "123456789";
 	private static final String IBAN = "IBAN";
 	private Hotel hotel;
@@ -23,7 +25,7 @@ public class HotelHasVacancyMethodTest {
 
 	@Before
 	public void setUp() {
-		this.hotel = new Hotel("XPTO123", "Paris", SINGLE_PRICE, DOUBLE_PRICE);
+		this.hotel = new Hotel("XPTO123", "Paris", NIFHotel, IBANHotel, SINGLE_PRICE, DOUBLE_PRICE);
 		this.room = new Room(this.hotel, "01", Type.DOUBLE);
 	}
 
@@ -44,7 +46,7 @@ public class HotelHasVacancyMethodTest {
 
 	@Test
 	public void noVacancyEmptyRoomSet() {
-		Hotel otherHotel = new Hotel("XPTO124", "Paris Germain", SINGLE_PRICE, DOUBLE_PRICE);
+		Hotel otherHotel = new Hotel("XPTO124", "Paris Germain", NIFHotel, IBANHotel, SINGLE_PRICE, DOUBLE_PRICE);
 
 		assertNull(otherHotel.hasVacancy(Type.DOUBLE, this.arrival, this.departure));
 	}

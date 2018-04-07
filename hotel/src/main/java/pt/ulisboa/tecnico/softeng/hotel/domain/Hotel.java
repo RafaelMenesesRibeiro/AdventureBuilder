@@ -15,16 +15,20 @@ public class Hotel {
 
 	private final String code;
 	private final String name;
+	private final String NIF;
+	private final String IBAN;
 	private final Set<Room> rooms = new HashSet<>();
 	private double priceSingle;
 	private double priceDouble;
 	private final Processor processor = new Processor();
 
-	public Hotel(String code, String name, double priceSingle, double priceDouble) throws HotelException {
+	public Hotel(String code, String name, String NIF, String IBAN, double priceSingle, double priceDouble) throws HotelException {
 
 		checkArguments(code, name);
 		this.code = code;
 		this.name = name;
+		this.NIF = NIF;
+		this.IBAN = IBAN;
 		if (priceSingle > 0 && priceDouble > 0) {
 			this.priceSingle = priceSingle;
 			this.priceDouble = priceDouble;
@@ -80,6 +84,14 @@ public class Hotel {
 
 	public String getName() {
 		return this.name;
+	}
+
+	public String getNIF() {
+		return this.NIF;
+	}
+
+	public String getIBAN() {
+		return this.IBAN;
 	}
 
 	void addRoom(Room room) {
