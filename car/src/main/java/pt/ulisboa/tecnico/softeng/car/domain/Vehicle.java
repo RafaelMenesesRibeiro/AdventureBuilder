@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.Iterator;
 
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -99,6 +100,10 @@ public abstract class Vehicle {
 		this.rentings.put(renting.getReference(), renting);
 	}
 
+	private void removeRenting(Renting renting) {
+		this.rentings.remove(renting.getReference());
+	}
+
 	/**
 	 * Lookup for a <code>Renting</code> with the given reference.
 	 * 
@@ -124,6 +129,18 @@ public abstract class Vehicle {
 		this.addRenting(renting);
 
 		return renting;
+	}
+
+	public String cancelRenting(String reference) {
+		Iterator it = this.rentings.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			if (pair.getKey().equals(reference)) {
+				this.removeRenting((Renting) pair.getValue());
+				return (String) pair.getKey();
+			}
+		}
+		throw new CarException();
 	}
 
 	public static void clear() {
