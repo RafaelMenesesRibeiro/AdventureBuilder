@@ -18,7 +18,7 @@ public class BookRoomState extends AdventureState {
 	public void process(Adventure adventure) {
 		try {
 			adventure.setRoomConfirmation(
-					HotelInterface.reserveRoom(Room.Type.SINGLE, adventure.getBegin(), adventure.getEnd(), adventure.getBroker().getNIFBuyer(), adventure.getBroker().getIBAN()));
+			HotelInterface.reserveRoom(Room.Type.SINGLE, adventure.getBegin(), adventure.getEnd(), adventure.getBroker().getNIFBuyer(), adventure.getBroker().getIBAN()));
 		} catch (HotelException he) {
 			adventure.setState(State.UNDO);
 			return;
