@@ -53,7 +53,7 @@ public class RentVehicleStateMethodTest {
 
 		this.adventure.process();
 
-		Assert.assertEquals(State.CONFIRMED, this.adventure.getState());
+		Assert.assertEquals(State.PROCESS_PAYMENT, this.adventure.getState());
 		Assert.assertNotNull(this.adventure.getVehicleConfirmation());
 		Assert.assertNull(this.adventure.getVehicleCancellation());
 	}
@@ -158,7 +158,7 @@ public class RentVehicleStateMethodTest {
 
 		for (short i = 0; i < 5 + 1; i++) { this.adventure.process(); }
 		
-		Assert.assertEquals(State.CONFIRMED, this.adventure.getState());
+		Assert.assertEquals(State.PROCESS_PAYMENT, this.adventure.getState());
 	}
 
 	@Test

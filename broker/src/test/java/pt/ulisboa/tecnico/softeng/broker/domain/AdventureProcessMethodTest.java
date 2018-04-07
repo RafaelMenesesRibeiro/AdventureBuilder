@@ -71,10 +71,9 @@ public class AdventureProcessMethodTest {
 		Adventure adventure = new Adventure(this.client, this.broker, this.begin, this.begin, 20, this.IBAN, 300);
 
 		adventure.process();
-		adventure.process();
 
-		assertEquals(Adventure.State.CONFIRMED, adventure.getState());
-		assertNotNull(adventure.getPaymentConfirmation());
+		assertEquals(Adventure.State.PROCESS_PAYMENT, adventure.getState());
+		//assertNotNull(adventure.getPaymentConfirmation());
 		assertNotNull(adventure.getActivityConfirmation());
 	}
 

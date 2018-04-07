@@ -11,27 +11,29 @@ public class ReserveActivityState extends AdventureState {
 	@Override
 	public State getState() {
 		return State.RESERVE_ACTIVITY;
-	}
+	} 
 
 	@Override
 	public void process(Adventure adventure) {
 		try {
 			adventure.setActivityConfirmation(
-					ActivityInterface.reserveActivity(
-						adventure.getBegin(), adventure.getEnd(), adventure.getAge(), adventure.getBroker().getNIFBuyer(), adventure.getIBAN()));
+
+			ActivityInterface.reserveActivity(adventure.getBegin(), adventure.getEnd(), adventure.getAge(), adventure.getBroker().getNIFBuyer(), adventure.getIBAN()));
+
+
 		} catch (ActivityException ae) {
-			adventure.setState(State.UNDO);
+			adventure.setState(State.CANCELLED);
 			return;
 		} catch (RemoteAccessException rae) {
 			incNumOfRemoteErrors();
 			if (getNumOfRemoteErrors() == MAX_REMOTE_ERRORS) {
-				adventure.setState(State.UNDO);
+				adventure.setState(State.CANCELLED);
 			}
 			return;
 		}
 
 		if (adventure.getBegin().equals(adventure.getEnd())) {
-			adventure.setState(State.CONFIRMED);
+			adventure.setState(State.PROCESS_PAYMENT);
 		} else {
 			adventure.setState(State.BOOK_ROOM);
 		}
