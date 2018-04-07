@@ -18,6 +18,7 @@ public class Hotel {
 	private final Set<Room> rooms = new HashSet<>();
 	private double priceSingle;
 	private double priceDouble;
+	private final Processor processor = new Processor();
 
 	public Hotel(String code, String name, double priceSingle, double priceDouble) throws HotelException {
 
@@ -175,6 +176,10 @@ public class Hotel {
 			}
 		}
 		return rooms;
+	}
+
+	public Processor getProcessor() {
+		return this.processor;
 	}
 
     public void removeRooms() {

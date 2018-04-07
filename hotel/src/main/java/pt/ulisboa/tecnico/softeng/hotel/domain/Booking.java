@@ -17,10 +17,11 @@ public class Booking {
 	private final String IBAN;
 	private String paymentReference;
 	private String invoiceReference;
+	private Hotel hotel;
 
 	Booking(Hotel hotel, Room room, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
 		checkArguments(hotel, room, arrival, departure, NIF, IBAN);
-
+		this.hotel = hotel;
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
 		this.arrival = arrival;
 		this.departure = departure;
@@ -110,6 +111,7 @@ public class Booking {
 	public String cancel() {
 		this.cancellation = this.reference + "CANCEL";
 		this.cancellationDate = new LocalDate();
+		this.hotel.getProcessor().submitRenting(this);
 		return this.cancellation;
 	}
 
