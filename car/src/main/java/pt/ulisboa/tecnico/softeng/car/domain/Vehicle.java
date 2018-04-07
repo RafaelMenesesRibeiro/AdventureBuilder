@@ -132,7 +132,8 @@ public abstract class Vehicle {
 
 		Renting renting = new Renting(drivingLicense, begin, end, this, NIF, IBAN);
 		this.addRenting(renting);
-
+		this.rentACar.getProcessor().submitRenting(renting);
+		
 		return renting;
 	}
 

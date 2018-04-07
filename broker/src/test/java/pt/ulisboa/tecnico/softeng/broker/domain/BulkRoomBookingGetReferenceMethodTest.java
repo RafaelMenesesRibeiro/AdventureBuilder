@@ -21,7 +21,7 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 @RunWith(JMockit.class)
 public class BulkRoomBookingGetReferenceMethodTest {
-	private static final String SINGLE = "SINGLE";
+	private static final String SINGLE = "SINGLE"; 
 	private static final String DOUBLE = "DOUBLE";
 	private static final String REF_1 = "ref1";
 	private static final String REF_2 = "ref2";
