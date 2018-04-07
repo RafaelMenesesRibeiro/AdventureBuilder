@@ -4,7 +4,6 @@ import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.bank.domain.Account;
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
-import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure;
 import pt.ulisboa.tecnico.softeng.broker.domain.Broker;
 
@@ -14,11 +13,12 @@ public class Application {
 		System.out.println("Adventures!");
 
 		Bank bank = new Bank("MoneyPlus", "BK01");
-		Account account = new Account(bank, new Client(bank, "José dos Anzóis"));
+		pt.ulisboa.tecnico.softeng.broker.domain.Client client = new pt.ulisboa.tecnico.softeng.broker.domain.Client("123", 20, "123456789");
+		Account account = new Account(bank, new pt.ulisboa.tecnico.softeng.bank.domain.Client(bank, "Mafalda Gaspar"));
 		account.deposit(1000);
 
 		Broker broker = new Broker("BR01", "Fun", "123456789", "98765432");
-		Adventure adventure = new Adventure(broker, new LocalDate(), new LocalDate(), 33, account.getIBAN(), 50);
+		Adventure adventure = new Adventure(client, broker, new LocalDate(), new LocalDate(), 33, account.getIBAN(), 50);
 
 		adventure.process();
 

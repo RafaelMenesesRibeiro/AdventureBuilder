@@ -17,6 +17,7 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.CarInterface;
+import pt.ulisboa.tecnico.softeng.broker.domain.Client;
 
 @RunWith(JMockit.class)
 public class BookRoomStateMethodTest {
@@ -33,9 +34,12 @@ public class BookRoomStateMethodTest {
 	@Injectable
 	private Broker broker;
 
+	@Injectable
+	private Client client;
+
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
 		this.adventure.setState(State.BOOK_ROOM);
 	}
 

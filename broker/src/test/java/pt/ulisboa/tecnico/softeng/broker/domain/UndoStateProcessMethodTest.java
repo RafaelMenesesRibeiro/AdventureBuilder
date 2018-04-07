@@ -41,9 +41,12 @@ public class UndoStateProcessMethodTest {
 	@Injectable
 	private Broker broker;
 
+	@Injectable
+	private Client client;
+
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
 		this.adventure.setState(State.UNDO);
 	}
 
