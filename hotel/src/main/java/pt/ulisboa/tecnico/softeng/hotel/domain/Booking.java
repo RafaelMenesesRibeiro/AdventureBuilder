@@ -7,6 +7,7 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class Booking {
 	private static int counter = 0;
 
+	private final Room room;
 	private final String reference;
 	private String cancellation;
 	private LocalDate cancellationDate;
@@ -14,20 +15,24 @@ public class Booking {
 	private final LocalDate departure;
 	private final String NIF;
 	private final String IBAN;
+	private String paymentReference;
+	private String invoiceReference;
+	private Hotel hotel;
 
-	Booking(Hotel hotel, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
-		checkArguments(hotel, arrival, departure, NIF, IBAN);
-
+	Booking(Hotel hotel, Room room, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
+		checkArguments(hotel, room, arrival, departure, NIF, IBAN);
+		this.hotel = hotel;
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
 		this.arrival = arrival;
 		this.departure = departure;
 		this.IBAN = IBAN;
 		this.NIF = NIF;
+		this.room = room;
 
 	}
 
-	private void checkArguments(Hotel hotel, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
-		if (hotel == null || arrival == null || departure == null || NIF == null || IBAN == null) {
+	private void checkArguments(Hotel hotel, Room room, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
+		if (hotel == null || room == null || arrival == null || departure == null || NIF == null || IBAN == null) {
 			throw new HotelException();
 		}
 
@@ -54,6 +59,10 @@ public class Booking {
 
 	public LocalDate getCancellationDate() {
 		return this.cancellationDate;
+	}
+
+	public Room getRoom() {
+		return this.room;
 	}
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
@@ -102,11 +111,33 @@ public class Booking {
 	public String cancel() {
 		this.cancellation = this.reference + "CANCEL";
 		this.cancellationDate = new LocalDate();
+		this.hotel.getProcessor().submitRenting(this);
 		return this.cancellation;
 	}
 
 	public boolean isCancelled() {
 		return this.cancellation != null;
+	}
+
+
+	public double getAmount() {
+		return this.room.getPrice();
+	}
+
+	public String getPaymentReference() {
+		return this.paymentReference;
+	}
+
+	public void setPaymentReference(String paymentReference) {
+		this.paymentReference = paymentReference;
+	}
+
+	public String getInvoiceReference() {
+		return this.invoiceReference;
+	}
+
+	public void setInvoiceReference(String invoiceReference) {
+		this.invoiceReference = invoiceReference;
 	}
 
 }

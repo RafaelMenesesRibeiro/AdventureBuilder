@@ -17,11 +17,15 @@ public class BookingConflictMethodTest {
 	private static final String IBAN = "IBAN";
 	private Booking booking;
 
+	public static enum Type {
+		SINGLE, DOUBLE
+	}
+
 	@Before
 	public void setUp() {
 		Hotel hotel = new Hotel("XPTO123", "Londres", SINGLE_PRICE, DOUBLE_PRICE);
-
-		this.booking = new Booking(hotel, this.arrival, this.departure, NIF, IBAN);
+		Room room = new Room(hotel, "01",  Room.Type.SINGLE);
+		this.booking = new Booking(hotel, room, this.arrival, this.departure, NIF, IBAN);
 	}
 
 	@Test
