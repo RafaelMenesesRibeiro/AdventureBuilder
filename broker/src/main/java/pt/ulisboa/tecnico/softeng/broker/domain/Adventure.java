@@ -46,7 +46,7 @@ public class Adventure {
 
 		broker.addAdventure(this);
 
-		setState(State.PROCESS_PAYMENT);
+		setState(State.RESERVE_ACTIVITY);
 	}
 
 	private void checkArguments(Client client, Broker broker, LocalDate begin, LocalDate end, int age, String IBAN, int amount) {
