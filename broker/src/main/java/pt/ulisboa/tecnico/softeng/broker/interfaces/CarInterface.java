@@ -16,8 +16,9 @@ public class CarInterface {
 		return renting.getReference();
 	}
 
-	public static String cancelRenting(String vehicleConfirmation) {
-		return "Car Cancelled.";
+	public static String cancelRenting(String reference) {
+		Vehicle vehicle = RentACar.getRenting(reference).getVehicle();
+		return vehicle.cancelRenting(reference);
 	}
 
 	public static Renting getRentingData(String reference) {
