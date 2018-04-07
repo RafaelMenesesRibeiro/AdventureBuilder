@@ -11,6 +11,7 @@ public class VehicleRentTest {
 	private static final String PLATE_CAR = "22-33-HZ";
 	private static final String RENT_A_CAR_NAME = "Eartz";
 	private static final String DRIVING_LICENSE = "lx1423";
+	private static final double CAR_PRICE = 10;
 	private static final LocalDate date1 = LocalDate.parse("2018-01-06");
 	private static final LocalDate date2 = LocalDate.parse("2018-01-09");
 	private Car car;
@@ -36,7 +37,7 @@ public class VehicleRentTest {
 	@Before
 	public void setUp() {
 		RentACar rentACar = new RentACar(RENT_A_CAR_NAME, NIF_SELLER_1, IBAN_SELLER_1);
-		this.car = new Car(PLATE_CAR, 10, rentACar);
+		this.car = new Car(PLATE_CAR, 10, CAR_PRICE, rentACar);
 	}
 
 	@Test(expected = CarException.class)
@@ -48,14 +49,14 @@ public class VehicleRentTest {
 	@Test(expected = CarException.class)
 	public void beginIsNull() {
 		RentACar rentACar = new RentACar(RENT_A_CAR_NAME, NIF_SELLER_2, IBAN_SELLER_2);
-		Vehicle car = new Car(PLATE_CAR, 10, rentACar);
+		Vehicle car = new Car(PLATE_CAR, 10, CAR_PRICE, rentACar);
 		car.rent(DRIVING_LICENSE, null, date2, NIF_BUYER_3, IBAN_BUYER_3);
 	}
 
 	@Test(expected = CarException.class)
 	public void endIsNull() {
 		RentACar rentACar = new RentACar(RENT_A_CAR_NAME, NIF_SELLER_3, IBAN_SELLER_3);
-		Vehicle car = new Car(PLATE_CAR, 10, rentACar);
+		Vehicle car = new Car(PLATE_CAR, 10, CAR_PRICE, rentACar);
 		car.rent(DRIVING_LICENSE, date1, null, NIF_BUYER_3, IBAN_BUYER_3);
 	}
 
