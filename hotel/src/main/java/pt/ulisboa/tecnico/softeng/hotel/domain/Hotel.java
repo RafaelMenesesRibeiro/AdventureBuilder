@@ -16,14 +16,33 @@ public class Hotel {
 	private final String code;
 	private final String name;
 	private final Set<Room> rooms = new HashSet<>();
+	private double priceSingle;
+	private double priceDouble;
 
-	public Hotel(String code, String name) {
+	public Hotel(String code, String name, double priceSingle, double priceDouble) throws HotelException {
+
 		checkArguments(code, name);
-
 		this.code = code;
 		this.name = name;
+		if (priceSingle > 0 && priceDouble > 0) {
+			this.priceSingle = priceSingle;
+			this.priceDouble = priceDouble;
+		} else {
+			throw new HotelException();
+		}
+
 		Hotel.hotels.add(this);
+
 	}
+
+	public double getSingleRoomPrice() {
+		return this.priceSingle;
+	}
+
+	public double getDoubleRoomPrice() {
+		return this.priceDouble;
+	}
+
 
 	private void checkArguments(String code, String name) {
 		if (code == null || name == null || code.trim().length() == 0 || name.trim().length() == 0) {
@@ -93,11 +112,11 @@ public class Hotel {
 		return null;
 	}
 
-	public static String reserveRoom(Room.Type type, LocalDate arrival, LocalDate departure) {
+	public static String reserveRoom(Room.Type type, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
 		for (Hotel hotel : Hotel.hotels) {
 			Room room = hotel.hasVacancy(type, arrival, departure);
 			if (room != null) {
-				return room.reserve(type, arrival, departure).getReference();
+				return room.reserve(type, arrival, departure, NIF, IBAN).getReference();
 			}
 		}
 		throw new HotelException();
@@ -125,7 +144,7 @@ public class Hotel {
 		throw new HotelException();
 	}
 
-	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure) {
+	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
 		if (number < 1) {
 			throw new HotelException();
 		}
@@ -137,7 +156,7 @@ public class Hotel {
 
 		Set<String> references = new HashSet<>();
 		for (Room room : rooms) {
-			references.add(room.reserve(room.getType(), arrival, departure).getReference());
+			references.add(room.reserve(room.getType(), arrival, departure, NIF, IBAN).getReference());
 		}
 
 		return references;

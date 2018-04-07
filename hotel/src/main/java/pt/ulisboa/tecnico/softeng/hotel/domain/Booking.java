@@ -12,17 +12,22 @@ public class Booking {
 	private LocalDate cancellationDate;
 	private final LocalDate arrival;
 	private final LocalDate departure;
+	private final String NIF;
+	private final String IBAN;
 
-	Booking(Hotel hotel, LocalDate arrival, LocalDate departure) {
-		checkArguments(hotel, arrival, departure);
+	Booking(Hotel hotel, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
+		checkArguments(hotel, arrival, departure, NIF, IBAN);
 
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
 		this.arrival = arrival;
 		this.departure = departure;
+		this.IBAN = IBAN;
+		this.NIF = NIF;
+
 	}
 
-	private void checkArguments(Hotel hotel, LocalDate arrival, LocalDate departure) {
-		if (hotel == null || arrival == null || departure == null) {
+	private void checkArguments(Hotel hotel, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
+		if (hotel == null || arrival == null || departure == null || NIF == null || IBAN == null) {
 			throw new HotelException();
 		}
 
@@ -78,6 +83,20 @@ public class Booking {
 		}
 
 		return false;
+	}
+
+	/**
+	 * @return the NIF
+	 */
+	public String getNif() {
+		return this.NIF;
+	}
+
+	/**
+	 * @return the IBAN
+	 */
+	public String getIban() {
+		return this.IBAN;
 	}
 
 	public String cancel() {

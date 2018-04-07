@@ -21,8 +21,8 @@ public class AdventureConstructorMethodTest {
 
 	@Before
 	public void setUp() {
-		this.broker = new Broker("BR01", "eXtremeADVENTURE", "123456789", "123456123");
 		this.client = new Client("123", 20, "123456219");
+		this.broker = new Broker("BR01", "eXtremeADVENTURE", "123456789", "123456123", "IBAN");
 	}
 
 	@Test

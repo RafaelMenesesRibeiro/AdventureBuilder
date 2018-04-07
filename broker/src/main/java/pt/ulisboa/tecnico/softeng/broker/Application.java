@@ -17,7 +17,7 @@ public class Application {
 		Account account = new Account(bank, new pt.ulisboa.tecnico.softeng.bank.domain.Client(bank, "Mafalda Gaspar"));
 		account.deposit(1000);
 
-		Broker broker = new Broker("BR01", "Fun", "123456789", "98765432");
+		Broker broker = new Broker("BR01", "Fun", "123456789", "98765432", "IBAN");
 		Adventure adventure = new Adventure(client, broker, new LocalDate(), new LocalDate(), 33, account.getIBAN(), 50);
 
 		adventure.process();
