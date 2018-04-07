@@ -40,6 +40,17 @@ public class Processor {
 					renting.setInvoiceReference(TaxInterface.submitInvoice(invoiceData));
 				} catch (TaxException | RemoteAccessException ex) {
 					failedToProcess.add(renting);
+				} 
+			} else {
+				try {
+					if (renting.getCancelledPaymentReference() == null) {
+						renting.setCancelledPaymentReference(
+								BankInterface.cancelPayment(renting.getPaymentReference()));
+					}
+					TaxInterface.cancelInvoice(renting.getInvoiceReference());
+					renting.setCancelledInvoice(true);
+				} catch (BankException | TaxException | RemoteAccessException ex) {
+					failedToProcess.add(renting);
 				}
 			}
 		}
