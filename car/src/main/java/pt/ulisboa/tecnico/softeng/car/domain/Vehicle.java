@@ -39,9 +39,6 @@ public abstract class Vehicle {
 
 	private void checkArguments(String plate, int kilometers, double price, RentACar rentACar) {
 		if (plate == null || !plate.matches(plateFormat) || plates.contains(plate.toUpperCase())) {
-			System.out.println("::::::::: PLATE :::::::::");
-			System.out.println("::::::::: " + plate + " :::::::::");
-			System.out.println("::::::::: PLATE :::::::::");
 			throw new CarException();
 		} else if (kilometers < 0) {
 			throw new CarException();
