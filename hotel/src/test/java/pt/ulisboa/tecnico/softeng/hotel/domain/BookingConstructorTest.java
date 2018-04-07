@@ -16,18 +16,21 @@ public class BookingConstructorTest {
 	private static final String NIF = "123456789";
 	private static final String IBAN = "IBAN";
 	private Hotel hotel;
+	private Room room;
 
 	@Before
 	public void setUp() {
 		this.hotel = new Hotel("XPTO123", "Londres", SINGLE_PRICE, DOUBLE_PRICE);
+		this.room = new Room(hotel, "01", Room.Type.SINGLE);
 	}
 
 	@Test
 	public void success() {
-		Booking booking = new Booking(this.hotel, this.arrival, this.departure, NIF, IBAN);
+		Booking booking = new Booking(this.hotel, this.room, this.arrival, this.departure, NIF, IBAN);
 
 		Assert.assertTrue(booking.getReference().startsWith(this.hotel.getCode()));
 		Assert.assertTrue(booking.getReference().length() > Hotel.CODE_SIZE);
+		Assert.assertEquals(this.room.getNumber(), booking.getRoom().getNumber());
 		Assert.assertEquals(this.arrival, booking.getArrival());
 		Assert.assertEquals(NIF, booking.getNif());
 		Assert.assertEquals(IBAN, booking.getIban());
@@ -36,27 +39,32 @@ public class BookingConstructorTest {
 
 	@Test(expected = HotelException.class)
 	public void nullHotel() {
-		new Booking(null, this.arrival, this.departure, NIF, IBAN);
+		new Booking(null, this.room, this.arrival, this.departure, NIF, IBAN);
+	}
+
+	@Test(expected = HotelException.class)
+	public void nullRoom() {
+		new Booking(this.hotel, null, this.arrival, this.departure, NIF, IBAN);
 	}
 
 	@Test(expected = HotelException.class)
 	public void nullArrival() {
-		new Booking(this.hotel, null, this.departure, NIF, IBAN);
+		new Booking(this.hotel, this.room, null, this.departure, NIF, IBAN);
 	}
 
 	@Test(expected = HotelException.class)
 	public void nullDeparture() {
-		new Booking(this.hotel, this.arrival, null, NIF, IBAN);
+		new Booking(this.hotel, this.room, this.arrival, null, NIF, IBAN);
 	}
 
 	@Test(expected = HotelException.class)
 	public void departureBeforeArrival() {
-		new Booking(this.hotel, this.arrival, this.arrival.minusDays(1), NIF, IBAN);
+		new Booking(this.hotel, this.room, this.arrival, this.arrival.minusDays(1), NIF, IBAN);
 	}
 
 	@Test
 	public void arrivalEqualDeparture() {
-		new Booking(this.hotel, this.arrival, this.arrival, NIF, IBAN);
+		new Booking(this.hotel, this.room, this.arrival, this.arrival, NIF, IBAN);
 	}
 
 	@After

@@ -49,6 +49,10 @@ public class Room {
 		return this.type;
 	}
 
+	public double getPrice() {
+		return ( this.type == Type.SINGLE ? this.hotel.getSingleRoomPrice() : this.hotel.getDoubleRoomPrice() );
+	}
+
 	int getNumberOfBookings() {
 		return this.bookings.size();
 	}
@@ -76,7 +80,7 @@ public class Room {
 			throw new HotelException();
 		}
 
-		Booking booking = new Booking(this.hotel, arrival, departure, NIF, IBAN);
+		Booking booking = new Booking(this.hotel, this, arrival, departure, NIF, IBAN);
 		this.bookings.add(booking);
 
 		return booking;
