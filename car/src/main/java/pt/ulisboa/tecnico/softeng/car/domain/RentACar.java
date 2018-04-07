@@ -21,6 +21,8 @@ public class RentACar {
 	private final String IBAN;
 	private final Map<String, Vehicle> vehicles = new HashMap<>();
 
+	private final Processor processor = new Processor();
+	
 	public RentACar(String name, String NIF, String IBAN) {
 		checkArguments(name, NIF, IBAN);
 
@@ -116,6 +118,18 @@ public class RentACar {
 			}
 		}
 		return null;
+	}
+
+	public Processor getProcessor() {
+		return this.processor;
+	}
+
+	public static String cancelReservation(String reference) {
+		Renting renting = getRenting(reference);
+		if (renting != null) {
+			return renting.cancel();
+		}
+		throw new CarException();
 	}
 
 	public static RentingData getRentingData(String reference) {

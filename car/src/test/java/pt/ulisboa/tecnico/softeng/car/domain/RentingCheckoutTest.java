@@ -13,6 +13,7 @@ public class RentingCheckoutTest {
 	private static final String NAME = "eartz";
 	private static final String PLATE_CAR1 = "aa-00-11";
 	private static final String DRIVING_LICENSE = "br123";
+	private static final double CAR_PRICE = 10;
 	private static final LocalDate date1 = LocalDate.parse("2018-01-06");
 	private static final LocalDate date2 = LocalDate.parse("2018-01-07");
 	
@@ -27,7 +28,7 @@ public class RentingCheckoutTest {
 	@Before
 	public void setUp() {
 		RentACar rentACar1 = new RentACar(NAME, NIF_SELLER, IBAN_SELLER);
-		this.car = new Car(PLATE_CAR1, 10, rentACar1);
+		this.car = new Car(PLATE_CAR1, 10, CAR_PRICE, rentACar1);
 	}
 
 	@Test

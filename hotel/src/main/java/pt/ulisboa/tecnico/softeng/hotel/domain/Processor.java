@@ -1,11 +1,11 @@
-package pt.ulisboa.tecnico.softeng.activity.domain;
+package pt.ulisboa.tecnico.softeng.hotel.domain;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import pt.ulisboa.tecnico.softeng.activity.exception.RemoteAccessException;
-import pt.ulisboa.tecnico.softeng.activity.interfaces.BankInterface;
-import pt.ulisboa.tecnico.softeng.activity.interfaces.TaxInterface;
+import pt.ulisboa.tecnico.softeng.hotel.exception.RemoteAccessException;
+import pt.ulisboa.tecnico.softeng.hotel.interfaces.BankInterface;
+import pt.ulisboa.tecnico.softeng.hotel.interfaces.TaxInterface;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
@@ -16,7 +16,7 @@ public class Processor {
 	// is cancelled while trying to pay or send invoice
 	private final Set<Booking> bookingToProcess = new HashSet<>();
 
-	public void submitBooking(Booking booking) {
+	public void submitRenting(Booking booking) {
 		this.bookingToProcess.add(booking);
 		processInvoices();
 	}
@@ -34,25 +34,6 @@ public class Processor {
 						continue;
 					}
 				}
-				InvoiceData invoiceData = new InvoiceData(booking.getProviderNif(), booking.getNif(), booking.getType(),
-						booking.getAmount(), booking.getDate());
-				try {
-					booking.setInvoiceReference(TaxInterface.submitInvoice(invoiceData));
-				} catch (TaxException | RemoteAccessException ex) {
-					failedToProcess.add(booking);
-				}
-			} else {
-				try {
-					if (booking.getCancelledPaymentReference() == null) {
-						booking.setCancelledPaymentReference(
-								BankInterface.cancelPayment(booking.getPaymentReference()));
-					}
-					TaxInterface.cancelInvoice(booking.getInvoiceReference());
-					booking.setCancelledInvoice(true);
-				} catch (BankException | TaxException | RemoteAccessException ex) {
-					failedToProcess.add(booking);
-				}
-
 			}
 		}
 

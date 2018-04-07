@@ -54,7 +54,7 @@ public class AdventureSequenceTest {
 		new Expectations() {
 			{
 
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				ActivityInterface.reserveActivity(arrival, departure, AGE, NIF, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
@@ -96,7 +96,9 @@ public class AdventureSequenceTest {
 			@Mocked final ActivityInterface activityInterface) {
 		new Expectations() {
 			{
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+
+				ActivityInterface.reserveActivity(arrival, departure, AGE, NIF, IBAN);
+
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
@@ -122,8 +124,12 @@ public class AdventureSequenceTest {
 	public void unsuccessSequenceOne(@Mocked final ActivityInterface activityInterface) {
 		new Expectations() {
 			{
-				ActivityInterface.reserveActivity(arrival, arrival, AGE);
+				ActivityInterface.reserveActivity(arrival, arrival, AGE, NIF, IBAN);
 				this.result = new ActivityException();
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
 			}
 		};
 
@@ -138,7 +144,8 @@ public class AdventureSequenceTest {
 	public void unsuccessSequenceTwo(@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface) {
 		new Expectations() {
 			{
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+
+				ActivityInterface.reserveActivity(arrival, departure, AGE, NIF, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
@@ -152,6 +159,8 @@ public class AdventureSequenceTest {
 
 				broker.getIBAN();
 				this.result = IBAN;
+
+
 
 			}
 		};
@@ -171,7 +180,10 @@ public class AdventureSequenceTest {
 			@Mocked final CarInterface carInterface) {
 		new Expectations() {
 			{
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+
+				ActivityInterface.reserveActivity(arrival, departure, AGE, NIF, IBAN);
+
+
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
@@ -213,7 +225,7 @@ public class AdventureSequenceTest {
 		new Expectations() {
 			{
 
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				ActivityInterface.reserveActivity(arrival, departure, AGE, anyString, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
@@ -260,7 +272,7 @@ public class AdventureSequenceTest {
 		new Expectations() {
 			{
 
-				ActivityInterface.reserveActivity(arrival, departure, AGE);
+				ActivityInterface.reserveActivity(arrival, departure, AGE, anyString, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
 				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
