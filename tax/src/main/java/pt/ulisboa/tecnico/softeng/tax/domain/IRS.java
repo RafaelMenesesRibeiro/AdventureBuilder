@@ -47,6 +47,15 @@ public class IRS {
 		return null;
 	}
 
+	public Invoice getInvoiceByReference(String reference) {
+		for (TaxPayer taxPayer : taxPayers) {
+			if (taxPayer.getInvoiceByReference(reference) != null) {
+				return taxPayer.getInvoiceByReference(reference);
+			}
+		}
+		return null;
+	}
+
 	public static String submitInvoice(InvoiceData invoiceData) {
 		IRS irs = IRS.getIRS();
 		Seller seller = (Seller) irs.getTaxPayerByNIF(invoiceData.getSellerNIF());
@@ -70,9 +79,14 @@ public class IRS {
 		removeTaxPayers();
 	}
 
-	public static String cancelInvoice(String referString) {
-		// TODO: Complete this
-		return null;
+	public static void cancelInvoice(String referString) {
+		IRS irs = IRS.getIRS();
+		Invoice invoice = irs.getInvoiceByReference(referString);
+		Seller seller = (Seller) invoice.getSeller();
+		Buyer buyer = (Buyer) invoice.getBuyer();
+
+		seller.removeInvoice(invoice);
+		buyer.removeInvoice(invoice);
 	}
 
 }

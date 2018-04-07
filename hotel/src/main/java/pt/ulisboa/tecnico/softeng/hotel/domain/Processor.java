@@ -16,7 +16,7 @@ public class Processor {
 	// is cancelled while trying to pay or send invoice
 	private final Set<Booking> bookingToProcess = new HashSet<>();
 
-	public void submitRenting(Booking booking) {
+	public void submitHotelBooking(Booking booking) {
 		this.bookingToProcess.add(booking);
 		processInvoices();
 	}

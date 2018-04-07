@@ -111,7 +111,7 @@ public class Booking {
 	public String cancel() {
 		this.cancellation = this.reference + "CANCEL";
 		this.cancellationDate = new LocalDate();
-		this.hotel.getProcessor().submitRenting(this);
+		this.hotel.getProcessor().submitHotelBooking(this);
 		return this.cancellation;
 	}
 

@@ -13,6 +13,8 @@ public class BookingConflictMethodTest {
 	private final LocalDate departure = new LocalDate(2016, 12, 24);
 	private final double SINGLE_PRICE = 200;
 	private final double DOUBLE_PRICE = 300;
+	private static final String NIFHotel = "123456788";
+	private static final String IBANHotel = "IBAC";
 	private static final String NIF = "123456789";
 	private static final String IBAN = "IBAN";
 	private Booking booking;
@@ -23,7 +25,7 @@ public class BookingConflictMethodTest {
 
 	@Before
 	public void setUp() {
-		Hotel hotel = new Hotel("XPTO123", "Londres", SINGLE_PRICE, DOUBLE_PRICE);
+		Hotel hotel = new Hotel("XPTO123", "Londres", NIFHotel, IBANHotel, SINGLE_PRICE, DOUBLE_PRICE);
 		Room room = new Room(hotel, "01",  Room.Type.SINGLE);
 		this.booking = new Booking(hotel, room, this.arrival, this.departure, NIF, IBAN);
 	}
