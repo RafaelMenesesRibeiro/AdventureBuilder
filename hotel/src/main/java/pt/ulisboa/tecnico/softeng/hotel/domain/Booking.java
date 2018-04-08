@@ -102,6 +102,12 @@ public class Booking {
 	}
 
 	/**
+	 * @return the hotel NIF
+	 */
+	public String getHotelNif() {
+		return this.hotel.getNIF();
+	}
+	/**
 	 * @return the IBAN
 	 */
 	public String getIban() {
