@@ -102,6 +102,13 @@ public class RentACar {
 		return getAllAvailableVehicles(Car.class, begin, end);
 	}
 
+	public static String rent(LocalDate begin, LocalDate end, String drivingLicense, String NIF, String IBAN) {
+		Set<Vehicle> availableVehicles = getAllAvailableCars(begin, end);
+		Vehicle toRent = (Vehicle) (availableVehicles.toArray())[0];
+		Renting renting = toRent.rent(drivingLicense, begin, end, NIF, IBAN);
+		return renting.getReference();
+	}
+
 	/**
 	 * Lookup for a renting using its reference.
 	 * 
