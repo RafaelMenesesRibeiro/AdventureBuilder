@@ -94,6 +94,14 @@ public class RentACar {
 		return vehicles;
 	}
 
+	public static String reserveAvailableVehicle(Class<?> cls, LocalDate begin, LocalDate end, String drivingLicense, String NIF, String IBAN) {
+		Set<Vehicle> vehicles = RentACar.getAllAvailableVehicles(cls, begin, end);
+		if (vehicles.size() == 0) { throw new CarException(); }
+		Vehicle vehicle = (Vehicle) vehicles.toArray()[0];
+		return vehicle.rent(drivingLicense, begin, end, NIF, IBAN).getReference();
+	}
+
+
 	public static Set<Vehicle> getAllAvailableMotorcycles(LocalDate begin, LocalDate end) {
 		return getAllAvailableVehicles(Motorcycle.class, begin, end);
 	}
