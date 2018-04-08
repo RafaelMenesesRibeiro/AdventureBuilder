@@ -21,7 +21,7 @@ public class Adventure {
 	private final LocalDate end;
 	private final int age;
 	private final String IBAN;
-	private final int amount;
+	private int amount;
 	private String paymentConfirmation;
 	private String paymentCancellation;
 	private String roomConfirmation;
@@ -101,6 +101,10 @@ public class Adventure {
 
 	public int getAmount() {
 		return this.amount;
+	}
+
+	public void incrementAmount(double value) {
+		this.amount += (int) value;
 	}
 
 	public String getPaymentConfirmation() {

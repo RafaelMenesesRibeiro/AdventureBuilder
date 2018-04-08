@@ -5,6 +5,7 @@ import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 
 public class BookRoomState extends AdventureState {
 	public static final int MAX_REMOTE_ERRORS = 10;
@@ -19,6 +20,8 @@ public class BookRoomState extends AdventureState {
 		try {
 			adventure.setRoomConfirmation(
 			HotelInterface.reserveRoom(Room.Type.SINGLE, adventure.getBegin(), adventure.getEnd(), adventure.getBroker().getNIFBuyer(), adventure.getBroker().getIBAN()));
+		
+
 		} catch (HotelException he) {
 			adventure.setState(State.UNDO);
 			return;

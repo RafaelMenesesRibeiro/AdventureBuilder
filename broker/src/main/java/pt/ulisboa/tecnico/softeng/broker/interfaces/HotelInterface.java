@@ -24,4 +24,9 @@ public class HotelInterface {
 	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure, String NIF, String IBAN) {
 		return Hotel.bulkBooking(number, arrival, departure, NIF, IBAN);
 	}
+
+	//public static double getActivityAmount (String reference) {
+		//RoomBookingData data = HotelInterface. getRoomBookingData(reference);
+		//return data.getRoomType()
+	//}
 }

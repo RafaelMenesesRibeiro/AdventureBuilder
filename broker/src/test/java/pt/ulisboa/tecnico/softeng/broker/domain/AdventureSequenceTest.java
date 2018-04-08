@@ -10,6 +10,8 @@ import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
 import mockit.integration.junit4.JMockit;
+import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
+import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
@@ -50,9 +52,16 @@ public class AdventureSequenceTest {
 	@Test
 	public void successSequenceOne(@Mocked final BankInterface bankInterface,
 			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface,
-			@Mocked final CarInterface carInterface) {
+			@Mocked final CarInterface carInterface, @Mocked final ActivityProvider activityProvider) {
+
+			//ActivityProvider provider = new  ActivityProvider("123456", "andreia", NIF, IBAN);
+			///ActivityOffer 
+			//ActivityReservationData(ActivityProvider provider, ActivityOffer offer, Booking booking) 
+
 		new Expectations() {
 			{
+				//ActivityInterface.getActivityReservationData(ACTIVITY_CONFIRMATION);
+				//this.result = new ActivityReservationData();
 
 				ActivityInterface.reserveActivity(arrival, departure, AGE, NIF, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
