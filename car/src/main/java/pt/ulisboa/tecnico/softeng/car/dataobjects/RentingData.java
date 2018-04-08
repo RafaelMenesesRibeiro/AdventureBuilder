@@ -26,6 +26,7 @@ public class RentingData {
 		this.rentACarCode = rentACarCode;
 		this.begin = begin;
 		this.end = end;
+		this.rentAmount = RentACar.getRenting(reference).getAmount();
 		this.cancellation = RentACar.getRenting(reference).getCancellation();
 		this.rentAmount = RentACar.getRenting(reference).getAmount();
 		this.cancellationDate = RentACar.getRenting(reference).getCancellationDate();
@@ -128,6 +129,7 @@ public class RentingData {
 	public LocalDate getCancellationDate() {
 		return this.cancellationDate;
 	}
+
 	public double getRentingAmount() {
 		return this.rentAmount;
 	}

@@ -28,6 +28,7 @@ public class RoomBookingData {
 		this.roomNumber = room.getNumber();
 		this.roomAmount = room.getPrice();
 		this.roomType = room.getType().name();
+		this.roomAmount = room.getPrice();
 		this.arrival = booking.getArrival();
 		this.departure = booking.getDeparture();
 		this.cancellationDate = booking.getCancellationDate();
@@ -77,6 +78,10 @@ public class RoomBookingData {
 		return this.roomType;
 	}
 
+	public double getRoomAmount() {
+		return this.roomAmount;
+	}
+
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
 	}
@@ -105,8 +110,6 @@ public class RoomBookingData {
 		this.cancellationDate = cancellationDate;
 	}
 
-	public double getRoomAmount() {
-		return this.roomAmount;
-	}
+
 
 }
