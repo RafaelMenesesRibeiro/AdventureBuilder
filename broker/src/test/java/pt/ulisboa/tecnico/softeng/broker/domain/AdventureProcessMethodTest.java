@@ -29,6 +29,8 @@ public class AdventureProcessMethodTest {
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
 	private static final String NIF_SELLER = "987654321";
+	private static final boolean CAR_NEEDED = true;
+	private static final boolean NO_CAR_NEEDED = false;
 	private Broker broker;
 	private Client client;
 	private String IBAN;
@@ -65,10 +67,7 @@ public class AdventureProcessMethodTest {
 
 	@Test
 	public void success() {
-		Adventure adventure = new Adventure(this.client, this.broker, this.begin, this.end, 20, this.IBAN, 300);
-		
-
-		
+		Adventure adventure = new Adventure(this.client, this.broker, this.begin, this.end, 20, this.IBAN, 300, CAR_NEEDED);
 		adventure.process();
 
 		adventure.process();
@@ -88,7 +87,7 @@ public class AdventureProcessMethodTest {
 
 	@Test
 	public void successNoHotelBooking() {
-		Adventure adventure = new Adventure(this.client, this.broker, this.begin, this.begin, 20, this.IBAN, 300);
+		Adventure adventure = new Adventure(this.client, this.broker, this.begin, this.begin, 20, this.IBAN, 300, NO_CAR_NEEDED);
 
 		adventure.process();
 

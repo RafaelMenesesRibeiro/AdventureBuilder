@@ -26,6 +26,8 @@ public class BookRoomStateMethodTest {
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final int AGE = 20;
+	private static final boolean CAR_NEEDED = true;
+	private static final boolean NO_CAR_NEEDED = false;
 	private static final String ROOM_CONFIRMATION = "RoomConfirmation";
 	private static final String VEHICLE_CONFIRMATION = "VehicleConfirmation";
 	private static final LocalDate arrival = new LocalDate(2016, 12, 19);
@@ -40,7 +42,7 @@ public class BookRoomStateMethodTest {
 
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 		this.adventure.setState(State.BOOK_ROOM);
 		
 	}
@@ -65,6 +67,31 @@ public class BookRoomStateMethodTest {
 		};
 
 		this.adventure.process();
+		this.adventure.process();
+
+		Assert.assertEquals(State.PROCESS_PAYMENT, this.adventure.getState());
+	}
+
+	@Test
+	public void successBookRoomNoCar(@Mocked final HotelInterface hotelInterface, 
+		@Mocked final CarInterface carInterface) {
+		
+		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, NO_CAR_NEEDED);
+		this.adventure.setState(State.BOOK_ROOM);
+
+		new Expectations() {
+			{
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
+				this.result = ROOM_CONFIRMATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				broker.getIBAN();
+				this.result = IBAN;
+			}
+		};
+
 		this.adventure.process();
 
 		Assert.assertEquals(State.PROCESS_PAYMENT, this.adventure.getState());
@@ -154,6 +181,49 @@ public class BookRoomStateMethodTest {
 		}
 
 		Assert.assertEquals(State.BOOK_ROOM, this.adventure.getState());
+	}
+
+	@Test
+	public void fiveRemoteAccessExceptionOneSuccessNoCar(@Mocked final HotelInterface hotelInterface, 
+		@Mocked final CarInterface carInterface) {
+
+		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, NO_CAR_NEEDED);
+		this.adventure.setState(State.BOOK_ROOM);
+
+		new Expectations() {
+			{
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
+				this.result = new Delegate() {
+					int i = 0;
+
+					public String delegate() {
+						if (this.i < 5) {
+							this.i++;
+							throw new RemoteAccessException();
+						} else {
+							return ROOM_CONFIRMATION;
+						}
+					}
+				};
+				this.times = 6;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				broker.getIBAN();
+				this.result = IBAN;
+
+			}
+		};
+
+		this.adventure.process();
+		this.adventure.process();
+		this.adventure.process();
+		this.adventure.process();
+		this.adventure.process();
+		this.adventure.process();
+
+		Assert.assertEquals(State.PROCESS_PAYMENT, this.adventure.getState());
 	}
 
 	@Test

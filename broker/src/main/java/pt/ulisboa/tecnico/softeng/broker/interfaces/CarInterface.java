@@ -1,7 +1,5 @@
 package pt.ulisboa.tecnico.softeng.broker.interfaces;
 
-import java.util.Set;
-
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.car.domain.RentACar;

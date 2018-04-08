@@ -35,10 +35,10 @@ public class ReserveActivityState extends AdventureState {
 		}
 
 		if (adventure.getBegin().equals(adventure.getEnd())) {
-			adventure.setState(State.PROCESS_PAYMENT);
-		} else {
-			adventure.setState(State.BOOK_ROOM);
+			if (adventure.getIsCarNeeded()) { adventure.setState(State.RENT_VEHICLE); }
+			else { adventure.setState(State.PROCESS_PAYMENT); }
 		}
+		else { adventure.setState(State.BOOK_ROOM); }
 	}
 
 }

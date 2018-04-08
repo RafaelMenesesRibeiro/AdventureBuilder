@@ -26,6 +26,7 @@ public class ProcessPaymentStateProcessMethodTest {
 	private static final String NIF_CLIENT = "123456781";
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
+	private static final boolean CAR_NEEDED = true;
 	private static final String PAYMENT_CONFIRMATION = "PaymentConfirmation";
 	private final LocalDate begin = new LocalDate(2016, 12, 19);
 	private final LocalDate end = new LocalDate(2016, 12, 21);
@@ -39,7 +40,7 @@ public class ProcessPaymentStateProcessMethodTest {
 
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.client, this.broker, this.begin, this.end, 20, IBAN, AMOUNT);
+		this.adventure = new Adventure(this.client, this.broker, this.begin, this.end, 20, IBAN, AMOUNT, CAR_NEEDED);
 		this.adventure.setState(State.PROCESS_PAYMENT);
 	}
 
