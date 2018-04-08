@@ -10,7 +10,6 @@ import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
 import mockit.integration.junit4.JMockit;
-import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
@@ -19,6 +18,8 @@ import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.CarInterface;
+
+import pt.ulisboa.tecnico.softeng.broker.interfaces.TaxInterface;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.car.exception.CarException;
@@ -28,6 +29,7 @@ import pt.ulisboa.tecnico.softeng.broker.domain.Adventure;
 @RunWith(JMockit.class)
 public class AdventureSequenceTest {
 	private static final String NIF = "123456789";
+	private static final String NIF_CLIENT = "123456781";
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final int AGE = 20;
@@ -52,17 +54,13 @@ public class AdventureSequenceTest {
 	@Test
 	public void successSequenceOne(@Mocked final BankInterface bankInterface,
 			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface,
-			@Mocked final CarInterface carInterface, @Mocked final ActivityProvider activityProvider) {
+			@Mocked final CarInterface carInterface, @Mocked final ActivityProvider activityProvider, 
+			@Mocked final TaxInterface taxInterface) {
 
-			//ActivityProvider provider = new  ActivityProvider("123456", "andreia", NIF, IBAN);
-			///ActivityOffer 
-			//ActivityReservationData(ActivityProvider provider, ActivityOffer offer, Booking booking) 
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
 
 		new Expectations() {
 			{
-				//ActivityInterface.getActivityReservationData(ACTIVITY_CONFIRMATION);
-				//this.result = new ActivityReservationData();
-
 				ActivityInterface.reserveActivity(arrival, departure, AGE, NIF, IBAN);
 				this.result = ACTIVITY_CONFIRMATION;
 
@@ -81,15 +79,27 @@ public class AdventureSequenceTest {
 
 				HotelInterface.getRoomBookingData(ROOM_CONFIRMATION);
 
-				broker.getNIFBuyer();
+				broker.getNIFSeller();
 				this.result = NIF;
 
 				broker.getIBAN();
 				this.result = IBAN;
+
+				client.getNIF();
+				this.result = NIF_CLIENT;
+
+				adventure.getAmount();
+				this.result = AMOUNT;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				
+				TaxInterface.submitInvoice(anyString, anyString, anyString, AMOUNT, new LocalDate());
+				this.result = "invoice ref";
+
 			}
 		};
-
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
 
 		adventure.process();
 		adventure.process();
@@ -168,8 +178,6 @@ public class AdventureSequenceTest {
 
 				broker.getIBAN();
 				this.result = IBAN;
-
-
 
 			}
 		};
@@ -277,7 +285,9 @@ public class AdventureSequenceTest {
 	@Test
 	public void unsuccessSequenceFive(@Mocked final BankInterface bankInterface,
 			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface, 
-			@Mocked final CarInterface carInterface) {
+			@Mocked final CarInterface carInterface, @Mocked final TaxInterface taxInterface) {
+
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
 		new Expectations() {
 			{
 
@@ -314,10 +324,24 @@ public class AdventureSequenceTest {
 
 				broker.getIBAN();
 				this.result = IBAN;
+
+				client.getNIF();
+				this.result = NIF_CLIENT;
+
+				adventure.getAmount();
+				this.result = AMOUNT;
+				
+				TaxInterface.submitInvoice(anyString, anyString, anyString, AMOUNT, new LocalDate());
+				this.result = "invoice ref";
+
+
+				broker.getNIFSeller();
+				this.result = NIF;
+
+
+				
 			}
 		};
-
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
 
 		adventure.process();
 		adventure.process();

@@ -15,9 +15,15 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
 import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
+import pt.ulisboa.tecnico.softeng.broker.interfaces.TaxInterface;
+import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
+import pt.ulisboa.tecnico.softeng.car.domain.Vehicle;
+import pt.ulisboa.tecnico.softeng.car.domain.Car;
 
 @RunWith(JMockit.class)
 public class ProcessPaymentStateProcessMethodTest {
+	private static final String NIF = "123456789";
+	private static final String NIF_CLIENT = "123456781";
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final String PAYMENT_CONFIRMATION = "PaymentConfirmation";
@@ -38,11 +44,31 @@ public class ProcessPaymentStateProcessMethodTest {
 	}
 
 	@Test
-	public void success(@Mocked final BankInterface bankInterface) {
+	public void success(@Mocked final BankInterface bankInterface, @Mocked TaxInterface taxInterface) {
+
+		RentACar rentACar = new RentACar("John's cars", "123123123",  "BK01987654301");
+		Vehicle v = new Car("12-34-AA", 30, 2.4, rentACar);
+		
 		new Expectations() {
 			{
 				BankInterface.processPayment(IBAN, AMOUNT);
 				this.result = PAYMENT_CONFIRMATION;
+
+				TaxInterface.submitInvoice(anyString, anyString, anyString, AMOUNT, new LocalDate());
+				this.result = "invoice ref";
+
+				adventure.getIBAN();
+				this.result = IBAN;
+
+				broker.getNIFSeller();
+				this.result = NIF;
+
+
+				client.getNIF();
+				this.result = NIF_CLIENT;
+
+				adventure.getAmount();
+				this.result = AMOUNT;
 			}
 		};
 
@@ -111,7 +137,8 @@ public class ProcessPaymentStateProcessMethodTest {
 	}
 
 	@Test
-	public void twoRemoteAccessExceptionOneSuccess(@Mocked final BankInterface bankInterface) {
+	public void twoRemoteAccessExceptionOneSuccess(@Mocked final BankInterface bankInterface, 
+	@Mocked final TaxInterface taxInterface) {
 		new Expectations() {
 			{
 				BankInterface.processPayment(IBAN, AMOUNT);
@@ -129,8 +156,25 @@ public class ProcessPaymentStateProcessMethodTest {
 				};
 				this.times = 3;
 
+				TaxInterface.submitInvoice(anyString, anyString, anyString, AMOUNT, new LocalDate());
+				this.result = "invoice ref";
+
+				adventure.getIBAN();
+				this.result = IBAN;
+
+				broker.getNIFSeller();
+				this.result = NIF;
+
+
+				client.getNIF();
+				this.result = NIF_CLIENT;
+
+				adventure.getAmount();
+				this.result = AMOUNT;
 			}
 		};
+
+		
 
 		this.adventure.process();
 		this.adventure.process();
