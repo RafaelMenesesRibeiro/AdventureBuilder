@@ -15,6 +15,7 @@ public class RentVehicleState extends AdventureState {
 	public void process(Adventure adventure) {
 		try {
 			adventure.setVehicleConfirmation(CarInterface.reserveCar(adventure.getBegin(), adventure.getEnd(), adventure.getBroker().getNIFBuyer(), adventure.getIBAN()));
+			adventure.incrementAmount(CarInterface.getRentingAmount(adventure.getVehicleConfirmation()));
 		}
 		catch (CarException ce) {
 			adventure.setState(State.UNDO);

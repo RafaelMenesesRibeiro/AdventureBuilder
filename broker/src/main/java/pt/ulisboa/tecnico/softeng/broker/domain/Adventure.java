@@ -107,6 +107,10 @@ public class Adventure {
 		this.amount += (int) value;
 	}
 
+	public void resetAmount() {
+		this.amount = 0;
+	}
+
 	public String getPaymentConfirmation() {
 		return this.paymentConfirmation;
 	}
