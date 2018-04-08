@@ -57,11 +57,7 @@ public abstract class TaxPayer {
 		}
 		return null;
 	}
-
-	public void removeInvoice(Invoice invoice) {
-		invoices.remove(invoice);
-	}
-
+	
 	public String getNIF() {
 		return this.NIF;
 	}

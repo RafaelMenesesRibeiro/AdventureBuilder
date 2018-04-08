@@ -14,6 +14,7 @@ public class Invoice {
 	private final ItemType itemType;
 	private final Seller seller;
 	private final Buyer buyer;
+	private boolean isCancelled;
 
 	Invoice(double value, LocalDate date, ItemType itemType, Seller seller, Buyer buyer) {
 		checkArguments(value, date, itemType, seller, buyer);
@@ -25,6 +26,7 @@ public class Invoice {
 		this.seller = seller;
 		this.buyer = buyer;
 		this.iva = value * itemType.getTax() / 100;
+		this.isCancelled = false;
 
 		seller.addInvoice(this);
 		buyer.addInvoice(this);
@@ -78,5 +80,13 @@ public class Invoice {
 
 	public Buyer getBuyer() {
 		return this.buyer;
+	}
+
+	public boolean getCancellation() {
+		return this.isCancelled;
+	}
+
+	public void setCancellation(boolean val) {
+		this.isCancelled = val;
 	}
 }
