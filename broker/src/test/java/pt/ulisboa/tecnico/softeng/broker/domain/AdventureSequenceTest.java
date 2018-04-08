@@ -157,6 +157,62 @@ public class AdventureSequenceTest {
 	}
 
 	@Test
+	public void successSequenceFour(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface) {
+		new Expectations() {
+			{
+
+				ActivityInterface.reserveActivity(arrival, arrival, AGE, NIF, IBAN);
+				this.result = ACTIVITY_CONFIRMATION;
+
+				BankInterface.processPayment(IBAN, AMOUNT);
+				this.result = PAYMENT_CONFIRMATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+			}
+		};
+
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, arrival, AGE, IBAN, AMOUNT, NO_CAR_NEEDED);
+
+		
+		adventure.process();
+		adventure.process();
+		
+		Assert.assertEquals(State.CONFIRMED, adventure.getState());
+	}
+
+	@Test
+	public void successSequenceFive(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final CarInterface carInterface) {
+		new Expectations() {
+			{
+
+				ActivityInterface.reserveActivity(arrival, arrival, AGE, NIF, IBAN);
+				this.result = ACTIVITY_CONFIRMATION;
+
+				CarInterface.reserveCar(arrival, arrival, NIF, IBAN);
+				this.result = VEHICLE_CONFIRMATION;
+
+				BankInterface.processPayment(IBAN, AMOUNT);
+				this.result = PAYMENT_CONFIRMATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+			}
+		};
+
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, arrival, AGE, IBAN, AMOUNT, CAR_NEEDED);
+
+		
+		adventure.process();
+		adventure.process();
+		adventure.process();
+		
+		Assert.assertEquals(State.CONFIRMED, adventure.getState());
+	}
+
+	@Test
 	public void unsuccessSequenceOne(@Mocked final ActivityInterface activityInterface) {
 		new Expectations() {
 			{
