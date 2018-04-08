@@ -7,13 +7,11 @@ import org.joda.time.LocalDate;
 import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
 import pt.ulisboa.tecnico.softeng.car.domain.Renting;
 import pt.ulisboa.tecnico.softeng.car.domain.Vehicle;
+import pt.ulisboa.tecnico.softeng.car.domain.Car;
 
 public class CarInterface {
 	public static String reserveCar(LocalDate begin, LocalDate end, String NIF, String IBAN) {
-		Set<Vehicle> availableVehicles = RentACar.getAllAvailableCars(begin, end);
-		Vehicle toRent = (Vehicle) (availableVehicles.toArray())[0];
-		Renting renting = toRent.rent("br112233", begin, end, NIF, IBAN); //TODO: GET THE DRIVING LICENSE FROM SOMEWHERE.
-		return renting.getReference();
+		return RentACar.reserveAvailableVehicle(Car.class, begin, end, "br112233", NIF, IBAN);
 	}
 
 	public static String cancelRenting(String reference) {
