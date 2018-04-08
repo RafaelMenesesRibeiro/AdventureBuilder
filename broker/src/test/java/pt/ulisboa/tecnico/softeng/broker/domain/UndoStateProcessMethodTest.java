@@ -26,6 +26,8 @@ public class UndoStateProcessMethodTest {
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final int AGE = 20;
+	private static final boolean CAR_NEEDED = true;
+	private static final boolean NO_CAR_NEEDED = false;
 	private static final String PAYMENT_CONFIRMATION = "PaymentConfirmation";
 	private static final String PAYMENT_CANCELLATION = "PaymentCancellation";
 	private static final String ACTIVITY_CONFIRMATION = "ActivityConfirmation";
@@ -46,7 +48,7 @@ public class UndoStateProcessMethodTest {
 
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 		this.adventure.setState(State.UNDO);
 	}
 

@@ -22,6 +22,7 @@ public class Adventure {
 	private final int age;
 	private final String IBAN;
 	private final int amount;
+	private final boolean isCarNeeded;
 	private String paymentConfirmation;
 	private String paymentCancellation;
 	private String roomConfirmation;
@@ -33,7 +34,7 @@ public class Adventure {
 
 	private AdventureState state;
 
-	public Adventure(Client client, Broker broker, LocalDate begin, LocalDate end, int age, String IBAN, int amount) {
+	public Adventure(Client client, Broker broker, LocalDate begin, LocalDate end, int age, String IBAN, int amount, boolean isCarNeeded) {
 		checkArguments(client, broker, begin, end, age, IBAN, amount);
 		this.client = client;
 		this.ID = broker.getCode() + Integer.toString(++counter);
@@ -43,6 +44,7 @@ public class Adventure {
 		this.age = age;
 		this.IBAN = IBAN;
 		this.amount = amount;
+		this.isCarNeeded = isCarNeeded;
 
 		broker.addAdventure(this);
 
@@ -101,6 +103,10 @@ public class Adventure {
 
 	public int getAmount() {
 		return this.amount;
+	}
+
+	public boolean getIsCarNeeded() {
+		return this.isCarNeeded;
 	}
 
 	public String getPaymentConfirmation() {

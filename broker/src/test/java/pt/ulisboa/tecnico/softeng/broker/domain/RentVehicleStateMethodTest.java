@@ -22,6 +22,7 @@ public class RentVehicleStateMethodTest {
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final int AGE = 20;
+	private static final boolean CAR_NEEDED = true;
 	private static final String VEHICLE_CONFIRMATION = "VehileConfirmation";
 	private static final LocalDate arrival = new LocalDate(2016, 12, 19);
 	private static final LocalDate departure = new LocalDate(2016, 12, 21);
@@ -35,7 +36,7 @@ public class RentVehicleStateMethodTest {
 
 	@Before
 	public void setUp() {
-		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		this.adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 		this.adventure.setState(State.RENT_VEHICLE);
 	}
 

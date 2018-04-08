@@ -29,6 +29,8 @@ public class AdventureSequenceTest {
 	private static final String IBAN = "BK01987654321";
 	private static final int AMOUNT = 300;
 	private static final int AGE = 20;
+	private static final boolean CAR_NEEDED = true;
+	private static final boolean NO_CAR_NEEDED = false;
 	private static final String PAYMENT_CONFIRMATION = "PaymentConfirmation";
 	private static final String PAYMENT_CANCELLATION = "PaymentCancellation";
 	private static final String ACTIVITY_CONFIRMATION = "ActivityConfirmation";
@@ -80,7 +82,7 @@ public class AdventureSequenceTest {
 			}
 		};
 
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 
 		adventure.process();
 		adventure.process();
@@ -112,12 +114,102 @@ public class AdventureSequenceTest {
 			}
 		};
 
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 
 		adventure.process();
 		adventure.process();
 
 		Assert.assertEquals(State.RENT_VEHICLE, adventure.getState());
+	}
+
+	@Test
+	public void successSequenceThree(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface,
+			@Mocked final CarInterface carInterface) {
+		new Expectations() {
+			{
+
+				ActivityInterface.reserveActivity(arrival, departure, AGE, NIF, IBAN);
+				this.result = ACTIVITY_CONFIRMATION;
+
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
+				this.result = ROOM_CONFIRMATION;
+
+				BankInterface.processPayment(IBAN, AMOUNT);
+				this.result = PAYMENT_CONFIRMATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				broker.getIBAN();
+				this.result = IBAN;
+			}
+		};
+
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, NO_CAR_NEEDED);
+
+		
+		adventure.process();
+		adventure.process();
+		adventure.process();
+		
+		Assert.assertEquals(State.CONFIRMED, adventure.getState());
+	}
+
+	@Test
+	public void successSequenceFour(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface) {
+		new Expectations() {
+			{
+
+				ActivityInterface.reserveActivity(arrival, arrival, AGE, NIF, IBAN);
+				this.result = ACTIVITY_CONFIRMATION;
+
+				BankInterface.processPayment(IBAN, AMOUNT);
+				this.result = PAYMENT_CONFIRMATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+			}
+		};
+
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, arrival, AGE, IBAN, AMOUNT, NO_CAR_NEEDED);
+
+		
+		adventure.process();
+		adventure.process();
+		
+		Assert.assertEquals(State.CONFIRMED, adventure.getState());
+	}
+
+	@Test
+	public void successSequenceFive(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final CarInterface carInterface) {
+		new Expectations() {
+			{
+
+				ActivityInterface.reserveActivity(arrival, arrival, AGE, NIF, IBAN);
+				this.result = ACTIVITY_CONFIRMATION;
+
+				CarInterface.reserveCar(arrival, arrival, NIF, IBAN);
+				this.result = VEHICLE_CONFIRMATION;
+
+				BankInterface.processPayment(IBAN, AMOUNT);
+				this.result = PAYMENT_CONFIRMATION;
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+			}
+		};
+
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, arrival, AGE, IBAN, AMOUNT, CAR_NEEDED);
+
+		
+		adventure.process();
+		adventure.process();
+		adventure.process();
+		
+		Assert.assertEquals(State.CONFIRMED, adventure.getState());
 	}
 
 	@Test
@@ -133,7 +225,7 @@ public class AdventureSequenceTest {
 			}
 		};
 
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, arrival, AGE, IBAN, AMOUNT);
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, arrival, AGE, IBAN, AMOUNT, CAR_NEEDED);
 
 		adventure.process();
 
@@ -165,7 +257,7 @@ public class AdventureSequenceTest {
 			}
 		};
 
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 
 		adventure.process();
 		adventure.process();
@@ -207,7 +299,7 @@ public class AdventureSequenceTest {
 			}
 		};
 
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 
 		adventure.process();
 		adventure.process();
@@ -254,7 +346,7 @@ public class AdventureSequenceTest {
 			}
 		};
 
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 
 		adventure.process();
 		adventure.process();
@@ -308,7 +400,7 @@ public class AdventureSequenceTest {
 			}
 		};
 
-		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT);
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, CAR_NEEDED);
 
 		adventure.process();
 		adventure.process();
@@ -322,6 +414,45 @@ public class AdventureSequenceTest {
 
 		Assert.assertEquals(State.CANCELLED, adventure.getState());
 	}	
+
+	@Test
+	public void unsuccessSequenceSix(@Mocked final BankInterface bankInterface,
+			@Mocked final ActivityInterface activityInterface, @Mocked final HotelInterface roomInterface,
+			@Mocked final CarInterface carInterface) {
+		new Expectations() {
+			{
+
+				ActivityInterface.reserveActivity(arrival, departure, AGE, anyString, IBAN);
+				this.result = ACTIVITY_CONFIRMATION;
+
+				HotelInterface.reserveRoom(Type.SINGLE, arrival, departure, NIF, IBAN);
+				this.result = ROOM_CONFIRMATION;
+
+				BankInterface.processPayment(IBAN, AMOUNT);
+				this.result = new BankException();
+
+				ActivityInterface.cancelReservation(ACTIVITY_CONFIRMATION);
+				this.result = ACTIVITY_CANCELLATION;
+
+				HotelInterface.cancelBooking(ROOM_CONFIRMATION);
+				this.result = ROOM_CANCELLATION;	
+
+				broker.getNIFBuyer();
+				this.result = NIF;
+
+				broker.getIBAN();
+				this.result = IBAN;
+			}
+		};
+
+		Adventure adventure = new Adventure(this.client, this.broker, arrival, departure, AGE, IBAN, AMOUNT, NO_CAR_NEEDED);
+
+		adventure.process();
+		adventure.process();
+		adventure.process();
+		adventure.process();
+		Assert.assertEquals(State.CANCELLED, adventure.getState());
+	}
 
 	@After
 	public void tearDown() {
