@@ -9,16 +9,19 @@ public class Client {
 	public final String NIF;
 	public int age;
 	public String IBAN;
+	public String drivingLicense;
 
 	public static Set<Client> clients = new HashSet<>();
 
-	public Client(String IBAN, int age, String NIF) {
+	public Client(String IBAN, int age, String NIF, String drivingLicense) {
 		this.checkIBAN(IBAN);
 		this.IBAN = IBAN;
 		this.checkAge(age);
 		this.age = age;
 		this.checkNIF(NIF);
 		this.NIF = NIF;
+		this.checkDrivingLicense(drivingLicense);
+		this.drivingLicense = drivingLicense;
 		clients.add(this);
 	}
 
@@ -45,6 +48,17 @@ public class Client {
 		}
 	}
 
+	public void checkDrivingLicense(String drivingLicense) {
+		if (drivingLicense == null || !drivingLicense.matches("^[a-zA-Z]+\\d+$")) {
+			throw new BrokerException();
+		}
+		for (Client client : clients) {
+			if (client.getDrivingLicense().equals(drivingLicense)) {
+				throw new BrokerException();
+			}
+		}
+	}
+
 	public String getNIF(){
 		return this.NIF;
 	}
@@ -55,5 +69,9 @@ public class Client {
 
 	public String getIBAN(){
 		return this.IBAN;
+	}
+
+	public String getDrivingLicense() {
+		return this.drivingLicense;
 	}
 }

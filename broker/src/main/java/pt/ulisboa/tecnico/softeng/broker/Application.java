@@ -13,7 +13,7 @@ public class Application {
 		System.out.println("Adventures!");
 
 		Bank bank = new Bank("MoneyPlus", "BK01");
-		pt.ulisboa.tecnico.softeng.broker.domain.Client client = new pt.ulisboa.tecnico.softeng.broker.domain.Client("123", 20, "123456789");
+		pt.ulisboa.tecnico.softeng.broker.domain.Client client = new pt.ulisboa.tecnico.softeng.broker.domain.Client("123", 20, "123456789", "br123");
 		Account account = new Account(bank, new pt.ulisboa.tecnico.softeng.bank.domain.Client(bank, "Mafalda Gaspar"));
 		account.deposit(1000);
 
