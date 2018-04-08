@@ -1,7 +1,5 @@
 package pt.ulisboa.tecnico.softeng.broker.interfaces;
 
-import java.util.Set;
-
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.car.domain.RentACar;
@@ -10,6 +8,7 @@ import pt.ulisboa.tecnico.softeng.car.domain.Vehicle;
 import pt.ulisboa.tecnico.softeng.car.domain.Car;
 
 public class CarInterface {
+
 	public static String reserveCar(LocalDate begin, LocalDate end, String NIF, String IBAN) {
 		return RentACar.reserveAvailableVehicle(Car.class, begin, end, "br112233", NIF, IBAN);
 	}
