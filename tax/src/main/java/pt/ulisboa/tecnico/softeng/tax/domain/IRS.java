@@ -82,11 +82,7 @@ public class IRS {
 	public static void cancelInvoice(String referString) {
 		IRS irs = IRS.getIRS();
 		Invoice invoice = irs.getInvoiceByReference(referString);
-		Seller seller = (Seller) invoice.getSeller();
-		Buyer buyer = (Buyer) invoice.getBuyer();
-
-		seller.removeInvoice(invoice);
-		buyer.removeInvoice(invoice);
+		if (invoice != null) invoice.setCancellation(true);
 	}
 
 }

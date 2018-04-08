@@ -6,6 +6,7 @@ import java.util.Set;
 import pt.ulisboa.tecnico.softeng.hotel.exception.RemoteAccessException;
 import pt.ulisboa.tecnico.softeng.hotel.interfaces.BankInterface;
 import pt.ulisboa.tecnico.softeng.hotel.interfaces.TaxInterface;
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
@@ -29,10 +30,26 @@ public class Processor {
 					try {
 						booking.setPaymentReference(
 								BankInterface.processPayment(booking.getIban(), booking.getAmount()));
-					} catch (BankException | RemoteAccessException ex) {
+					} catch (HotelException | BankException | RemoteAccessException ex) {
 						failedToProcess.add(booking);
 						continue;
 					}
+				}
+				InvoiceData invoiceData = new InvoiceData(booking.getNif(), booking.getHotelNif(), booking.getReference(),
+						booking.getAmount(), booking.getDeparture());
+				try {
+					booking.setInvoiceReference(TaxInterface.submitInvoice(invoiceData));
+				} catch (RemoteAccessException | TaxException e) {
+					failedToProcess.add(booking);
+				}
+			} else {
+				try {
+					if (booking.getCancellation() != null) {
+						BankInterface.cancelPayment(booking.getPaymentReference());
+					}
+					TaxInterface.cancelInvoice(booking.getInvoiceReference());
+				} catch (TaxException | BankException | RemoteAccessException e) {
+					failedToProcess.add(booking);
 				}
 			}
 		}
