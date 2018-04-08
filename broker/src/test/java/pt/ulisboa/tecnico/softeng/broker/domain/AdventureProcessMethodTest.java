@@ -38,7 +38,7 @@ public class AdventureProcessMethodTest {
 
 	@Before
 	public void setUp() {
-		this.client = new Client("123", 20, "123444661");
+		this.client = new Client("123", 20, "123444661", "br123");
 		this.broker = new Broker("BR01", "eXtremeADVENTURE", "123456789", "987654321", "IBAN");
 
 		Bank bank = new Bank("Money", "BK01");
