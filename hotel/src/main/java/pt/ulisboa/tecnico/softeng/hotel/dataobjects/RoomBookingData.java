@@ -12,6 +12,7 @@ public class RoomBookingData {
 	private String hotelCode;
 	private String roomNumber;
 	private String roomType;
+	private double roomAmount;
 	private LocalDate arrival;
 	private LocalDate departure;
 	private LocalDate cancellationDate;
@@ -26,6 +27,7 @@ public class RoomBookingData {
 		this.hotelCode = room.getHotel().getCode();
 		this.roomNumber = room.getNumber();
 		this.roomType = room.getType().name();
+		this.roomAmount = room.getPrice();
 		this.arrival = booking.getArrival();
 		this.departure = booking.getDeparture();
 		this.cancellationDate = booking.getCancellationDate();
@@ -73,6 +75,10 @@ public class RoomBookingData {
 
 	public String getRoomType() {
 		return this.roomType;
+	}
+
+	public double getRoomAmount() {
+		return this.roomAmount;
 	}
 
 	public void setRoomType(String roomType) {
