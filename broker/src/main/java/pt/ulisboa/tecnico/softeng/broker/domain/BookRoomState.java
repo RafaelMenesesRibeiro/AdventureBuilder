@@ -19,6 +19,8 @@ public class BookRoomState extends AdventureState {
 		try {
 			adventure.setRoomConfirmation(
 			HotelInterface.reserveRoom(Room.Type.SINGLE, adventure.getBegin(), adventure.getEnd(), adventure.getBroker().getNIFBuyer(), adventure.getBroker().getIBAN()));
+			adventure.incrementAmount(HotelInterface.getRoomAmount(adventure.getRoomConfirmation()));
+
 		} catch (HotelException he) {
 			adventure.setState(State.UNDO);
 			return;

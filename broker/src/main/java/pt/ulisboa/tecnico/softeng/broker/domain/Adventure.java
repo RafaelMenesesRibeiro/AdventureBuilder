@@ -21,7 +21,7 @@ public class Adventure {
 	private final LocalDate end;
 	private final int age;
 	private final String IBAN;
-	private final int amount;
+	private int amount;
 	private final boolean isCarNeeded;
 	private String paymentConfirmation;
 	private String paymentCancellation;
@@ -105,6 +105,13 @@ public class Adventure {
 		return this.amount;
 	}
 
+	public void incrementAmount(double value) {
+		this.amount += (int) value;
+	}
+
+	public void resetAmount() {
+		this.amount = 0;
+	}
 	public boolean getIsCarNeeded() {
 		return this.isCarNeeded;
 	}

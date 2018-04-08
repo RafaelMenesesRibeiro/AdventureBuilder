@@ -95,10 +95,10 @@ public class RentACar {
 	}
 
 	public static String reserveAvailableVehicle(Class<?> cls, LocalDate begin, LocalDate end, String drivingLicense, String NIF, String IBAN) {
-		Set<Vehicle> vehicles = RentACar.getAllAvailableVehicles(cls, begin, end);
-		if (vehicles.size() == 0) { throw new CarException(); }
-		Vehicle vehicle = (Vehicle) vehicles.toArray()[0];
-		return vehicle.rent(drivingLicense, begin, end, NIF, IBAN).getReference();
+        Set<Vehicle> vehicles = RentACar.getAllAvailableVehicles(cls, begin, end);
+        if (vehicles.size() == 0) { throw new CarException(); }
+        Vehicle vehicle = (Vehicle) vehicles.toArray()[0];
+        return vehicle.rent(drivingLicense, begin, end, NIF, IBAN).getReference();
 	}
 
 
@@ -108,6 +108,13 @@ public class RentACar {
 
 	public static Set<Vehicle> getAllAvailableCars(LocalDate begin, LocalDate end) {
 		return getAllAvailableVehicles(Car.class, begin, end);
+	}
+
+	public static String rent(LocalDate begin, LocalDate end, String drivingLicense, String NIF, String IBAN) {
+		Set<Vehicle> availableVehicles = getAllAvailableCars(begin, end);
+		Vehicle toRent = (Vehicle) (availableVehicles.toArray())[0];
+		Renting renting = toRent.rent(drivingLicense, begin, end, NIF, IBAN);
+		return renting.getReference();
 	}
 
 	/**
