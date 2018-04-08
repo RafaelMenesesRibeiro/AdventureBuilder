@@ -138,8 +138,7 @@ public class Renting {
 	}
 
 	public double getAmount() {
-		//return this.vehicle.getCost();
-		return 0;
+		return this.vehicle.getPrice();
 	}
 
 	public String getPaymentReference() {
