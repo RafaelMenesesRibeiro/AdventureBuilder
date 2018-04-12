@@ -53,9 +53,7 @@ relation RoomHasBookings {
 	}
 }
 
-class Processor {
-	String id;
-}
+class Processor;
 
 relation HotelHasProcessor {
 	Hotel playsRole hotel {
