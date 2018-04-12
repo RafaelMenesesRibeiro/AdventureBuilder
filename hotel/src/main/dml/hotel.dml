@@ -5,6 +5,11 @@ enum pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type as RoomType;
 class Hotel {
 	String code;
 	String name;
+	String nif;
+	String iban;
+	double priceSingle;
+	double priceDouble;
+
 	int counter;
 }
 
