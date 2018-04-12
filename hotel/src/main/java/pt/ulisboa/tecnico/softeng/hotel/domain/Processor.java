@@ -12,9 +12,7 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class Processor extends Processor_Base {
 
-	public Processor(String bankName) {
-		setId(bankName+"Processor");
-	}
+	public Processor() {}
 
 	public void submitBooking(Booking booking) {
 		getBookingToProcessSet().add(booking);
