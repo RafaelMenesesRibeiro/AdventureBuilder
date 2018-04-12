@@ -30,7 +30,7 @@ public class Hotel extends Hotel_Base {
 		super.setIban(iban);
 		setPriceSingle(priceSingle);
 		setPriceDouble(priceDouble);
-		super.setProcessor(new Processor(name));
+		super.setProcessor(new Processor());
 
 		FenixFramework.getDomainRoot().addHotel(this);
 	}
