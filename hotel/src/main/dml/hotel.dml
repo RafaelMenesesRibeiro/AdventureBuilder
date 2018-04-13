@@ -74,7 +74,7 @@ relation HotelHasProcessor {
 
 relation ProcessorHasBookings {
 	Processor playsRole processor {
-		multiplicity 1..1;
+		multiplicity 0..1;
 	}
 	Booking playsRole bookingToProcess {
 		multiplicity 0..*;
