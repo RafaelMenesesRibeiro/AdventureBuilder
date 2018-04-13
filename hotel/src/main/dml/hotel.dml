@@ -37,11 +37,17 @@ relation HotelHasRooms {
 }
 
 class Booking {
-	String reference;
-	String cancellation;
 	LocalDate cancellationDate;
 	LocalDate arrival;
 	LocalDate departure;
+	String cancellation;
+	String reference;
+	String providerNif;
+	String buyerNif;
+	String buyerIban;
+	String paymentReference;
+	String invoiceReference;
+	double price;
 }
 
 relation RoomHasBookings {

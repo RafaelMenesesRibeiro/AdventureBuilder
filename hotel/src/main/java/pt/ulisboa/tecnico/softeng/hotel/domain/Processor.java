@@ -25,14 +25,13 @@ public class Processor extends Processor_Base {
 			if (!booking.isCancelled()) {
 				if (booking.getPaymentReference() == null) {
 					try {
-						booking.setPaymentReference(BankInterface.processPayment(booking.getIban(), booking.getPrice()));
+						booking.setPaymentReference(BankInterface.processPayment(booking.getBuyerIban(), booking.getPrice()));
 					} catch (BankException | RemoteAccessException ex) {
 						failedToProcess.add(booking);
 						continue;
 					}
 				}
-				final InvoiceData invoiceData = new InvoiceData(booking.getProviderNif(), booking.getNif(),
-						Booking.getType(), booking.getPrice(), booking.getArrival());
+				final InvoiceData invoiceData = new InvoiceData(booking.getProviderNif(), booking.getBuyerNif(), Booking.getType(), booking.getPrice(), booking.getArrival());
 				try {
 					booking.setInvoiceReference(TaxInterface.submitInvoice(invoiceData));
 				} catch (TaxException | RemoteAccessException ex) {
