@@ -2,6 +2,7 @@ package pt.ulisboa.tecnico.softeng.hotel.domain;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
 
 public class HotelPersistenceTest {
 	private static final String HOTEL_NAME = "Berlin Plaza";
-	private final static String HOTEL_CODE = "H123456";
+	private static final String HOTEL_CODE = "H123456";
 	private static final String ROOM_NUMBER = "01";
 
 	private final LocalDate arrival = new LocalDate(2017, 12, 15);
@@ -42,6 +43,13 @@ public class HotelPersistenceTest {
 	@Atomic(mode = TxMode.READ)
 	public void atomicAssert() {
 		Hotel hotel = Hotel.getHotelByCode(HOTEL_CODE);
+
+		assertNotNull(hotel.getProcessor());
+
+		Processor processor = hotel.getProcessor();
+
+		assertNotNull(processor.getHotel());
+		assertTrue(processor.getBookingToProcessSet().isEmpty());
 
 		assertEquals(HOTEL_NAME, hotel.getName());
 		assertEquals(HOTEL_CODE, hotel.getCode());
