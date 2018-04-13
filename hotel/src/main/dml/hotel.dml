@@ -9,7 +9,6 @@ class Hotel {
 	String iban;
 	double priceSingle;
 	double priceDouble;
-
 	int counter;
 }
 
