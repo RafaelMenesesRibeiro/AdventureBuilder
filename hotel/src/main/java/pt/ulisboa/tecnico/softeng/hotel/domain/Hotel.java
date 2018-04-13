@@ -53,11 +53,11 @@ public class Hotel extends Hotel_Base {
 	public void delete() {
 		setRoot(null);
 
+		getProcessor().delete();
+		
 		for (Room room : getRoomSet()) {
 			room.delete();
 		}
-
-		getProcessor().delete();
 
 		deleteDomainObject();
 	}

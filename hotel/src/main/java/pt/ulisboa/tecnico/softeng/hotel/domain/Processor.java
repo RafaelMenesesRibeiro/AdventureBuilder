@@ -64,6 +64,8 @@ public class Processor extends Processor_Base {
 	}
 
 	public void delete() {
+		setHotel(null);
+
 		for (Booking booking : getBookingToProcessSet()) {
 			booking.delete();
 		}

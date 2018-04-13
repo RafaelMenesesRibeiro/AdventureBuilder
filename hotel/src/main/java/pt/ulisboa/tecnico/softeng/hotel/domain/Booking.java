@@ -38,6 +38,7 @@ public class Booking extends Booking_Base {
 	public void setProviderNif(String providerNif) { /* do nothing - provider nif is final	*/ }
 
 	public void delete() {
+		setProcessor(null);
 		setRoom(null);
 
 		deleteDomainObject();
