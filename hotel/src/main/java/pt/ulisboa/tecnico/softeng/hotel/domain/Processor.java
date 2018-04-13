@@ -63,4 +63,12 @@ public class Processor extends Processor_Base {
 		getBookingToProcessSet().clear();
 	}
 
+	public void delete() {
+		for (Booking booking : getBookingToProcessSet()) {
+			booking.delete();
+		}
+
+		deleteDomainObject();
+	}
+
 }

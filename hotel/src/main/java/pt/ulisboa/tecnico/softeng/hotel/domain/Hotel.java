@@ -57,6 +57,8 @@ public class Hotel extends Hotel_Base {
 			room.delete();
 		}
 
+		getProcessor().delete();
+
 		deleteDomainObject();
 	}
 
