@@ -8,10 +8,6 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class Booking extends Booking_Base {
 	private static final String HOUSING_TYPE = "HOUSING";
 
-	private boolean cancelledInvoice = false;
-	private String cancelledPaymentReference = null;
-
-
 	public Booking(Room room, LocalDate arrival, LocalDate departure, String buyerNif, String buyerIban) {
 		checkArguments(room, arrival, departure, buyerNif, buyerIban);
 
@@ -26,6 +22,7 @@ public class Booking extends Booking_Base {
 		super.setBuyerIban(buyerIban);
 		super.setPrice(room.getHotel().getPrice(room.getType()) * Days.daysBetween(arrival, departure).getDays());
 
+		setCancelledInvoice(false);
 	}
 
 	@Override
@@ -91,19 +88,7 @@ public class Booking extends Booking_Base {
 	}
 
 	public boolean isCancelledInvoice() {
-		return this.cancelledInvoice;
-	}
-
-	public void setCancelledInvoice(boolean cancelledInvoice) {
-		this.cancelledInvoice = cancelledInvoice;
-	}
-
-	public String getCancelledPaymentReference() {
-		return this.cancelledPaymentReference;
-	}
-
-	public void setCancelledPaymentReference(String cancelledPaymentReference) {
-		this.cancelledPaymentReference = cancelledPaymentReference;
+		return getCancelledInvoice();
 	}
 
 	public String cancel() {

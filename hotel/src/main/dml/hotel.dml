@@ -47,7 +47,9 @@ class Booking {
 	String buyerIban;
 	String paymentReference;
 	String invoiceReference;
+	String cancelledPaymentReference;
 	double price;
+	boolean cancelledInvoice;
 }
 
 relation RoomHasBookings {
