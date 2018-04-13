@@ -64,7 +64,7 @@ public class Booking extends Booking_Base {
 			return false;
 		}
 
-		if (arrival.equals(getDeparture())) {
+		if (arrival.equals(departure)) {
 			return true;
 		}
 
