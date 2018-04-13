@@ -18,12 +18,12 @@ To see the coverage reports, go to module_name/target/site/jacoco/index.html.
 
 ## Tasks - Third Delivery  
 
-|   Number   |          Name           |   GitHub Name   |        Module      |     Task    |
-| ---------- | ----------------------- | ----------------| ------------------ | ----------- |
-| 84758      | Rafael Ribeiro          | RafaelRibeiro97 |      Tax / Bank    |Tester / Code|
-| 83391      | Andreia Valente         | AndreiaValente  |      Tax / Bank    |Tester / Code|
-| 85069      | Francisco Barros        | FranciscoKloganB|Car / Broker / Hotel|Tester / Code|
-| 84710      | Diogo Vilela            | DiogoFSVilela   |Car / Broker / Hotel|Tester / Code|
-| 83405      | João Neves              | JoaoMiguelNeves |Car / Broker / Hotel|Tester / Code|
-| 84711      | Diogo Redin             | diogoredin      |      Tax / Bank    |Tester / Code|
-| 77921      | Mafalda Gaspar          | mafsgasp        |      Tax / Bank    |Tester / Code|
+|   Number   |          Name           |   GitHub Name   |           Module        |     Task    |
+| ---------- | ----------------------- | ----------------| ----------------------- | ----------- |
+| 84758      | Rafael Ribeiro          | RafaelRibeiro97 | Tax / Activity / Broker |Tester / Code|
+| 83391      | Andreia Valente         | AndreiaValente  | Tax / Activity / Broker |Tester / Code|
+| 85069      | Francisco Barros        | FranciscoKloganB|       Car / Hotel       |Tester / Code|
+| 84710      | Diogo Vilela            | DiogoFSVilela   |       Car / Hotel       |Tester / Code|
+| 83405      | João Neves              | JoaoMiguelNeves |       Car / Hotel       |Tester / Code|
+| 84711      | Diogo Redin             | diogoredin      | Tax / Activity / Broker |Tester / Code|
+| 77921      | Mafalda Gaspar          | mafsgasp        | Tax / Activity / Broker |Tester / Code|
