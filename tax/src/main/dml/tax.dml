@@ -1,0 +1,6 @@
+package pt.ulisboa.tecnico.softeng.tax.domain;
+
+class ItemType {
+	String name;
+	int tax;
+}
