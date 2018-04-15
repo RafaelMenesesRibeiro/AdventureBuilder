@@ -21,12 +21,13 @@ public class IRS extends IRS_Base{
 			new IRS();
 			return FenixFramework.getDomainRoot().getUniqueIRS();
 		}
-		//return FenixFramework.getDomainRoot().getUniqueIRS();
-		
+		return FenixFramework.getDomainRoot().getUniqueIRS();
+		/*
 		if (instance == null) {
 			instance = new IRS();
 		}
 		return instance;
+		*/
 	}
 
 	private IRS() { FenixFramework.getDomainRoot().setUniqueIRS(this); } 
