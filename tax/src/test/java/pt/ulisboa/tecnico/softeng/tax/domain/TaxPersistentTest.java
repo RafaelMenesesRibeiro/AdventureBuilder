@@ -25,27 +25,31 @@ public class TaxPersistentTest {
 	private static TaxPayer BUYER;
 	private static IRS irs;
 
-	@Before
-	public void setUp() {
+	@Test
+	public void success() {
+		//atomicProcess();
+		//atomicAssert();
+	}
+
+	@Atomic(mode = TxMode.WRITE)
+	public void atomicProcess() { 
+		//TODO: Uncoment when needed.
+		/*
 		this.irs = IRS.getIRS();
 		this.ITEM_TYPE = new ItemType(this.irs, ITEM_TYPE_NAME, ITEM_TYPE_TAX);
 		this.SELLER = new Seller(this.irs, SELLER_NIF, TAX_PAYER_NAME, ADDRESS);
 		this.BUYER = new Buyer(this.irs, BUYER_NIF, TAX_PAYER_NAME, ADDRESS);
+		*/
 	}
-
-	@Test
-	public void success() {
-		atomicProcess();
-		atomicAssert();
-	}
-
-	@Atomic(mode = TxMode.WRITE)
-	public void atomicProcess() {  }
 
 	@Atomic(mode = TxMode.READ)
-	public void atomicAssert() {  }
+	public void atomicAssert() { 
+		IRS irsDB = IRS.getIRS();
+	}
 
 	@After
 	@Atomic(mode = TxMode.WRITE)
-	public void tearDown() {  }
+	public void tearDown() {
+		//IRS.getIRS().delete();
+	}
 }
