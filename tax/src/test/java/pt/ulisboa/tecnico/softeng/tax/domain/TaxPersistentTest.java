@@ -27,19 +27,19 @@ public class TaxPersistentTest {
 
 	@Test
 	public void success() {
-		//atomicProcess();
-		//atomicAssert();
+		atomicProcess();
+		atomicAssert();
 	}
 
 	@Atomic(mode = TxMode.WRITE)
 	public void atomicProcess() { 
 		//TODO: Uncoment when needed.
 		/*
-		this.irs = IRS.getIRS();
 		this.ITEM_TYPE = new ItemType(this.irs, ITEM_TYPE_NAME, ITEM_TYPE_TAX);
 		this.SELLER = new Seller(this.irs, SELLER_NIF, TAX_PAYER_NAME, ADDRESS);
 		this.BUYER = new Buyer(this.irs, BUYER_NIF, TAX_PAYER_NAME, ADDRESS);
 		*/
+		this.irs = IRS.getIRS(); //Creates the IRS (Singleton design pattern.)
 	}
 
 	@Atomic(mode = TxMode.READ)
@@ -50,6 +50,6 @@ public class TaxPersistentTest {
 	@After
 	@Atomic(mode = TxMode.WRITE)
 	public void tearDown() {
-		//IRS.getIRS().delete();
+		IRS.getIRS().delete();
 	}
 }
