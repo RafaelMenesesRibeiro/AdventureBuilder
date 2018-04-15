@@ -16,12 +16,11 @@ public class IRS extends IRS_Base{
 	private static IRS instance;
 
 	public static IRS getIRS() {
-		IRS i = FenixFramework.getDomainRoot().getUniqueIRS();
-		if (i == null) {
-			new IRS();
-			return FenixFramework.getDomainRoot().getUniqueIRS();
-		}
+		IRS instance = FenixFramework.getDomainRoot().getUniqueIRS();
+		if (instance != null) { return instance; }
+		new IRS();
 		return FenixFramework.getDomainRoot().getUniqueIRS();
+
 	}
 
 	private IRS() { FenixFramework.getDomainRoot().setUniqueIRS(this); } 
