@@ -13,8 +13,6 @@ public class IRS extends IRS_Base{
 	private final Set<TaxPayer> taxPayers = new HashSet<>();
 	private final Set<ItemType> itemTypes = new HashSet<>();
 
-	private static IRS instance;
-
 	public static IRS getIRS() {
 		IRS instance = FenixFramework.getDomainRoot().getUniqueIRS();
 		if (instance != null) { return instance; }
