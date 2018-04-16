@@ -13,8 +13,6 @@ import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
 public class Broker extends Broker_Base {
 	private static Logger logger = LoggerFactory.getLogger(Broker.class);
 
-	private final Set<Client> clients = new HashSet<>();
-
 	@Override
 	public int getCounter() {
 		int counter = super.getCounter() + 1;
@@ -38,6 +36,9 @@ public class Broker extends Broker_Base {
 	public void delete() {
 		setRoot(null);
 
+		for (Client client : getClientSet()) {
+			client.delete();
+		}
 		for (Adventure adventure : getAdventureSet()) {
 			adventure.delete();
 		}
@@ -76,7 +77,7 @@ public class Broker extends Broker_Base {
 	}
 
 	public Client getClientByNIF(String NIF) {
-		for (Client client : this.clients) {
+		for (Client client : getClientSet()) {
 			if (client.getNIF().equals(NIF)) {
 				return client;
 			}
@@ -85,11 +86,7 @@ public class Broker extends Broker_Base {
 	}
 
 	public boolean drivingLicenseIsRegistered(String drivingLicense) {
-		return this.clients.stream().anyMatch(client -> client.getDrivingLicense().equals(drivingLicense));
-	}
-
-	public void addClient(Client client) {
-		this.clients.add(client);
+		return getClientSet().stream().anyMatch(client -> client.getDrivingLicense().equals(drivingLicense));
 	}
 
 	public void bulkBooking(int number, LocalDate arrival, LocalDate departure) {
