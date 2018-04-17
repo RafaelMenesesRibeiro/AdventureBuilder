@@ -80,6 +80,8 @@ relation AdventureHasState {
 }
 
 class BulkRoomBooking {
+	String buyerNif;
+	String buyerIban;
 	int number;
 	LocalDate arrival;
 	LocalDate departure;
