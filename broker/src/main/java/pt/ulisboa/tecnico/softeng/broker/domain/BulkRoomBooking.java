@@ -13,8 +13,6 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class BulkRoomBooking extends BulkRoomBooking_Base {
 	public static final int MAX_HOTEL_EXCEPTIONS = 3;
 	public static final int MAX_REMOTE_ERRORS = 10;
-	public String buyerNif;
-	public String buyerIban;
 
 	@Override
 	public void setBuyerNif(String buyerNif) {
@@ -36,8 +34,8 @@ public class BulkRoomBooking extends BulkRoomBooking_Base {
 		setArrival(arrival);
 		setDeparture(departure);
 
-		this.buyerNif = buyerNif;
-		this.buyerIban = buyerIban;
+		setBuyerNif(buyerNif);
+		setBuyerIban(buyerIban);
 
 		setBroker(broker);
 	}
@@ -62,8 +60,8 @@ public class BulkRoomBooking extends BulkRoomBooking_Base {
 		}
 
 		try {
-			for (String reference : HotelInterface.bulkBooking(getNumber(), getArrival(), getDeparture(), this.buyerNif,
-					this.buyerIban)) {
+			for (String reference : HotelInterface.bulkBooking(getNumber(), getArrival(), getDeparture(), getBuyerNif(),
+					getBuyerIban())) {
 				addReference(new Reference(this, reference));
 			}
 			setNumberOfHotelExceptions(0);
