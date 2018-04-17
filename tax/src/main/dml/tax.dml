@@ -1,6 +1,5 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
-
 class IRS {  }
 
 relation DomainRootHasIrsApplication {
@@ -10,4 +9,9 @@ relation DomainRootHasIrsApplication {
 	IRS playsRole uniqueIRS {
 		multiplicity 0..1;
 	}
+}
+
+class ItemType {
+	String name;
+	int tax;
 }
