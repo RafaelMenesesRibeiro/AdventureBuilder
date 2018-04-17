@@ -16,6 +16,7 @@ To see the coverage reports, go to module_name/target/site/jacoco/index.html.
 | 83391      | Andreia Valente         | andreia.valente@tecnico.ulisboa.pt       | AndreiaValente  |   17  |
 
 
+
 ## Tasks - Third Delivery  
 
 |   Number   |          Name           |   GitHub Name   |           Module        |     Task    |
@@ -27,4 +28,3 @@ To see the coverage reports, go to module_name/target/site/jacoco/index.html.
 | 83405      | João Neves              | JoaoMiguelNeves |       Car / Hotel       |Tester / Code|
 | 84711      | Diogo Redin             | diogoredin      | Tax / Activity / Broker |Tester / Code|
 | 77921      | Mafalda Gaspar          | mafsgasp        | Tax / Activity / Broker |Tester / Code|
-

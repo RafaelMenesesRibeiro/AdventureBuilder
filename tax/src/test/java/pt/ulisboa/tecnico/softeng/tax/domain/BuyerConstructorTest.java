@@ -9,15 +9,15 @@ import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
-public class BuyerConstructorTest {
+public class BuyerConstructorTest extends RollbackTestAbstractClass {
 	private static final String ADDRESS = "Somewhere";
 	private static final String NAME = "José Vendido";
 	private static final String NIF = "123456789";
 
 	IRS irs;
 
-	@Before
-	public void setUp() {
+	@Override
+	public void populate4Test() {
 		this.irs = IRS.getIRS();
 	}
 
@@ -82,6 +82,6 @@ public class BuyerConstructorTest {
 	@After
 	public void tearDown() {
 		IRS.getIRS().clearAll();
+		super.tearDown();
 	}
-
 }

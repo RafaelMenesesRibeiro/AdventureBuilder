@@ -1,19 +1,15 @@
 package pt.ulisboa.tecnico.softeng.broker.domain;
 
 import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
+import pt.ist.fenixframework.FenixFramework;
 
-public class Client {
-	private final String IBAN;
-	private final String NIF;
-	private final String drivingLicense;
-	private final int age;
-
+public class Client extends Client_Base {
 	public Client(Broker broker, String IBAN, String NIF, String drivingLicense, int age) {
 		checkArguments(broker, IBAN, NIF, drivingLicense, age);
-		this.IBAN = IBAN;
-		this.NIF = NIF;
-		this.drivingLicense = drivingLicense;
-		this.age = age;
+		setIBAN(IBAN);
+		setNIF(NIF);
+		setDrivingLicense(drivingLicense);
+		setAge(age);
 
 		broker.addClient(this);
 	}
@@ -39,22 +35,10 @@ public class Client {
 		if (broker.drivingLicenseIsRegistered(drivingLicense)) {
 			throw new BrokerException();
 		}
-
 	}
 
-	public String getIBAN() {
-		return this.IBAN;
-	}
-
-	public String getNIF() {
-		return this.NIF;
-	}
-
-	public int getAge() {
-		return this.age;
-	}
-
-	public String getDrivingLicense() {
-		return drivingLicense;
+	public void delete() {
+		setBroker(null);
+		deleteDomainObject();
 	}
 }

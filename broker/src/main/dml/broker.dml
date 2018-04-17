@@ -4,7 +4,28 @@ class Broker {
 	String code;
 	String name;
 	int counter;
+	String nifAsSeller;
+	String nifAsBuyer;
+	String IBAN;
 }
+
+class Client {
+	String IBAN;
+	String NIF;
+	String drivingLicense;
+	int age;	
+}
+
+
+relation BrokerHasClients {
+	Broker playsRole broker {
+		multiplicity 1..1;
+	}
+	Client playsRole client {
+		multiplicity 0..*;
+	}
+}
+
 
 relation DomainRootHasBrokerApplication {
 	.pt.ist.fenixframework.DomainRoot playsRole root {

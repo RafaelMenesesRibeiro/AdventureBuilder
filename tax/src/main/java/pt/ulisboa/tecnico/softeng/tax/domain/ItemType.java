@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
+import pt.ist.fenixframework.FenixFramework;
+
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class ItemType extends ItemType_Base{
