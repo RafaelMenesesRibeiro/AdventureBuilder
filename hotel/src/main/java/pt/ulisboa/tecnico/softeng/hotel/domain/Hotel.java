@@ -14,8 +14,8 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class Hotel extends Hotel_Base {
 	static final int CODE_SIZE = 7;
 
-	private final String NIF;
-	private final String IBAN;
+	private final String nif;
+	private final String iban;
 	private double priceSingle;
 	private double priceDouble;
 
@@ -28,14 +28,14 @@ public class Hotel extends Hotel_Base {
 		return counter;
 	}
 
-	public Hotel(String code, String name, String NIF, String IBAN, double priceSingle, double priceDouble) {
-		checkArguments(code, name, NIF, IBAN, priceSingle, priceDouble);
+	public Hotel(String code, String name, String nif, String iban, double priceSingle, double priceDouble) {
+		checkArguments(code, name, nif, iban, priceSingle, priceDouble);
 
 		setCode(code);
 		setName(name);
 
-		this.NIF = NIF;
-		this.IBAN = IBAN;
+		this.nif = nif;
+		this.iban = iban;
 		this.priceSingle = priceSingle;
 		this.priceDouble = priceDouble;
 
@@ -52,10 +52,10 @@ public class Hotel extends Hotel_Base {
 		deleteDomainObject();
 	}
 
-	private void checkArguments(String code, String name, String NIF, String IBAN, double priceSingle,
+	private void checkArguments(String code, String name, String nif, String iban, double priceSingle,
 			double priceDouble) {
-		if (code == null || name == null || isEmpty(code) || isEmpty(name) || NIF == null || isEmpty(NIF)
-				|| IBAN == null || isEmpty(IBAN) || priceSingle < 0 || priceDouble < 0) {
+		if (code == null || name == null || isEmpty(code) || isEmpty(name) || nif == null || isEmpty(nif)
+				|| iban == null || isEmpty(iban) || priceSingle < 0 || priceDouble < 0) {
 
 			throw new HotelException();
 		}
@@ -71,7 +71,7 @@ public class Hotel extends Hotel_Base {
 		}
 
 		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
-			if (hotel.getNIF().equals(NIF)) {
+			if (hotel.getNIF().equals(nif)) {
 				throw new HotelException();
 			}
 		}
@@ -101,11 +101,11 @@ public class Hotel extends Hotel_Base {
 	}
 
 	public String getNIF() {
-		return this.NIF;
+		return this.nif;
 	}
 
 	public String getIBAN() {
-		return this.IBAN;
+		return this.iban;
 	}
 
 	public Processor getProcessor() {
@@ -171,11 +171,11 @@ public class Hotel extends Hotel_Base {
 	}
 
 	public static String reserveRoom(Room.Type type, LocalDate arrival, LocalDate departure, String buyerNIF,
-			String buyerIBAN) {
+			String buyerIban) {
 		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
 			Room room = hotel.hasVacancy(type, arrival, departure);
 			if (room != null) {
-				Booking booking = room.reserve(type, arrival, departure, buyerNIF, buyerIBAN);
+				Booking booking = room.reserve(type, arrival, departure, buyerNIF, buyerIban);
 				hotel.getProcessor().submitBooking(booking);
 				return booking.getReference();
 			}
@@ -206,7 +206,7 @@ public class Hotel extends Hotel_Base {
 	}
 
 	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure, String buyerNIF,
-			String buyerIBAN) {
+			String buyerIban) {
 		if (number < 1) {
 			throw new HotelException();
 		}
@@ -219,7 +219,7 @@ public class Hotel extends Hotel_Base {
 		Set<String> references = new HashSet<>();
 
 		for (int i = 0; i < number; i++) {
-			Booking booking = rooms.get(i).reserve(rooms.get(i).getType(), arrival, departure, buyerNIF, buyerIBAN);
+			Booking booking = rooms.get(i).reserve(rooms.get(i).getType(), arrival, departure, buyerNIF, buyerIban);
 			rooms.get(i).getHotel().getProcessor().submitBooking(booking);
 			references.add(booking.getReference());
 		}

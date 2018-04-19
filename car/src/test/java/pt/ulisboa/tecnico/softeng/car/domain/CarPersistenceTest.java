@@ -37,8 +37,8 @@ public class CarPersistenceTest {
 		assertEquals(1, rentals.size());
 		RentACar rental = rentals.get(0);
 		assertEquals(RENT_NAME, rental.getName());
-		assertEquals(RENT_NIF, rental.getNIF());
-		assertEquals(RENT_IBAN, rental.getIBAN());
+		assertEquals(RENT_NIF, rental.getNif());
+		assertEquals(RENT_IBAN, rental.getIban());
 	}
 
 	@After

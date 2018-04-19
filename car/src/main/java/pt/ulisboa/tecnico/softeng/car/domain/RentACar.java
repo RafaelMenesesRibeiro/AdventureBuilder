@@ -22,24 +22,24 @@ public class RentACar extends RentACar_Base {
 
 	private final Processor processor = new Processor();
 
-	public RentACar(String name, String NIF, String IBAN) {
-		checkArguments(name, NIF, IBAN);
+	public RentACar(String name, String nif, String iban) {
+		checkArguments(name, nif, iban);
 		setName(name);
-		setNIF(NIF);
-		setIBAN(IBAN);
-		setCode(NIF + Integer.toString(getNextCounter()));
+		setNif(nif);
+		setIban(iban);
+		setCode(nif + Integer.toString(getNextCounter()));
 
 		FenixFramework.getDomainRoot().addRentACar(this);
 	}
 
-	private void checkArguments(String name, String NIF, String IBAN) {
-		if (name == null || name.isEmpty() || NIF == null || NIF.isEmpty() || IBAN == null || IBAN.isEmpty()) {
+	private void checkArguments(String name, String nif, String iban) {
+		if (name == null || name.isEmpty() || nif == null || nif.isEmpty() || iban == null || iban.isEmpty()) {
 
 			throw new CarException();
 		}
 
 		for (final RentACar rental : FenixFramework.getDomainRoot().getRentACarSet()) {
-			if (rental.getNIF().equals(NIF)) {
+			if (rental.getNif().equals(nif)) {
 				throw new CarException();
 			}
 		}

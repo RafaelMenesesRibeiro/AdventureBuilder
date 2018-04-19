@@ -8,9 +8,9 @@ public class Booking extends Booking_Base {
 	private static int counter = 0;
 
 	private static final String SPORT_TYPE = "SPORT";
-	private final String providerNIF;
-	private final String NIF;
-	private final String IBAN;
+	private final String providerNif;
+	private final String nif;
+	private final String iban;
 	private final double amount;
 	private final LocalDate date;
 	private String paymentReference;
@@ -19,25 +19,25 @@ public class Booking extends Booking_Base {
 	private boolean cancelledInvoice = false;
 	private String cancelledPaymentReference = null;
 
-	public Booking(ActivityProvider provider, ActivityOffer offer, String buyerNIF, String buyerIBAN) {
-		checkArguments(provider, offer, buyerNIF, buyerIBAN);
+	public Booking(ActivityProvider provider, ActivityOffer offer, String buyerNif, String buyerIban) {
+		checkArguments(provider, offer, buyerNif, buyerIban);
 
 		setReference(offer.getActivity().getActivityProvider().getCode() + Integer.toString(++Booking.counter));
 
 		setActivityOffer(offer);
 
-		this.providerNIF = provider.getNIF();
-		this.NIF = buyerNIF;
-		this.IBAN = buyerIBAN;
+		this.providerNif = provider.getNif();
+		this.nif = buyerNif;
+		this.iban = buyerIban;
 		this.amount = offer.getPrice();
 		this.date = offer.getBegin();
 
 		offer.addBooking(this);
 	}
 
-	private void checkArguments(ActivityProvider provider, ActivityOffer offer, String buyerNIF, String buyerIBAN) {
-		if (provider == null || offer == null || buyerNIF == null || buyerNIF.trim().length() == 0 || buyerIBAN == null
-				|| buyerIBAN.trim().length() == 0) {
+	private void checkArguments(ActivityProvider provider, ActivityOffer offer, String buyerNIF, String buyerIban) {
+		if (provider == null || offer == null || buyerNIF == null || buyerNIF.trim().length() == 0 || buyerIban == null
+				|| buyerIban.trim().length() == 0) {
 			throw new ActivityException();
 		}
 
@@ -56,16 +56,16 @@ public class Booking extends Booking_Base {
 		return SPORT_TYPE;
 	}
 
-	public String getProviderNIF() {
-		return this.providerNIF;
+	public String getProviderNif() {
+		return this.providerNif;
 	}
 
-	public String getNIF() {
-		return this.NIF;
+	public String getNif() {
+		return this.nif;
 	}
 
-	public String getIBAN() {
-		return this.IBAN;
+	public String getIban() {
+		return this.iban;
 	}
 
 	public double getAmount() {

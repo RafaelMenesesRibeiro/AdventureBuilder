@@ -7,7 +7,7 @@ import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
 public class BankOperationData {
 	private String reference;
 	private String type;
-	private String IBAN;
+	private String iban;
 	private double value;
 	private DateTime time;
 
@@ -17,7 +17,7 @@ public class BankOperationData {
 	public BankOperationData(Operation operation) {
 		this.reference = operation.getReference();
 		this.type = operation.getType().name();
-		this.IBAN = operation.getAccount().getIBAN();
+		this.iban = operation.getAccount().getIBAN();
 		this.value = operation.getValue();
 		this.time = operation.getTime();
 	}
@@ -38,12 +38,12 @@ public class BankOperationData {
 		this.type = type;
 	}
 
-	public String getIBAN() {
-		return this.IBAN;
+	public String getIban() {
+		return this.iban;
 	}
 
-	public void setIBAN(String IBAN) {
-		this.IBAN = IBAN;
+	public void setIban(String iban) {
+		this.iban = iban;
 	}
 
 	public double getValue() {
