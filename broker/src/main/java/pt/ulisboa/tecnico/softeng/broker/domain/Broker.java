@@ -13,9 +13,9 @@ import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
 public class Broker extends Broker_Base {
 	private static Logger logger = LoggerFactory.getLogger(Broker.class);
 
-	private final String nifAsSeller;
-	private final String nifAsBuyer;
-	private final String iban;
+	private final String NIFAsSeller;
+	private final String NIFAsBuyer;
+	private final String IBAN;
 	private final Set<Client> clients = new HashSet<>();
 
 	@Override
@@ -25,15 +25,15 @@ public class Broker extends Broker_Base {
 		return counter;
 	}
 
-	public Broker(String code, String name, String nifAsSeller, String nifAsBuyer, String iban) {
-		checkArguments(code, name, nifAsSeller, nifAsBuyer, iban);
+	public Broker(String code, String name, String NIFAsSeller, String NIFAsBuyer, String IBAN) {
+		checkArguments(code, name, NIFAsSeller, NIFAsBuyer, IBAN);
 
 		setCode(code);
 		setName(name);
 
-		this.nifAsSeller = nifAsSeller;
-		this.nifAsBuyer = nifAsBuyer;
-		this.iban = iban;
+		this.NIFAsSeller = NIFAsSeller;
+		this.NIFAsBuyer = NIFAsBuyer;
+		this.IBAN = IBAN;
 
 		FenixFramework.getDomainRoot().addBroker(this);
 	}
@@ -52,14 +52,14 @@ public class Broker extends Broker_Base {
 		deleteDomainObject();
 	}
 
-	private void checkArguments(String code, String name, String nifAsSeller, String nifAsBuyer, String iban) {
+	private void checkArguments(String code, String name, String NIFAsSeller, String NIFAsBuyer, String IBAN) {
 		if (code == null || code.trim().length() == 0 || name == null || name.trim().length() == 0
-				|| nifAsSeller == null || nifAsSeller.trim().length() == 0 || nifAsBuyer == null
-				|| nifAsBuyer.trim().length() == 0 || iban == null || iban.trim().length() == 0) {
+				|| NIFAsSeller == null || NIFAsSeller.trim().length() == 0 || NIFAsBuyer == null
+				|| NIFAsBuyer.trim().length() == 0 || IBAN == null || IBAN.trim().length() == 0) {
 			throw new BrokerException();
 		}
 
-		if (nifAsSeller.equals(nifAsBuyer)) {
+		if (NIFAsSeller.equals(NIFAsBuyer)) {
 			throw new BrokerException();
 		}
 
@@ -70,24 +70,24 @@ public class Broker extends Broker_Base {
 		}
 
 		for (Broker broker : FenixFramework.getDomainRoot().getBrokerSet()) {
-			if (broker.getNifAsSeller().equals(nifAsSeller) || broker.getNifAsSeller().equals(nifAsBuyer)
-					|| broker.getNifAsBuyer().equals(nifAsSeller) || broker.getNifAsBuyer().equals(nifAsBuyer)) {
+			if (broker.getNIFAsSeller().equals(NIFAsSeller) || broker.getNIFAsSeller().equals(NIFAsBuyer)
+					|| broker.getNIFAsBuyer().equals(NIFAsSeller) || broker.getNIFAsBuyer().equals(NIFAsBuyer)) {
 				throw new BrokerException();
 			}
 		}
 
 	}
 
-	public String getNifAsSeller() {
-		return this.nifAsSeller;
+	public String getNIFAsSeller() {
+		return this.NIFAsSeller;
 	}
 
-	public String getNifAsBuyer() {
-		return this.nifAsBuyer;
+	public String getNIFAsBuyer() {
+		return this.NIFAsBuyer;
 	}
 
 	public String getIBAN() {
-		return this.iban;
+		return this.IBAN;
 	}
 
 	public Client getClientByNIF(String NIF) {
@@ -108,7 +108,7 @@ public class Broker extends Broker_Base {
 	}
 
 	public void bulkBooking(int number, LocalDate arrival, LocalDate departure) {
-		BulkRoomBooking bulkBooking = new BulkRoomBooking(this, number, arrival, departure, this.nifAsBuyer, this.iban);
+		BulkRoomBooking bulkBooking = new BulkRoomBooking(this, number, arrival, departure, this.NIFAsBuyer, this.IBAN);
 		bulkBooking.processBooking();
 	}
 }

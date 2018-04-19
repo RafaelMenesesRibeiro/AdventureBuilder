@@ -52,7 +52,7 @@ public class Room extends Room_Base {
 		return true;
 	}
 
-	public Booking reserve(Type type, LocalDate arrival, LocalDate departure, String buyerNIF, String buyerIban) {
+	public Booking reserve(Type type, LocalDate arrival, LocalDate departure, String buyerNIF, String buyerIBAN) {
 		if (type == null || arrival == null || departure == null) {
 			throw new HotelException();
 		}
@@ -61,7 +61,7 @@ public class Room extends Room_Base {
 			throw new HotelException();
 		}
 
-		Booking booking = new Booking(this, arrival, departure, buyerNIF, buyerIban);
+		Booking booking = new Booking(this, arrival, departure, buyerNIF, buyerIBAN);
 
 		return booking;
 	}

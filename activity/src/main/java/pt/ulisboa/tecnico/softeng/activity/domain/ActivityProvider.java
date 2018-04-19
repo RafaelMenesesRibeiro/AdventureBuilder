@@ -12,8 +12,8 @@ import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 public class ActivityProvider extends ActivityProvider_Base {
 	static final int CODE_SIZE = 6;
 
-	private final String nif;
-	private final String iban;
+	private final String NIF;
+	private final String IBAN;
 
 	private final Processor processor = new Processor();
 
@@ -24,14 +24,14 @@ public class ActivityProvider extends ActivityProvider_Base {
 		return counter;
 	}
 
-	public ActivityProvider(String code, String name, String nif, String iban) {
-		checkArguments(code, name, nif, iban);
+	public ActivityProvider(String code, String name, String NIF, String IBAN) {
+		checkArguments(code, name, NIF, IBAN);
 
 		setCode(code);
 		setName(name);
 
-		this.nif = nif;
-		this.iban = iban;
+		this.NIF = NIF;
+		this.IBAN = IBAN;
 
 		FenixFramework.getDomainRoot().addActivityProvider(this);
 	}
@@ -46,9 +46,9 @@ public class ActivityProvider extends ActivityProvider_Base {
 		deleteDomainObject();
 	}
 
-	private void checkArguments(String code, String name, String nif, String iban) {
-		if (code == null || name == null || code.trim().equals("") || name.trim().equals("") || nif == null
-				|| nif.trim().length() == 0 || iban == null || iban.trim().length() == 0) {
+	private void checkArguments(String code, String name, String NIF, String IBAN) {
+		if (code == null || name == null || code.trim().equals("") || name.trim().equals("") || NIF == null
+				|| NIF.trim().length() == 0 || IBAN == null || IBAN.trim().length() == 0) {
 			throw new ActivityException();
 		}
 
@@ -63,18 +63,18 @@ public class ActivityProvider extends ActivityProvider_Base {
 		}
 
 		for (ActivityProvider activityProvider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
-			if (activityProvider.getNif().equals(nif)) {
+			if (activityProvider.getNIF().equals(NIF)) {
 				throw new ActivityException();
 			}
 		}
 	}
 
-	public String getNif() {
-		return this.nif;
+	public String getNIF() {
+		return this.NIF;
 	}
 
-	public String getIban() {
-		return this.iban;
+	public String getIBAN() {
+		return this.IBAN;
 	}
 
 	public Processor getProcessor() {
@@ -109,12 +109,12 @@ public class ActivityProvider extends ActivityProvider_Base {
 		return null;
 	}
 
-	public static String reserveActivity(LocalDate begin, LocalDate end, int age, String nif, String iban) {
+	public static String reserveActivity(LocalDate begin, LocalDate end, int age, String NIF, String IBAN) {
 		List<ActivityOffer> offers;
 		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
 			offers = provider.findOffer(begin, end, age);
 			if (!offers.isEmpty()) {
-				Booking booking = new Booking(provider, offers.get(0), nif, iban);
+				Booking booking = new Booking(provider, offers.get(0), NIF, IBAN);
 				provider.getProcessor().submitBooking(booking);
 				return booking.getReference();
 			}

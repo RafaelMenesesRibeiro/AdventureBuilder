@@ -80,7 +80,7 @@ public class HotelConstructorTest extends RollbackTestAbstractClass {
 	}
 
 	@Test(expected = HotelException.class)
-	public void nifNotUnique() {
+	public void NIFNotUnique() {
 		new Hotel(HOTEL_CODE, HOTEL_NAME, NIF, IBAN, PRICE_SINGLE, PRICE_DOUBLE);
 		new Hotel(HOTEL_CODE + "_new", HOTEL_NAME + "_New", NIF, IBAN, PRICE_SINGLE, PRICE_DOUBLE);
 	}

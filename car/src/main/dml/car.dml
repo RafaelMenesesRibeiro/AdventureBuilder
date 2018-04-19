@@ -3,8 +3,8 @@ package pt.ulisboa.tecnico.softeng.car.domain;
 class RentACar {
 	String name;
 	String code;
-	String nif;
-	String iban;
+	String NIF;
+	String IBAN;
 }
 
 relation DomainRootHasRentACars {

@@ -24,13 +24,13 @@ public class Processor {
 			if (!booking.isCancelled()) {
 				if (booking.getPaymentReference() == null) {
 					try {
-						booking.setPaymentReference(BankInterface.processPayment(booking.getIban(), booking.getPrice()));
+						booking.setPaymentReference(BankInterface.processPayment(booking.getIBAN(), booking.getPrice()));
 					} catch (BankException | RemoteAccessException ex) {
 						failedToProcess.add(booking);
 						continue;
 					}
 				}
-				final InvoiceData invoiceData = new InvoiceData(booking.getProviderNif(), booking.getNif(),
+				final InvoiceData invoiceData = new InvoiceData(booking.getProviderNIF(), booking.getNIF(),
 						Booking.getType(), booking.getPrice(), booking.getArrival());
 				try {
 					booking.setInvoiceReference(TaxInterface.submitInvoice(invoiceData));
