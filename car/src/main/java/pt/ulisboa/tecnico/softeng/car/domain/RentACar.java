@@ -25,8 +25,8 @@ public class RentACar extends RentACar_Base {
 	public RentACar(String name, String nif, String iban) {
 		checkArguments(name, nif, iban);
 		setName(name);
-		setNif(nif);
-		setIban(iban);
+		setNIF(nif);
+		setIBAN(iban);
 		setCode(nif + Integer.toString(getNextCounter()));
 
 		FenixFramework.getDomainRoot().addRentACar(this);
@@ -39,7 +39,7 @@ public class RentACar extends RentACar_Base {
 		}
 
 		for (final RentACar rental : FenixFramework.getDomainRoot().getRentACarSet()) {
-			if (rental.getNif().equals(nif)) {
+			if (rental.getNIF().equals(nif)) {
 				throw new CarException();
 			}
 		}
