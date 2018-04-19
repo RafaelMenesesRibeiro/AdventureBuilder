@@ -82,7 +82,6 @@ public class RentACarGetAllAvailableVehiclesTest extends RollbackTestAbstractCla
 
 	@After
 	public void tearDown() {
-		RentACar.rentACars.clear();
 		Vehicle.plates.clear();
 		super.tearDown();
 	}

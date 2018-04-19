@@ -57,7 +57,6 @@ public class VehicleRentTest extends RollbackTestAbstractClass {
 
 	@After
 	public void tearDown() {
-		RentACar.rentACars.clear();
 		Vehicle.plates.clear();
 		super.tearDown();
 	}
