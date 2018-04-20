@@ -8,3 +8,7 @@ infer-out
 .idea
 .DS_Store
 fenix-framework.properties
+docker-compose.yml
+data/init.sql
+.vscode/settings.json
+.env
