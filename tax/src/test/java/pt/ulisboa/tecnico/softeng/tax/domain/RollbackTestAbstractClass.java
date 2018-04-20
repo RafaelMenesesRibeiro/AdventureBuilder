@@ -24,6 +24,5 @@ public abstract class RollbackTestAbstractClass {
 		try { FenixFramework.getTransactionManager().rollback(); }
 		catch (IllegalStateException | SecurityException | SystemException exc) { exc.printStackTrace(); }
 	}
-
 	public abstract void populate4Test();
 }

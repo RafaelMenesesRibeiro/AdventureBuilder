@@ -10,28 +10,28 @@ import pt.ulisboa.tecnico.softeng.hotel.interfaces.TaxInterface;
 import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
-public class Processor {
-	private final Set<Booking> bookingToProcess = new HashSet<>();
+public class Processor extends Processor_Base {
+
+	public Processor() {}
 
 	public void submitBooking(Booking booking) {
-		this.bookingToProcess.add(booking);
+		getBookingToProcessSet().add(booking);
 		processInvoices();
 	}
 
 	private void processInvoices() {
 		final Set<Booking> failedToProcess = new HashSet<>();
-		for (final Booking booking : this.bookingToProcess) {
+		for (final Booking booking : getBookingToProcessSet()) {
 			if (!booking.isCancelled()) {
 				if (booking.getPaymentReference() == null) {
 					try {
-						booking.setPaymentReference(BankInterface.processPayment(booking.getIban(), booking.getPrice()));
+						booking.setPaymentReference(BankInterface.processPayment(booking.getBuyerIban(), booking.getPrice()));
 					} catch (BankException | RemoteAccessException ex) {
 						failedToProcess.add(booking);
 						continue;
 					}
 				}
-				final InvoiceData invoiceData = new InvoiceData(booking.getProviderNif(), booking.getNif(),
-						Booking.getType(), booking.getPrice(), booking.getArrival());
+				final InvoiceData invoiceData = new InvoiceData(booking.getProviderNif(), booking.getBuyerNif(), Booking.getType(), booking.getPrice(), booking.getArrival());
 				try {
 					booking.setInvoiceReference(TaxInterface.submitInvoice(invoiceData));
 				} catch (TaxException | RemoteAccessException ex) {
@@ -54,13 +54,23 @@ public class Processor {
 			}
 		}
 
-		this.bookingToProcess.clear();
-		this.bookingToProcess.addAll(failedToProcess);
+		getBookingToProcessSet().clear();
+		getBookingToProcessSet().addAll(failedToProcess);
 
 	}
 
 	public void clean() {
-		this.bookingToProcess.clear();
+		getBookingToProcessSet().clear();
+	}
+
+	public void delete() {
+		setHotel(null);
+
+		for (Booking booking : getBookingToProcessSet()) {
+			booking.delete();
+		}
+
+		deleteDomainObject();
 	}
 
 }
