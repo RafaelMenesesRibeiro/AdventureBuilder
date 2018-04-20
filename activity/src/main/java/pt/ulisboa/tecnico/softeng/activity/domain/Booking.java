@@ -26,7 +26,7 @@ public class Booking extends Booking_Base {
 
 		setActivityOffer(offer);
 
-		this.providerNif = provider.getNif();
+		this.providerNif = provider.getNIF();
 		this.nif = buyerNif;
 		this.iban = buyerIban;
 		this.amount = offer.getPrice();
