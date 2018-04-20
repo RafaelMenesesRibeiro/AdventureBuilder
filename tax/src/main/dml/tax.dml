@@ -11,3 +11,10 @@ relation DomainRootHasIrsApplication {
 		multiplicity 0..1;
 	}
 }
+
+class Invoice {
+	String reference;
+	double value;
+	double iva;
+	LocalDate date;
+}
