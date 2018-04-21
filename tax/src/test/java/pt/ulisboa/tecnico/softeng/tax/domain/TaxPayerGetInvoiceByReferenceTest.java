@@ -52,9 +52,4 @@ public class TaxPayerGetInvoiceByReferenceTest extends RollbackTestAbstractClass
 		assertNull(this.seller.getInvoiceByReference(BUYER_NIF));
 	}
 
-	@After
-	public void tearDown() {
-		IRS.getIRS().clearAll();
-		super.tearDown();
-	}
 }

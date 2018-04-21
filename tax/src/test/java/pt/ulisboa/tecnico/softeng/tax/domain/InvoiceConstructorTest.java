@@ -86,10 +86,4 @@ public class InvoiceConstructorTest extends RollbackTestAbstractClass {
 	public void equal1970() {
 		new Invoice(VALUE, new LocalDate(1970, 01, 01), this.itemType, this.seller, this.buyer);
 	}
-
-	@After
-	public void tearDown() {
-		IRS.getIRS().clearAll();
-		super.tearDown();
-	}
 }

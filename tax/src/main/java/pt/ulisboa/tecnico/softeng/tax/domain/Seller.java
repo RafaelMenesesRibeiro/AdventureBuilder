@@ -1,10 +1,21 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
+import pt.ist.fenixframework.FenixFramework;
+
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
-public class Seller extends TaxPayer {
+public class Seller extends Seller_Base {
+
+	public Seller() { super(); }
+
 	public Seller(IRS irs, String NIF, String name, String address) {
-		super(irs, NIF, name, address);
+		super.checkArguments(irs, NIF, name, address);
+
+		setNIF(NIF);
+		setName(name);
+		setAddress(address);
+
+		irs.addTaxPayer(this);
 	}
 
 	public double toPay(int year) {
@@ -13,12 +24,11 @@ public class Seller extends TaxPayer {
 		}
 
 		double result = 0;
-		for (Invoice invoice : this.invoices) {
+		for (Invoice invoice : getInvoiceSet()) {
 			if (!invoice.isCancelled() && invoice.getDate().getYear() == year) {
 				result = result + invoice.getIva();
 			}
 		}
 		return result;
 	}
-
 }

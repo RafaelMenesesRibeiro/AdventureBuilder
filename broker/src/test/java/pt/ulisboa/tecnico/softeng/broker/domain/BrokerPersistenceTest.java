@@ -48,8 +48,9 @@ public class BrokerPersistenceTest extends BaseTest {
 		assertEquals(1, broker.getClientSet().size());
 
 
-		assertEquals(1, broker.getClientSet().size());
+
 		List<Client> clients = new ArrayList<>(broker.getClientSet());
+		assertEquals(1, clients.size());
 		Client client = clients.get(0);
 
 		assertEquals(CLIENT_IBAN, client.getIBAN());

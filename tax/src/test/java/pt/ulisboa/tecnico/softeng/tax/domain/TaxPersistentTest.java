@@ -47,12 +47,18 @@ public class TaxPersistentTest {
 
 	@Atomic(mode = TxMode.READ)
 	public void atomicAssert() { 
+		//assertNotNullFenixFramework.getDomainRoot().getIRS());
 		IRS irsDB = IRS.getIRS();
 
+	
 		List<ItemType> itemTypes = new ArrayList<>(irs.getItemTypeSet());
 		ItemType item = itemTypes.get(0);
 		assertEquals(ITEM_TYPE_NAME, item.getName());
 		assertEquals(ITEM_TYPE_TAX, item.getTax());
+		
+		//List<TaxPayer> payers = new ArrayList<>(irs.getTaxPayerSet());
+		//assertEquals(2, payers.size());
+
 	}
 
 	@After
