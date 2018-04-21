@@ -16,8 +16,7 @@ class ItemType {
 	int tax;
 }
 
-
-relation IrsHasItemTypes {
+relation IrsHasItemType {
 	IRS playsRole irs {
 		multiplicity 1..1;
 	}

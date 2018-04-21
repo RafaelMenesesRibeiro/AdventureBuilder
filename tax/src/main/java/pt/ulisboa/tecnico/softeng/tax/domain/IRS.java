@@ -40,10 +40,6 @@ public class IRS extends IRS_Base{
 		return null;
 	}
 
-//	void addItemType(ItemType itemType) {
-//		this.itemTypes.add(itemType);
-//	}
-
 	public ItemType getItemTypeByName(String name) {
 		for (ItemType itemType : getItemTypeSet()) {
 			if (itemType.getName().equals(name)) {
@@ -94,5 +90,4 @@ public class IRS extends IRS_Base{
 		}
 		return null;
 	}
-
 }
