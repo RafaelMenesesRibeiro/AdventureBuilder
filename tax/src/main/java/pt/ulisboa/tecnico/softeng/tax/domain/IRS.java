@@ -9,7 +9,7 @@ import pt.ist.fenixframework.DomainRoot;
 import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
-public class IRS extends IRS_Base{
+public class IRS extends IRS_Base {
 	private final Set<TaxPayer> taxPayers = new HashSet<>();
 	private final Set<ItemType> itemTypes = new HashSet<>();
 
