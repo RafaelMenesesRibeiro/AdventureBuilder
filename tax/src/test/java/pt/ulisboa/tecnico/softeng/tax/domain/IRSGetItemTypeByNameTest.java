@@ -48,10 +48,4 @@ public class IRSGetItemTypeByNameTest extends RollbackTestAbstractClass {
 
 		assertNull(itemType);
 	}
-
-	@After
-	public void tearDown() {
-		this.irs.clearAll();
-		super.tearDown();
-	}
 }

@@ -78,10 +78,4 @@ public class BuyerConstructorTest extends RollbackTestAbstractClass {
 	public void emptyAddress() {
 		new Buyer(this.irs, NIF, NAME, "");
 	}
-
-	@After
-	public void tearDown() {
-		IRS.getIRS().clearAll();
-		super.tearDown();
-	}
 }
