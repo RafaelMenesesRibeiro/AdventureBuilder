@@ -16,11 +16,6 @@ public class Adventure extends Adventure_Base {
 	private final Client client;
 	private final double margin;
 	private final boolean rentVehicle;
-	private double currentAmount;
-	private String rentingConfirmation;
-	private String rentingCancellation;
-	private String invoiceReference;
-	private boolean invoiceCancelled;
 
 	private AdventureState state;
 
@@ -90,7 +85,7 @@ public class Adventure extends Adventure_Base {
 	}
 
 	public void incAmountToPay(double toPay) {
-		this.currentAmount += toPay;
+		setCurrentAmount(getCurrentAmount() + toPay);
 	}
 
 	public boolean shouldRentVehicle() {
