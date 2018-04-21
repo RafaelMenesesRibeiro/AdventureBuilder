@@ -11,7 +11,15 @@ relation DomainRootHasIrsApplication {
 	}
 }
 
+
 class ItemType {
 	String name;
 	int tax;
+}
+
+class Invoice {
+	String reference;
+	double value;
+	double iva;
+	LocalDate date;
 }
