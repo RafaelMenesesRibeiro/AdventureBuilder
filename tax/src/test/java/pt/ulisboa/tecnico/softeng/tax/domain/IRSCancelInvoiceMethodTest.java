@@ -51,10 +51,4 @@ public class IRSCancelInvoiceMethodTest extends RollbackTestAbstractClass {
 	public void referenceDoesNotExist() {
 		IRS.cancelInvoice("XXXXXXXX");
 	}
-
-	@After
-	public void tearDown() {
-		this.irs.clearAll();
-		super.tearDown();
-	}
 }

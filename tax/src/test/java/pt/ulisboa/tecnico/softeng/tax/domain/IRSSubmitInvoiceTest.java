@@ -107,10 +107,4 @@ public class IRSSubmitInvoiceTest extends RollbackTestAbstractClass {
 		InvoiceData invoiceData = new InvoiceData(SELLER_NIF, BUYER_NIF, FOOD, VALUE, new LocalDate(1970, 01, 01));
 		IRS.submitInvoice(invoiceData);
 	}
-
-	@After
-	public void tearDown() {
-		this.irs.clearAll();
-		super.tearDown();
-	}
 }
