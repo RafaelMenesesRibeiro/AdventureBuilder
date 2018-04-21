@@ -56,7 +56,10 @@ relation BuyerHasInvoices {
 	}
 }
 
-
+class ItemType {
+	String name;
+	int tax;
+}
 
 relation IrsHasItemType {
 	IRS playsRole irs {
