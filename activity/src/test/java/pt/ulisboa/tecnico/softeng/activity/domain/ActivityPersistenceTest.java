@@ -30,24 +30,27 @@ public class ActivityPersistenceTest {
 	private final LocalDate end = new LocalDate(2017, 04, 15);
 
 	@Test
-	public void success() {
+	public void successOne() {
 		atomicProcess();
-		atomicAssert();
+		atomicAssertOne();
+	}
+
+	@Test
+	public void successTwo() {
+		atomicProcess();
+		atomicAssertTwo();
 	}
 
 	@Atomic(mode = TxMode.WRITE)
 	public void atomicProcess() {
 		ActivityProvider activityProvider = new ActivityProvider(PROVIDER_CODE, PROVIDER_NAME, NIF, IBAN);
-
 		Activity activity = new Activity(activityProvider, ACTIVITY_NAME, 18, 65, CAPACITY);
-
 		ActivityOffer activityOffer = new ActivityOffer(activity, this.begin, this.end, 30);
-
 		new Booking(activityProvider, activityOffer, BUYER_NIF, BUYER_IBAN);
 	}
 
 	@Atomic(mode = TxMode.READ)
-	public void atomicAssert() {
+	public void atomicAssertOne() {
 		assertEquals(1, FenixFramework.getDomainRoot().getActivityProviderSet().size());
 
 		List<ActivityProvider> providers = new ArrayList<>(FenixFramework.getDomainRoot().getActivityProviderSet());
@@ -81,6 +84,25 @@ public class ActivityPersistenceTest {
 		assertNotNull(booking.getReference());
 		assertNull(booking.getCancel());
 		assertNull(booking.getCancellationDate());
+	}
+
+	@Atomic(mode = TxMode.WRITE)
+	public void atomicAssertTwo() {
+
+		List<ActivityProvider> providers = new ArrayList<>(FenixFramework.getDomainRoot().getActivityProviderSet());
+		ActivityProvider provider = providers.get(0);
+
+		List<Activity> activities = new ArrayList<>(provider.getActivitySet());
+		Activity activity = activities.get(0);
+
+		List<ActivityOffer> offers = new ArrayList<>(activity.getActivityOfferSet());
+		ActivityOffer offer = offers.get(0);
+
+		Processor processor = provider.getProcessor();
+		processor.getBookingToProcessSet().add( new Booking(provider, offer, BUYER_NIF, BUYER_IBAN) );
+
+		assertNotNull(processor);
+		assertEquals(1, processor.getBookingToProcessSet().size());
 	}
 
 	@After
