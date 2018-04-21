@@ -6,14 +6,12 @@ import java.util.List;
 import org.joda.time.LocalDate;
 
 import pt.ist.fenixframework.FenixFramework;
+
 import pt.ulisboa.tecnico.softeng.activity.dataobjects.ActivityReservationData;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
 public class ActivityProvider extends ActivityProvider_Base {
 	static final int CODE_SIZE = 6;
-
-	private final String nif;
-	private final String iban;
 
 	private final Processor processor = new Processor();
 
@@ -29,11 +27,20 @@ public class ActivityProvider extends ActivityProvider_Base {
 
 		setCode(code);
 		setName(name);
-
-		this.nif = nif;
-		this.iban = iban;
+		super.setNIF(nif);
+		super.setIBAN(iban);
 
 		FenixFramework.getDomainRoot().addActivityProvider(this);
+	}
+
+	@Override
+	public void setNIF(String NIF) {
+		// Nif is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setIBAN(String IBAN) {
+		// Iban is final and can't be changed - Do nothing;
 	}
 
 	public void delete() {
@@ -63,18 +70,10 @@ public class ActivityProvider extends ActivityProvider_Base {
 		}
 
 		for (ActivityProvider activityProvider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
-			if (activityProvider.getNif().equals(nif)) {
+			if (activityProvider.getNIF().equals(nif)) {
 				throw new ActivityException();
 			}
 		}
-	}
-
-	public String getNif() {
-		return this.nif;
-	}
-
-	public String getIban() {
-		return this.iban;
 	}
 
 	public Processor getProcessor() {

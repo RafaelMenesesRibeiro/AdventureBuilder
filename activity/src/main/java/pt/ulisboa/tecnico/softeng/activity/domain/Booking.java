@@ -8,11 +8,6 @@ public class Booking extends Booking_Base {
 	private static int counter = 0;
 
 	private static final String SPORT_TYPE = "SPORT";
-	private final String providerNif;
-	private final String nif;
-	private final String iban;
-	private final double amount;
-	private final LocalDate date;
 	private String paymentReference;
 	private String invoiceReference;
 
@@ -26,13 +21,38 @@ public class Booking extends Booking_Base {
 
 		setActivityOffer(offer);
 
-		this.providerNif = provider.getNif();
-		this.nif = buyerNif;
-		this.iban = buyerIban;
-		this.amount = offer.getPrice();
-		this.date = offer.getBegin();
+		super.setProviderNIF(provider.getNIF());
+		super.setNIF(buyerNif);
+		super.setIBAN(buyerIban);
+		super.setAmount(offer.getPrice());
+		super.setDate(offer.getBegin());
 
 		offer.addBooking(this);
+	}
+
+	@Override
+	public void setProviderNIF(String NIF) {
+		// Nif is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setNIF(String NIF) {
+		// Nif is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setIBAN(String IBAN) {
+		// Iban is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setAmount(double IBAN) {
+		// Amount is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setDate(LocalDate date) {
+		// Date is final and can't be changed - Do nothing;
 	}
 
 	private void checkArguments(ActivityProvider provider, ActivityOffer offer, String buyerNIF, String buyerIban) {
@@ -54,26 +74,6 @@ public class Booking extends Booking_Base {
 
 	public String getType() {
 		return SPORT_TYPE;
-	}
-
-	public String getProviderNif() {
-		return this.providerNif;
-	}
-
-	public String getNif() {
-		return this.nif;
-	}
-
-	public String getIban() {
-		return this.iban;
-	}
-
-	public double getAmount() {
-		return this.amount;
-	}
-
-	public LocalDate getDate() {
-		return this.date;
 	}
 
 	public String getPaymentReference() {
