@@ -15,8 +15,6 @@ public class Adventure extends Adventure_Base {
 
 	private final Client client;
 
-	private AdventureState state;
-
 	public Adventure(Broker broker, LocalDate begin, LocalDate end, Client client, double margin) {
 		this(broker, begin, end, client, margin, false);
 	}
