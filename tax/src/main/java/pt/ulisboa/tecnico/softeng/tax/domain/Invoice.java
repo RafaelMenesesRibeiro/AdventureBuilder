@@ -79,6 +79,11 @@ public class Invoice extends Invoice_Base{
 	}
 
 	public void delete() {
+		for (TaxPayer tp : getTaxPayerSet()) {
+			removeTaxPayer(tp);
+		}
+		
+		super.setItemType(null);
 		deleteDomainObject();
 	}
 }

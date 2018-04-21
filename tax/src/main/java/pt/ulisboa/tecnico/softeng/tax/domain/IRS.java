@@ -25,12 +25,12 @@ public class IRS extends IRS_Base{
 	public void delete() {
 		setRoot(null);
 
-		for (ItemType it : getItemTypeSet()) {
-			it.delete();
+		for (TaxPayer payer : getTaxPayerSet()) {
+			payer.delete();
 		}
 
-		for (TaxPayer payer: getTaxPayerSet()) {
-			payer.delete();
+		for (ItemType it : getItemTypeSet()) {
+			it.delete();
 		}
 
 		deleteDomainObject();
