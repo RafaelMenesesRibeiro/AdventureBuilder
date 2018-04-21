@@ -55,6 +55,15 @@ class Adventure {
 	boolean rentVehicle;
 }
 
+relation AdventureHasClients {
+	Adventure playsRole adventure {
+		multiplicity 0..*;
+	}
+	Client playsRole client {
+		multiplicity 1..1;
+	}
+}
+
 relation BrokerHasAdventures {
 	Broker playsRole broker {
 		multiplicity 1..1;

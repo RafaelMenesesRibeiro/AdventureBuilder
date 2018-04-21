@@ -13,7 +13,6 @@ public class Adventure extends Adventure_Base {
 		PROCESS_PAYMENT, RESERVE_ACTIVITY, BOOK_ROOM, RENT_VEHICLE, UNDO, CONFIRMED, CANCELLED, TAX_PAYMENT
 	}
 
-	private final Client client;
 
 	public Adventure(Broker broker, LocalDate begin, LocalDate end, Client client, double margin) {
 		this(broker, begin, end, client, margin, false);
@@ -26,7 +25,7 @@ public class Adventure extends Adventure_Base {
 		setBegin(begin);
 		setEnd(end);
 
-		this.client = client;
+		setClient(client);
 		super.setMargin(margin);
 		super.setRentVehicle(rentVehicle);
 		setCurrentAmount(0.0);
@@ -40,6 +39,8 @@ public class Adventure extends Adventure_Base {
 
 	public void delete() {
 		setBroker(null);
+
+		setClient(null);
 
 		getState().delete();
 
@@ -65,16 +66,13 @@ public class Adventure extends Adventure_Base {
 	}
 
 	public int getAge() {
-		return this.client.getAge();
+		return getClient().getAge();
 	}
 
 	public String getIBAN() {
-		return this.client.getIBAN();
+		return getClient().getIBAN();
 	}
 
-	public Client getClient() {
-		return this.client;
-	}
 
 	@Override
 	public void setMargin(double margin) {  }
