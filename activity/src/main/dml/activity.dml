@@ -59,7 +59,10 @@ class Booking {
 	String IBAN;
 	double amount;
 	LocalDate date;
-
+	String paymentReference;
+	String invoiceReference;
+	boolean cancelledInvoice;
+	String cancelledPaymentReference;
 }
 
 relation ActivityOfferHasBookings {
