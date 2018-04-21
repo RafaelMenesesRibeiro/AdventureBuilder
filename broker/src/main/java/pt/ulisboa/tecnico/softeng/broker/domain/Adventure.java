@@ -13,11 +13,6 @@ public class Adventure extends Adventure_Base {
 		PROCESS_PAYMENT, RESERVE_ACTIVITY, BOOK_ROOM, RENT_VEHICLE, UNDO, CONFIRMED, CANCELLED, TAX_PAYMENT
 	}
 
-	private final Client client;
-	private final double margin;
-	private final boolean rentVehicle;
-
-	private AdventureState state;
 
 	public Adventure(Broker broker, LocalDate begin, LocalDate end, Client client, double margin) {
 		this(broker, begin, end, client, margin, false);
@@ -30,9 +25,9 @@ public class Adventure extends Adventure_Base {
 		setBegin(begin);
 		setEnd(end);
 
-		this.client = client;
-		this.margin = margin;
-		this.rentVehicle = rentVehicle;
+		setClient(client);
+		super.setMargin(margin);
+		super.setRentVehicle(rentVehicle);
 		setCurrentAmount(0.0);
 
 		broker.addAdventure(this);
@@ -44,6 +39,8 @@ public class Adventure extends Adventure_Base {
 
 	public void delete() {
 		setBroker(null);
+
+		setClient(null);
 
 		getState().delete();
 
@@ -69,19 +66,19 @@ public class Adventure extends Adventure_Base {
 	}
 
 	public int getAge() {
-		return this.client.getAge();
+		return getClient().getAge();
 	}
 
 	public String getIBAN() {
-		return this.client.getIBAN();
+		return getClient().getIBAN();
 	}
 
-	public Client getClient() {
-		return this.client;
-	}
 
-	public double getMargin() {
-		return this.margin;
+	@Override
+	public void setMargin(double margin) {  }
+
+	public double getAmount() {
+		return getCurrentAmount() * (1 + getMargin());
 	}
 
 	public void incAmountToPay(double toPay) {
@@ -89,7 +86,7 @@ public class Adventure extends Adventure_Base {
 	}
 
 	public boolean shouldRentVehicle() {
-		return this.rentVehicle;
+		return getRentVehicle();
 	}
 
 	public void setState(State state) {

@@ -11,7 +11,6 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class IRS extends IRS_Base{
 	private final Set<TaxPayer> taxPayers = new HashSet<>();
-	private final Set<ItemType> itemTypes = new HashSet<>();
 
 	public static IRS getIRS() {
 		IRS instance = FenixFramework.getDomainRoot().getUniqueIRS();
@@ -25,6 +24,11 @@ public class IRS extends IRS_Base{
 
 	public void delete() {
 		setRoot(null);
+
+		for (ItemType it : getItemTypeSet()) {
+			it.delete();
+		}
+		
 		deleteDomainObject();
 	}
 
@@ -41,12 +45,8 @@ public class IRS extends IRS_Base{
 		return null;
 	}
 
-	void addItemType(ItemType itemType) {
-		this.itemTypes.add(itemType);
-	}
-
 	public ItemType getItemTypeByName(String name) {
-		for (ItemType itemType : this.itemTypes) {
+		for (ItemType itemType : getItemTypeSet()) {
 			if (itemType.getName().equals(name)) {
 				return itemType;
 			}
@@ -64,16 +64,11 @@ public class IRS extends IRS_Base{
 		return invoice.getReference();
 	}
 
-	public void removeItemTypes() {
-		this.itemTypes.clear();
-	}
-
 	public void removeTaxPayers() {
 		this.taxPayers.clear();
 	}
 
 	public void clearAll() {
-		removeItemTypes();
 		removeTaxPayers();
 	}
 
@@ -100,5 +95,4 @@ public class IRS extends IRS_Base{
 		}
 		return null;
 	}
-
 }
