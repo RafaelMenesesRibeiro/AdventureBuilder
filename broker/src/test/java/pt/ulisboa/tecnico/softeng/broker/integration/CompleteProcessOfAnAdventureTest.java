@@ -197,11 +197,7 @@ public class CompleteProcessOfAnAdventureTest extends RollbackTestAbstractClass 
 		this.clientAccount
 				.deposit((ACTIVITY_COST + PRICE_SINGLE * numberOfDays + PRICE_OF_CAR * numberOfDays) * (1 + MARGIN));
 
-		System.out.println("balance1" + this.clientAccount.getBalance());
-
 		this.adventure.process();
-
-		System.out.println("balance2" + this.clientAccount.getBalance());
 
 		assertEquals(0, this.clientAccount.getBalance(), 0.0f);
 		// TODO: assertEquals(78, this.brokerAccount.getBalance(), 0.0f);

@@ -67,7 +67,6 @@ public class IRSSubmitInvoiceTest extends RollbackTestAbstractClass {
 
 	@Test(expected = TaxException.class)
 	public void nullItemType() {
-		System.out.println("NULLTYPE");
 		InvoiceData invoiceData = new InvoiceData(SELLER_NIF, BUYER_NIF, null, VALUE, this.date);
 		IRS.submitInvoice(invoiceData);
 	}
