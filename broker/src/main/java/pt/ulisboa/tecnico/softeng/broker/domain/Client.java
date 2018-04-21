@@ -39,6 +39,11 @@ public class Client extends Client_Base {
 
 	public void delete() {
 		setBroker(null);
+
+		for (Adventure adventure : getAdventureSet()) {
+			adventure.delete();
+		}
+		
 		deleteDomainObject();
 	}
 }
