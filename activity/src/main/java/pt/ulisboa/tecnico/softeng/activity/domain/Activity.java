@@ -19,7 +19,6 @@ public class Activity extends Activity_Base {
 		setMinAge(minAge);
 		setMaxAge(maxAge);
 		setCapacity(capacity);
-
 		setActivityProvider(provider);
 	}
 

@@ -22,6 +22,8 @@ public class ActivityProviderConstructorMethodTest extends RollbackTestAbstractC
 	public void success() {
 		ActivityProvider provider = new ActivityProvider(PROVIDER_CODE, PROVIDER_NAME, NIF, IBAN);
 
+		Assert.assertEquals(NIF, provider.getNIF());
+		Assert.assertEquals(IBAN, provider.getIBAN());
 		Assert.assertEquals(PROVIDER_NAME, provider.getName());
 		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
 		Assert.assertEquals(1, FenixFramework.getDomainRoot().getActivityProviderSet().size());

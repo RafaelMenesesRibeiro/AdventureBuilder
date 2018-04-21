@@ -84,6 +84,10 @@ public class Adventure extends Adventure_Base {
 		return this.margin;
 	}
 
+	public double getAmount() {
+		return getCurrentAmount() * (1 + this.margin);
+	}
+
 	public void incAmountToPay(double toPay) {
 		setCurrentAmount(getCurrentAmount() + toPay);
 	}

@@ -5,6 +5,10 @@ enum pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type as RoomType;
 class Hotel {
 	String code;
 	String name;
+	String nif;
+	String iban;
+	double priceSingle;
+	double priceDouble;
 	int counter;
 }
 
@@ -32,11 +36,19 @@ relation HotelHasRooms {
 }
 
 class Booking {
-	String reference;
-	String cancellation;
 	LocalDate cancellationDate;
 	LocalDate arrival;
 	LocalDate departure;
+	String cancellation;
+	String reference;
+	String providerNif;
+	String buyerNif;
+	String buyerIban;
+	String paymentReference;
+	String invoiceReference;
+	String cancelledPaymentReference;
+	double price;
+	boolean cancelledInvoice;
 }
 
 relation RoomHasBookings {
@@ -44,6 +56,27 @@ relation RoomHasBookings {
 		multiplicity 1..1;
 	}
 	Booking playsRole booking {
+		multiplicity 0..*;
+	}
+}
+
+class Processor;
+
+relation HotelHasProcessor {
+	Hotel playsRole hotel {
+		multiplicity 1..1;
+	}
+
+	Processor playsRole processor {
+		multiplicity 1..1;
+	}
+}
+
+relation ProcessorHasBookings {
+	Processor playsRole processor {
+		multiplicity 0..1;
+	}
+	Booking playsRole bookingToProcess {
 		multiplicity 0..*;
 	}
 }

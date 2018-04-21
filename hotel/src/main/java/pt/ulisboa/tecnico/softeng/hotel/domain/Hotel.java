@@ -14,13 +14,6 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class Hotel extends Hotel_Base {
 	static final int CODE_SIZE = 7;
 
-	private final String nif;
-	private final String iban;
-	private double priceSingle;
-	private double priceDouble;
-
-	private final Processor processor = new Processor();
-
 	@Override
 	public int getCounter() {
 		int counter = super.getCounter() + 1;
@@ -33,18 +26,35 @@ public class Hotel extends Hotel_Base {
 
 		setCode(code);
 		setName(name);
-
-		this.nif = nif;
-		this.iban = iban;
-		this.priceSingle = priceSingle;
-		this.priceDouble = priceDouble;
+		super.setNif(nif);
+		super.setIban(iban);
+		setPriceSingle(priceSingle);
+		setPriceDouble(priceDouble);
+		super.setProcessor(new Processor());
 
 		FenixFramework.getDomainRoot().addHotel(this);
+	}
+
+	@Override
+	public void setNif(String nif) {
+		// Nif is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setIban(String nif) {
+		// Iban is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setProcessor(Processor processor) {
+		// Processor is final and can't be changed - Do nothing;
 	}
 
 	public void delete() {
 		setRoot(null);
 
+		getProcessor().delete();
+		
 		for (Room room : getRoomSet()) {
 			room.delete();
 		}
@@ -71,7 +81,7 @@ public class Hotel extends Hotel_Base {
 		}
 
 		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
-			if (hotel.getNIF().equals(nif)) {
+			if (hotel.getNif().equals(nif)) {
 				throw new HotelException();
 			}
 		}
@@ -100,31 +110,11 @@ public class Hotel extends Hotel_Base {
 		return availableRooms;
 	}
 
-	public String getNIF() {
-		return this.nif;
-	}
-
-	public String getIBAN() {
-		return this.iban;
-	}
-
-	public Processor getProcessor() {
-		return this.processor;
-	}
-
-	public double getPriceSingle() {
-		return this.priceSingle;
-	}
-
-	public double getPriceDouble() {
-		return this.priceDouble;
-	}
-
 	public double getPrice(Room.Type type) {
 		if (type == null) {
 			throw new HotelException();
 		} else {
-			return type.equals(Room.Type.SINGLE) ? this.priceSingle : this.priceDouble;
+			return type.equals(Room.Type.SINGLE) ? super.getPriceSingle() : super.getPriceDouble();
 		}
 	}
 
@@ -132,9 +122,9 @@ public class Hotel extends Hotel_Base {
 		if (price < 0 || type == null) {
 			throw new HotelException();
 		} else if (type.equals(Room.Type.SINGLE)) {
-			this.priceSingle = price;
+			super.setPriceSingle(price);
 		} else {
-			this.priceDouble = price;
+			super.setPriceDouble(price);
 		}
 	}
 
@@ -205,8 +195,7 @@ public class Hotel extends Hotel_Base {
 		throw new HotelException();
 	}
 
-	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure, String buyerNIF,
-			String buyerIban) {
+	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure, String buyerNIF, String buyerIban) {
 		if (number < 1) {
 			throw new HotelException();
 		}

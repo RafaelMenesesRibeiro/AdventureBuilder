@@ -1,4 +1,4 @@
-package pt.ulisboa.tecnico.softeng.tax.domain;
+package pt.ulisboa.tecnico.softeng.car.domain;
 
 import javax.transaction.NotSupportedException;
 import javax.transaction.SystemException;
@@ -15,14 +15,20 @@ public abstract class RollbackTestAbstractClass {
 		try {
 			FenixFramework.getTransactionManager().begin(false);
 			populate4Test();
+		} catch (WriteOnReadError | NotSupportedException | SystemException e1) {
+			e1.printStackTrace();
 		}
-		catch (WriteOnReadError | NotSupportedException | SystemException exc) { exc.printStackTrace(); }
 	}
 
 	@After
 	public void tearDown() {
-		try { FenixFramework.getTransactionManager().rollback(); }
-		catch (IllegalStateException | SecurityException | SystemException exc) { exc.printStackTrace(); }
+		try {
+			FenixFramework.getTransactionManager().rollback();
+		} catch (IllegalStateException | SecurityException | SystemException e) {
+			e.printStackTrace();
+		}
 	}
+
 	public abstract void populate4Test();
+
 }
