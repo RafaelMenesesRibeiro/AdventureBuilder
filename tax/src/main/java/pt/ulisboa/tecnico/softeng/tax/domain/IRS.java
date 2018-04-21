@@ -11,8 +11,6 @@ import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class IRS extends IRS_Base{
 
-	private final Set<ItemType> itemTypes = new HashSet<>();
-
 	public static IRS getIRS() {
 		IRS instance = FenixFramework.getDomainRoot().getUniqueIRS();
 		if (instance != null) { return instance; }
@@ -23,6 +21,22 @@ public class IRS extends IRS_Base{
 
 	private IRS() { FenixFramework.getDomainRoot().setUniqueIRS(this); } 
 
+
+	public void delete() {
+		setRoot(null);
+
+		for (ItemType it : getItemTypeSet()) {
+			it.delete();
+		}
+
+		for (TaxPayer payer: getTaxPayerSet()) {
+			payer.delete();
+		}
+
+		deleteDomainObject();
+	}
+
+
 	public TaxPayer getTaxPayerByNIF(String NIF) {
 		for (TaxPayer taxPayer : getTaxPayerSet()) {
 			if (taxPayer.getNIF().equals(NIF)) {
@@ -32,12 +46,8 @@ public class IRS extends IRS_Base{
 		return null;
 	}
 
-	void addItemType(ItemType itemType) {
-		this.itemTypes.add(itemType);
-	}
-
 	public ItemType getItemTypeByName(String name) {
-		for (ItemType itemType : this.itemTypes) {
+		for (ItemType itemType : getItemTypeSet()) {
 			if (itemType.getName().equals(name)) {
 				return itemType;
 			}
@@ -55,14 +65,7 @@ public class IRS extends IRS_Base{
 		return invoice.getReference();
 	}
 
-	public void removeItemTypes() {
-		this.itemTypes.clear();
-	}
 
-
-	public void clearAll() {
-		removeItemTypes();
-	}
 
 	public static void cancelInvoice(String reference) {
 		if (reference == null || reference.isEmpty()) {
@@ -88,11 +91,4 @@ public class IRS extends IRS_Base{
 		return null;
 	}
 
-	public void delete() {
-		setRoot(null);
-		for (TaxPayer payer: getTaxPayerSet()) {
-			payer.delete();
-		}
-		deleteDomainObject();
-	}
 }

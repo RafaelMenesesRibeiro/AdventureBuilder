@@ -42,6 +42,9 @@ public abstract class TaxPayer extends TaxPayer_Base {
 
 	public void delete() {
 		setIrs(null);
+		for (Invoice invoice: getInvoiceSet()) {
+			invoice.delete();
+		}
 		deleteDomainObject();
 	}
 }

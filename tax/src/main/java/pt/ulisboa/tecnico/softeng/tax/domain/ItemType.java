@@ -28,12 +28,10 @@ public class ItemType {
 		}
 	}
 
-	public String getName() {
-		return this.name;
-	}
 
-	public int getTax() {
-		return this.tax;
+	public void delete() {
+		setIrs(null);
+		deleteDomainObject();
 	}
 
 }

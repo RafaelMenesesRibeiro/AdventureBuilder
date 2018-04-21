@@ -1,5 +1,8 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.joda.time.LocalDate;
 
 import static org.junit.Assert.assertEquals;
@@ -35,11 +38,11 @@ public class TaxPersistentTest {
 	public void atomicProcess() { 
 		//TODO: Uncoment when needed.
 		/*
-		this.ITEM_TYPE = new ItemType(this.irs, ITEM_TYPE_NAME, ITEM_TYPE_TAX);
 		this.SELLER = new Seller(this.irs, SELLER_NIF, TAX_PAYER_NAME, ADDRESS);
 		this.BUYER = new Buyer(this.irs, BUYER_NIF, TAX_PAYER_NAME, ADDRESS);
 		*/
 		this.irs = IRS.getIRS(); //Creates the IRS (Singleton design pattern.)
+		this.ITEM_TYPE = new ItemType(this.irs, ITEM_TYPE_NAME, ITEM_TYPE_TAX);
 	}
 
 	@Atomic(mode = TxMode.READ)
@@ -47,16 +50,14 @@ public class TaxPersistentTest {
 		//assertNotNullFenixFramework.getDomainRoot().getIRS());
 		IRS irsDB = IRS.getIRS();
 
-		//List<ItemTyper> itemTypes = new ArrayList<>(irs.getItemTypeSet());
-		//ItemType item = itemTypes.get(0);
-		//assertEquals(ITEM_TYPE_NAME, item.getName());
-		//assertEquals(ITEM_TYPE_TAX, item.getTax());
-
+	
+		List<ItemType> itemTypes = new ArrayList<>(irs.getItemTypeSet());
+		ItemType item = itemTypes.get(0);
+		assertEquals(ITEM_TYPE_NAME, item.getName());
+		assertEquals(ITEM_TYPE_TAX, item.getTax());
+		
 		//List<TaxPayer> payers = new ArrayList<>(irs.getTaxPayerSet());
 		//assertEquals(2, payers.size());
-
-		
-
 
 	}
 

@@ -57,3 +57,13 @@ relation BuyerHasInvoices {
 }
 
 
+
+relation IrsHasItemType {
+	IRS playsRole irs {
+		multiplicity 1..1;
+	}
+	ItemType playsRole itemType {
+		multiplicity 0..*;
+	}
+}
+
