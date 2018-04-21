@@ -31,7 +31,6 @@ public class IRSSubmitInvoiceTest extends RollbackTestAbstractClass {
 	public void success() {
 		InvoiceData invoiceData = new InvoiceData(SELLER_NIF, BUYER_NIF, FOOD, VALUE, this.date);
 		String invoiceReference = IRS.submitInvoice(invoiceData);
-
 		Invoice invoice = this.irs.getTaxPayerByNIF(SELLER_NIF).getInvoiceByReference(invoiceReference);
 
 		assertEquals(invoiceReference, invoice.getReference());
@@ -68,6 +67,7 @@ public class IRSSubmitInvoiceTest extends RollbackTestAbstractClass {
 
 	@Test(expected = TaxException.class)
 	public void nullItemType() {
+		System.out.println("NULLTYPE");
 		InvoiceData invoiceData = new InvoiceData(SELLER_NIF, BUYER_NIF, null, VALUE, this.date);
 		IRS.submitInvoice(invoiceData);
 	}
@@ -106,5 +106,11 @@ public class IRSSubmitInvoiceTest extends RollbackTestAbstractClass {
 	public void equal1970() {
 		InvoiceData invoiceData = new InvoiceData(SELLER_NIF, BUYER_NIF, FOOD, VALUE, new LocalDate(1970, 01, 01));
 		IRS.submitInvoice(invoiceData);
+	}
+
+	@After
+	public void tearDown() {
+		this.irs.clearAll();
+		super.tearDown();
 	}
 }

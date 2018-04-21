@@ -51,4 +51,5 @@ public class TaxPayerGetInvoiceByReferenceTest extends RollbackTestAbstractClass
 	public void desNotExist() {
 		assertNull(this.seller.getInvoiceByReference(BUYER_NIF));
 	}
+
 }

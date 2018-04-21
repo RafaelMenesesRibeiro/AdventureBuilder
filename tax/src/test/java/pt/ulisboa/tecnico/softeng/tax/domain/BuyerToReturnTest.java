@@ -84,4 +84,11 @@ public class BuyerToReturnTest extends RollbackTestAbstractClass {
 
 		assertEquals(0.75f, value, 0.00f);
 	}
+
+	@After
+	public void tearDown() {
+		IRS.getIRS().clearAll();
+		super.tearDown();
+	}
+
 }

@@ -28,7 +28,7 @@ public class ItemTypeConstructorTest extends RollbackTestAbstractClass {
 		ItemType itemType = new ItemType(irs, CAR, TAX);
 
 		assertEquals(CAR, itemType.getName());
-		assertEquals(TAX, itemType.getTax());
+		assertEquals(TAX, itemType.tax);
 		assertNotNull(IRS.getIRS().getItemTypeByName(CAR));
 
 		assertEquals(itemType, irs.getItemTypeByName(CAR));
@@ -63,5 +63,11 @@ public class ItemTypeConstructorTest extends RollbackTestAbstractClass {
 
 	public void zeroTax() {
 		new ItemType(this.irs, CAR, 0);
+	}
+
+	@After
+	public void tearDown() {
+		IRS.getIRS().clearAll();
+		super.tearDown();
 	}
 }
