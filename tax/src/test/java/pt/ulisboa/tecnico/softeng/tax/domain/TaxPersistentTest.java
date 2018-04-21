@@ -63,8 +63,23 @@ public class TaxPersistentTest {
 		assertEquals(SELLER, invoice.getSeller());
 		assertEquals(BUYER, invoice.getBuyer());
 		
-		//List<TaxPayer> payers = new ArrayList<>(irs.getTaxPayerSet());
-		//assertEquals(2, payers.size());
+		List<TaxPayer> payers = new ArrayList<>(irs.getTaxPayerSet());
+		assertEquals(2, payers.size());
+
+		TaxPayer seller = payers.get(0);
+		TaxPayer buyer = payers.get(1);
+		if (payers.get(0).getClass() == Buyer.class) {
+			buyer = payers.get(0);
+			seller = payers.get(1);
+		}
+
+		assertEquals(SELLER_NIF, seller.getNIF());
+		assertEquals(TAX_PAYER_NAME, seller.getName());
+		assertEquals(ADDRESS, seller.getAddress());
+
+		assertEquals(BUYER_NIF, buyer.getNIF());
+		assertEquals(TAX_PAYER_NAME, buyer.getName());
+		assertEquals(ADDRESS, buyer.getAddress());
 	}
 
 	@After
