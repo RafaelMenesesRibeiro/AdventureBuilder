@@ -7,19 +7,24 @@ import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
 public class Invoice extends Invoice_Base{
-	private static int counter = 0;
-	private boolean cancelled = false;
+	@Override
+	public int getCounter() {
+		int counter = super.getCounter() + 1;
+		setCounter(counter);
+		return counter;
+	}
 
 	Invoice(double value, LocalDate date, ItemType itemType, Seller seller, Buyer buyer) {
 		checkArguments(value, date, itemType, seller, buyer);
 
-		super.setReference(Integer.toString(++Invoice.counter));
+		super.setReference(Integer.toString(getCounter()));
 		super.setValue(value);
 		super.setDate(date);
 		super.setItemType(itemType);
 		super.addTaxPayer(seller);
 		super.addTaxPayer(buyer);
 		super.setIva(value * itemType.getTax() / 100);
+		super.setCancelled(false);
 
 		seller.addInvoice(this);
 		buyer.addInvoice(this);
@@ -66,11 +71,11 @@ public class Invoice extends Invoice_Base{
 	}
 
 	public void cancel() {
-		this.cancelled = true;
+		setCancelled(true);
 	}
 
 	public boolean isCancelled() {
-		return this.cancelled;
+		return getCancelled();
 	}
 
 	public void delete() {

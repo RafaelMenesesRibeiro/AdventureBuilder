@@ -17,6 +17,8 @@ class Invoice {
 	double value;
 	double iva;
 	LocalDate date;
+	int counter;
+	boolean cancelled;
 }
 
 class TaxPayer {
