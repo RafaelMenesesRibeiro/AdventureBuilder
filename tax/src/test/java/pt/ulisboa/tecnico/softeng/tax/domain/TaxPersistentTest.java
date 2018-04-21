@@ -23,9 +23,11 @@ public class TaxPersistentTest {
 	private static final int ITEM_TYPE_TAX = 20;
 	private static ItemType ITEM_TYPE;
 	private static final String SELLER_NIF = "123441223";
-	private static TaxPayer SELLER;
+	private static Seller SELLER;
 	private static final String BUYER_NIF = "123551223";
-	private static TaxPayer BUYER;
+	private static Buyer BUYER;
+	private static final double INVOICE_VALUE = 22;
+	private static Invoice INVOICE;
 	private static IRS irs;
 
 	@Test
@@ -36,29 +38,48 @@ public class TaxPersistentTest {
 
 	@Atomic(mode = TxMode.WRITE)
 	public void atomicProcess() { 
-		//TODO: Uncoment when needed.
-		/*
-		this.SELLER = new Seller(this.irs, SELLER_NIF, TAX_PAYER_NAME, ADDRESS);
-		this.BUYER = new Buyer(this.irs, BUYER_NIF, TAX_PAYER_NAME, ADDRESS);
-		*/
 		this.irs = IRS.getIRS(); //Creates the IRS (Singleton design pattern.)
 		this.ITEM_TYPE = new ItemType(this.irs, ITEM_TYPE_NAME, ITEM_TYPE_TAX);
+		this.SELLER = new Seller(this.irs, SELLER_NIF, TAX_PAYER_NAME, ADDRESS);
+		this.BUYER = new Buyer(this.irs, BUYER_NIF, TAX_PAYER_NAME, ADDRESS);
+		this.INVOICE = new Invoice(INVOICE_VALUE, DATE, ITEM_TYPE, SELLER, BUYER);
 	}
 
 	@Atomic(mode = TxMode.READ)
 	public void atomicAssert() { 
 		//assertNotNullFenixFramework.getDomainRoot().getIRS());
 		IRS irsDB = IRS.getIRS();
-
 	
 		List<ItemType> itemTypes = new ArrayList<>(irs.getItemTypeSet());
 		ItemType item = itemTypes.get(0);
 		assertEquals(ITEM_TYPE_NAME, item.getName());
 		assertEquals(ITEM_TYPE_TAX, item.getTax());
-		
-		//List<TaxPayer> payers = new ArrayList<>(irs.getTaxPayerSet());
-		//assertEquals(2, payers.size());
 
+		List<Invoice> invoices = new ArrayList<>(item.getInvoiceSet());
+		Invoice invoice = invoices.get(0);
+		assertEquals(INVOICE_VALUE, invoice.getValue(), 0.0f);
+		assertEquals(DATE, invoice.getDate());
+		assertEquals(ITEM_TYPE, invoice.getItemType());
+		assertEquals(SELLER, invoice.getSeller());
+		assertEquals(BUYER, invoice.getBuyer());
+		
+		List<TaxPayer> payers = new ArrayList<>(irs.getTaxPayerSet());
+		assertEquals(2, payers.size());
+
+		TaxPayer seller = payers.get(0);
+		TaxPayer buyer = payers.get(1);
+		if (payers.get(0).getClass() == Buyer.class) {
+			buyer = payers.get(0);
+			seller = payers.get(1);
+		}
+
+		assertEquals(SELLER_NIF, seller.getNIF());
+		assertEquals(TAX_PAYER_NAME, seller.getName());
+		assertEquals(ADDRESS, seller.getAddress());
+
+		assertEquals(BUYER_NIF, buyer.getNIF());
+		assertEquals(TAX_PAYER_NAME, buyer.getName());
+		assertEquals(ADDRESS, buyer.getAddress());
 	}
 
 	@After
