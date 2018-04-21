@@ -67,6 +67,7 @@ public class Booking extends Booking_Base {
 	}
 
 	public void delete() {
+		setProcessor(null);
 		setActivityOffer(null);
 
 		deleteDomainObject();
