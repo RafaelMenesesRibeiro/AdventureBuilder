@@ -4,6 +4,8 @@ class ActivityProvider {
 	String name;
 	String code;
 	int counter;
+	String NIF;
+	String IBAN;
 } 
 
 relation DomainRootHasActivityProviders {
@@ -36,6 +38,7 @@ class ActivityOffer {
 	LocalDate begin;
 	LocalDate end;
 	int capacity;
+	int price;
 }
 
 relation ActivityHasActivityOffers {
@@ -51,6 +54,12 @@ class Booking {
 	String reference;
 	String cancel;
 	LocalDate cancellationDate;
+	String providerNIF;
+	String NIF;
+	String IBAN;
+	double amount;
+	LocalDate date;
+
 }
 
 relation ActivityOfferHasBookings {
@@ -58,6 +67,27 @@ relation ActivityOfferHasBookings {
 		multiplicity 1..1;
 	}
 	Booking playsRole booking {
+		multiplicity 0..*;
+	}
+}
+
+class Processor;
+
+relation ActivityProviderHasProcessor {
+	ActivityProvider playsRole activityProvider {
+		multiplicity 1..1;
+	}
+
+	Processor playsRole processor {
+		multiplicity 1..1;
+	}
+}
+
+relation ActivityProviderProcessorHasBookings {
+	Processor playsRole processor {
+		multiplicity 0..1;
+	}
+	Booking playsRole bookingToProcess {
 		multiplicity 0..*;
 	}
 }
