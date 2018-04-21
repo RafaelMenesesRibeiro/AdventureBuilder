@@ -14,8 +14,6 @@ public class Adventure extends Adventure_Base {
 	}
 
 	private final Client client;
-	private final double margin;
-	private final boolean rentVehicle;
 
 	private AdventureState state;
 
@@ -31,8 +29,8 @@ public class Adventure extends Adventure_Base {
 		setEnd(end);
 
 		this.client = client;
-		this.margin = margin;
-		this.rentVehicle = rentVehicle;
+		super.setMargin(margin);
+		super.setRentVehicle(rentVehicle);
 		setCurrentAmount(0.0);
 
 		broker.addAdventure(this);
@@ -80,12 +78,11 @@ public class Adventure extends Adventure_Base {
 		return this.client;
 	}
 
-	public double getMargin() {
-		return this.margin;
-	}
+	@Override
+	public void setMargin(double margin) {  }
 
 	public double getAmount() {
-		return getCurrentAmount() * (1 + this.margin);
+		return getCurrentAmount() * (1 + getMargin());
 	}
 
 	public void incAmountToPay(double toPay) {
@@ -93,7 +90,7 @@ public class Adventure extends Adventure_Base {
 	}
 
 	public boolean shouldRentVehicle() {
-		return this.rentVehicle;
+		return getRentVehicle();
 	}
 
 	public void setState(State state) {
