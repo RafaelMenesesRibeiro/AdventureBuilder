@@ -12,8 +12,13 @@ public class ActivityOffer extends ActivityOffer_Base {
 		setBegin(begin);
 		setEnd(end);
 		setCapacity(activity.getCapacity());
-		setPrice(amount);
+		super.setPrice(amount);
 		setActivity(activity);
+	}
+
+	@Override
+	public void setPrice(int amount) {
+		// Amount is final and can't be changed - Do nothing;
 	}
 
 	public void delete() {

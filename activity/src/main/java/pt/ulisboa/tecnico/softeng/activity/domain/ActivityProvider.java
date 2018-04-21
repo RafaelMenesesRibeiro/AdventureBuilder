@@ -27,10 +27,20 @@ public class ActivityProvider extends ActivityProvider_Base {
 
 		setCode(code);
 		setName(name);
-		setNIF(nif);
-		setIBAN(iban);
+		super.setNIF(nif);
+		super.setIBAN(iban);
 
 		FenixFramework.getDomainRoot().addActivityProvider(this);
+	}
+
+	@Override
+	public void setNIF(String NIF) {
+		// Nif is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setIBAN(String IBAN) {
+		// Iban is final and can't be changed - Do nothing;
 	}
 
 	public void delete() {

@@ -21,13 +21,38 @@ public class Booking extends Booking_Base {
 
 		setActivityOffer(offer);
 
-		setProviderNIF(provider.getNIF());
-		setNIF(buyerNif);
-		setIBAN(buyerIban);
-		setAmount(offer.getPrice());
-		setDate(offer.getBegin());
+		super.setProviderNIF(provider.getNIF());
+		super.setNIF(buyerNif);
+		super.setIBAN(buyerIban);
+		super.setAmount(offer.getPrice());
+		super.setDate(offer.getBegin());
 
 		offer.addBooking(this);
+	}
+
+	@Override
+	public void setProviderNIF(String NIF) {
+		// Nif is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setNIF(String NIF) {
+		// Nif is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setIBAN(String IBAN) {
+		// Iban is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setAmount(double IBAN) {
+		// Amount is final and can't be changed - Do nothing;
+	}
+
+	@Override
+	public void setDate(LocalDate date) {
+		// Date is final and can't be changed - Do nothing;
 	}
 
 	private void checkArguments(ActivityProvider provider, ActivityOffer offer, String buyerNIF, String buyerIban) {
