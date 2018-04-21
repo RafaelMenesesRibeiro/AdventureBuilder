@@ -8,11 +8,6 @@ public class Booking extends Booking_Base {
 	private static int counter = 0;
 
 	private static final String SPORT_TYPE = "SPORT";
-	private final String providerNif;
-	private final String nif;
-	private final String iban;
-	private final double amount;
-	private final LocalDate date;
 	private String paymentReference;
 	private String invoiceReference;
 
@@ -26,11 +21,11 @@ public class Booking extends Booking_Base {
 
 		setActivityOffer(offer);
 
-		this.providerNif = provider.getNIF();
-		this.nif = buyerNif;
-		this.iban = buyerIban;
-		this.amount = offer.getPrice();
-		this.date = offer.getBegin();
+		setProviderNIF(provider.getNIF());
+		setNIF(buyerNif);
+		setIBAN(buyerIban);
+		setAmount(offer.getPrice());
+		setDate(offer.getBegin());
 
 		offer.addBooking(this);
 	}
@@ -54,26 +49,6 @@ public class Booking extends Booking_Base {
 
 	public String getType() {
 		return SPORT_TYPE;
-	}
-
-	public String getProviderNif() {
-		return this.providerNif;
-	}
-
-	public String getNif() {
-		return this.nif;
-	}
-
-	public String getIban() {
-		return this.iban;
-	}
-
-	public double getAmount() {
-		return this.amount;
-	}
-
-	public LocalDate getDate() {
-		return this.date;
 	}
 
 	public String getPaymentReference() {
