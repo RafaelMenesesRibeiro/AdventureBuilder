@@ -18,7 +18,7 @@ public abstract class TaxPayer extends TaxPayer_Base {
 		irs.addTaxPayer(this);
 	}
 
-	private void checkArguments(IRS irs, String NIF, String name, String address) {
+	public void checkArguments(IRS irs, String NIF, String name, String address) {
 		if (NIF == null || NIF.length() != 9) {
 			throw new TaxException();
 		}
@@ -37,8 +37,18 @@ public abstract class TaxPayer extends TaxPayer_Base {
 
 	}
 
-	public abstract Invoice getInvoiceByReference(String invoiceReference);
+	public Invoice getInvoiceByReference(String invoiceReference) {
+		if (invoiceReference == null || invoiceReference.isEmpty()) {
+			throw new TaxException();
+		}
 
+		for (Invoice invoice : getInvoiceSet()) {
+			if (invoice.getReference().equals(invoiceReference)) {
+				return invoice;
+			}
+		}
+		return null;
+	}
 
 	public void delete() {
 		setIrs(null);
