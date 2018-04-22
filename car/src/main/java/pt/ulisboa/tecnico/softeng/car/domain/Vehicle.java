@@ -106,4 +106,14 @@ public abstract class Vehicle extends Vehicle_Base{
 
         return renting;
 	}
+
+	public void delete() {
+		setRentACar(null);
+
+		for (Renting renting : getRentingSet()) {
+			renting.delete();
+		}
+
+		deleteDomainObject();
+	}
 }
