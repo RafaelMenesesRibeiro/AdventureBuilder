@@ -89,6 +89,7 @@ public class Renting extends Renting_Base {
 	}
 
 	public void delete() {
+		setProcessor(null);
 		setVehicle(null);
 
 		deleteDomainObject();

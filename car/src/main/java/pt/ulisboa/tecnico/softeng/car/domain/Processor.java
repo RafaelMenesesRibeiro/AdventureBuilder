@@ -10,18 +10,18 @@ import pt.ulisboa.tecnico.softeng.car.interfaces.TaxInterface;
 import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
-public class Processor {
+public class Processor extends Processor_Base {
 
-	private final Set<Renting> rentingToProcess = new HashSet<>();
+	public Processor() {}
 
 	public void submitRenting(Renting renting) {
-		this.rentingToProcess.add(renting);
+		this.getRentingToProcessSet().add(renting);
 		processInvoices();
 	}
 
 	private void processInvoices() {
 		Set<Renting> failedToProcess = new HashSet<>();
-		for (Renting renting : this.rentingToProcess) {
+		for (Renting renting : this.getRentingToProcessSet()) {
 			if (!renting.isCancelled()) {
 				if (renting.getPaymentReference() == null) {
 					try {
@@ -55,13 +55,22 @@ public class Processor {
 			}
 		}
 
-		this.rentingToProcess.clear();
-		this.rentingToProcess.addAll(failedToProcess);
+		this.getRentingToProcessSet().clear();
+		this.getRentingToProcessSet().addAll(failedToProcess);
 
 	}
 
 	public void clean() {
-		this.rentingToProcess.clear();
+		this.getRentingToProcessSet().clear();
+	}
+
+	public void delete() {
+		setRentACar(null);
+
+		for (Renting renting : getRentingToProcessSet()) {
+			renting.delete();
+		}
+		deleteDomainObject();
 	}
 
 }
