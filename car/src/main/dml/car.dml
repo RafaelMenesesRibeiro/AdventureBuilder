@@ -34,3 +34,17 @@ class Renting {
 	boolean cancelledInvoice;
 	String cancelledPaymentReference;	
 }
+
+class Vehicle {
+	String plate;
+	int kilometers;
+	double price;
+}
+
+class Car extends Vehicle {
+
+}
+
+class Motorcycle extends Vehicle {
+
+}

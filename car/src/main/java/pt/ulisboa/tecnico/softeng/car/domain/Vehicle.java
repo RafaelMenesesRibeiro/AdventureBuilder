@@ -8,32 +8,39 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 
-public abstract class Vehicle {
+public abstract class Vehicle extends Vehicle_Base{
 	private static Logger logger = LoggerFactory.getLogger(Vehicle.class);
 
 	private static String plateFormat = "..-..-..";
 	static Set<String> plates = new HashSet<>();
-
-	private final String plate;
-	private int kilometers;
-	private double price;
-	private final RentACar rentACar;
 	public final Set<Renting> rentings = new HashSet<>();
+
+	private RentACar rentACar;
 
 	public Vehicle(String plate, int kilometers, double price, RentACar rentACar) {
 		logger.debug("Vehicle plate: {}", plate);
 		checkArguments(plate, kilometers, rentACar);
 
-		this.plate = plate;
-		this.kilometers = kilometers;
-		this.price = price;
-		this.rentACar = rentACar;
+		this.setPlate(plate);
+		this.setKilometers(kilometers);
+		this.setPrice(price);
+		this.setRentACar(rentACar);
 
 		plates.add(plate.toUpperCase());
 		rentACar.addVehicle(this);
 	}
 
-	private void checkArguments(String plate, int kilometers, RentACar rentACar) {
+	public Vehicle() {}
+
+	public void setRentACar(RentACar rentACar) {
+		this.rentACar = rentACar;
+	}
+
+	public RentACar getRentACar() {
+		return rentACar;
+	}
+
+	public void checkArguments(String plate, int kilometers, RentACar rentACar) {
 		if (plate == null || !plate.matches(plateFormat) || plates.contains(plate.toUpperCase())) {
 			throw new CarException();
 		} else if (kilometers < 0) {
@@ -44,20 +51,6 @@ public abstract class Vehicle {
 	}
 
 	/**
-	 * @return the plate
-	 */
-	public String getPlate() {
-		return this.plate;
-	}
-
-	/**
-	 * @return the kilometers
-	 */
-	public int getKilometers() {
-		return this.kilometers;
-	}
-
-	/**
 	 * @param kilometers
 	 *            the kilometers to set
 	 */
@@ -65,18 +58,7 @@ public abstract class Vehicle {
 		if (kilometers < 0) {
 			throw new CarException();
 		}
-		this.kilometers += kilometers;
-	}
-
-	public double getPrice() {
-		return this.price;
-	}
-
-	/**
-	 * @return the rentACar
-	 */
-	public RentACar getRentACar() {
-		return this.rentACar;
+		this.setKilometers(this.getKilometers() + kilometers);
 	}
 
 	public boolean isFree(LocalDate begin, LocalDate end) {
