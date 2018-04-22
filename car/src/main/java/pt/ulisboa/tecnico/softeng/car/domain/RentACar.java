@@ -52,7 +52,7 @@ public class RentACar extends RentACar_Base {
 	}
 
 
-	void addVehicle(Vehicle vehicle) {
+	public void addVehicle(Vehicle vehicle) {
 		this.vehicles.put(vehicle.getPlate(), vehicle);
 	}
 
