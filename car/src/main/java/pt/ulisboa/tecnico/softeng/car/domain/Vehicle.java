@@ -13,7 +13,6 @@ public abstract class Vehicle extends Vehicle_Base{
 
 	private static String plateFormat = "..-..-..";
 	static Set<String> plates = new HashSet<>();
-	public final Set<Renting> rentings = new HashSet<>();
 
 	private RentACar rentACar;
 
@@ -65,22 +64,12 @@ public abstract class Vehicle extends Vehicle_Base{
 		if (begin == null || end == null) {
 			throw new CarException();
 		}
-		for (Renting renting : this.rentings) {
+		for (Renting renting : this.getRentingSet()) {
 			if (renting.conflict(begin, end)) {
 				return false;
 			}
 		}
 		return true;
-	}
-
-	/**
-	 * Add a <code>Renting</code> object to the vehicle. Use with caution --- no
-	 * validation is being made.
-	 *
-	 * @param renting
-	 */
-	private void addRenting(Renting renting) {
-		this.rentings.add(renting);
 	}
 
 	/**
@@ -90,7 +79,7 @@ public abstract class Vehicle extends Vehicle_Base{
 	 * @return Renting with the given reference
 	 */
 	public Renting getRenting(String reference) {
-		return this.rentings
+		return this.getRentingSet()
 				.stream()
 				.filter(renting -> renting.getReference().equals(reference)
                         || renting.isCancelled() && renting.getCancellationReference().equals(reference))

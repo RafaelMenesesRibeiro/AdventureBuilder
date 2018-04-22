@@ -48,3 +48,13 @@ class Car extends Vehicle {
 class Motorcycle extends Vehicle {
 
 }
+
+relation VehicleHasRenting {
+	Vehicle playsRole vehicle {
+		multiplicity 1..1;
+	}
+
+	Renting playsRole renting {
+		multiplicity 0..*;
+	}
+}
