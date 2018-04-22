@@ -88,4 +88,10 @@ public class Renting extends Renting_Base {
 		return this.type;
 	}
 
+	public void delete() {
+		setVehicle(null);
+
+		deleteDomainObject();
+	}
+
 }
