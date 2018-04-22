@@ -47,6 +47,10 @@ public class RentACar extends RentACar_Base {
 
 	public void delete() {
 		setRoot(null);
+		
+		for (Vehicle vehicle : getVehicleSet()) {
+			vehicle.delete();
+		}
 
 		deleteDomainObject();
 	}

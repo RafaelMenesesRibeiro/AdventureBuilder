@@ -58,3 +58,14 @@ relation VehicleHasRenting {
 		multiplicity 0..*;
 	}
 }
+
+
+relation RentACarHasVehicles {
+	RentACar playsRole rentACar {
+		multiplicity 1..1;
+	}
+
+	Vehicle playsRole vehicle {
+		multiplicity 0..*;
+	}
+}

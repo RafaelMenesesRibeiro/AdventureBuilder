@@ -14,8 +14,6 @@ public abstract class Vehicle extends Vehicle_Base{
 	private static String plateFormat = "..-..-..";
 	static Set<String> plates = new HashSet<>();
 
-	private RentACar rentACar;
-
 	public Vehicle(String plate, int kilometers, double price, RentACar rentACar) {
 		logger.debug("Vehicle plate: {}", plate);
 		checkArguments(plate, kilometers, rentACar);
@@ -30,14 +28,6 @@ public abstract class Vehicle extends Vehicle_Base{
 	}
 
 	public Vehicle() {}
-
-	public void setRentACar(RentACar rentACar) {
-		this.rentACar = rentACar;
-	}
-
-	public RentACar getRentACar() {
-		return rentACar;
-	}
 
 	public void checkArguments(String plate, int kilometers, RentACar rentACar) {
 		if (plate == null || !plate.matches(plateFormat) || plates.contains(plate.toUpperCase())) {
