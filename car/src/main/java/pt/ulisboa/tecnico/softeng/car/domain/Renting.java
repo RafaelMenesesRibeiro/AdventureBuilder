@@ -7,7 +7,6 @@ import pt.ulisboa.tecnico.softeng.car.exception.CarException;
 public class Renting extends Renting_Base {
 	private static String drivingLicenseFormat = "^[a-zA-Z]+\\d+$";
 	private static final String type = "RENTAL";
-	private final Vehicle vehicle;
 
 	public Renting(String drivingLicense, LocalDate begin, LocalDate end, Vehicle vehicle, String buyerNIF,
 			String buyerIBAN) {
@@ -16,7 +15,7 @@ public class Renting extends Renting_Base {
 		this.setDrivingLicense(drivingLicense);
 		this.setBegin(begin);
 		this.setEnd(end);
-		this.vehicle = vehicle;
+		this.setVehicle(vehicle);
 		this.setClientNIF(buyerNIF);
 		this.setClientIBAN(buyerIBAN);
 		this.setPrice(vehicle.getPrice() * (end.getDayOfYear() - begin.getDayOfYear()));
@@ -30,13 +29,6 @@ public class Renting extends Renting_Base {
 				|| vehicle == null || end.isBefore(begin)) {
 			throw new CarException();
 		}
-	}
-
-	/**
-	 * @return the vehicle
-	 */
-	public Vehicle getVehicle() {
-		return this.vehicle;
 	}
 
 	public boolean isCancelled() {
@@ -72,7 +64,7 @@ public class Renting extends Renting_Base {
 	 */
 	public void checkout(int kilometers) {
 		this.setKilometers(kilometers);
-		this.vehicle.addKilometers(this.getKilometers());
+		this.getVehicle().addKilometers(this.getKilometers());
 	}
 
 	public String cancel() {
@@ -94,6 +86,12 @@ public class Renting extends Renting_Base {
 
 	public String getType() {
 		return this.type;
+	}
+
+	public void delete() {
+		setVehicle(null);
+
+		deleteDomainObject();
 	}
 
 }
