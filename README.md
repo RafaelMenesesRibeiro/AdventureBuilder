@@ -19,15 +19,15 @@ To run webservices: mvn clean spring-boot:run on module and access on http://loc
 
 ## Tasks - Fourth Delivery
 
-|   Number   |          Name           |   GitHub Name   |           Module        |     Task    |
-| ---------- | ----------------------- | ----------------| ----------------------- | ----------- |
-| 84758      | Rafael Ribeiro          | RafaelRibeiro97 |                         |Tester / Code|
-| 83391      | Andreia Valente         | AndreiaValente  |                         |Tester / Code|
-| 85069      | Francisco Barros        | FranciscoKloganB|                         |Tester / Code|
-| 84710      | Diogo Vilela            | DiogoFSVilela   |                         |Tester / Code|
-| 83405      | João Neves              | JoaoMiguelNeves |                         |Tester / Code|
-| 84711      | Diogo Redin             | diogoredin      |                         |Tester / Code|
-| 77921      | Mafalda Gaspar          | mafsgasp        |                         |Tester / Code|
+|   Number   |          Name           |   GitHub Name   |   Module   |     Task    |
+| ---------- | ----------------------- | ----------------| -----------| ----------- |
+| 84758      | Rafael Ribeiro          | RafaelRibeiro97 |   Hotel    |Tester / Code|
+| 83391      | Andreia Valente         | AndreiaValente  |   Bank     |Tester / Code|
+| 85069      | Francisco Barros        | FranciscoKloganB|  Activity  |Tester / Code|
+| 84710      | Diogo Vilela            | DiogoFSVilela   |    Car     |Tester / Code|
+| 83405      | João Neves              | JoaoMiguelNeves |    Tax     |Tester / Code|
+| 84711      | Diogo Redin             | diogoredin      |   Broker   |Tester / Code|
+| 77921      | Mafalda Gaspar          | mafsgasp        |    Tax     |Tester / Code|
 
 ### Infrastructure
 
