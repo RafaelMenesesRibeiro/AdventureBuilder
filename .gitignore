@@ -8,7 +8,6 @@ jmeter.log
 *.log
 infer-out
 *.iml
-*.yml
 .idea
 .DS_Store
 fenix-framework.properties
