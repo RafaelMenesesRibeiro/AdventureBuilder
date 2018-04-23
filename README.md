@@ -1,19 +1,10 @@
 # Adventure Builder 
 
-## Status
+[![Build Status](https://travis-ci.com/tecnico-softeng/es18tg_17-project.svg?token=tzyzgKHYbK1mnRs5VZbp&branch=develop)](https://travis-ci.com/tecnico-softeng/es18tg_17-project) [![codecov](https://codecov.io/gh/tecnico-softeng/es18tg_17-project/branch/develop/graph/badge.svg?token=iC1C1G5pBo)](https://codecov.io/gh/tecnico-softeng/es18tg_17-project)
 
-[![Build Status](https://travis-ci.com/tecnico-softeng/es18tg_17-project.svg?token=tzyzgKHYbK1mnRs5VZbp&branch=develop)](https://travis-ci.com/tecnico-softeng/es18tg_17-project)
-
-[![codecov](https://codecov.io/gh/tecnico-softeng/es18tg_17-project/branch/develop/graph/badge.svg?token=iC1C1G5pBo)](https://codecov.io/gh/tecnico-softeng/es18tg_17-project)
-
-## Running
-
-To run tests execute: mvn clean install
+To run tests execute: mvn clean install.
 To see the coverage reports, go to module_name/target/site/jacoco/index.html.
-
 To run webservices: mvn clean spring-boot:run on module and access on http://localhost:8080/banks for example.
-
-## Group 17
 
 |   Number   |          Name           |                 Email                    |   Name GitHUb   | Grupo |
 | ---------- | ----------------------- | -----------------------------------------| ----------------| ----- |
