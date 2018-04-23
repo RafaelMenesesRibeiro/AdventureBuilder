@@ -5,27 +5,25 @@ import java.util.stream.Collectors;
 
 import org.joda.time.LocalDate;
 
-import pt.ulisboa.tecnico.softeng.broker.exception.RemoteAccessException;
-import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
-import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
-import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
+import pt.ulisboa.tecnico.softeng.broker.services.remote.HotelInterface;
+import pt.ulisboa.tecnico.softeng.broker.services.remote.dataobjects.RoomBookingData;
+import pt.ulisboa.tecnico.softeng.broker.services.remote.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.broker.services.remote.exception.RemoteAccessException;
 
 public class BulkRoomBooking extends BulkRoomBooking_Base {
 	public static final int MAX_HOTEL_EXCEPTIONS = 3;
 	public static final int MAX_REMOTE_ERRORS = 10;
 
-	private final String buyerNif;
-	private final String buyerIban;
-
 	public BulkRoomBooking(Broker broker, int number, LocalDate arrival, LocalDate departure, String buyerNif,
 			String buyerIban) {
+		checkArguments(number, arrival, departure);
+
 		setNumber(number);
 		setArrival(arrival);
 		setDeparture(departure);
-
-		this.buyerNif = buyerNif;
-		this.buyerIban = buyerIban;
-
+		setBuyerNif(buyerNif);
+		setBuyerIban(buyerIban);
 		setBroker(broker);
 	}
 
@@ -39,6 +37,13 @@ public class BulkRoomBooking extends BulkRoomBooking_Base {
 		deleteDomainObject();
 	}
 
+	private void checkArguments(int number, LocalDate arrival, LocalDate departure) {
+		if (number < 1 || arrival == null || departure == null || departure.isBefore(arrival)) {
+			throw new BrokerException();
+		}
+
+	}
+
 	public Set<String> getReferences() {
 		return getReferenceSet().stream().map(r -> r.getValue()).collect(Collectors.toSet());
 	}
@@ -49,8 +54,8 @@ public class BulkRoomBooking extends BulkRoomBooking_Base {
 		}
 
 		try {
-			for (String reference : HotelInterface.bulkBooking(getNumber(), getArrival(), getDeparture(), this.buyerNif,
-					this.buyerIban)) {
+			for (String reference : HotelInterface.bulkBooking(getNumber(), getArrival(), getDeparture(), getBuyerNif(),
+					getBuyerIban())) {
 				addReference(new Reference(this, reference));
 			}
 			setNumberOfHotelExceptions(0);

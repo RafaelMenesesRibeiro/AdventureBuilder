@@ -1,46 +1,41 @@
 package pt.ulisboa.tecnico.softeng.tax.domain;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import pt.ulisboa.tecnico.softeng.tax.dataobjects.InvoiceData;
+import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
+import pt.ulisboa.tecnico.softeng.tax.services.local.dataobjects.InvoiceData;
 
-public class IRS {
-	private final Set<TaxPayer> taxPayers = new HashSet<>();
-	private final Set<ItemType> itemTypes = new HashSet<>();
+public class IRS extends IRS_Base {
 
-	private static IRS instance;
-
-	public static IRS getIRS() {
-		if (instance == null) {
-			instance = new IRS();
+	public static IRS getIRSInstance() {
+		if (FenixFramework.getDomainRoot().getIrs() == null) {
+			return new IRS();
 		}
-		return instance;
+		return FenixFramework.getDomainRoot().getIrs();
 	}
 
 	private IRS() {
+		setRoot(FenixFramework.getDomainRoot());
 	}
 
-	void addTaxPayer(TaxPayer taxPayer) {
-		this.taxPayers.add(taxPayer);
+	public void delete() {
+		setRoot(null);
+
+		clearAll();
+
+		deleteDomainObject();
 	}
 
 	public TaxPayer getTaxPayerByNIF(String NIF) {
-		for (TaxPayer taxPayer : this.taxPayers) {
-			if (taxPayer.getNIF().equals(NIF)) {
+		for (TaxPayer taxPayer : getTaxPayerSet()) {
+			if (taxPayer.getNif().equals(NIF)) {
 				return taxPayer;
 			}
 		}
 		return null;
 	}
 
-	void addItemType(ItemType itemType) {
-		this.itemTypes.add(itemType);
-	}
-
 	public ItemType getItemTypeByName(String name) {
-		for (ItemType itemType : this.itemTypes) {
+		for (ItemType itemType : getItemTypeSet()) {
 			if (itemType.getName().equals(name)) {
 				return itemType;
 			}
@@ -49,7 +44,7 @@ public class IRS {
 	}
 
 	public static String submitInvoice(InvoiceData invoiceData) {
-		IRS irs = IRS.getIRS();
+		IRS irs = IRS.getIRSInstance();
 		Seller seller = (Seller) irs.getTaxPayerByNIF(invoiceData.getSellerNIF());
 		Buyer buyer = (Buyer) irs.getTaxPayerByNIF(invoiceData.getBuyerNIF());
 		ItemType itemType = irs.getItemTypeByName(invoiceData.getItemType());
@@ -58,17 +53,19 @@ public class IRS {
 		return invoice.getReference();
 	}
 
-	public void removeItemTypes() {
-		this.itemTypes.clear();
-	}
+	private void clearAll() {
+		for (ItemType itemType : getItemTypeSet()) {
+			itemType.delete();
+		}
 
-	public void removeTaxPayers() {
-		this.taxPayers.clear();
-	}
+		for (TaxPayer taxPayer : getTaxPayerSet()) {
+			taxPayer.delete();
+		}
 
-	public void clearAll() {
-		removeItemTypes();
-		removeTaxPayers();
+		for (Invoice invoice : getInvoiceSet()) {
+			invoice.delete();
+		}
+
 	}
 
 	public static void cancelInvoice(String reference) {
@@ -76,7 +73,7 @@ public class IRS {
 			throw new TaxException();
 		}
 
-		Invoice invoice = IRS.getIRS().getInvoiceByReference(reference);
+		Invoice invoice = IRS.getIRSInstance().getInvoiceByReference(reference);
 
 		if (invoice == null) {
 			throw new TaxException();
@@ -86,13 +83,20 @@ public class IRS {
 	}
 
 	private Invoice getInvoiceByReference(String reference) {
-		for (TaxPayer taxPayer : this.taxPayers) {
+		for (TaxPayer taxPayer : getTaxPayerSet()) {
 			Invoice invoice = taxPayer.getInvoiceByReference(reference);
 			if (invoice != null) {
 				return invoice;
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public int getCounter() {
+		int counter = super.getCounter() + 1;
+		setCounter(counter);
+		return counter;
 	}
 
 }

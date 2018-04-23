@@ -4,16 +4,17 @@ import static org.junit.Assert.*;
 
 import mockit.Mocked;
 import mockit.integration.junit4.JMockit;
+import pt.ulisboa.tecnico.softeng.car.services.remote.BankInterface;
+import pt.ulisboa.tecnico.softeng.car.services.remote.TaxInterface;
+
 import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import pt.ulisboa.tecnico.softeng.car.interfaces.BankInterface;
-import pt.ulisboa.tecnico.softeng.car.interfaces.TaxInterface;
 
 @RunWith(JMockit.class)
-public class RentACarGetRentingTest {
+public class RentACarGetRentingTest extends RollbackTestAbstractClass {
 	private static final String NAME1 = "eartz";
 	private static final String PLATE_CAR1 = "aa-00-11";
 	private static final String DRIVING_LICENSE = "br123";
@@ -32,8 +33,8 @@ public class RentACarGetRentingTest {
 	@Mocked
 	private TaxInterface taxInterface;
 
-	@Before
-	public void setUp() {
+    @Override
+    public void populate4Test() {
 		RentACar rentACar1 = new RentACar(NAME1, NIF, IBAN);
 		Vehicle car1 = new Car(PLATE_CAR1, 10, 10, rentACar1);
 		this.renting = car1.rent(DRIVING_LICENSE, date1, date2, NIF, IBAN_BUYER);
@@ -42,16 +43,11 @@ public class RentACarGetRentingTest {
 
 	@Test
 	public void getRenting() {
-		assertEquals(this.renting, RentACar.getRenting(this.renting.getReference()));
+		assertEquals(this.renting.getReference(), RentACar.getRenting(this.renting.getReference()).getReference());
 	}
 
 	public void nonExistent() {
 		assertNull(RentACar.getRenting("a"));
 	}
 
-	@After
-	public void tearDown() {
-		RentACar.rentACars.clear();
-		Vehicle.plates.clear();
-	}
 }

@@ -10,26 +10,26 @@ import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
-public class ItemTypeConstructorTest {
+public class ItemTypeConstructorTest extends RollbackTestAbstractClass {
 	private static final String CAR = "CAR";
 	private static final int TAX = 23;
 
 	IRS irs;
 
-	@Before
-	public void setUp() {
-		this.irs = IRS.getIRS();
+	@Override
+	public void populate4Test() {
+		this.irs = IRS.getIRSInstance();
 	}
 
 	@Test
 	public void success() {
-		IRS irs = IRS.getIRS();
+		IRS irs = IRS.getIRSInstance();
 
 		ItemType itemType = new ItemType(irs, CAR, TAX);
 
 		assertEquals(CAR, itemType.getName());
-		assertEquals(TAX, itemType.tax);
-		assertNotNull(IRS.getIRS().getItemTypeByName(CAR));
+		assertEquals(TAX, itemType.getTax());
+		assertNotNull(IRS.getIRSInstance().getItemTypeByName(CAR));
 
 		assertEquals(itemType, irs.getItemTypeByName(CAR));
 	}
@@ -42,7 +42,7 @@ public class ItemTypeConstructorTest {
 			new ItemType(this.irs, CAR, TAX);
 			fail();
 		} catch (TaxException te) {
-			assertEquals(itemType, IRS.getIRS().getItemTypeByName(CAR));
+			assertEquals(itemType, IRS.getIRSInstance().getItemTypeByName(CAR));
 		}
 	}
 
@@ -65,9 +65,5 @@ public class ItemTypeConstructorTest {
 		new ItemType(this.irs, CAR, 0);
 	}
 
-	@After
-	public void tearDown() {
-		IRS.getIRS().clearAll();
-	}
 
 }

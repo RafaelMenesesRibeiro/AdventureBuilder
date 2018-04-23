@@ -3,6 +3,8 @@ package pt.ulisboa.tecnico.softeng.activity.domain;
 class ActivityProvider {
 	String name;
 	String code;
+	String nif;
+	String iban;
 	int counter;
 } 
 
@@ -36,6 +38,7 @@ class ActivityOffer {
 	LocalDate begin;
 	LocalDate end;
 	int capacity;
+	double amount;
 }
 
 relation ActivityHasActivityOffers {
@@ -49,8 +52,18 @@ relation ActivityHasActivityOffers {
 
 class Booking {
 	String reference;
+	String Type;
+	String providerNif;
+	String buyerNif;
+	String iban;
+	double amount;
+	LocalDate date;
+	String paymentReference;
+	String invoiceReference;
+	boolean cancelledInvoice;
 	String cancel;
 	LocalDate cancellationDate;
+	String cancelledPaymentReference;
 }
 
 relation ActivityOfferHasBookings {
@@ -61,4 +74,25 @@ relation ActivityOfferHasBookings {
 		multiplicity 0..*;
 	}
 }
+
+class Processor;
+
+relation ActivityProviderHasProcessor {
+	ActivityProvider playsRole activityProvider {
+		multiplicity 1..1;
+	}
+	Processor playsRole processor {
+		multiplicity 1..1;
+	}
+}
+
+relation ProcessorManagesActivityBookings {
+	Processor playsRole processor {
+		multiplicity 0..1;
+	}
+	Booking playsRole booking {
+		multiplicity 0..*;
+	}
+}
+
 

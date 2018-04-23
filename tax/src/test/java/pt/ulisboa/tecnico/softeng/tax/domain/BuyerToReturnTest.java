@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.tax.exception.TaxException;
 
-public class BuyerToReturnTest {
+public class BuyerToReturnTest extends RollbackTestAbstractClass {
 	private static final String SELLER_NIF = "123456789";
 	private static final String BUYER_NIF = "987654321";
 	private static final String FOOD = "FOOD";
@@ -20,9 +20,9 @@ public class BuyerToReturnTest {
 	private Buyer buyer;
 	private ItemType itemType;
 
-	@Before
-	public void setUp() {
-		IRS irs = IRS.getIRS();
+	@Override
+	public void populate4Test() {
+		IRS irs = IRS.getIRSInstance();
 		this.seller = new Seller(irs, SELLER_NIF, "José Vendido", "Somewhere");
 		this.buyer = new Buyer(irs, BUYER_NIF, "Manuel Comprado", "Anywhere");
 		this.itemType = new ItemType(irs, FOOD, TAX);
@@ -84,10 +84,4 @@ public class BuyerToReturnTest {
 
 		assertEquals(0.75f, value, 0.00f);
 	}
-
-	@After
-	public void tearDown() {
-		IRS.getIRS().clearAll();
-	}
-
 }
