@@ -1,9 +1,13 @@
-# Adventure Builder [![Build Status](https://travis-ci.com/tecnico-softeng/es18LL_NN-project.svg?token=COPY_FROM_TRAVIS&branch=develop)](https://travis-ci.com/tecnico-softeng/es18LL_NN-project) [![codecov](https://codecov.io/gh/tecnico-softeng/es18LL_NN-project/branch/master/graph/badge.svg?token=COPY_FROM_CODECOV)](https://codecov.io/gh/tecnico-softeng/es18LL_NN-project)
+# Adventure Builder 
+
+[![Build Status](https://travis-ci.com/tecnico-softeng/es18tg_17-project.svg?token=7ZfOpwZfl2v6bYdUH_5vkw&branch=develop)](https://travis-ci.com/tecnico-softeng/es18LL_NN-project)
+
+[![codecov](https://codecov.io/gh/tecnico-softeng/es18tg_17-project/branch/develop/graph/badge.svg?token=iC1C1G5pBo)](https://codecov.io/gh/tecnico-softeng/es18tg_17-project)
 
 To run tests execute: mvn clean install
-
 To see the coverage reports, go to module_name/target/site/jacoco/index.html.
 
+To run webservices: mvn clean spring-boot:run on module and access on http://localhost:8080/banks for example.
 
 |   Number   |          Name           |                 Email                    |   Name GitHUb   | Grupo |
 | ---------- | ----------------------- | -----------------------------------------| ----------------| ----- |
@@ -16,20 +20,17 @@ To see the coverage reports, go to module_name/target/site/jacoco/index.html.
 | 83391      | Andreia Valente         | andreia.valente@tecnico.ulisboa.pt       | AndreiaValente  |   17  |
 
 
-## Tasks - Third Delivery  
+## Tasks - Fourth Delivery
 
 |   Number   |          Name           |   GitHub Name   |           Module        |     Task    |
 | ---------- | ----------------------- | ----------------| ----------------------- | ----------- |
-| 84758      | Rafael Ribeiro          | RafaelRibeiro97 | Tax / Activity / Broker |Tester / Code|
-| 83391      | Andreia Valente         | AndreiaValente  | Tax / Activity / Broker |Tester / Code|
-| 85069      | Francisco Barros        | FranciscoKloganB|       Car / Hotel       |Tester / Code|
-| 84710      | Diogo Vilela            | DiogoFSVilela   |       Car / Hotel       |Tester / Code|
-| 83405      | João Neves              | JoaoMiguelNeves |       Car / Hotel       |Tester / Code|
-| 84711      | Diogo Redin             | diogoredin      | Tax / Activity / Broker |Tester / Code|
-| 77921      | Mafalda Gaspar          | mafsgasp        | Tax / Activity / Broker |Tester / Code|
-
-- **Group 1:**
-- **Group 2:**
+| 84758      | Rafael Ribeiro          | RafaelRibeiro97 |                         |Tester / Code|
+| 83391      | Andreia Valente         | AndreiaValente  |                         |Tester / Code|
+| 85069      | Francisco Barros        | FranciscoKloganB|                         |Tester / Code|
+| 84710      | Diogo Vilela            | DiogoFSVilela   |                         |Tester / Code|
+| 83405      | João Neves              | JoaoMiguelNeves |                         |Tester / Code|
+| 84711      | Diogo Redin             | diogoredin      |                         |Tester / Code|
+| 77921      | Mafalda Gaspar          | mafsgasp        |                         |Tester / Code|
 
 ### Infrastructure
 
