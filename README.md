@@ -4,7 +4,7 @@
 
 To run tests execute: mvn clean install.
 To see the coverage reports, go to module_name/target/site/jacoco/index.html.
-To run webservices: mvn clean spring-boot:run on module and access on http://localhost:8080/banks for example.
+To run webservices: mvn clean spring-boot:run on module and access on http://localhost:8080 for example.
 
 |   Number   |          Name           |                 Email                    |   Name GitHUb   | Grupo |
 | ---------- | ----------------------- | -----------------------------------------| ----------------| ----- |
