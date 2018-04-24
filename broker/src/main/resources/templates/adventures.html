@@ -12,21 +12,40 @@
 </head>
 <body>
 	<div class="container">
+		<br/>
+		<a class="btn btn-default pull-right" th:href="@{/brokers}">&#8592; Go back to Brokers</a>
 		<h2>
 			Welcome to Broker <span th:text="${broker.name}">Name</span> Adventures
 		</h2>
-		<a class="btn btn-default pull-right" th:href="@{/brokers}">Brokers</a>
 		<br/>
 		<h3>Create Adventure</h3>
 		<p class="text-danger" th:text="${error}">Error</p>
-		<form class="form-inline" th:action="@{/brokers/{code}/adventures(code=${broker.code})}" th:object="${adventure}" method="post">
-	 		<label>Begin: </label> <input class="form-control" type="date" th:field="*{begin}" /> 
-			<label>End: </label> <input class="form-control" type="date" th:field="*{end}" />  
-			<label>Age: </label> <input class="form-control" type="number" th:field="*{age}" /> 
-			<label>IBAN: </label> <input class="form-control" type="text" th:field="*{iban}" /> 
-			<label>Amount: </label> <input class="form-control" type="number" th:value="*{amount}" th:field="*{amount}" />
+		<form th:action="@{/brokers/{code}/adventures(code=${broker.code})}" th:object="${adventure}" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="form_1">Begin</label>
+					<input class="form-control" id="form_1" type="date" th:field="*{begin}" /> 
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_2">End</label>
+					<input class="form-control" id="form_2" type="date" th:field="*{end}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_3">Age</label>
+					<input class="form-control" id="form_3" type="number" th:field="*{age}" /> 
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_4">IBAN</label>
+					<input class="form-control" id="form_4" type="text" th:field="*{iban}" /> 
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_5">Amount</label>
+					<input class="form-control" id="form_5" type="number" th:value="*{amount}" th:field="*{amount}" />
+				</div>
+			</div>
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>
+		<br/>
 		<br/>
 		<h3>Adventures</h3>
  		<table class="table table-striped">
