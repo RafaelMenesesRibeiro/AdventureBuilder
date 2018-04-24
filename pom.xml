@@ -23,7 +23,7 @@
 
 		<version.org.jmockit.jmockit>1.38</version.org.jmockit.jmockit>
 
-		<version.org.webjars.bootstrap>3.3.7-1</version.org.webjars.bootstrap>
+		<version.org.webjars.bootstrap>4.1.0</version.org.webjars.bootstrap>
 		<version.org.webjars.jquery>3.1.1</version.org.webjars.jquery>
 
 		<version.fenixframework>2.6.2</version.fenixframework>
