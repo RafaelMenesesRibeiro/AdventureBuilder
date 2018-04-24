@@ -29,8 +29,7 @@ public class HotelInterface {
 
 	@Atomic(mode = TxMode.WRITE)
 	public static void createHotel(HotelData hotelData) {
-		new Hotel(hotelData.getCode(), hotelData.getName(), hotelData.getNif(), hotelData.getIban(),
-				hotelData.getPriceSingle(), hotelData.getPriceDouble());
+		new Hotel(hotelData.getCode(), hotelData.getName(), hotelData.getNif(), hotelData.getIban(), hotelData.getPriceSingle(), hotelData.getPriceDouble());
 	}
 
 	@Atomic(mode = TxMode.READ)

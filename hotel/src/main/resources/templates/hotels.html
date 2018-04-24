@@ -18,7 +18,14 @@
 		<p class="text-danger" th:text="${error}">Error</p>
 		<form class="form-inline" th:action="@{/hotels}" th:object="${hotel}" method="post">
 			<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" /> 
-			<label>Code: </label> <input class="form-control" type="text" th:field="*{code}" /> 
+			<label>Code: </label> <input class="form-control" type="text" th:field="*{code}" />
+			<br></br>
+			<label>NIF: </label> <input class="form-control" type="text" th:field="*{nif}" /> 
+			<label>IBAN: </label> <input class="form-control" type="text" th:field="*{iban}" /> 
+			<br></br>
+			<label>Price Single: </label> <input class="form-control" type="text" th:field="*{priceSingle}" /> 
+			<label>Price Double: </label> <input class="form-control" type="text" th:field="*{priceDouble}" /> 
+			<br></br>
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>
 		<br/>
@@ -28,6 +35,11 @@
 				<tr>
 					<th>Name</th>
 					<th>Code</th>
+					<th>NIF</th>
+					<th>IBAN</th>
+					<th>Price Single</th>
+					<th>Price Double</th>
+
  					<th>Rooms</th>
 				</tr>
 			</thead>
@@ -35,6 +47,10 @@
 				<tr th:each="hotel: ${hotels}">
 					<td th:text="${hotel.name}">Name</td>
 					<td th:text="${hotel.code}">Code</td>
+					<td th:text="${hotel.nif}">NIF</td>
+					<td th:text="${hotel.iban}">IBAN</td>
+					<td th:text="${hotel.priceSingle}">Price Single</td>
+					<td th:text="${hotel.priceDouble}">Price Double</td>
 				 	<td><a
 						th:href="@{/hotels/{code}/rooms(code=${hotel.code})}">Rooms</a></td>
 				</tr>
