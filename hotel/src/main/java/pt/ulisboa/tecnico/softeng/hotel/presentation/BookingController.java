@@ -42,8 +42,8 @@ public class BookingController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String bookingSubmit(Model model, @PathVariable String code, @PathVariable String number,
 			@ModelAttribute RoomBookingData booking) {
-		logger.info("bookingSubmit hotelCode:{}, roomNumber:{}, arrival:{}, departure:{}", code, number,
-				booking.getArrival(), booking.getDeparture());
+		logger.info("bookingSubmit hotelCode:{}, roomNumber:{}, buyerNif:{}, buyerIban:{}, arrival:{}, departure:{}", 
+			code, number, booking.getBuyerNif(), booking.getBuyerIban(), booking.getArrival(), booking.getDeparture());
 
 		try {
 			HotelInterface.createBooking(code, number, booking);
