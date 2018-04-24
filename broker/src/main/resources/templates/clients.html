@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Adventures</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
+
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<br/>
+		<a class="btn btn-default pull-right" th:href="@{/brokers}">&#8592; Go back to Brokers</a>
+		<h2>
+			Welcome to Broker <span th:text="${broker.name}">Name</span> Clients
+		</h2>
+		<br/>
+		<h3>Create Client</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+		<form th:action="@{/brokers/{code}/clients(code=${broker.code})}" th:object="${client}" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="form_1">Driving License</label>
+					<input class="form-control" id="form_1" type="text" th:field="*{drivingLicense}" /> 
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_2">Age</label>
+					<input class="form-control" id="form_2" type="number" th:field="*{age}" /> 
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_3">NIF</label>
+					<input class="form-control" id="form_3" type="text" th:field="*{nif}" /> 
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_4">IBAN</label>
+					<input class="form-control" id="form_4" type="text" th:field="*{iban}" /> 
+				</div>
+			</div>
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		<br/>
+		<br/>
+		<h3>Clients</h3>
+ 		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Driving License</th>
+ 					<th>Age</th>
+					<th>NIF</th>
+					<th>IBAN</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="client: ${broker.clients}">
+					<td th:text="${client.drivingLicense}">drivingLicense</td>
+ 					<td th:text="${client.age}">age</td>
+					<td th:text="${client.nif}">nif</td>
+					<td th:text="${client.iban}">iban</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
