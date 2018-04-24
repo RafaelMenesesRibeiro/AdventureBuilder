@@ -46,8 +46,8 @@ public class BrokerInterface {
 
 	@Atomic(mode = TxMode.WRITE)
 	public static void createAdventure(String brokerCode, AdventureData adventureData) {
-		// TODO: receive client and margin
-		new Adventure(getBrokerByCode(brokerCode), adventureData.getBegin(), adventureData.getEnd(), null, 0.1);
+		Adventure adv = new Adventure(getBrokerByCode(brokerCode), adventureData.getBegin(), adventureData.getEnd(), getClientByIban(brokerCode, adventureData.getIban()), adventureData.getMargin()/100);
+		adv.incAmountToPay(adventureData.getAmount());
 	}
 
 	@Atomic(mode = TxMode.WRITE)
@@ -66,6 +66,16 @@ public class BrokerInterface {
 		for (Broker broker : FenixFramework.getDomainRoot().getBrokerSet()) {
 			if (broker.getCode().equals(code)) {
 				return broker;
+			}
+		}
+		return null;
+	}
+
+	private static Client getClientByIban(String brokerCode, String iban) {
+		Broker broker = getBrokerByCode(brokerCode);
+		for (Client client : broker.getClientSet()) {
+			if (client.getIban().equals(iban)) {
+				return client;
 			}
 		}
 		return null;

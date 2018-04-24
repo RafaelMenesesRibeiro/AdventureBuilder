@@ -31,16 +31,28 @@
 					<input class="form-control" id="form_2" type="date" th:field="*{end}" />
 				</div>
 				<div class="form-group col-md-6">
-					<label for="form_3">Age</label>
-					<input class="form-control" id="form_3" type="number" th:field="*{age}" /> 
+					<label for="form_4">Amount</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">$</div>
+						</div>
+						<input class="form-control" id="form_4" type="number" th:value="*{amount}" th:field="*{amount}" />
+					</div>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="form_4">IBAN</label>
-					<input class="form-control" id="form_4" type="text" th:field="*{iban}" /> 
+					<label for="form_4">Margin</label>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">%</div>
+						</div>
+						<input class="form-control" id="form_4" type="number" th:value="*{margin}" th:field="*{margin}" />
+					</div>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="form_5">Amount</label>
-					<input class="form-control" id="form_5" type="number" th:value="*{amount}" th:field="*{amount}" />
+					<label for="form_3">Client</label>
+					<select class="form-control" id="form_3" th:field="*{iban}">
+						<option th:each="client : ${broker.clients}" th:value="${client.iban}" th:text="${client.iban}"/>
+					</select>
 				</div>
 			</div>
 			<input class="btn btn-primary" type="submit" value="Submit" />
@@ -54,9 +66,8 @@
 					<th>Id</th>
  					<th>Begin</th>
 					<th>End</th>
-					<th>Age</th>
-					<th>IBAN</th>
 					<th>Amount</th>
+					<th>Client</th>
 					<th>State</th>
 					<th>Payment Confirmation</th>
 					<th>Payment Cancellation</th>
@@ -71,9 +82,9 @@
 					<td th:text="${adventure.id}">id</td>
  					<td th:text="${adventure.begin}">begin</td>
 					<td th:text="${adventure.end}">end</td>
-					<td th:text="${adventure.age}">age</td>
-					<td th:text="${adventure.iban}">IBAN</td>
 					<td th:text="${adventure.amount}">amount</td>
+					<td><a
+						th:href="@{/brokers/{code}/clients#(code=${broker.code})} + ${adventure.iban}">Link</a></td>
 					<td th:text="${adventure.state}">state</td>
 					<td th:text="${adventure.paymentConfirmation}">Payment Confirmation</td>
 					<td th:text="${adventure.paymentCancellation}">Payment Cancellation</td>
