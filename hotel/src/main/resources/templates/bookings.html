@@ -40,11 +40,11 @@
 			</thead>
 			<tbody>
 				<tr th:each="booking : ${room.bookings}">
-					<td th:text="${booking.arrival}">12/12/2016</td>
-					<td th:text="${booking.departure}">21/12/2016</td>
-					<td th:text="${booking.reference}">xpto3456</td>
-					<td th:text="${booking.cancellation}">xpto3456CANCEL</td>
-					<td th:text="${booking.cancellationDate}">07/12/2016</td>
+					<td th:text="${booking.arrival}">Arrival</td>
+					<td th:text="${booking.departure}">Departure</td>
+					<td th:text="${booking.reference}">Reference</td>
+					<td th:text="${booking.cancellation}">Cancellation</td>
+					<td th:text="${booking.cancellationDate}">Cancellation Date</td>
 				</tr>
 			</tbody>
 		</table>
