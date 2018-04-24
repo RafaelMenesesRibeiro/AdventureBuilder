@@ -13,6 +13,7 @@ import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
 import pt.ulisboa.tecnico.softeng.broker.services.local.BrokerInterface;
 import pt.ulisboa.tecnico.softeng.broker.services.local.dataobjects.AdventureData;
 import pt.ulisboa.tecnico.softeng.broker.services.local.dataobjects.BrokerData;
+import pt.ulisboa.tecnico.softeng.broker.services.local.dataobjects.ClientData;
 import pt.ulisboa.tecnico.softeng.broker.services.local.dataobjects.BrokerData.CopyDepth;
 
 @Controller
@@ -39,14 +40,13 @@ public class AdventureController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String submitAdventure(Model model, @PathVariable String brokerCode,
-			@ModelAttribute AdventureData adventureData) {
-		logger.info("adventureSubmit brokerCode:{}, begin:{}, end:{}, age:{}, iban:{}, amount:{}", brokerCode,
-				adventureData.getBegin(), adventureData.getEnd(), adventureData.getAge(), adventureData.getIban(),
-				adventureData.getAmount());
+	public String submitAdventure(Model model, @PathVariable String brokerCode, @ModelAttribute AdventureData adventureData) {
+		logger.info("adventureSubmit brokerCode:{}, begin:{}, end:{}, amount:{}, margin:{}, iban:{}", brokerCode,
+				adventureData.getBegin(), adventureData.getEnd(), adventureData.getAmount(), adventureData.getMargin(), adventureData.getIban());
 
 		try {
 			BrokerInterface.createAdventure(brokerCode, adventureData);
+
 		} catch (BrokerException be) {
 			model.addAttribute("error", "Error: it was not possible to create the adventure");
 			model.addAttribute("adventure", adventureData);

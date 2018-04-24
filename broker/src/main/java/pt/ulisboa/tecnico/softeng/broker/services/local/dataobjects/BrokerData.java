@@ -37,6 +37,9 @@ public class BrokerData {
 			for (Adventure adventure : broker.getAdventureSet()) {
 				this.adventures.add(new AdventureData(adventure));
 			}
+			for (Client client : broker.getClientSet()) {
+				this.clients.add(new ClientData(client));
+			}
 			break;
 		case BULKS:
 			for (BulkRoomBooking bulkRoomBooking : broker.getRoomBulkBookingSet()) {
