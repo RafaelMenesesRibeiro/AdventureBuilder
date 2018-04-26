@@ -15,7 +15,7 @@ import pt.ulisboa.tecnico.softeng.bank.services.local.BankInterface;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
 
 public class BankInterfaceGetOperationDataMethodTest extends RollbackTestAbstractClass {
-	private static int AMOUNT = 100;
+	private static double AMOUNT = 100.00;
 	private Bank bank;
 	private Account account;
 	private String reference;
