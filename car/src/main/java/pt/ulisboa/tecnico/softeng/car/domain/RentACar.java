@@ -40,6 +40,7 @@ public class RentACar extends RentACar_Base {
 
 			throw new CarException();
 		}
+				
 
 		for (final RentACar rental : FenixFramework.getDomainRoot().getRentACarSet()) {
 			if (rental.getNif().equals(nif)) {
@@ -108,7 +109,7 @@ public class RentACar extends RentACar_Base {
 	 * @param reference
 	 * @return the renting with the given reference.
 	 */
-	protected static Renting getRenting(String reference) {
+	public static Renting getRenting(String reference) {
 		for (final RentACar rentACar : FenixFramework.getDomainRoot().getRentACarSet()) {
 			for (final Vehicle vehicle : rentACar.getVehicleSet()) {
 				final Renting renting = vehicle.getRenting(reference);
@@ -135,4 +136,14 @@ public class RentACar extends RentACar_Base {
 		return counter;
 	}
 
+
+	public Vehicle getVehicleByPlate (String plate) {
+		Set<Vehicle> vehicles = this.getVehicleSet();
+		for (Vehicle vehicle: vehicles) {
+			if (vehicle.getPlate().equals(plate)) {
+				return vehicle;
+			}
+		}
+		return null;
+	}
 }
