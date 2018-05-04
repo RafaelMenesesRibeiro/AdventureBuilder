@@ -17,14 +17,30 @@
 		<br/>
 		<h3>Create Activity</h3>
 		<p class="text-danger" th:text="${error}">Error</p>
-		<form class="form-inline" th:action="@{/providers/{code}/activities(code=${provider.code})}" th:object="${activity}" method="post">
-	 		<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" /> 
-	 		<label>Min Age: </label> <input class="form-control" type="number" th:field="*{minAge}" /> 
-	 		<label>Max Age: </label> <input class="form-control" type="number" th:field="*{maxAge}" /> 
-	 		<label>Capacity: </label> <input class="form-control" type="number" th:field="*{capacity}" /> 
+		<form th:action="@{/providers/{code}/activities(code=${provider.code})}" th:object="${activity}" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>Name: </label>
+					<input class="form-control" type="text" th:field="*{name}" />
+				</div>
+				<div class="form-group col-md-6">
+			 		<label>Min Age: </label>
+					<input class="form-control" type="number" th:field="*{minAge}" />
+				</div>
+				<div class="form-group col-md-6">
+			 		<label>Max Age: </label>
+					<input class="form-control" type="number" th:field="*{maxAge}" />
+				</div>
+				<div class="form-group col-md-6">
+			 		<label>Capacity: </label>
+					<input class="form-control" type="number" th:field="*{capacity}" />
+				</div>
+			</div>
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>
 		<br/>
+		<br/>
+
 		<h3>Clients</h3>
  		<table class="table table-striped">
 			<thead>

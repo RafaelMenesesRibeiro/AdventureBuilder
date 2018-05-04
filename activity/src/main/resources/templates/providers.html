@@ -58,8 +58,7 @@
 					<td th:text="${provider.name}">Name</td>
 					<td th:text="${provider.nif}">ActivityProvider Nif</td>
 					<td th:text="${provider.iban}">ActivityProvider Iban</td>
-				 	<td><a
-						th:href="@{/providers/{code}/activities(code=${provider.code})}">Activities</a></td>
+				 	<td><a th:href="@{/providers/{code}/activities(code=${provider.code})}">Activities</a></td>
 				</tr>
 			</tbody>
 		</table>
