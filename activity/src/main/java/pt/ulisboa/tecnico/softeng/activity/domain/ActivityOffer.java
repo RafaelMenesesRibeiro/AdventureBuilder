@@ -2,6 +2,7 @@ package pt.ulisboa.tecnico.softeng.activity.domain;
 
 import org.joda.time.LocalDate;
 import java.util.Random;
+import java.lang.Math;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
@@ -20,7 +21,7 @@ public class ActivityOffer extends ActivityOffer_Base {
 
 	private int getRandom() {
 		Random r = new Random();
-		return r.nextInt();
+		return Math.abs(r.nextInt());
 	}
 
 	public void delete() {
