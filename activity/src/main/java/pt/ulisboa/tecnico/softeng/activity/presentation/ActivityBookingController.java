@@ -13,32 +13,32 @@ import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.activity.services.local.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityOfferData;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityReservationData;
 
 @Controller
-@RequestMapping(value = "/providers/{codeProvider}/activities/{codeActivity}/offers")
+@RequestMapping(value = "/providers/{codeProvider}/activities/{codeActivity}/offers/{codeOffer}")
 public class ActivityBookingController {
-	/*
-	private static Logger logger = LoggerFactory.getLogger(ActivityOfferController.class);
-
+	private static Logger logger = LoggerFactory.getLogger(ActivityBookingController.class);
 	@RequestMapping(method = RequestMethod.GET)
-	public String bookingForm(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @PathVariable String offerId) {
-		logger.info("bookingForm codeProvider:{}, codeActivity:{}, offer:{}", codeProvider, codeActivity, offer);
+	public String bookingForm(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @PathVariable String codeOffer) {
+		logger.info("bookingForm codeProvider:{}, codeActivity:{}, codeOffer:{}", codeProvider, codeActivity, codeOffer);
 
-		ActivityData activityData = ActivityInterface.getActivityDataByCode(codeProvider, codeActivity);
+		ActivityOfferData activityOfferData = ActivityInterface.getActivityOfferDataByCode(codeProvider, codeActivity, codeOffer);
 
-		if (activityData == null) {
-			model.addAttribute("error", "Error: it does not exist an activity with code " + codeActivity
-					+ " in provider with code " + codeProvider);
+		if (activityOfferData == null) {
+			model.addAttribute("error", "Error: it does not exist an activity with code " + codeActivity + " in provider with code " + codeProvider);
 			model.addAttribute("provider", new ActivityReservationData());
-		//	model.addAttribute("providers", ActivityInterface.getProviders());
+			model.addAttribute("providers", ActivityInterface.getProviders());
 			return "providers";
 		} else {
 			model.addAttribute("offer", new ActivityReservationData());
-			model.addAttribute("activity", activityData);
+			model.addAttribute("activity", activityOfferData);
 			return "reservations";
 		}
 	}
 
+	/*
 	@RequestMapping(method = RequestMethod.POST)
 	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @ModelAttribute ActivityOfferData offer) {
 		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, begin:{}, end:{}", codeProvider, codeActivity,

@@ -14,6 +14,7 @@ public class ActivityOfferData {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate end;
 	private Integer capacity;
+	private String code;
 	private double amount;
 	private List<ActivityReservationData> reservations;
 
@@ -21,6 +22,7 @@ public class ActivityOfferData {
 	}
 
 	public ActivityOfferData(ActivityOffer offer) {
+		this.code = offer.getCode();
 		this.begin = offer.getBegin();
 		this.end = offer.getEnd();
 		this.capacity = offer.getCapacity();
@@ -28,6 +30,14 @@ public class ActivityOfferData {
 		this.reservations = offer.getBookingSet().stream().map(b -> new ActivityReservationData(b)).collect(Collectors.toList());
 	}
 
+	public String getCode() {
+		return this.code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 	public LocalDate getBegin() {
 		return this.begin;
 	}

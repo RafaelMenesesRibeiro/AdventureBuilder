@@ -63,6 +63,16 @@ public class ActivityInterface {
 	}
 
 	@Atomic(mode = TxMode.WRITE)
+	public static ActivityOfferData getActivityOfferDataByCode(String codeProvider, String codeActivity, String codeOffer) {
+		ActivityOffer activityOffer = getActivityOfferByCode(codeProvider, codeActivity, codeOffer);
+		if (activityOffer == null) {
+			return null;
+		}
+
+		return new ActivityOfferData(activityOffer);
+	}
+
+	@Atomic(mode = TxMode.WRITE)
 	public static void createOffer(String codeProvider, String codeActivity, ActivityOfferData offer) {
 		Activity activity = getActivityByCode(codeProvider, codeActivity);
 		if (activity == null) {
@@ -129,7 +139,15 @@ public class ActivityInterface {
 			return null;
 		}
 
-		return provider.getActivitySet().stream().filter(a -> a.getCode().equals(codeActivity)).findFirst()
-				.orElse(null);
+		return provider.getActivitySet().stream().filter(a -> a.getCode().equals(codeActivity)).findFirst().orElse(null);
+	}
+
+	private static ActivityOffer getActivityOfferByCode(String codeProvider, String codeActivity, String codeOffer) {
+		Activity activity = getActivityByCode(codeProvider, codeActivity);
+		if (activity == null) {
+			return null;
+		} else {
+			return activity.getActivityOfferByCode(codeOffer);
+		}
 	}
 }

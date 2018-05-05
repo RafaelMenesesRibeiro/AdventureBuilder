@@ -7,16 +7,16 @@ import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
 
 public class ActivityReservationData {
-	private final String reference;
-	private final String cancellation;
-	private final String name;
-	private final String code;
-	private final LocalDate begin;
-	private final LocalDate end;
-	private final LocalDate cancellationDate;
-	private final double price;
-	private final String paymentReference;
-	private final String invoiceReference;
+	private String reference;
+	private String cancellation;
+	private String name;
+	private String code;
+	private LocalDate begin;
+	private LocalDate end;
+	private LocalDate cancellationDate;
+	private double price;
+	private String paymentReference;
+	private String invoiceReference;
 
 	public ActivityReservationData(ActivityProvider provider, ActivityOffer offer, Booking booking) {
 		this.reference = booking.getReference();
@@ -29,6 +29,10 @@ public class ActivityReservationData {
 		this.price = offer.getPrice();
 		this.paymentReference = booking.getPaymentReference();
 		this.invoiceReference = booking.getInvoiceReference();
+	}
+
+	public ActivityReservationData() {
+
 	}
 
 	public ActivityReservationData(Booking booking) {
