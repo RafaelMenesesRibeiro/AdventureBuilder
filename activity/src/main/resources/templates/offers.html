@@ -42,6 +42,7 @@
  		<table class="table table-striped">
 			<thead>
 				<tr>
+					<th>Offer Code</th>
 					<th>Begin</th>
  					<th>End</th>
  					<th>Capacity</th>
@@ -51,6 +52,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="offer: ${activity.offers}">
+					<td th:text="${offer.code}">12351261</td>
 					<td th:text="${offer.begin}">12/12/2017</td>
  					<td th:text="${offer.end}">12/12/2107</td>
  					<td th:text="${offer.capacity}">20</td>
