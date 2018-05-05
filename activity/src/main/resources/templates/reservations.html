@@ -10,9 +10,9 @@
 <body>
 	<div class="container">
 		<h2>
-			Bookings for Offer beggining on <span th:text="${offer.begin}"></span> and ending on <span th:text="${offer.end}"></span> for <span th:text="${offer.activity.name}"></span> activity.
+			Bookings for Offer beggining on <!--<span th:text="${offer.begin}"></span> and ending on <span th:text="${offer.end}"></span> for <span th:text="${offer.activity.name}"></span> activity.-->
 		</h2>
-		<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities/{codeActivity}/offers(codeProvider=${offer.activity.codeProvider}, codeActivity=${offer.activity.code})}">Offers</a>
+		 <!--<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities/{codeActivity}/offers(codeProvider=${offer.activity.codeProvider}, codeActivity=${offer.activity.code})}">Offers</a>-->
 		<br/>
 		<h3>Create Booking</h3>
 		<p class="text-danger" th:text="${error}">Error</p>
@@ -42,11 +42,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="booking: ${offer.reservations}">
+					<!--
+					<tr th:each="booking: ${offer.reservations}">
 					<td th:text="${booking.reference}">
 					<td th:text="${booking.buyerNif}">237084365</td>
  					<td th:text="${booking.buyerIban}">PT5035000000131813107</td>
-					<!--
+
 					setReference < activity provider code + some integer, do it on controller, probably worth displaying on page.
 					setActivityOffer < display on page header
 					setProviderNif < no need to display anywhere, but make sure to fetch it from the right place with controller
@@ -56,8 +57,9 @@
 					setDate < display on page header and fetch from offer
 					setType < it's always sport
 					setCancelledInvoice < it's false by default, should it be changeable manually?
-					-->
+
 				</tr>
+				-->
 			</tbody>
 		</table>
 	</div>

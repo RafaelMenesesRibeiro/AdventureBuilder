@@ -26,15 +26,17 @@ public class ActivityOfferController {
 
 		ActivityData activityData = ActivityInterface.getActivityDataByCode(codeProvider, codeActivity);
 
+		ActivityProviderData provider = ActivityInterface.getProviderDataByCode(codeProvider);
+
 		if (activityData == null) {
-			model.addAttribute("error", "Error: it does not exist an activity with code " + codeActivity
-					+ " in provider with code " + codeProvider);
+			model.addAttribute("error", "Error: it does not exist an activity with code " + codeActivity + " in provider with code " + codeProvider);
 			model.addAttribute("provider", new ActivityProviderData());
 			model.addAttribute("providers", ActivityInterface.getProviders());
 			return "providers";
 		} else {
-			model.addAttribute("offer", new ActivityOfferData());
+			model.addAttribute("provider", provider);
 			model.addAttribute("activity", activityData);
+			model.addAttribute("offer", new ActivityOfferData());
 			return "offers";
 		}
 	}
