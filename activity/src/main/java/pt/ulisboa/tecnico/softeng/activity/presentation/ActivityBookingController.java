@@ -29,7 +29,7 @@ public class ActivityBookingController {
 		ActivityOfferData activityOfferData = ActivityInterface.getActivityOfferDataByCode(codeProvider, codeActivity, codeOffer);
 
 		if (activityOfferData == null) {
-			model.addAttribute("error", "Error: it does not exist an activity with code " + codeActivity + " in provider with code " + codeProvider);
+			model.addAttribute("error", "Error: it does not exist an offer with code " + codeOffer + " in activity with code" + codeActivity + "on provider with code " + codeProvider);
 			model.addAttribute("provider", new ActivityReservationData());
 			model.addAttribute("providers", ActivityInterface.getProviders());
 			return "providers";
@@ -43,18 +43,43 @@ public class ActivityBookingController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @PathVariable String codeOffer, @ModelAttribute ActivityReservationData reservation) {
-		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, codeOffer:{}", codeProvider, codeActivity, codeOffer);
-		/*
+	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
+																@PathVariable String codeOffer, @ModelAttribute ActivityReservationData reservation) {
+
+		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, codeOffer:{}, buyerNif:{}, buyerIban:{}",
+									codeProvider, codeActivity, codeOffer, reservation.getBuyerNif(), reservation.getBuyerIban());
+
 		try {
-			ActivityInterface.createBooking(codeProvider, codeActivity, offer);
+			ActivityInterface.createBooking(codeProvider, codeActivity, codeOffer, reservation);
 		} catch (ActivityException e) {
-			model.addAttribute("error", "Error: it was not possible to create de offer");
-			model.addAttribute("offer", offer);
+			model.addAttribute("error", "Error: it was not possible to make a booking");
+			model.addAttribute("reservation", reservation);
+			model.addAttribute("offer", ActivityInterface.getActivityOfferDataByCode(codeProvider, codeActivity, codeOffer));
 			model.addAttribute("activity", ActivityInterface.getActivityDataByCode(codeProvider, codeActivity));
+			model.addAttribute("provider", ActivityInterface.getProviderDataByCode(codeProvider));
 			return "reservations";
 		}
-		*/
 		return "redirect:/providers/" + codeProvider + "/activities/" + codeActivity + "/offers/" + codeOffer + "/reservations";
 	}
+	/*
+	@RequestMapping(method = RequestMethod.POST)
+	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
+																@PathVariable String codeOffer, @ModelAttribute ActivityReservationData reservation) {
+
+		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, codeOffer:{}, buyerNif:{}, buyerIban:{}",
+									codeProvider, codeActivity, codeOffer, reservation.getBuyerNif(), reservation.getBuyerIban());
+
+		try {
+			ActivityInterface.reserveActivity(begin, end, age, nif, iban);
+		} catch (ActivityException e) {
+			model.addAttribute("error", "Error: it was not possible to make a booking");
+			model.addAttribute("reservation", reservation);
+			model.addAttribute("offer", ActivityInterface.getActivityOfferDataByCode(codeProvider, codeActivity, codeOffer));
+			model.addAttribute("activity", ActivityInterface.getActivityDataByCode(codeProvider, codeActivity));
+			model.addAttribute("provider", ActivityInterface.getProviderDataByCode(codeProvider));
+			return "reservations";
+		}
+		return "redirect:/providers/" + codeProvider + "/activities/" + codeActivity + "/offers/" + codeOffer + "/reservations";
+	}
+	*/
 }

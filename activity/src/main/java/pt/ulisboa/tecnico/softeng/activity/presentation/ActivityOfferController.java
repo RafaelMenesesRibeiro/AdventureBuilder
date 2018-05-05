@@ -50,6 +50,7 @@ public class ActivityOfferController {
 			model.addAttribute("error", "Error: it was not possible to create de offer");
 			model.addAttribute("offer", offer);
 			model.addAttribute("activity", ActivityInterface.getActivityDataByCode(codeProvider, codeActivity));
+			model.addAttribute("provider", ActivityInterface.getProviderDataByCode(codeProvider));
 			return "offers";
 		}
 
