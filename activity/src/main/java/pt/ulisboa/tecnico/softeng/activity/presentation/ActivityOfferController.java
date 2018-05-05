@@ -24,9 +24,8 @@ public class ActivityOfferController {
 	public String offerForm(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity) {
 		logger.info("offerForm codeProvider:{}, codeActivity:{}", codeProvider, codeActivity);
 
+		ActivityProviderData providerData = ActivityInterface.getProviderDataByCode(codeProvider);
 		ActivityData activityData = ActivityInterface.getActivityDataByCode(codeProvider, codeActivity);
-
-		ActivityProviderData provider = ActivityInterface.getProviderDataByCode(codeProvider);
 
 		if (activityData == null) {
 			model.addAttribute("error", "Error: it does not exist an activity with code " + codeActivity + " in provider with code " + codeProvider);
@@ -34,7 +33,7 @@ public class ActivityOfferController {
 			model.addAttribute("providers", ActivityInterface.getProviders());
 			return "providers";
 		} else {
-			model.addAttribute("provider", provider);
+			model.addAttribute("provider", providerData);
 			model.addAttribute("activity", activityData);
 			model.addAttribute("offer", new ActivityOfferData());
 			return "offers";
@@ -42,8 +41,7 @@ public class ActivityOfferController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String offerSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
-			@ModelAttribute ActivityOfferData offer) {
+	public String offerSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @ModelAttribute ActivityOfferData offer) {
 		logger.info("offerSubmit codeProvider:{}, codeActivity:{}, begin:{}, end:{}", codeProvider, codeActivity,
 				offer.getBegin(), offer.getEnd());
 

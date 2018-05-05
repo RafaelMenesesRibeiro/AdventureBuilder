@@ -24,6 +24,8 @@ public class ActivityBookingController {
 	public String bookingForm(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @PathVariable String codeOffer) {
 		logger.info("bookingForm codeProvider:{}, codeActivity:{}, codeOffer:{}", codeProvider, codeActivity, codeOffer);
 
+		ActivityProviderData providerData = ActivityInterface.getProviderDataByCode(codeProvider);
+		ActivityData activityData = ActivityInterface.getActivityDataByCode(codeProvider, codeActivity);
 		ActivityOfferData activityOfferData = ActivityInterface.getActivityOfferDataByCode(codeProvider, codeActivity, codeOffer);
 
 		if (activityOfferData == null) {
@@ -32,18 +34,18 @@ public class ActivityBookingController {
 			model.addAttribute("providers", ActivityInterface.getProviders());
 			return "providers";
 		} else {
-			model.addAttribute("offer", new ActivityReservationData());
-			model.addAttribute("activity", activityOfferData);
+			model.addAttribute("provider", providerData);
+			model.addAttribute("activity", activityData);
+			model.addAttribute("offer", activityOfferData);
+			model.addAttribute("reservation", new ActivityReservationData());
 			return "reservations";
 		}
 	}
 
-	/*
 	@RequestMapping(method = RequestMethod.POST)
-	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @ModelAttribute ActivityOfferData offer) {
-		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, begin:{}, end:{}", codeProvider, codeActivity,
-				offer.getBegin(), offer.getEnd());
-
+	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @PathVariable String codeOffer, @ModelAttribute ActivityReservationData reservation) {
+		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, codeOffer:{}", codeProvider, codeActivity, codeOffer);
+		/*
 		try {
 			ActivityInterface.createOffer(codeProvider, codeActivity, offer);
 		} catch (ActivityException e) {
@@ -52,9 +54,7 @@ public class ActivityBookingController {
 			model.addAttribute("activity", ActivityInterface.getActivityDataByCode(codeProvider, codeActivity));
 			return "reservations";
 		}
-
-		return "redirect:/providers/" + codeProvider + "/activities/" + codeActivity + "/offers/" + offerId + "reservations";
+		*/
+		return "redirect:/providers/" + codeProvider + "/activities/" + codeActivity + "/offers/" + codeOffer + "/reservations";
 	}
-	*/
-
 }
