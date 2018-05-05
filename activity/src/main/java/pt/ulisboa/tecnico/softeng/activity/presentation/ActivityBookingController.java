@@ -28,11 +28,11 @@ public class ActivityBookingController {
 		if (activityData == null) {
 			model.addAttribute("error", "Error: it does not exist an activity with code " + codeActivity
 					+ " in provider with code " + codeProvider);
-			model.addAttribute("provider", new ActivityBookingData());
+			model.addAttribute("provider", new ActivityReservationData());
 		//	model.addAttribute("providers", ActivityInterface.getProviders());
 			return "providers";
 		} else {
-			model.addAttribute("offer", new ActivityBookingData());
+			model.addAttribute("offer", new ActivityReservationData());
 			model.addAttribute("activity", activityData);
 			return "reservations";
 		}
