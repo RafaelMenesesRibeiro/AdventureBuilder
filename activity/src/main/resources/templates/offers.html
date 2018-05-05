@@ -12,7 +12,7 @@
 		<h2>
 			Offers of Activity <span th:text="${activity.name}">Tracking</span> of <span th:text="${activity.nameProvider}">eXtreme</span>
 		</h2>
-		<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities(codeProvider=${activity.codeProvider})}">Activities</a>
+		<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities(codeProvider=${activity.codeProvider})}">Back to Activities</a>
 		<br/>
 		<h3>Create Offer</h3>
 		<p class="text-danger" th:text="${error}">Error</p>

@@ -9,57 +9,50 @@
 </head>
 <body>
 	<div class="container">
-		<h2>
-			Bookings for Offer beggining on <!--<span th:text="${offer.begin}"></span> and ending on <span th:text="${offer.end}"></span> for <span th:text="${offer.activity.name}"></span> activity.-->
-		</h2>
-		 <!--<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities/{codeActivity}/offers(codeProvider=${offer.activity.codeProvider}, codeActivity=${offer.activity.code})}">Offers</a>-->
+		<h2>Bookings for offer with code: <span th:text="${offer.code}"></span></h2>
+		<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities/{codeActivity}/offers(codeProvider=${activity.codeProvider}, codeActivity=${activity.code})}">Back to Offers</a>
+		<br/>
+		<br/>
+		<h6><strong>Provider:</strong> <span th:text="${provider.name}"></span>, <strong>Provider Code:</strong> <span th:text="${provider.code}"></span></h6>
+		<h6><strong>Activity:</strong> <span th:text="${activity.name}"></span></h6>
+		<h6><strong>Begins:</strong> <span th:text="${offer.begin}"></span>, <strong>Ends:</strong> <span th:text="${offer.end}"></span></h6>
+		<h6><strong>Price:</strong> <span th:text="${offer.amount}"></span></h6>
 		<br/>
 		<h3>Create Booking</h3>
 		<p class="text-danger" th:text="${error}">Error</p>
-		<!--
-		<form th:action="@{/providers/{codeProvider}/activities/{codeActivity}/offers/{offer}/bookings(codeProvider=${offer.activity.codeProvider},codeActivity=${offer.activity.code}, offer=${@FIXME})}" th:object="${offer}" method="post">
+		<form th:action="@{/providers/{codeProvider}/activities/{codeActivity}/offers/{codeOffer}/reservations(codeProvider=${activity.codeProvider},codeActivity=${activity.code},codeOffer=${offer.code})}" th:object="${reservation}" method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label>Buyer NIF: </label>
-					<input class="form-control" type="number" th:field="*{buyerNif}" />
+					<input class="form-control" type="text" th:field="*{buyerNif}" />
 				</div>
 				<div class="form-group col-md-6">
 					<label>Buyer IBAN: </label>
-					<input class="form-control" type="number" th:field="*{buyerIban}" />
+					<input class="form-control" type="text" th:field="*{buyerIban}" />
 				</div>
 			</div>
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>
-		-->
 		<br/>
 		<h3>List of Bookings</h3>
  		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Booking Reference</th>
-					<th>Buyer NIF</th>
- 					<th>Buyer IBAN</th>
+					<th>Reference</th>
+					<th>Cancelation Status</th>
+					<th>Cancelation Date</th>
+					<th>Payment Reference</th>
+					<th>Invoice reference</th>
 				</tr>
 			</thead>
 			<tbody>
-					<!--
-					<tr th:each="booking: ${offer.reservations}">
-					<td th:text="${booking.reference}">
-					<td th:text="${booking.buyerNif}">237084365</td>
- 					<td th:text="${booking.buyerIban}">PT5035000000131813107</td>
-
-					setReference < activity provider code + some integer, do it on controller, probably worth displaying on page.
-					setActivityOffer < display on page header
-					setProviderNif < no need to display anywhere, but make sure to fetch it from the right place with controller
-					setBuyerNif  < done
-					setBuyerIban < done
-					setAmount < no need to display but fetch from offer
-					setDate < display on page header and fetch from offer
-					setType < it's always sport
-					setCancelledInvoice < it's false by default, should it be changeable manually?
-
+				<tr th:each="reservation: ${offer.reservations}">
+					<td th:text="${reservation.reference}"></td>
+					<td th:text="${reservation.cancellation}"></td>
+					<td th:text="${reservation.cancellationDate}"></td>
+					<td th:text="${reservation.paymentReference}"></td>
+					<td th:text="${reservation.invoiceReference}"></td>
 				</tr>
-				-->
 			</tbody>
 		</table>
 	</div>

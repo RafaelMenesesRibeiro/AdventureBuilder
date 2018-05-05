@@ -1,22 +1,28 @@
 package pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects;
 
 import org.joda.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityOffer;
 import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
 
 public class ActivityReservationData {
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate begin;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate end;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate cancellationDate;
+	private double price;
 	private String reference;
 	private String cancellation;
 	private String name;
 	private String code;
-	private LocalDate begin;
-	private LocalDate end;
-	private LocalDate cancellationDate;
-	private double price;
 	private String paymentReference;
 	private String invoiceReference;
+	private String buyerNif;
+	private String buyerIban;
 
 	public ActivityReservationData(ActivityProvider provider, ActivityOffer offer, Booking booking) {
 		this.reference = booking.getReference();
@@ -88,4 +94,11 @@ public class ActivityReservationData {
 		return this.invoiceReference;
 	}
 
+	public String getBuyerNif() {
+		return this.buyerNif;
+	}
+
+	public String getBuyerIban() {
+		return this.buyerIban;
+	}
 }

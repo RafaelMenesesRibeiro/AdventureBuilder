@@ -42,8 +42,7 @@ public class ActivityOfferController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String offerSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @ModelAttribute ActivityOfferData offer) {
-		logger.info("offerSubmit codeProvider:{}, codeActivity:{}, begin:{}, end:{}", codeProvider, codeActivity,
-				offer.getBegin(), offer.getEnd());
+		logger.info("offerSubmit codeProvider:{}, codeActivity:{}, begin:{}, end:{}", codeProvider, codeActivity, offer.getBegin(), offer.getEnd());
 
 		try {
 			ActivityInterface.createOffer(codeProvider, codeActivity, offer);

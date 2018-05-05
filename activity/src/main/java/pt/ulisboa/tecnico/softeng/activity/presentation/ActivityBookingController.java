@@ -47,7 +47,7 @@ public class ActivityBookingController {
 		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, codeOffer:{}", codeProvider, codeActivity, codeOffer);
 		/*
 		try {
-			ActivityInterface.createOffer(codeProvider, codeActivity, offer);
+			ActivityInterface.createBooking(codeProvider, codeActivity, offer);
 		} catch (ActivityException e) {
 			model.addAttribute("error", "Error: it was not possible to create de offer");
 			model.addAttribute("offer", offer);
