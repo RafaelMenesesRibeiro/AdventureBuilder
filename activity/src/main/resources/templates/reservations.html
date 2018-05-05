@@ -10,7 +10,10 @@
 <body>
 	<div class="container">
 		<h2>Bookings for offer with code: <span th:text="${offer.code}"></span></h2>
-		<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities/{codeActivity}/offers(codeProvider=${activity.codeProvider}, codeActivity=${activity.code})}">Back to Offers</a>
+		<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities/{codeActivity}/offers(codeProvider=${activity.codeProvider}, codeActivity=${activity.code})}">&#8592; Back to Offers</a>
+		<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities(codeProvider=${activity.codeProvider})}">&#8592; Back to Activities</a>
+		<a class="btn btn-default pull-right" th:href="@{/providers}">&#8592; Back to Providers</a>
+		<a class="btn btn-default pull-right" th:href="@{/}">&#8592; Back to Activity Manager Index</a>
 		<br/>
 		<br/>
 		<h6><strong>Provider:</strong> <span th:text="${provider.name}"></span>, <strong>Provider Code:</strong> <span th:text="${provider.code}"></span></h6>
