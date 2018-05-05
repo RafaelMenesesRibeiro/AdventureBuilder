@@ -25,8 +25,7 @@ public class ActivityOfferData {
 		this.end = offer.getEnd();
 		this.capacity = offer.getCapacity();
 		this.amount = offer.getAmount();
-		this.reservations = offer.getBookingSet().stream().map(b -> new ActivityReservationData(b))
-				.collect(Collectors.toList());
+		this.reservations = offer.getBookingSet().stream().map(b -> new ActivityReservationData(b)).collect(Collectors.toList());
 	}
 
 	public LocalDate getBegin() {

@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Offer Bookings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>
+			Bookings for Offer beggining on <span th:text="${offer.begin}"></span> and ending on <span th:text="${offer.end}"></span> for <span th:text="${offer.activity.name}"></span> activity.
+		</h2>
+		<a class="btn btn-default pull-right" th:href="@{/providers/{codeProvider}/activities/{codeActivity}/offers(codeProvider=${offer.activity.codeProvider}, codeActivity=${offer.activity.code})}">Offers</a>
+		<br/>
+		<h3>Create Booking</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+		<!--
+		<form th:action="@{/providers/{codeProvider}/activities/{codeActivity}/offers/{offer}/bookings(codeProvider=${offer.activity.codeProvider},codeActivity=${offer.activity.code}, offer=${@FIXME})}" th:object="${offer}" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>Buyer NIF: </label>
+					<input class="form-control" type="number" th:field="*{buyerNif}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label>Buyer IBAN: </label>
+					<input class="form-control" type="number" th:field="*{buyerIban}" />
+				</div>
+			</div>
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		-->
+		<br/>
+		<h3>List of Bookings</h3>
+ 		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Booking Reference</th>
+					<th>Buyer NIF</th>
+ 					<th>Buyer IBAN</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="booking: ${offer.reservations}">
+					<td th:text="${booking.reference}">
+					<td th:text="${booking.buyerNif}">237084365</td>
+ 					<td th:text="${booking.buyerIban}">PT5035000000131813107</td>
+					<!--
+					setReference < activity provider code + some integer, do it on controller, probably worth displaying on page.
+					setActivityOffer < display on page header
+					setProviderNif < no need to display anywhere, but make sure to fetch it from the right place with controller
+					setBuyerNif  < done
+					setBuyerIban < done
+					setAmount < no need to display but fetch from offer
+					setDate < display on page header and fetch from offer
+					setType < it's always sport
+					setCancelledInvoice < it's false by default, should it be changeable manually?
+					-->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
