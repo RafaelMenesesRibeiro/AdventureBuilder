@@ -17,7 +17,7 @@ import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityOf
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityReservationData;
 
 @Controller
-@RequestMapping(value = "/providers/{codeProvider}/activities/{codeActivity}/offers/{codeOffer}")
+@RequestMapping(value = "/providers/{codeProvider}/activities/{codeActivity}/offers/{codeOffer}/reservations")
 public class ActivityBookingController {
 	private static Logger logger = LoggerFactory.getLogger(ActivityBookingController.class);
 	@RequestMapping(method = RequestMethod.GET)
