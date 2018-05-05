@@ -122,12 +122,4 @@ public class ActivityProvider extends ActivityProvider_Base {
 		}
 		throw new ActivityException();
 	}
-
-	@Override
-	public int getCounter() {
-		int counter = super.getCounter() + 1;
-		setCounter(counter);
-		return counter;
-	}
-
 }

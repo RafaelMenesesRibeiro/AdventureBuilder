@@ -17,6 +17,7 @@ import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityPr
 @Controller
 @RequestMapping(value = "/providers/{codeProvider}/activities/{codeActivity}/offers")
 public class ActivityBookingController {
+	/*
 	private static Logger logger = LoggerFactory.getLogger(ActivityOfferController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -40,7 +41,7 @@ public class ActivityBookingController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity, @ModelAttribute ActivityOfferData offer) {
-		logger.info("offerSubmit codeProvider:{}, codeActivity:{}, begin:{}, end:{}", codeProvider, codeActivity,
+		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, begin:{}, end:{}", codeProvider, codeActivity,
 				offer.getBegin(), offer.getEnd());
 
 		try {
@@ -54,5 +55,6 @@ public class ActivityBookingController {
 
 		return "redirect:/providers/" + codeProvider + "/activities/" + codeActivity + "/offers/" + offerId + "reservations";
 	}
+	*/
 
 }
