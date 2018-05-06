@@ -1,23 +1,35 @@
 package pt.ulisboa.tecnico.softeng.tax.services.local.dataobjects;
 
 import org.joda.time.LocalDate;
+import pt.ulisboa.tecnico.softeng.tax.domain.Invoice;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class InvoiceData {
 	private String sellerNIF;
 	private String buyerNIF;
 	private String itemType;
-	private double value;
+	private float value;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate date;
 
 	public InvoiceData() {
 	}
 
-	public InvoiceData(String sellerNIF, String buyerNIF, String itemType, double value, LocalDate date) {
+	public InvoiceData(String sellerNIF, String buyerNIF, String itemType, float value, LocalDate date) {
 		this.sellerNIF = sellerNIF;
 		this.buyerNIF = buyerNIF;
 		this.itemType = itemType;
 		this.value = value;
 		this.date = date;
+	}
+
+	public InvoiceData(Invoice invoice) {
+		this.buyerNIF = invoice.getBuyer().getNif();
+		this.sellerNIF = invoice.getSeller().getNif();
+		this.itemType = invoice.getItemType().getName();
+		this.value = (float) invoice.getValue();
+		this.date = invoice.getDate();
 	}
 
 	public String getSellerNIF() {
@@ -44,7 +56,7 @@ public class InvoiceData {
 		this.itemType = itemType;
 	}
 
-	public double getValue() {
+	public float getValue() {
 		return this.value;
 	}
 

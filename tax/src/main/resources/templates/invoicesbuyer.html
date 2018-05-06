@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>TaxPayers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<br/>
+		<h2>
+			Welcome to Invoices' Manager for Buyer <span th:text="${buyernif}"> nif </span>
+		</h2>
+		<br/><h3>Create Invoice</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+		<form th:action="@{invoices}" th:object="${invoice}" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="form_1">Value</label>
+					<input class="form-control" id="form_1" type="text" th:field="*{value}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_2">Date</label>
+					<input class="form-control" id="form_2" type="text" th:field="*{date}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_3">Item Type</label>
+					<input class="form-control" id="form_3" type="text" th:field="*{itemType}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_4">Seller NIF</label>
+					<input class="form-control" id="form_4" type="text" th:field="*{sellerNIF}" />
+				</div>
+				<div class="form-group col-md-6">
+				</div>
+			</div>
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		<br/>
+		<br/>
+	</div>
+</body>
+</html>
