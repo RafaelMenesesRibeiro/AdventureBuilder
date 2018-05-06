@@ -80,11 +80,11 @@
 			</thead>
 			<tbody>
 				<tr th:each="reservation: ${offer.reservations}">
-					<td th:text="${reservation.reference}"></td>
+					<td th:text="${reservation.reference}">1318411031</td>
 					<td th:text="${reservation.cancellation}"></td>
-					<td th:text="${reservation.cancellationDate}"></td>
-					<td th:text="${reservation.paymentReference}"></td>
-					<td th:text="${reservation.invoiceReference}"></td>
+					<td th:text="${reservation.cancellationDate}">12/12/2017</td>
+					<td th:text="${reservation.paymentReference}">411314</td>
+					<td th:text="${reservation.invoiceReference}">314151</td>
 				</tr>
 			</tbody>
 		</table>
