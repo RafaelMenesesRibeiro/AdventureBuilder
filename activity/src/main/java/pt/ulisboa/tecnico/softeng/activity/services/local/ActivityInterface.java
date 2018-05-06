@@ -34,7 +34,13 @@ public class ActivityInterface {
 
 	@Atomic(mode = TxMode.WRITE)
 	public static void createBooking(String codeProvider, String codeActivity, String codeOffer, ActivityReservationData reservation) {
-		new Booking(getProviderByCode(codeProvider), getActivityOfferByCode(codeProvider, codeActivity, codeOffer), reservation.getBuyerNif(), reservation.getBuyerIban());
+		ActivityProvider provider = getProviderByCode(codeProvider);
+		Activity activity = getActivityByCode(codeProvider, codeActivity);
+		ActivityOffer offer = getActivityOfferByCode(codeProvider, codeActivity, codeOffer);
+		if (provider == null || activity == null || offer == null) {
+			throw new ActivityException();
+		}
+		new Booking(provider, offer, reservation.getBuyerNif(), reservation.getBuyerIban());
 	}
 
 	@Atomic(mode = TxMode.READ)

@@ -22,7 +22,9 @@
 		<h6><strong>Price:</strong> <span th:text="${offer.amount}"></span></h6>
 		<br/>
 		<h3>Create Booking</h3>
+
 		<p class="text-danger" th:text="${error}">Error</p>
+
 		<form th:action="@{/providers/{codeProvider}/activities/{codeActivity}/offers/{codeOffer}/reservations(codeProvider=${activity.codeProvider},codeActivity=${activity.code},codeOffer=${offer.code})}" th:object="${reservation}" method="post">
 			<div class="form-row">
 				<div class="form-group col-md-6">
@@ -37,11 +39,12 @@
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>
 		<br/>
+
 		<h3>List of Bookings</h3>
  		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Reference</th>
+					<th>Booking Reference</th>
 					<th>Cancelation Status</th>
 					<th>Cancelation Date</th>
 					<th>Payment Reference</th>

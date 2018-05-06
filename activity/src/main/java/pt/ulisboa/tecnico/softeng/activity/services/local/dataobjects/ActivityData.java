@@ -26,8 +26,7 @@ public class ActivityData {
 		this.minAge = activity.getMinAge();
 		this.maxAge = activity.getMaxAge();
 		this.capacity = activity.getCapacity();
-		this.offers = activity.getActivityOfferSet().stream().sorted((o1, o2) -> o1.getBegin().compareTo(o2.getBegin()))
-				.map(o -> new ActivityOfferData(o)).collect(Collectors.toList());
+		this.offers = activity.getActivityOfferSet().stream().sorted((o1, o2) -> o1.getBegin().compareTo(o2.getBegin())).map(o -> new ActivityOfferData(o)).collect(Collectors.toList());
 	}
 
 	public String getCodeProvider() {
