@@ -25,6 +25,12 @@ public class ActivityProvider extends ActivityProvider_Base {
 		FenixFramework.getDomainRoot().addActivityProvider(this);
 	}
 
+	@Override public int getCounter() {
+		int counter = super.getCounter() + 1;
+		setCounter(counter);
+		return counter;
+	}
+
 	public void delete() {
 		setRoot(null);
 
