@@ -20,8 +20,7 @@ public class ActivityProviderData {
 		this.name = provider.getName();
 		this.nif = provider.getNif();
 		this.iban = provider.getIban();
-		this.setActivities(provider.getActivitySet().stream().sorted((a1, a2) -> a1.getName().compareTo(a2.getName()))
-				.map(a -> new ActivityData(a)).collect(Collectors.toList()));
+		this.setActivities(provider.getActivitySet().stream().sorted((a1, a2) -> a1.getName().compareTo(a2.getName())).map(a -> new ActivityData(a)).collect(Collectors.toList()));
 	}
 
 	public String getCode() {

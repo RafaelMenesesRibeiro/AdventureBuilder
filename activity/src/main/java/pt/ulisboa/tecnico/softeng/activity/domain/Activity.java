@@ -58,6 +58,15 @@ public class Activity extends Activity_Base {
 		return result;
 	}
 
+	public ActivityOffer getActivityOfferByCode(String codeOffer) {
+		for (ActivityOffer offer : getActivityOfferSet()) {
+			if (codeOffer.equals(offer.getCode())) {
+				return offer;
+			}
+		}
+		return null;
+	}
+
 	boolean matchAge(int age) {
 		return age >= getMinAge() && age <= getMaxAge();
 	}
