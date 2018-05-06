@@ -20,6 +20,11 @@
 			<label>NIF: </label> <input class="form-control" type="text" th:field="*{nif}" />
 			<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" />
 			<label>Address: </label> <input class="form-control" type="text" th:field="*{address}" />
+			<label>Type: </label> 
+				<select class="form-control" th:field="*{type}" >
+					<option type="text" th:value="Buyer" th:text="Buyer"></option>
+					<option type="text" th:value="Seller" th:text="Seller"></option>
+				</select>
 			<br></br>
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>

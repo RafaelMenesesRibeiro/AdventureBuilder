@@ -27,11 +27,10 @@ public class TaxPayerController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String taxPayerSubmit(Model model, @ModelAttribute TaxPayerData taxPayerData) {
-		logger.info("taxPayerDataSubmit nif:{} name:{} address:{}", taxPayerData.getNif(), taxPayerData.getName(), taxPayerData.getAddress());
+		logger.info("taxPayerDataSubmit nif:{} name:{} address:{} class:{}", taxPayerData.getNif(), taxPayerData.getName(), taxPayerData.getAddress(), taxPayerData.getClass());
 
 		try {
 			TaxInterface.createTaxPayer(taxPayerData);
-
 		} catch (TaxException te) {
 			model.addAttribute("error", "Error: it was not possible to create the taxPayer");
 			model.addAttribute("taxpayer", taxPayerData);

@@ -10,6 +10,7 @@ import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ulisboa.tecnico.softeng.tax.domain.Buyer;
 import pt.ulisboa.tecnico.softeng.tax.services.local.dataobjects.TaxPayerData;
 import pt.ulisboa.tecnico.softeng.tax.domain.IRS;
+import pt.ulisboa.tecnico.softeng.tax.domain.Seller;
 
 public class TaxInterface {
     @Atomic(mode = TxMode.READ)
@@ -20,7 +21,13 @@ public class TaxInterface {
     
     @Atomic(mode = TxMode.WRITE)
 	public static void createTaxPayer(TaxPayerData taxPayerData) {
-		new Buyer(IRS.getIRSInstance(), taxPayerData.getNif(), taxPayerData.getName(), taxPayerData.getAddress());
+        String type = taxPayerData.getType();
+        if (type.equals("Buyer")) {
+			new Buyer(IRS.getIRSInstance(), taxPayerData.getNif(), taxPayerData.getName(), taxPayerData.getAddress());
+		}
+		else if (type.equals("Seller")) {
+			new Seller(IRS.getIRSInstance(), taxPayerData.getNif(), taxPayerData.getName(), taxPayerData.getAddress());
+		}
     }
     
 }
