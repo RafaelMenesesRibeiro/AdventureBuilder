@@ -64,7 +64,6 @@ public class CarInterface {
 	public static void createRenting(String code, String plate, RentingData rentingData) {
 		Vehicle vehicle = getVehicleByPlate(code, plate);
 		if (vehicle == null) {
-			System.out.println("Hi, there");
 			throw new CarException();
 		}
 		new Renting(rentingData.getDrivingLicense(), rentingData.getBegin(), rentingData.getEnd(), vehicle, rentingData.getNif(),
