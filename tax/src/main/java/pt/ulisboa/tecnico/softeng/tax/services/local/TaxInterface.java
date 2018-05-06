@@ -9,7 +9,9 @@ import pt.ist.fenixframework.Atomic.TxMode;
 
 import pt.ulisboa.tecnico.softeng.tax.domain.Buyer;
 import pt.ulisboa.tecnico.softeng.tax.services.local.dataobjects.TaxPayerData;
+import pt.ulisboa.tecnico.softeng.tax.services.local.dataobjects.ItemTypeData;
 import pt.ulisboa.tecnico.softeng.tax.domain.IRS;
+import pt.ulisboa.tecnico.softeng.tax.domain.ItemType;
 import pt.ulisboa.tecnico.softeng.tax.domain.Seller;
 
 public class TaxInterface {
@@ -28,6 +30,17 @@ public class TaxInterface {
 		else if (type.equals("Seller")) {
 			new Seller(IRS.getIRSInstance(), taxPayerData.getNif(), taxPayerData.getName(), taxPayerData.getAddress());
 		}
+    }
+
+    @Atomic(mode = TxMode.READ)
+	public static List<ItemTypeData> getItemTypes() {
+		return IRS.getIRSInstance().getItemTypeSet().stream().map(t -> new ItemTypeData(t))
+				.collect(Collectors.toList()); 
+    }
+
+    @Atomic(mode = TxMode.WRITE)
+	public static void createItemType(ItemTypeData itemTypeData) {
+        new ItemType(IRS.getIRSInstance(), itemTypeData.getName(), itemTypeData.getTax());
     }
     
 }
