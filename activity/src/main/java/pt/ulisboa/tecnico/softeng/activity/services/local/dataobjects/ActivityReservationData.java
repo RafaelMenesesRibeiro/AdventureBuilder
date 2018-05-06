@@ -23,6 +23,7 @@ public class ActivityReservationData {
 	private String invoiceReference;
 	private String buyerNif;
 	private String buyerIban;
+	private int age;
 
 	public ActivityReservationData(ActivityProvider provider, ActivityOffer offer, Booking booking) {
 		this.reference = booking.getReference();
@@ -62,7 +63,7 @@ public class ActivityReservationData {
 		return this.reference;
 	}
 
-	public void getReference(String reference) {
+	public void setReference(String reference) {
 		this.reference = reference;
 	}
 
@@ -70,7 +71,7 @@ public class ActivityReservationData {
 		return this.cancellation;
 	}
 
-	public void getCancellation(String cancellation) {
+	public void setCancellation(String cancellation) {
 		this.cancellation = cancellation;
 	}
 
@@ -152,5 +153,13 @@ public class ActivityReservationData {
 
 	public void setBuyerIban(String buyerIban) {
 		this.buyerIban = buyerIban;
+	}
+
+	public int getAge() {
+		return this.age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

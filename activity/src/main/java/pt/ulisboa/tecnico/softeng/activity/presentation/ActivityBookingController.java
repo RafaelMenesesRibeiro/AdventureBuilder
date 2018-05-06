@@ -42,8 +42,8 @@ public class ActivityBookingController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
+	@RequestMapping(params = "reserveByCode", method = RequestMethod.POST)
+	public String bookingSubmitWithCode(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
 																@PathVariable String codeOffer, @ModelAttribute ActivityReservationData reservation) {
 
 		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, codeOffer:{}, buyerNif:{}, buyerIban:{}",
@@ -61,16 +61,16 @@ public class ActivityBookingController {
 		}
 		return "redirect:/providers/" + codeProvider + "/activities/" + codeActivity + "/offers/" + codeOffer + "/reservations";
 	}
-	/*
-	@RequestMapping(method = RequestMethod.POST)
-	public String bookingSubmit(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
-																@PathVariable String codeOffer, @ModelAttribute ActivityReservationData reservation) {
+
+	@RequestMapping(params = "reserveBySearch", method = RequestMethod.POST)
+	public String bookingSubmitBySearch(Model model, @PathVariable String codeProvider, @PathVariable String codeActivity,
+					@PathVariable String codeOffer, @ModelAttribute ActivityReservationData reservation) {
 
 		logger.info("bookingSubmit codeProvider:{}, codeActivity:{}, codeOffer:{}, buyerNif:{}, buyerIban:{}",
 									codeProvider, codeActivity, codeOffer, reservation.getBuyerNif(), reservation.getBuyerIban());
 
 		try {
-			ActivityInterface.reserveActivity(begin, end, age, nif, iban);
+			ActivityInterface.reserveActivity(reservation.getBegin(), reservation.getEnd(), reservation.getAge(), reservation.getBuyerNif(), reservation.getBuyerIban());
 		} catch (ActivityException e) {
 			model.addAttribute("error", "Error: it was not possible to make a booking");
 			model.addAttribute("reservation", reservation);
@@ -81,5 +81,4 @@ public class ActivityBookingController {
 		}
 		return "redirect:/providers/" + codeProvider + "/activities/" + codeActivity + "/offers/" + codeOffer + "/reservations";
 	}
-	*/
 }
