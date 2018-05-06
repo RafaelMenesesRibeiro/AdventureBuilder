@@ -15,7 +15,7 @@ import pt.ulisboa.tecnico.softeng.tax.domain.ItemType;
 import pt.ulisboa.tecnico.softeng.tax.domain.Seller;
 
 public class TaxInterface {
-    @Atomic(mode = TxMode.READ)
+	@Atomic(mode = TxMode.WRITE)
 	public static List<TaxPayerData> getTaxPayers() {
 		return IRS.getIRSInstance().getTaxPayerSet().stream().map(t -> new TaxPayerData(t))
 				.collect(Collectors.toList()); 
