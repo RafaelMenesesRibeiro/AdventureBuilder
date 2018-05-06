@@ -14,32 +14,56 @@
 			Welcome to Providers' Manager
 		</h2>
 		<br/>
+
 		<h3>Create Provider</h3>
 		<p class="text-danger" th:text="${error}">This is not good</p>
-		<form class="form-inline" th:action="@{/providers}" th:object="${provider}" method="post">
-			<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" /> 
-			<label>Code: </label> <input class="form-control" type="text" th:field="*{code}" /> 
+		<form th:action="@{/providers}" th:object="${provider}" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label>Code: </label>
+					<input class="form-control" type="text" th:field="*{code}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label>Name: </label>
+					<input class="form-control" type="text" th:field="*{name}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label>NIF: </label>
+					<input class="form-control" type="text" th:field="*{nif}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label>IBAN: </label>
+					<input class="form-control" type="text" th:field="*{iban}" />
+				</div>
+			</div>
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>
 		<br/>
+		<br/>
+
 		<h3>List of Providers</h3>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Name</th>
 					<th>Code</th>
+					<th>Name</th>
+					<th>NIF</th>
+					<th>IBAN</th>
  					<th>Activities</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="provider: ${providers}">
-					<td th:text="${provider.name}">Advyyyy++</td>
-					<td th:text="${provider.code}">PR111111</td>
+					<td th:text="${provider.code}">Code</td>
+					<td th:text="${provider.name}">Name</td>
+					<td th:text="${provider.nif}">ActivityProvider Nif</td>
+					<td th:text="${provider.iban}">ActivityProvider Iban</td>
 				 	<td><a
 						th:href="@{/providers/{code}/activities(code=${provider.code})}">Activities</a></td>
 				</tr>
 			</tbody>
 		</table>
+
 	</div>
 </body>
 </html>
