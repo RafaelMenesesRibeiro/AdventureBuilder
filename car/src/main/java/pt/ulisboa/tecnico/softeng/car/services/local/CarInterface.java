@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.joda.time.LocalDate;
 
+import ch.qos.logback.core.joran.conditional.ElseAction;
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
@@ -50,7 +51,11 @@ public class CarInterface {
 	@Atomic(mode = TxMode.WRITE)
 	public static void createVehicle(String rentACarCode, VehicleData vehicleData) {
 		RentACar rentACar = getRentACarByCode(rentACarCode);
-		new Car(vehicleData.getPlate(), 0, vehicleData.getPrice(), rentACar);
+		if (vehicleData.getType().equals("Car"))
+			new Car(vehicleData.getPlate(), 0, vehicleData.getPrice(), rentACar);
+		else if (vehicleData.getType().equals("Motorcycle"))
+			new Motorcycle(vehicleData.getPlate(), 0, vehicleData.getPrice(), rentACar);
+
 	}
 
 
@@ -134,4 +139,25 @@ public class CarInterface {
 		return vehicle;
 	}
 
+
+	@Atomic(mode = TxMode.READ)
+	public static VehicleData getVehicleDataByPlate(String code, String palte) {
+		Vehicle vehicle = getVehicleByPlate(code, palte);
+		if (vehicle == null) {
+			return null;
+		}
+
+		return new VehicleData(vehicle);
+	}
+
+	@Atomic(mode = TxMode.READ)
+	public static void checkout(String reference, int kilometers) {
+		for (RentACar rentACar : FenixFramework.getDomainRoot().getRentACarSet()) {
+			Renting renting = rentACar.getRenting(reference);
+			if (renting != null) {
+				renting.checkout(kilometers);
+			}
+		}
+		throw new CarException();
+	}
 }

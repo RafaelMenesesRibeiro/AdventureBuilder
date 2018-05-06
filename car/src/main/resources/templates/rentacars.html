@@ -35,9 +35,7 @@
 					<th>Code</th>
 					<th>NIF</th>
 					<th>IBAN</th>
-
-
-
+					<th>Vehicles</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,6 +44,7 @@
 					<td th:text="${rentacar.code}">Code</td>
 					<td th:text="${rentacar.nif}">NIF</td>
 					<td th:text="${rentacar.iban}">NIF</td>
+					<td><a th:href="@{/rentacars/{code}/vehicles(code=${rentacar.code})}">Vehicles</a></td>
 				</tr>
 
 			</tbody>
