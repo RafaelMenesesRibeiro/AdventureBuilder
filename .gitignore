@@ -6,10 +6,11 @@ fenix-framework.properties
 jmeter.log
 *.jtl
 *.log
+*.hprof
 infer-out
 *.iml
 .idea
 .DS_Store
-fenix-framework.properties
+.springBeans
 local.dev.yml
 .DS_Store
