@@ -1,12 +1,52 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>ItemTypes</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ItemTypes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.1.0/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.1.0/js/bootstrap.min.js}"></script>
 </head>
 <body>
-	<h2>
-		Welcome to Item Types' Manager
-	</h2>
+	<div class="container">
+		<br/>
+		<h2>
+			Welcome to Item Types' Manager
+		</h2>
+		<br/>
+		<h3>Create ItemType</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+		<form th:action="@{/itemtypes}" th:object="${itemtype}" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="form_1">Name</label>
+					<input class="form-control" id="form_1" type="text" th:field="*{name}" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="form_2">Tax</label>
+					<input class="form-control" id="form_2" type="number" th:field="*{tax}" />
+				</div>
+			</div>
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		<br/>
+		<br/>
+		<h3>List of ItemTypes</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Tax</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="itemtype: ${itemtypes}">
+					<td th:text="${itemtype.name}">Name</td>
+					<td th:text="${itemtype.tax}">Tax</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </body>
-</html>
+</html> 
