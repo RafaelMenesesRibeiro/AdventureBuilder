@@ -36,6 +36,7 @@
 					<th>NIF</th>
 					<th>Name</th>
 					<th>Address</th>
+					<th>Class</th>
 					<!--<th>Invoices</th>-->
 				</tr>
 			</thead>
@@ -44,6 +45,7 @@
 					<td th:text="${taxpayer.nif}">NIF</td>
 					<td th:text="${taxpayer.name}">Name</td>
 					<td th:text="${taxpayer.address}">Address</td>
+					<td th:text="${taxpayer.type}">Class</td>
 					<!--<td><a
 						th:href="@{/taxpayers/{nif}/invoices(nif=${taxpayer.nif})}">Invoices</a></td>-->
 				</tr>
