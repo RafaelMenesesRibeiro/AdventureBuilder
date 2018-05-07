@@ -17,7 +17,7 @@ To run webservices: mvn clean spring-boot:run on module and access on http://loc
 | 83391      | Andreia Valente         | andreia.valente@tecnico.ulisboa.pt       | AndreiaValente  |   17  |
 
 
-## Tasks - Fourth Delivery
+## Tasks - Fifth Delivery
 
 |   Number   |          Name           |   GitHub Name   |           Module        |     Task    |
 | ---------- | ----------------------- | ----------------| ----------------------- | ----------- |
@@ -30,7 +30,15 @@ To run webservices: mvn clean spring-boot:run on module and access on http://loc
 | 77921      | Mafalda Gaspar          | mafsgasp        |                         |Tester / Code|
 
 - **Group 1:**
+  - Mafalda Gaspar
+  - Andreia Valente
+  - Rafael Ribeiro
 - **Group 2:**
+  - Diogo Redin
+  - Francisco Barros
+- **Group 3:**
+  - João Neves
+  - Diogo Vilela
 
 ### Infrastructure
 
