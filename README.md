@@ -19,24 +19,25 @@ To run webservices: mvn clean spring-boot:run on module and access on http://loc
 
 ## Tasks - Fifth Delivery
 
-|   Number   |          Name           |   GitHub Name   |           Module        |     Task    |
-| ---------- | ----------------------- | ----------------| ----------------------- | ----------- |
-| 84758      | Rafael Ribeiro          | RafaelRibeiro97 |                         |Tester / Code|
-| 83391      | Andreia Valente         | AndreiaValente  |                         |Tester / Code|
-| 85069      | Francisco Barros        | FranciscoKloganB|                         |Tester / Code|
-| 84710      | Diogo Vilela            | DiogoFSVilela   |                         |Tester / Code|
-| 83405      | João Neves              | JoaoMiguelNeves |                         |Tester / Code|
-| 84711      | Diogo Redin             | diogoredin      |                         |Tester / Code|
-| 77921      | Mafalda Gaspar          | mafsgasp        |                         |Tester / Code|
+|   Number   |          Name           |   GitHub Name   |              Test           |     Task    |
+| ---------- | ----------------------- | ----------------| --------------------------- | ----------- |
+| 84758      | Rafael Ribeiro          | RafaelRibeiro97 |successSequenceNoHotelNoCar  |Tester / Code|
+| 83391      | Andreia Valente         | AndreiaValente  |successSequenceNoHotel       |Tester / Code|
+| 85069      | Francisco Barros        | FranciscoKloganB|unsuccessSequenceFailHotel   |Tester / Code|
+| 84710      | Diogo Vilela            | DiogoFSVilela   |unsuccessSequenceFailPayment |Tester / Code|
+| 83405      | João Neves              | JoaoMiguelNeves |unsuccessSequenceFailTax     |Tester / Code|
+| 83405      | João Neves              | JoaoMiguelNeves |unsuccessSequenceFailCar     |Tester / Code|
+| 84711      | Diogo Redin             | diogoredin      |unsuccessSequenceFailActivity|Tester / Code|
+| 77921      | Mafalda Gaspar          | mafsgasp        |successSequenceOneNoCar      |Tester / Code|
 
-- **Group 1:**
+- **Group 1 (100Reads):** 
   - Mafalda Gaspar
   - Andreia Valente
   - Rafael Ribeiro
-- **Group 2:**
+- **Group 2 (100Writes):**
   - Diogo Redin
   - Francisco Barros
-- **Group 3:**
+- **Group 3 (30Writes):**
   - João Neves
   - Diogo Vilela
 
