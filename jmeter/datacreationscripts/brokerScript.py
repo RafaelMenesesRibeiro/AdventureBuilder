@@ -10,5 +10,5 @@ for i in range (0, 100):
 	nifAsSeller = "11111200{}".format(i)
 	brokerIban = "BK12{}".format(i+1+202)
 	brokerName = "Joy of Travelling"
-	line = "{},{},{}".format(brokerCode, brokerName, nifAsSeller, nifAsBuyer, brokerIban)
+	line = "{},{},{},{},{}".format(brokerCode, brokerName, nifAsSeller, nifAsBuyer, brokerIban)
 	print(line)

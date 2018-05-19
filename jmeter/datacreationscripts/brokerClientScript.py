@@ -9,5 +9,5 @@ for i in range (0, 100):
 	clientNif = "2111110{}".format(i)
 	drivingLicense = "DL12345"
 	age = 19
-	line = "{},{},{},{}".format(brokerCode, clientIban, clientNif, drivingLicense, age)
+	line = "{},{},{},{},{}".format(brokerCode, clientIban, clientNif, drivingLicense, age)
 	print(line)
