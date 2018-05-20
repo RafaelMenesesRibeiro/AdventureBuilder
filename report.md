@@ -37,10 +37,10 @@ Após a inicialização de todos os módulos, é lido tudo o que foi criado, pel
 10. Read Offers
 11. Process Adventures
 
-## Erros ##
+# Erros #
 Em relação aos erros durante o teste, foram encontrados erros com 200 utilizadores concorrentes, embora isso dependa da máquina onde o teste está a ser executado.
 
-## Conclusão ##
+# Conclusão #
 Quanto maior o número de utilizadores concorrentes, maior será o número de conflitos de concorrência. Tal implica que o tempo de acesso irá aumentar com o número de utilziadores concorrentes.
 
 
