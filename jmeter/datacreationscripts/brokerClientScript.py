@@ -6,7 +6,8 @@ for i in range (0, 100):
 		brokerCode = "B1{}".format(i)
 
 	clientIban = "BK12{}".format(i + 1 + 202 + 100)
+	clientNif = "2111110{}".format(i)
 	drivingLicense = "DL12345"
 	age = 19
-	line = "{},{},{},{}".format(brokerCode, clientIban, drivingLicense, age)
+	line = "{},{},{},{},{}".format(brokerCode, clientIban, clientNif, drivingLicense, age)
 	print(line)
