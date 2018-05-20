@@ -15,3 +15,10 @@ infer-out
 local.dev.yml
 .DS_Store
 .vscode/settings.json
+bank/.factorypath
+activity/.factorypath
+broker/.factorypath
+car/.factorypath
+hotel/.factorypath
+tax/.factorypath
+*.example
