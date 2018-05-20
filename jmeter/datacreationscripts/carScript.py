@@ -1,6 +1,8 @@
 for i in range (0, 100):
 	if i < 10:
 		rentACarNif = "11111110{}".format(i)
+		carPlate = "0{}-XX-0{}".format(i,i)
+		kilometers = 10
 		drivingLicense = "DV123"
 		carPlate = "00-XX-00"
 		price = 60.0
