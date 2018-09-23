@@ -6,10 +6,14 @@
 
 [3rd Year - 2nd Semester]
 
+- Because of the way git forks private repositories and accounts for commits and contributors, severall contributors don't show in the page. (ritosilva, ruimaranhao, luiscruz and magicknot are the professors).
+- Also, the commits in the contributors page don't amount to the work done, due to the fact that at the beggining of every release the group had to clone the professors' version of the previous release (so all the groups being evaluated had the same previous step).
+
 Objective: 
-  - Work in a big team of 7 people
-  - Learn how to create JMeter and JMockit tests to test a big project
+- Work in a big team of 7 people
+- Learn how to create JMeter and JMockit tests to test a big project
  
+
 
 To run tests execute: mvn clean install.
 To see the coverage reports, go to module_name/target/site/jacoco/index.html.
