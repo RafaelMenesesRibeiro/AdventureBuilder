@@ -2,44 +2,29 @@
 
 [![Build Status](https://travis-ci.com/tecnico-softeng/es18tg_17-project.svg?token=tzyzgKHYbK1mnRs5VZbp&branch=develop)](https://travis-ci.com/tecnico-softeng/es18tg_17-project) [![codecov](https://codecov.io/gh/tecnico-softeng/es18tg_17-project/branch/develop/graph/badge.svg?token=iC1C1G5pBo)](https://codecov.io/gh/tecnico-softeng/es18tg_17-project)
 
+[University Project]
+
+[3rd Year - 2nd Semester]
+
+Objective: 
+  - Work in a big team of 7 people
+  - Learn how to create JMeter and JMockit tests to test a big project
+ 
+
 To run tests execute: mvn clean install.
 To see the coverage reports, go to module_name/target/site/jacoco/index.html.
 To run webservices: mvn clean spring-boot:run on module and access on http://localhost:8080/banks for example.
 
-|   Number   |          Name           |                 Email                    |   Name GitHUb   | Grupo |
-| ---------- | ----------------------- | -----------------------------------------| ----------------| ----- |
-| 84758      | Rafael Ribeiro          | rafaelmmribeiro@gmail.com                | RafaelRibeiro97 |   17  |
-| 85069      | Francisco Barros        | francisco.teixeira.de.barros@outlook.com | FranciscoKloganB|   17  |
-| 83405      | João Neves              | jmcpneves@gmail.com                      | JoaoMiguelNeves |   17  |
-| 84710      | Diogo Vilela            | diogofsvilela@gmail.com                  | DiogoFSVilela   |   17  |
-| 84711      | Diogo Redin             | diogo.redin@tecnico.ulisboa.pt           | diogoredin      |   17  |
-| 77921      | Mafalda Gaspar          | mariamafaldag@gmail.com                  | mafsgasp        |   17  |
-| 83391      | Andreia Valente         | andreia.valente@tecnico.ulisboa.pt       | AndreiaValente  |   17  |
+|          Name           |                 Email                    |   Name GitHUb   |
+| ----------------------- | -----------------------------------------| ----------------|
+| Rafael Ribeiro          | rafaelmmribeiro@gmail.com                | RafaelRibeiro97 |
+| Francisco Barros        | francisco.teixeira.de.barros@outlook.com | FranciscoKloganB|
+| João Neves              | jmcpneves@gmail.com                      | JoaoMiguelNeves |
+| Diogo Vilela            | diogofsvilela@gmail.com                  | DiogoFSVilela   |
+| Diogo Redin             | diogo.redin@tecnico.ulisboa.pt           | diogoredin      |
+| Mafalda Gaspar          | mariamafaldag@gmail.com                  | mafsgasp        |
+| Andreia Valente         | andreia.valente@tecnico.ulisboa.pt       | AndreiaValente  |
 
-
-## Tasks - Fifth Delivery
-
-|   Number   |          Name           |   GitHub Name   |              Test           |     Task    |
-| ---------- | ----------------------- | ----------------| --------------------------- | ----------- |
-| 84758      | Rafael Ribeiro          | RafaelRibeiro97 |successSequenceNoHotelNoCar  |Tester / Code|
-| 83391      | Andreia Valente         | AndreiaValente  |successSequenceNoHotel       |Tester / Code|
-| 85069      | Francisco Barros        | FranciscoKloganB|unsuccessSequenceFailHotel   |Tester / Code|
-| 84710      | Diogo Vilela            | DiogoFSVilela   |unsuccessSequenceFailPayment |Tester / Code|
-| 83405      | João Neves              | JoaoMiguelNeves |unsuccessSequenceFailTax     |Tester / Code|
-| 83405      | João Neves              | JoaoMiguelNeves |unsuccessSequenceFailCar     |Tester / Code|
-| 84711      | Diogo Redin             | diogoredin      |unsuccessSequenceFailActivity|Tester / Code|
-| 77921      | Mafalda Gaspar          | mafsgasp        |successSequenceOneNoCar      |Tester / Code|
-
-- **Group 1 (100Reads):** 
-  - Mafalda Gaspar
-  - Andreia Valente
-  - Rafael Ribeiro
-- **Group 2 (100Writes):**
-  - Diogo Redin
-  - Francisco Barros
-- **Group 3 (30Writes):**
-  - João Neves
-  - Diogo Vilela
 
 ### Infrastructure
 
